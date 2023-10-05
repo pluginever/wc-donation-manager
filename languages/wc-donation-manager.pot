@@ -1,0 +1,716 @@
+# Copyright (C) 2023 PluginEver
+# This file is distributed under the same license as the WC Donation Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WC Donation Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
+"POT-Creation-Date: 2023-10-05 09:37:52+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: lib/Lib/Plugin.php:309
+msgid "Go Pro"
+msgstr ""
+
+#: lib/Lib/Plugin.php:655 src/Admin/Settings.php:140
+msgid "Documentation"
+msgstr ""
+
+#: lib/Lib/Plugin.php:662
+msgid "Support"
+msgstr ""
+
+#: lib/Lib/Plugin.php:669
+msgid "Review"
+msgstr ""
+
+#: lib/Lib/Plugin.php:675
+msgid "More Plugins"
+msgstr ""
+
+#: lib/Lib/Plugin.php:692 src/Admin/Menus.php:61 src/Admin/Menus.php:62
+msgid "Settings"
+msgstr ""
+
+#: lib/Lib/Settings.php:96
+msgid "Settings saved."
+msgstr ""
+
+#: lib/Lib/Settings.php:310 lib/Lib/Settings.php:401 lib/Lib/Settings.php:410
+#: lib/Lib/Settings.php:419
+msgid "Recommended"
+msgstr ""
+
+#: lib/Lib/Settings.php:311 lib/Lib/Settings.php:402 lib/Lib/Settings.php:411
+#: lib/Lib/Settings.php:420
+msgid "Install Now"
+msgstr ""
+
+#: lib/Lib/Settings.php:372
+msgid "Need Help?"
+msgstr ""
+
+#: lib/Lib/Settings.php:434
+msgid "Join our Community"
+msgstr ""
+
+#: lib/Lib/Settings.php:438
+msgid "Request a Feature"
+msgstr ""
+
+#: lib/Lib/Settings.php:442
+msgid "Report a Bug"
+msgstr ""
+
+#: src/Admin/Actions.php:45
+msgid "Please enter a name for the thing."
+msgstr ""
+
+#: src/Admin/Actions.php:50
+msgid "Please select a product for the thing."
+msgstr ""
+
+#: src/Admin/Actions.php:73
+#. translators: %1$s: order edit link, %2$s: order id
+msgid ""
+"Thing has been created and created an associated order. <a "
+"href=\"%1$s\">Edit order #%2$s</a>"
+msgstr ""
+
+#: src/Admin/Actions.php:86
+#. translators: %1$s: order edit link, %2$s: order id
+msgid ""
+"Thing has been created and updated the associated order. <a "
+"href=\"%1$s\">Edit order #%2$s</a>"
+msgstr ""
+
+#: src/Admin/Actions.php:93
+#. translators: %1$s: thing edit link, %2$s: thing id
+msgid "Thing has been created. <a href=\"%1$s\">Edit thing #%2$s</a>"
+msgstr ""
+
+#: src/Admin/Admin.php:66
+#. translators: 1: Plugin name 2: WordPress
+msgid ""
+"Thank you for using %1$s. If you like it, please leave us a %2$s rating. A "
+"huge thank you from PluginEver in advance!"
+msgstr ""
+
+#: src/Admin/Admin.php:68
+msgid "Thanks :)"
+msgstr ""
+
+#: src/Admin/Admin.php:86
+#. translators: 1: Plugin version
+msgid "Version %s"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:88
+msgid "No items found."
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:100
+#: src/Admin/views/edit-thing.php:73
+msgid "Name"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:101
+#: src/Admin/views/edit-thing.php:31
+msgid "Product"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:102
+#: src/Admin/views/edit-thing.php:45
+msgid "Order"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:103
+#: src/Admin/views/add-thing.php:71 src/Admin/views/edit-thing.php:60
+msgid "Customer"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:104
+msgid "Date Created"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:143
+#: src/Admin/ListTables/ThingsListTable.php:224
+#: src/Admin/views/edit-thing.php:86
+msgid "Delete"
+msgstr ""
+
+#: src/Admin/ListTables/ThingsListTable.php:178
+#. translators: %d: number of things deleted.
+msgid "%d thing deleted."
+msgid_plural "%d things deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Admin/ListTables/ThingsListTable.php:223
+msgid "Edit"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WC Donation Manager"
+msgstr ""
+
+#: src/Admin/Menus.php:44 src/Admin/Menus.php:45
+#: src/Admin/views/list-thing.php:19
+msgid "Things"
+msgstr ""
+
+#: src/Admin/Orders.php:39 src/Orders.php:40
+msgid "First Name"
+msgstr ""
+
+#: src/Admin/Orders.php:40 src/Orders.php:41
+msgid "John"
+msgstr ""
+
+#: src/Admin/Orders.php:43 src/Orders.php:45
+msgid "Last Name"
+msgstr ""
+
+#: src/Admin/Orders.php:44 src/Orders.php:46
+msgid "Doe"
+msgstr ""
+
+#: src/Admin/Orders.php:47 src/Orders.php:50
+msgid "Email"
+msgstr ""
+
+#: src/Admin/Orders.php:48 src/Orders.php:51
+msgid "john@local.com"
+msgstr ""
+
+#: src/Admin/Orders.php:51 src/Orders.php:55
+msgid "Phone"
+msgstr ""
+
+#: src/Admin/Orders.php:52 src/Orders.php:56
+msgid "555-555-5555"
+msgstr ""
+
+#: src/Admin/Orders.php:73
+#. translators: %s is the item number.
+msgid "View Details"
+msgstr ""
+
+#: src/Admin/Settings.php:25
+msgid "General"
+msgstr ""
+
+#: src/Admin/Settings.php:46
+msgid "General settings"
+msgstr ""
+
+#: src/Admin/Settings.php:48 src/Admin/Settings.php:71
+msgid "The following options affect how the plugin will work."
+msgstr ""
+
+#: src/Admin/Settings.php:52 src/Admin/Settings.php:75
+msgid "Example field"
+msgstr ""
+
+#: src/Admin/Settings.php:54 src/Admin/Settings.php:55
+#: src/Admin/Settings.php:77 src/Admin/Settings.php:78
+msgid "This is an example field."
+msgstr ""
+
+#: src/Admin/Settings.php:69
+msgid "Advanced settings"
+msgstr ""
+
+#: src/Admin/Settings.php:106
+msgid "Feature 1"
+msgstr ""
+
+#: src/Admin/Settings.php:107
+msgid "Feature 2"
+msgstr ""
+
+#: src/Admin/Settings.php:108
+msgid "Feature 3"
+msgstr ""
+
+#: src/Admin/Settings.php:109
+msgid "Feature 4"
+msgstr ""
+
+#: src/Admin/Settings.php:110
+msgid "Feature 5"
+msgstr ""
+
+#: src/Admin/Settings.php:111
+msgid "Many more ..."
+msgstr ""
+
+#: src/Admin/Settings.php:115
+msgid "Want More?"
+msgstr ""
+
+#: src/Admin/Settings.php:116
+msgid ""
+"This plugin offers a premium version which comes with the following "
+"features:"
+msgstr ""
+
+#: src/Admin/Settings.php:123
+msgid "Upgrade to PRO"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:6 src/PostTypes.php:38
+msgid "Add New Thing"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:7
+msgid ""
+"You can create a new thing here. This form will create a thing for the "
+"user, and optionally an associated order. Created orders will be marked as "
+"pending payment."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:14
+msgid "Thing Name"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:19
+msgid "Enter the name of the thing."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:27
+msgid "Thing Product"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:31
+msgid "Select a thing product..."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:37
+msgid "Select the product associated with the thing."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:45
+msgid "Thing Status"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:51
+msgid "Create as a new thing."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:57
+msgid "Create a new corresponding order for this new thing."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:63
+msgid "Assign this thing to an existing order."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:75
+msgid "Guest"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:78
+msgid "Select the customer associated with the thing."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:85
+msgid "Order ID"
+msgstr ""
+
+#: src/Admin/views/add-thing.php:90
+msgid "Enter the order id of the thing."
+msgstr ""
+
+#: src/Admin/views/add-thing.php:100
+msgid "Add Thing"
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:14 src/PostTypes.php:40
+msgid "Edit Thing"
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:22
+msgid "Thing Details"
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:38
+msgid "No product assigned."
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:52
+msgid "No order assigned."
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:67
+msgid "No customer assigned."
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:83
+msgid "Actions"
+msgstr ""
+
+#: src/Admin/views/edit-thing.php:87
+msgid "Save Thing"
+msgstr ""
+
+#: src/Admin/views/list-thing.php:21
+msgid "Add New"
+msgstr ""
+
+#: src/Admin/views/list-thing.php:30
+msgid "Search"
+msgstr ""
+
+#: src/Cart.php:43
+msgid "This is the key"
+msgstr ""
+
+#: src/Cart.php:44
+msgid "This is the value"
+msgstr ""
+
+#: src/Cart.php:45
+msgid "This is the display value"
+msgstr ""
+
+#: src/Installer.php:79
+#. translators: 1: plugin name 2: version number
+msgid "%1$s updated to version %2$s successfully."
+msgstr ""
+
+#: src/Orders.php:39
+msgid "first_name"
+msgstr ""
+
+#: src/Orders.php:44
+msgid "last_name"
+msgstr ""
+
+#: src/Orders.php:49
+msgid "email"
+msgstr ""
+
+#: src/Orders.php:54
+msgid "phone"
+msgstr ""
+
+#: src/Plugin.php:77
+#. translators: 1: plugin name 2: WooCommerce
+msgid "%1$s requires %2$s to be installed and active."
+msgstr ""
+
+#: src/Plugin.php:79
+msgid "WooCommerce"
+msgstr ""
+
+#: src/PostTypes.php:39
+msgid "New Thing"
+msgstr ""
+
+#: src/PostTypes.php:41
+msgid "View Thing"
+msgstr ""
+
+#: src/PostTypes.php:42
+msgid "All Things"
+msgstr ""
+
+#: src/PostTypes.php:43
+msgid "Search Things"
+msgstr ""
+
+#: src/PostTypes.php:44
+msgid "Parent Things:"
+msgstr ""
+
+#: src/PostTypes.php:45
+msgid "No tickets found."
+msgstr ""
+
+#: src/PostTypes.php:46
+msgid "No tickets found in Trash."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/internationalized-plugin.php:11
+msgid "This is a dummy plugin"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:42
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:72
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:80
+msgid "There was an error when reading this WXR file"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:43
+msgid ""
+"Details are shown above. The importer will now try again with a different "
+"parser..."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:84
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:89
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:306
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:495
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:132
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:141
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:192
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:196
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:205
+msgid "Sorry, there has been an error."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:133
+msgid "The file does not exist, please try again."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:176
+msgid "All done."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:176
+msgid "Have fun!"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:177
+msgid "Remember to update the passwords and roles of imported users."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:197
+msgid ""
+"The export file could not be found at <code>%s</code>. It is likely that "
+"this was caused by a permissions problem."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:213
+msgid ""
+"This WXR file (version %s) may not be supported by this version of the "
+"importer. Please consider updating."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:238
+msgid ""
+"Failed to import author %s. Their posts will be attributed to the current "
+"user."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:264
+msgid "Assign Authors"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:265
+msgid ""
+"To make it easier for you to edit and save the imported content, you may "
+"want to reassign the author of the imported item to an existing user of "
+"this site. For example, you may want to import all the entries as "
+"<code>admin</code>s entries."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:267
+msgid ""
+"If a new user is created by WordPress, a new password will be randomly "
+"generated and the new user&#8217;s role will be set as %s. Manually "
+"changing the new user&#8217;s details will be necessary."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:277
+msgid "Import Attachments"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:280
+msgid "Download and import file attachments"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:284
+msgid "Submit"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:297
+msgid "Import author:"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:308
+msgid "or create new user with login name:"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:311
+msgid "as a new user:"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:319
+msgid "assign posts to an existing user:"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:321
+msgid "or assign posts to an existing user:"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:322
+msgid "- Select -"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:372
+msgid ""
+"Failed to create new user for %s. Their posts will be attributed to the "
+"current user."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:424
+msgid "Failed to import category %s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:467
+msgid "Failed to import post tag %s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:516
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:738
+msgid "Failed to import %s %s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:605
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:642
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:704
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:869
+msgid "Menu item skipped due to missing menu slug"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:876
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:939
+msgid "Fetching attachments is not enabled"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:952
+msgid "Invalid file type"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:996
+msgid "Remote server did not respond"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1002
+msgid "Remote server returned error response %1$d %2$s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1009
+msgid "Remote file is incorrect size"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1014
+msgid "Zero size file downloaded"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1020
+msgid "Remote file is too large, limit is %s"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1119
+msgid "Import WordPress"
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1126
+msgid ""
+"A new version of this importer is available. Please update to version %s to "
+"ensure compatibility with newer export files."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1141
+msgid ""
+"Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import "
+"the posts, pages, comments, custom fields, categories, and tags into this "
+"site."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1142
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1216
+msgid ""
+"Import <strong>posts, pages, comments, custom fields, categories, and "
+"tags</strong> from a WordPress export file."
+msgstr ""
+
+#: vendor/lucatume/wp-browser/src/data/themedir1/internationalized-theme/functions.php:7
+msgid "This is a dummy theme"
+msgstr ""
+
+#: vendor/wp-cli/wp-cli/php/utils-wp.php:238
+msgid "Inactive Widgets"
+msgstr ""
+
+#: vendor/wp-cli/wp-cli/php/utils-wp.php:241
+msgid "Drag widgets here to remove them from the sidebar but keep their settings."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://pluginever.com/plugins/woocommerce-donation-manager/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "TBD."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "PluginEver"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://pluginever.com/"
+msgstr ""
+
+#: src/PostTypes.php:33
+msgctxt "post type general name"
+msgid "Things"
+msgstr ""
+
+#: src/PostTypes.php:34
+msgctxt "post type singular name"
+msgid "Thing"
+msgstr ""
+
+#: src/PostTypes.php:35
+msgctxt "admin menu"
+msgid "Things"
+msgstr ""
+
+#: src/PostTypes.php:36
+msgctxt "add new on admin bar"
+msgid "Thing"
+msgstr ""
+
+#: src/PostTypes.php:37
+msgctxt "ticket"
+msgid "Add New"
+msgstr ""

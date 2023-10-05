@@ -1,0 +1,56 @@
+{
+  "name": "wc-donation-manager",
+  "title": "WC Donation Manager",
+  "version": "1.0.0",
+  "description": "TBD.",
+  "homepage": "https://pluginever.com/plugins/wc-donation-manager/",
+  "license": "GPL-3.0+",
+  "prettier": "@wordpress/prettier-config",
+  "scripts": {
+    "build": "wp-scripts build && grunt build",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:md:docs": "wp-scripts lint-md-docs",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start",
+    "test:e2e": "wp-scripts test-e2e",
+    "test:unit": "wp-scripts test-unit-js",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@lodder/time-grunt": "^4.0.0",
+    "@wordpress/prettier-config": "^2.19.0",
+    "@wordpress/scripts": "^26.6.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "grunt": "^1.6.1",
+    "grunt-checktextdomain": "^1.0.1",
+    "grunt-wp-i18n": "^1.0.3",
+    "grunt-wp-readme-to-markdown": "^2.1.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.5.0",
+    "load-grunt-tasks": "^5.1.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack-remove-empty-scripts": "^0.8.4",
+    "wp-prettier": "^2.8.5"
+  },
+  "stylelint": {
+    "extends": "@wordpress/stylelint-config",
+    "defaultSeverity": "warning"
+  },
+  "lint-staged": {
+    "*.scss": [
+      "wp-scripts lint-style --fix --custom-syntax postcss-scss"
+    ]
+  },
+  "browserslist": [
+    "> 0.1%",
+    "ie 8",
+    "ie 9"
+  ]
+}

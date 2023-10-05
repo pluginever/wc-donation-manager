@@ -1,0 +1,56 @@
+# IDEs
+/.settings
+/.project
+/.idea
+*.esproj
+*.tmproj
+*.tmproject
+tmtags
+.*.sw[a-z]
+*.un~
+Session.vim
+*.swp
+
+# Mac OSX
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# NPM packages used by Grunt.js
+node_modules
+bower_components
+.idea
+*.log
+npm-debug.log
+
+# Composer
+/vendor
+
+# PHPUnit
+/tmp
+
+# Misc
+*.zip
+.cache
+.sass-cache*
+.husky
+*.lock
+
+# Tests
+codeception.yml
+.env
+/tests/_data/dump.sql
+.env.testing
+
+# Framework
+lib
+
+
+# Build
+assets/dist
+
