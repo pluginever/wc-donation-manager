@@ -28,7 +28,11 @@ class Campaign extends Data {
 	 * @var array All data.
 	 */
 	protected $data = array(
-		'name'    => 0,
+		'campaign' => '',
+		'amount'   => '',
+		'goal'     => '',
+		'cause'    => '',
+		'status'   => '',
 	);
 
 	/**
@@ -40,7 +44,9 @@ class Campaign extends Data {
 	 * @var array
 	 */
 	protected $postdata_map = array(
-		'name'        => 'post_title',
+		'campaign' => 'post_title',
+		'cause'    => 'post_content',
+		'status'   => 'post_status',
 	);
 
 	/**

@@ -8,12 +8,10 @@
 
 defined( 'ABSPATH' ) || exit;
 $list_table = \WooCommerceDonationManager\Admin\Admin::get_list_table( 'campaigns' );
-// $list_table = wcdm_get_campaigns( 'campaign' ); // This line was generated automatically
 $action = $list_table->current_action();
 $list_table->process_bulk_action( $action );
 $list_table->prepare_items();
 ?>
-
 <div class="pev-admin-page__header">
 	<div>
 		<h1 class="wp-heading-inline">

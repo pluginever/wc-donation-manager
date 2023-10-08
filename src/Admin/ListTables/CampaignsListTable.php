@@ -51,20 +51,8 @@ class CampaignsListTable extends AbstractListTable {
 			'search'      => $this->get_search(),
 			'order'       => $this->get_order( 'ASC' ),
 			'post_status' => 'any',
-			'post_type' => 'wcdm_campaigns',
+			'post_type'   => 'wcdm_campaigns',
 		);
-
-//		$meta_props = array(
-//			'order_id'      => '_order_id',
-//			'product_id'    => '_product_id',
-//			'order_item_id' => '_order_item_id',
-//			'customer_id'   => '_customer_id',
-//		);
-//		// If the orderby param is within $meta_props.
-//		if ( in_array( $args['orderby'], array_keys( $meta_props ), true ) ) {
-//			$args['meta_key'] = $meta_props[ $args['orderby'] ]; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-//			$args['orderby']  = 'meta_value_num';
-//		}
 
 		$this->items       = wcdm_get_campaigns( $args );
 		$this->total_count = wcdm_get_campaigns( $args, true );
@@ -95,12 +83,12 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_columns() {
 		return array(
-			'cb'     => '<input type="checkbox" />',
-			'name'   => __( 'Name', 'wc-donation-manager' ),
-			'amount' => __( 'Amount', 'wc-donation-manager' ),
-			'goal'   => __( 'Goal', 'wc-donation-manager' ),
-			'cause'  => __( 'Cause', 'wc-donation-manager' ),
-			'status' => __( 'Status', 'wc-donation-manager' ),
+			'cb'       => '<input type="checkbox" />',
+			'campaign' => __( 'Campaign', 'wc-donation-manager' ),
+			'amount'   => __( 'Amount', 'wc-donation-manager' ),
+			'goal'     => __( 'Goal', 'wc-donation-manager' ),
+			'cause'    => __( 'Cause', 'wc-donation-manager' ),
+			'status'   => __( 'Status', 'wc-donation-manager' ),
 		);
 	}
 
@@ -112,9 +100,10 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'   => array( 'post_title', true ),
-			'amount' => array( 'campaign_amount', true ),
-			'goal'   => array( 'campaign_goal', true ),
+			'campaign' => array( 'post_title', true ),
+			'amount'   => array( 'campaign_amount', true ),
+			'goal'     => array( 'campaign_goal', true ),
+			'status'   => array( 'post_status', true ),
 		);
 	}
 
@@ -199,7 +188,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * @param Campaign $item The current campaign object.
 	 *
 	 * @return string Displays a checkbox.
-	 *@since  1.0.0
+	 * @since  1.0.0
 	 */
 	public function column_cb( $item ) {
 		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->get_id() ) );
@@ -211,7 +200,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * @param Campaign $item The current campaign object.
 	 *
 	 * @return string Displays the campaign name.
-	 *@since  1.0.0
+	 * @since  1.0.0
 	 */
 	public function column_name( $item ) {
 		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' );
@@ -220,6 +209,7 @@ class CampaignsListTable extends AbstractListTable {
 			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
 			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
+
 		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), esc_html( $item->get_campaign() ), $this->row_actions( $actions ) );
 	}
 
@@ -227,7 +217,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * This function renders most of the columns in the list table.
 	 *
 	 * @param Campaign $item The current campaign object.
-	 * @param string    $column_name The name of the column.
+	 * @param string $column_name The name of the column.
 	 *
 	 * @since 1.0.0
 	 */
@@ -237,7 +227,7 @@ class CampaignsListTable extends AbstractListTable {
 
 		switch ( $column_name ) {
 			case 'amount':
-				$value      = sprintf( '$%s', esc_html( $item->get_campaign() ) );
+				$value = sprintf( '$%s', esc_html( $item->get_campaign() ) );
 				break;
 			default:
 				$value = parent::column_default( $item, $column_name );
