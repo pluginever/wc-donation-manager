@@ -14,7 +14,7 @@ function wcsp_get_list_table( $type ) {
 	switch ( $type ) {
 		case 'campaigns':
 		default:
-			$list_table = new \WooCommerceDonationManager\Admin\ListTables\ThingsListTable();
+			$list_table = new \WooCommerceDonationManager\Admin\ListTables\CampaignsListTable();
 			break;
 	}
 

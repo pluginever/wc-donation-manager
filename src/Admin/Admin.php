@@ -31,12 +31,12 @@ class Admin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-//		require_once __DIR__ . '/Functions.php';
-//		wc_donation_manager()->services->add( Settings::instance() );
+		// require_once __DIR__ . '/Functions.php';
+		// wc_donation_manager()->services->add( Settings::instance() );
 		wc_donation_manager()->services->add( Menus::class );
-//		wc_donation_manager()->services->add( Orders::class );
-//		wc_donation_manager()->services->add( Products::class );
-//		wc_donation_manager()->services->add( Actions::class );
+		// wc_donation_manager()->services->add( Orders::class );
+		// wc_donation_manager()->services->add( Products::class );
+		 wc_donation_manager()->services->add( Actions::class );
 	}
 
 	/**
@@ -100,7 +100,6 @@ class Admin {
 			'toplevel_page_wc-donation-manager',
 			'woocommerce_page_plugin-wc-donation-manager',
 			'admin_page_plugin-wc-donation-manager',
-			'starter-plugin_page_wcsp-settings',
 		];
 
 		return apply_filters( 'wc_donation_manager_screen_ids', $screen_ids );
@@ -138,8 +137,6 @@ class Admin {
 			case 'campaigns':
 				$class = 'WooCommerceDonationManager\Admin\ListTables\CampaignsListTable';
 				break;
-
-
 		}
 
 		if ( $class && class_exists( $class ) && ! isset( $instances[ $class ] ) ) {

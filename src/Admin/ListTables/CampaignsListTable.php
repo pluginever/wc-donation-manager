@@ -2,7 +2,7 @@
 
 namespace WooCommerceDonationManager\Admin\ListTables;
 
-use WooCommerceDonationManager\Models\Campaigns;
+use WooCommerceDonationManager\Models\Campaign;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class CampaignsListTable extends AbstractListTable {
 	/**
-	 * Get things started
+	 * Get campaigns started
 	 *
 	 * @param array $args Optional.
 	 *
@@ -25,8 +25,8 @@ class CampaignsListTable extends AbstractListTable {
 		$args         = (array) wp_parse_args(
 			$args,
 			array(
-				'singular' => 'thing',
-				'plural'   => 'things',
+				'singular' => 'campaign',
+				'plural'   => 'campaigns',
 			)
 		);
 		$this->screen = get_current_screen();
@@ -50,21 +50,21 @@ class CampaignsListTable extends AbstractListTable {
 			'offset'      => $this->get_offset(),
 			'search'      => $this->get_search(),
 			'order'       => $this->get_order( 'ASC' ),
-			'orderby'     => $this->get_orderby( 'post_status' ),
 			'post_status' => 'any',
+			'post_type' => 'wcdm_campaigns',
 		);
 
-		$meta_props = array(
-			'order_id'      => '_order_id',
-			'product_id'    => '_product_id',
-			'order_item_id' => '_order_item_id',
-			'customer_id'   => '_customer_id',
-		);
-		// If the orderby param is within $meta_props.
-		if ( in_array( $args['orderby'], array_keys( $meta_props ), true ) ) {
-			$args['meta_key'] = $meta_props[ $args['orderby'] ]; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-			$args['orderby']  = 'meta_value_num';
-		}
+//		$meta_props = array(
+//			'order_id'      => '_order_id',
+//			'product_id'    => '_product_id',
+//			'order_item_id' => '_order_item_id',
+//			'customer_id'   => '_customer_id',
+//		);
+//		// If the orderby param is within $meta_props.
+//		if ( in_array( $args['orderby'], array_keys( $meta_props ), true ) ) {
+//			$args['meta_key'] = $meta_props[ $args['orderby'] ]; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+//			$args['orderby']  = 'meta_value_num';
+//		}
 
 		$this->items       = wcdm_get_campaigns( $args );
 		$this->total_count = wcdm_get_campaigns( $args, true );
@@ -76,7 +76,6 @@ class CampaignsListTable extends AbstractListTable {
 			)
 		);
 	}
-
 
 	/**
 	 * No items found text.
@@ -96,12 +95,12 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_columns() {
 		return array(
-			'cb'           => '<input type="checkbox" />',
-			'name'         => __( 'Name', 'wc-donation-manager' ),
-			'product'      => __( 'Product', 'wc-donation-manager' ),
-			'order'        => __( 'Order', 'wc-donation-manager' ),
-			'customer'     => __( 'Customer', 'wc-donation-manager' ),
-			'date_created' => __( 'Date Created', 'wc-donation-manager' ),
+			'cb'     => '<input type="checkbox" />',
+			'name'   => __( 'Name', 'wc-donation-manager' ),
+			'amount' => __( 'Amount', 'wc-donation-manager' ),
+			'goal'   => __( 'Goal', 'wc-donation-manager' ),
+			'cause'  => __( 'Cause', 'wc-donation-manager' ),
+			'status' => __( 'Status', 'wc-donation-manager' ),
 		);
 	}
 
@@ -113,11 +112,9 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'         => array( 'post_title', true ),
-			'product'      => array( 'product_id', true ),
-			'order'        => array( 'order_id', true ),
-			'customer'     => array( 'customer_id', true ),
-			'date_created' => array( 'date_created', true ),
+			'name'   => array( 'post_title', true ),
+			'amount' => array( 'campaign_amount', true ),
+			'goal'   => array( 'campaign_goal', true ),
 		);
 	}
 
@@ -169,13 +166,13 @@ class CampaignsListTable extends AbstractListTable {
 				case 'delete':
 					$deleted = 0;
 					foreach ( $ids as $id ) {
-						$thing = wcsp_get_thing( $id );
-						if ( $thing && $thing->delete() ) {
+						$campaign = wcdm_get_campaign( $id );
+						if ( $campaign && $campaign->delete() ) {
 							$deleted ++;
 						}
 					}
-					// translators: %d: number of things deleted.
-					wc_donation_manager()->add_notice( sprintf( _n( '%d thing deleted.', '%d things deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
+					// translators: %d: number of campaigns deleted.
+					wc_donation_manager()->add_notice( sprintf( _n( '%d campaign deleted.', '%d campaigns deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
 					break;
 			}
 
@@ -199,10 +196,10 @@ class CampaignsListTable extends AbstractListTable {
 	/**
 	 * Renders the checkbox column in the items list table.
 	 *
-	 * @param Thing $item The current ticket object.
+	 * @param Campaign $item The current campaign object.
 	 *
-	 * @since  1.0.0
 	 * @return string Displays a checkbox.
+	 *@since  1.0.0
 	 */
 	public function column_cb( $item ) {
 		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->get_id() ) );
@@ -211,58 +208,36 @@ class CampaignsListTable extends AbstractListTable {
 	/**
 	 * Renders the name column in the items list table.
 	 *
-	 * @param Thing $item The current ticket object.
+	 * @param Campaign $item The current campaign object.
 	 *
-	 * @since  1.0.0
-	 * @return string Displays the ticket name.
+	 * @return string Displays the campaign name.
+	 *@since  1.0.0
 	 */
 	public function column_name( $item ) {
-		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=thing' );
+		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' );
 		$id_url    = add_query_arg( 'id', $item->get_id(), $admin_url );
 		$actions   = array(
-			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_thing', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
-			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-things' ), __( 'Delete', 'wc-donation-manager' ) ),
+			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
+			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
-
-		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_thing', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
+		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), esc_html( $item->get_campaign() ), $this->row_actions( $actions ) );
 	}
 
 	/**
 	 * This function renders most of the columns in the list table.
 	 *
-	 * @param Thing  $item The current ticket object.
-	 * @param string $column_name The name of the column.
+	 * @param Campaign $item The current campaign object.
+	 * @param string    $column_name The name of the column.
 	 *
 	 * @since 1.0.0
 	 */
 	public function column_default( $item, $column_name ) {
+
 		$value = '&mdash;';
+
 		switch ( $column_name ) {
-			case 'product':
-				$product = $item->get_product();
-				if ( $product ) {
-					$product_id = $product->is_type( 'variation' ) ? $product->get_parent_id() : $product->get_id();
-					$value      = sprintf( '<a href="%s">%s</a>', esc_url( get_edit_post_link( $product_id ) ), esc_html( $product->get_name() ) );
-				}
-				break;
-			case 'order':
-				$order = $item->get_order();
-				if ( $order ) {
-					$value = sprintf( '<a href="%s">%s</a>', esc_url( get_edit_post_link( $order->get_id() ) ), esc_html( $order->get_order_number() ) );
-				}
-				break;
-			case 'customer':
-				$customer = $item->get_customer();
-				if ( $customer ) {
-					$full_name = implode( ' ', array_filter( array( $customer->get_first_name(), $customer->get_last_name() ) ) );
-					$value     = sprintf( '<a href="%s">%s</a>', esc_url( get_edit_user_link( $customer->get_id() ) ), esc_html( $full_name ) );
-				}
-				break;
-			case 'date_created':
-				$date = $item->post_date;
-				if ( $date ) {
-					$value = sprintf( '<time datetime="%s">%s</time>', esc_attr( $date ), esc_html( date_i18n( get_option( 'date_format' ), strtotime( $date ) ) ) );
-				}
+			case 'amount':
+				$value      = sprintf( '$%s', esc_html( $item->get_campaign() ) );
 				break;
 			default:
 				$value = parent::column_default( $item, $column_name );

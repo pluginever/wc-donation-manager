@@ -30,20 +30,20 @@ class PostTypes {
 	 */
 	public function register_cpt() {
 		$labels = array(
-			'name'               => _x( 'Campaigns', 'post type general name', 'wc-donation-manager' ),
+			'name'               => _x( 'Campaign', 'post type general name', 'wc-donation-manager' ),
 			'singular_name'      => _x( 'Campaign', 'post type singular name', 'wc-donation-manager' ),
-			'menu_name'          => _x( 'Campaigns', 'admin menu', 'wc-donation-manager' ),
+			'menu_name'          => _x( 'Campaign', 'admin menu', 'wc-donation-manager' ),
 			'name_admin_bar'     => _x( 'Campaign', 'add new on admin bar', 'wc-donation-manager' ),
-			'add_new'            => _x( 'Add New', 'ticket', 'wc-donation-manager' ),
+			'add_new'            => _x( 'Add New', 'campaign', 'wc-donation-manager' ),
 			'add_new_item'       => __( 'Add New Campaign', 'wc-donation-manager' ),
 			'new_item'           => __( 'New Campaign', 'wc-donation-manager' ),
 			'edit_item'          => __( 'Edit Campaign', 'wc-donation-manager' ),
 			'view_item'          => __( 'View Campaign', 'wc-donation-manager' ),
-			'all_items'          => __( 'All Campaigns', 'wc-donation-manager' ),
-			'search_items'       => __( 'Search Campaigns', 'wc-donation-manager' ),
-			'parent_item_colon'  => __( 'Parent Campaigns:', 'wc-donation-manager' ),
-			'not_found'          => __( 'No tickets found.', 'wc-donation-manager' ),
-			'not_found_in_trash' => __( 'No tickets found in Trash.', 'wc-donation-manager' ),
+			'all_items'          => __( 'All Campaign', 'wc-donation-manager' ),
+			'search_items'       => __( 'Search Campaign', 'wc-donation-manager' ),
+			'parent_item_colon'  => __( 'Parent Campaign:', 'wc-donation-manager' ),
+			'not_found'          => __( 'No campaigns found.', 'wc-donation-manager' ),
+			'not_found_in_trash' => __( 'No campaigns found in Trash.', 'wc-donation-manager' ),
 		);
 
 		$args = array(

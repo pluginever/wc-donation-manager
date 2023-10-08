@@ -5,7 +5,7 @@ namespace WooCommerceDonationManager\Admin;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Admin class.
+ * Menus class.
  *
  * @since 1.0.0
  * @package WooCommerceDonationManager
@@ -40,19 +40,19 @@ class Menus {
 		);
 
 		$submenu_pages = array(
-			'Campaigns',
+			'Campaign',
 			'Donors',
 			'Tools',
 		);
 		// Add submenu pages.
-		foreach( $submenu_pages as $submenu_page ) {
+		foreach ( $submenu_pages as $submenu_page ) {
 			add_submenu_page(
 				'wc-donation-manager',
-				esc_html__( $submenu_page, 'wc-donation-manager' ),
-				esc_html__( $submenu_page, 'wc-donation-manager' ),
+				esc_html__( ucwords( $submenu_page ), 'wc-donation-manager' ),
+				esc_html__( ucwords( $submenu_page ), 'wc-donation-manager' ),
 				'manage_options',
-				'Campaigns' === $submenu_page ? 'wc-donation-manager' : strtolower( 'wcdm-' . $submenu_page ),
-				array( $this, 'output_main_page' )
+				'Campaign' === $submenu_page ? 'wc-donation-manager' : strtolower( 'wcdm-' . $submenu_page ),
+				array( $this, 'output_main_page' ) // ToDo: Need to make the callback fn dynamic.
 			);
 		}
 	}
@@ -69,7 +69,7 @@ class Menus {
 			__( 'Settings', 'wc-donation-manager' ),
 			__( 'Settings', 'wc-donation-manager' ),
 			'manage_woocommerce',
-			'wcsp-settings',
+			'wcdm-settings',
 			array( Settings::class, 'output' )
 		);
 	}
@@ -85,7 +85,7 @@ class Menus {
 	}
 
 	/**
-	 * Output things content.
+	 * Output campaigns content.
 	 *
 	 * @since 1.0.0
 	 */
@@ -93,13 +93,13 @@ class Menus {
 
 		$add_campaigns  = isset( $_GET['new'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$edit_campaigns = isset( $_GET['edit_campaigns'] ) ? absint( wp_unslash( $_GET['edit_campaigns'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-//		if ( $edit_campaigns && ! wcdm_get_campaigns( $edit_campaigns ) ) {
+		// if ( $edit_campaigns && ! wcdm_get_campaigns( $edit_campaigns ) ) {
 		if ( $edit_campaigns ) {
 			wp_safe_redirect( admin_url( 'admin.php?page=wc-donation-manager' ) );
 			exit();
 		}
 		if ( $add_campaigns ) {
-			include __DIR__ . '/views/add-thing.php';
+			include __DIR__ . '/views/add-campaign.php';
 		} elseif ( $edit_campaigns ) {
 			include __DIR__ . '/views/edit-thing.php';
 		} else {

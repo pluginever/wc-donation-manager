@@ -22,7 +22,8 @@ class Settings extends Lib\Settings {
 	 */
 	public function get_tabs() {
 		$tabs = array(
-			'general' => __( 'General', 'wc-donation-manager' ),
+			'general'  => __( 'General', 'wc-donation-manager' ),
+			'advanced' => __( 'Advanced', 'wc-donation-manager' ),
 		);
 
 		return apply_filters( 'wc_donation_manager_settings_tabs', $tabs );
@@ -50,7 +51,7 @@ class Settings extends Lib\Settings {
 					],
 					[
 						'title'       => __( 'Example field', 'wc-donation-manager' ),
-						'id'          => 'wcsp_example_field',
+						'id'          => 'wcdm_example_field',
 						'desc'        => __( 'This is an example field.', 'wc-donation-manager' ),
 						'desc_tip'    => __( 'This is an example field.', 'wc-donation-manager' ),
 						'type'        => 'text',
@@ -73,7 +74,7 @@ class Settings extends Lib\Settings {
 					],
 					[
 						'title'       => __( 'Example field', 'wc-donation-manager' ),
-						'id'          => 'wcsp_example_field',
+						'id'          => 'wcdm_example_field',
 						'desc'        => __( 'This is an example field.', 'wc-donation-manager' ),
 						'desc_tip'    => __( 'This is an example field.', 'wc-donation-manager' ),
 						'type'        => 'text',
@@ -106,8 +107,6 @@ class Settings extends Lib\Settings {
 			__( 'Feature 1', 'wc-donation-manager' ),
 			__( 'Feature 2', 'wc-donation-manager' ),
 			__( 'Feature 3', 'wc-donation-manager' ),
-			__( 'Feature 4', 'wc-donation-manager' ),
-			__( 'Feature 5', 'wc-donation-manager' ),
 			__( 'Many more ...', 'wc-donation-manager' ),
 		);
 		?>

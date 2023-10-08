@@ -76,7 +76,6 @@ add_action(
 	}
 );
 
-
 /**
  * Get the plugin instance.
  *
@@ -85,10 +84,10 @@ add_action(
  */
 function wc_donation_manager() { // phpcs:ignore
 	$data = array(
-		'file'             => __FILE__,
-		'settings_url'     => admin_url( 'admin.php?page=wc-donation-manager' ),
-		'support_url'      => 'https://pluginever.com/support/',
-		'docs_url'         => 'https://pluginever.com/docs/wocommerce-starter-plugin/',
+		'file'         => __FILE__,
+		'settings_url' => admin_url( 'admin.php?page=wc-donation-manager' ),
+		'support_url'  => 'https://pluginever.com/support/',
+		'docs_url'     => 'https://pluginever.com/docs/wocommerce-donation-manager/',
 	);
 
 	return Plugin::create( $data );

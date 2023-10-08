@@ -6,23 +6,23 @@
  * @package WooCommerceDonationManager
  */
 
-use WooCommerceDonationManager\Models\Thing;
+use WooCommerceDonationManager\Models\Campaign;
 
 defined( 'ABSPATH' ) || exit;
 
-//require_once __DIR__ . '/Functions/updates.php';
+// require_once __DIR__ . '/Functions/updates.php';
 
 /**
- * Get thing.
+ * Get Campaign.
  *
  * @param mixed $data The data.
  *
- * @since 1.0.0
- * @return Campaigns|false The campaigns, or false if not found.
+ * @return Campaign|false The campaigns, or false if not found.
+ *@since 1.0.0
  */
 function wcdm_get_campaigns_edited( $data ) {
 
-	if ( $data instanceof Campaigns ) {
+	if ( $data instanceof Campaign) {
 		return $data;
 	}
 
@@ -31,45 +31,44 @@ function wcdm_get_campaigns_edited( $data ) {
 	}
 
 	if ( $data instanceof WP_Post && 'wcsp_campaigns' === $data->post_type ) {
-		return new Campaigns( $data );
+		return new Campaign( $data );
 	}
-//	wp_die('hello');
 	return false;
 }
 
 /**
- * Insert thing.
+ * Insert campaigns.
  *
  * @param array $data The data.
  * @param bool  $wp_error Optional. Whether to return a WP_Error object on failure. Default false.
  *
- * @since 1.0.0
- * @return Thing|WP_Error|false The thing object on success, WP_Error on failure. False if $wp_error is set to false.
+ * @return Campaign|WP_Error|false The campaigns object on success, WP_Error on failure. False if $wp_error is set to false.
+ *@since 1.0.0
  */
-function wcsp_create_thing( $data, $wp_error = true ) {
+function wcdm_create_campaign( $data, $wp_error = true ) {
 	$defaults = array(
 		'ID' => 0,
 	);
 	$data     = wp_parse_args( $data, $defaults );
-	$thing    = new Thing( $data['ID'] );
-	$thing->set_data( $data );
-	$saved = $thing->save();
+	$campaign = new Campaign( $data['ID'] );
+	$campaign->set_data( $data );
+	$saved = $campaign->save();
 
 	if ( is_wp_error( $saved ) ) {
 		return $wp_error ? $saved : false;
 	}
 
-	return $thing;
+	return $campaign;
 }
 
 /**
- * Get things.
+ * Get campaigns.
  *
  * @param array $args The args.
  * @param bool  $count Whether to return a count.
  *
- * @since 1.0.0
- * @return Campaigns[]|int The things.
+ * @return Campaign[]|int The campaigns.
+ *@since 1.0.0
  */
 function wcdm_get_campaigns( $args = [], $count = false ) {
 	$defaults = array(
@@ -88,17 +87,15 @@ function wcdm_get_campaigns( $args = [], $count = false ) {
 }
 
 /**
- * Get ticket.
+ * Get campaign.
  *
- * @param mixed $campaign Ticket object or ID.
+ * @param mixed $campaign Campaign object or ID.
  *
- * @return Campaigns|null
- * @version 1.0.0
+ * @return Campaign|null
+ *@version 1.0.0
  */
 function wcdm_get_campaign( $campaign ) {
-
-//	wp_die();
-	$campaign = new Campaigns( $campaign );
+	$campaign = new Campaign( $campaign );
 
 	if ( $campaign->get_id() ) {
 		return $campaign;
