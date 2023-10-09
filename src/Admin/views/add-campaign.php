@@ -1,4 +1,10 @@
 <?php
+/**
+ * Admin views: Add Campaign
+ *
+ * @since 1.0.0
+ * @package WooCommerceDonationManager
+ */
 
 defined( 'ABSPATH' ) || exit;
 
