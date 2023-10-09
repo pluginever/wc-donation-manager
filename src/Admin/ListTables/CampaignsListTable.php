@@ -83,12 +83,12 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_columns() {
 		return array(
-			'cb'       => '<input type="checkbox" />',
-			'campaign' => __( 'Campaign', 'wc-donation-manager' ),
-			'amount'   => __( 'Amount', 'wc-donation-manager' ),
-			'goal'     => __( 'Goal', 'wc-donation-manager' ),
-			'cause'    => __( 'Cause', 'wc-donation-manager' ),
-			'status'   => __( 'Status', 'wc-donation-manager' ),
+			'cb'     => '<input type="checkbox" />',
+			'name'   => __( 'Campaign', 'wc-donation-manager' ),
+			'amount' => __( 'Amount', 'wc-donation-manager' ),
+			'goal'   => __( 'Goal', 'wc-donation-manager' ),
+			'cause'  => __( 'Cause', 'wc-donation-manager' ),
+			'status' => __( 'Status', 'wc-donation-manager' ),
 		);
 	}
 
@@ -100,10 +100,10 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'campaign' => array( 'post_title', true ),
-			'amount'   => array( 'campaign_amount', true ),
-			'goal'     => array( 'campaign_goal', true ),
-			'status'   => array( 'post_status', true ),
+			'name'   => array( 'post_title', true ),
+			'amount' => array( 'campaign_amount', true ),
+			'goal'   => array( 'campaign_goal', true ),
+			'status' => array( 'post_status', true ),
 		);
 	}
 
@@ -217,7 +217,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * This function renders most of the columns in the list table.
 	 *
 	 * @param Campaign $item The current campaign object.
-	 * @param string $column_name The name of the column.
+	 * @param string   $column_name The name of the column.
 	 *
 	 * @since 1.0.0
 	 */
@@ -227,7 +227,10 @@ class CampaignsListTable extends AbstractListTable {
 
 		switch ( $column_name ) {
 			case 'amount':
-				$value = sprintf( '$%s', esc_html( $item->get_campaign() ) );
+				$value = sprintf( '$%s', esc_html( $item->get_amount() ) );
+				break;
+			case 'goal':
+				$value = sprintf( '$%s', esc_html( $item->get_goal() ) );
 				break;
 			default:
 				$value = parent::column_default( $item, $column_name );

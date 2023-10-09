@@ -18,11 +18,11 @@ defined( 'ABSPATH' ) || exit;
  * @param mixed $data The data.
  *
  * @return Campaign|false The campaigns, or false if not found.
- *@since 1.0.0
+ * @since 1.0.0
  */
 function wcdm_get_campaigns_edited( $data ) {
 
-	if ( $data instanceof Campaign) {
+	if ( $data instanceof Campaign ) {
 		return $data;
 	}
 
@@ -37,38 +37,13 @@ function wcdm_get_campaigns_edited( $data ) {
 }
 
 /**
- * Insert campaigns.
- *
- * @param array $data The data.
- * @param bool  $wp_error Optional. Whether to return a WP_Error object on failure. Default false.
- *
- * @return Campaign|WP_Error|false The campaigns object on success, WP_Error on failure. False if $wp_error is set to false.
- *@since 1.0.0
- */
-function wcdm_create_campaign( $data, $wp_error = true ) {
-	$defaults = array(
-		'ID' => 0,
-	);
-	$data     = wp_parse_args( $data, $defaults );
-	$campaign = new Campaign( $data['ID'] );
-	$campaign->set_data( $data );
-	$saved = $campaign->save();
-
-	if ( is_wp_error( $saved ) ) {
-		return $wp_error ? $saved : false;
-	}
-
-	return $campaign;
-}
-
-/**
  * Get campaigns.
  *
  * @param array $args The args.
  * @param bool  $count Whether to return a count.
  *
  * @return Campaign[]|int The campaigns.
- *@since 1.0.0
+ * @since 1.0.0
  */
 function wcdm_get_campaigns( $args = [], $count = false ) {
 	$defaults = array(
@@ -92,7 +67,7 @@ function wcdm_get_campaigns( $args = [], $count = false ) {
  * @param mixed $campaign Campaign object or ID.
  *
  * @return Campaign|null
- *@version 1.0.0
+ * @version 1.0.0
  */
 function wcdm_get_campaign( $campaign ) {
 	$campaign = new Campaign( $campaign );

@@ -8,7 +8,7 @@
 
 defined( 'ABSPATH' ) || exit;
 $list_table = \WooCommerceDonationManager\Admin\Admin::get_list_table( 'campaigns' );
-$action = $list_table->current_action();
+$action     = $list_table->current_action();
 $list_table->process_bulk_action( $action );
 $list_table->prepare_items();
 ?>

@@ -43,7 +43,7 @@ class Donor extends Data {
 	 */
 	protected $postdata_map = array(
 		'name'        => 'post_title',
-		'description' => 'post_content'
+		'description' => 'post_content',
 	);
 
 	/**

@@ -9,8 +9,8 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Campaign class
  *
+ * @since 1.0.0
  * @package WooCommerceDonationManager
- * @since   1.0.0
  */
 class Campaign extends Data {
 	/**
@@ -28,11 +28,11 @@ class Campaign extends Data {
 	 * @var array All data.
 	 */
 	protected $data = array(
-		'campaign' => '',
-		'amount'   => '',
-		'goal'     => '',
-		'cause'    => '',
-		'status'   => '',
+		'name'   => '',
+		'amount' => '',
+		'goal'   => '',
+		'cause'  => '',
+		'status' => '',
 	);
 
 	/**
@@ -44,9 +44,9 @@ class Campaign extends Data {
 	 * @var array
 	 */
 	protected $postdata_map = array(
-		'campaign' => 'post_title',
-		'cause'    => 'post_content',
-		'status'   => 'post_status',
+		'name'   => 'post_title',
+		'cause'  => 'post_content',
+		'status' => 'post_status',
 	);
 
 	/**
@@ -87,24 +87,112 @@ class Campaign extends Data {
 	*/
 
 	/**
-	 * Get ticket number.
+	 * Get campaign name.
 	 *
-	 * @return string
 	 * @since 1.0.0
+	 * @return string
 	 */
 	public function get_campaign() {
 		return $this->get_prop( 'name' );
 	}
 
 	/**
-	 * Set ticket number.
+	 * Set campaign name.
 	 *
 	 * @param string $campaign Campaign number.
 	 *
-	 * @return void
 	 * @since 1.0.0
+	 * @return void
 	 */
 	public function set_campaign( $campaign ) {
 		$this->set_prop( 'name', $campaign );
+	}
+
+	/**
+	 * Get amount.
+	 *
+	 * @since 1.0.0
+	 * @return numeric
+	 */
+	public function get_amount() {
+		return $this->get_prop( 'amount' );
+	}
+
+	/**
+	 * Set amount.
+	 *
+	 * @param numeric $amount Campaign amount.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_amount( $amount ) {
+		$this->set_prop( 'amount', $amount );
+	}
+
+	/**
+	 * Get goal.
+	 *
+	 * @since 1.0.0
+	 * @return numeric
+	 */
+	public function get_goal() {
+		return $this->get_prop( 'goal' );
+	}
+
+	/**
+	 * Set goal.
+	 *
+	 * @param numeric $goal Campaign goal.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_goal( $goal ) {
+		$this->set_prop( 'goal', $goal );
+	}
+
+	/**
+	 * Get cause.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function get_cause() {
+		return $this->get_prop( 'cause' );
+	}
+
+	/**
+	 * Set cause.
+	 *
+	 * @param string $cause Campaign cause.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_cause( $cause ) {
+		$this->set_prop( 'cause', $cause );
+	}
+
+	/**
+	 * Get status.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function get_status() {
+		return $this->get_prop( 'status' );
+	}
+
+	/**
+	 * Set status.
+	 *
+	 * @param string $status Campaign status.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_status( $status ) {
+		$this->set_prop( 'status', $status );
 	}
 }
