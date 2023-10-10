@@ -11,30 +11,6 @@ use WooCommerceDonationManager\Models\Campaign;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Get Campaign.
- *
- * @param mixed $data The data.
- *
- * @return Campaign|false The campaigns, or false if not found.
- * @since 1.0.0
- */
-function wcdm_get_campaigns_edited( $data ) {
-
-	if ( $data instanceof Campaign ) {
-		return $data;
-	}
-
-	if ( is_numeric( $data ) ) {
-		$data = get_post( $data );
-	}
-
-	if ( $data instanceof WP_Post && 'wcsp_campaigns' === $data->post_type ) {
-		return new Campaign( $data );
-	}
-	return false;
-}
-
-/**
  * Get campaigns.
  *
  * @param array $args The args.

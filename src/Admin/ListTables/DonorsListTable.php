@@ -2,19 +2,19 @@
 
 namespace WooCommerceDonationManager\Admin\ListTables;
 
-use WooCommerceDonationManager\Models\Campaign;
+use WooCommerceDonationManager\Models\Donor;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * CampaignsListTable class.
+ * DonorsListTable class.
  *
  * @since 1.0.0
  * @package WooCommerceDonationManager
  */
-class CampaignsListTable extends AbstractListTable {
+class DonorsListTable extends AbstractListTable {
 	/**
-	 * Get campaigns started
+	 * Get donors started
 	 *
 	 * @param array $args Optional.
 	 *
@@ -26,7 +26,7 @@ class CampaignsListTable extends AbstractListTable {
 			$args,
 			array(
 				'singular' => 'campaign',
-				'plural'   => 'campaigns',
+				'plural'   => 'donors',
 			)
 		);
 		$this->screen = get_current_screen();
@@ -49,12 +49,12 @@ class CampaignsListTable extends AbstractListTable {
 		$args = array(
 			'order'       => 'ASC',
 			'post_status' => 'any',
-			'post_type'   => 'wcdm_campaigns',
+			'post_type'   => 'wcdm_donors',
 			'posts_per_page' => $per_page,
 		);
 
-		$this->items       = wcdm_get_campaigns( $args );
-		$this->total_count = wcdm_get_campaigns( $args, true );
+		$this->items       = wcdm_get_donors( $args );
+		$this->total_count = wcdm_get_donors( $args, true );
 
 		$this->set_pagination_args(
 			array(
@@ -84,7 +84,7 @@ class CampaignsListTable extends AbstractListTable {
 	public function get_columns() {
 		return array(
 			'cb'     => '<input type="checkbox" />',
-			'name'   => __( 'Campaign', 'wc-donation-manager' ),
+			'name'   => __( 'Donor', 'wc-donation-manager' ),
 			'amount' => __( 'Amount', 'wc-donation-manager' ),
 			'goal'   => __( 'Goal', 'wc-donation-manager' ),
 			'cause'  => __( 'Cause', 'wc-donation-manager' ),
@@ -160,8 +160,8 @@ class CampaignsListTable extends AbstractListTable {
 							$deleted ++;
 						}
 					}
-					// translators: %d: number of campaigns deleted.
-					wc_donation_manager()->add_notice( sprintf( _n( '%d campaign deleted.', '%d campaigns deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
+					// translators: %d: number of donors deleted.
+					wc_donation_manager()->add_notice( sprintf( _n( '%d campaign deleted.', '%d donors deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
 					break;
 			}
 
@@ -185,7 +185,7 @@ class CampaignsListTable extends AbstractListTable {
 	/**
 	 * Renders the checkbox column in the items list table.
 	 *
-	 * @param Campaign $item The current campaign object.
+	 * @param Donor $item The current campaign object.
 	 *
 	 * @return string Displays a checkbox.
 	 * @since  1.0.0
@@ -197,7 +197,7 @@ class CampaignsListTable extends AbstractListTable {
 	/**
 	 * Renders the name column in the items list table.
 	 *
-	 * @param Campaign $item The current campaign object.
+	 * @param Donor $item The current campaign object.
 	 *
 	 * @return string Displays the campaign name.
 	 * @since  1.0.0
@@ -207,7 +207,7 @@ class CampaignsListTable extends AbstractListTable {
 		$id_url    = add_query_arg( 'id', $item->get_id(), $admin_url );
 		$actions   = array(
 			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
-			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
+			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-donors' ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
 
 		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
@@ -216,7 +216,7 @@ class CampaignsListTable extends AbstractListTable {
 	/**
 	 * This function renders most of the columns in the list table.
 	 *
-	 * @param Campaign $item The current campaign object.
+	 * @param Donor $item The current campaign object.
 	 * @param string   $column_name The name of the column.
 	 *
 	 * @since 1.0.0

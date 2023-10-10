@@ -137,6 +137,9 @@ class Admin {
 			case 'campaigns':
 				$class = 'WooCommerceDonationManager\Admin\ListTables\CampaignsListTable';
 				break;
+			case 'donors':
+				$class = 'WooCommerceDonationManager\Admin\ListTables\DonorsListTable';
+				break;
 		}
 
 		if ( $class && class_exists( $class ) && ! isset( $instances[ $class ] ) ) {

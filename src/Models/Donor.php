@@ -19,7 +19,7 @@ class Donor extends Data {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $post_type = 'post';
+	protected $post_type = 'wcdm_donors';
 
 	/**
 	 * All data for this object. Name value pairs (name + default value).

@@ -17,6 +17,27 @@ if ( ! class_exists( '\WP_List_Table' ) ) {
  */
 abstract class AbstractListTable extends \WP_List_Table {
 	/**
+	 * Tab Post
+	 *
+	 * @var object
+	 */
+	public $items;
+
+	/**
+	 * Total count
+	 *
+	 * @var int
+	 */
+	public $total_count;
+
+	/**
+	 * Total pages count
+	 *
+	 * @var int
+	 */
+	public $total_pages;
+
+	/**
 	 * Process bulk action.
 	 *
 	 * @param string $doaction Action name.

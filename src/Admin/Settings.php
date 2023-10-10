@@ -92,7 +92,6 @@ class Settings extends Lib\Settings {
 		return apply_filters( 'wc_donation_manager_get_settings_' . $tab, $settings );
 	}
 
-
 	/**
 	 * Output premium widget.
 	 *
