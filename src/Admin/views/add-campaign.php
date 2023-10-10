@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
 				<label for="amount"><?php esc_html_e( 'Amount', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" name="amount" id="amount" class="regular-text" value="" required/>
+				<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="" required/>
 				<p class="description">
 					<?php esc_html_e( 'Enter the amount of the campaign. It will use the WooCommerce product currency.', 'wc-donation-manager' ); ?>
 				</p>
@@ -41,7 +41,7 @@ defined( 'ABSPATH' ) || exit;
 				<label for="goal"><?php esc_html_e( 'Goal Amount', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" name="goal" id="goal" class="regular-text" value="" required/>
+				<input type="number" min="0" step="any" name="goal" id="goal" class="regular-text" value="" required/>
 				<p class="description">
 					<?php esc_html_e( 'Enter the goal amount of the campaign.', 'wc-donation-manager' ); ?>
 				</p>

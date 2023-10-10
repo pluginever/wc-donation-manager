@@ -29,10 +29,10 @@ class Campaign extends Data {
 	 */
 	protected $data = array(
 		'name'   => '',
-		'amount' => '',
-		'goal'   => '',
+		'amount' => 0.00,
+		'goal'   => 0.00,
 		'cause'  => '',
-		'status' => '',
+		'status' => 'published',
 	);
 
 	/**
@@ -50,22 +50,6 @@ class Campaign extends Data {
 	);
 
 	/**
-	 * Populate data.
-	 *
-	 * @param int|\WP_Post $data Post ID or object.
-	 *
-	 * @since 1.0.0
-	 * @return array
-	 */
-	public function populate_data( $data ) {
-		if ( is_string( $data ) && get_page_by_path( $data, OBJECT, $this->post_type ) ) {
-			$data = get_page_by_path( $data, OBJECT, $this->post_type );
-		}
-
-		return parent::populate_data( $data );
-	}
-
-	/**
 	 * Save data.
 	 *
 	 * @since 1.0.0
@@ -73,7 +57,13 @@ class Campaign extends Data {
 	 */
 	public function save() {
 		if ( empty( $this->get_prop( 'name' ) ) ) {
-			return new \WP_Error( 'missing_required', __( 'Missing required campaign name', 'wc-donation-manager' ) );
+			return new \WP_Error( 'missing_required', __( 'Missing required campaign name.', 'wc-donation-manager' ) );
+		}
+
+		if ( empty( $this->get_prop( 'amount' ) ) ) {
+			return new \WP_Error( 'missing_required', __( 'Missing required amount.', 'wc-donation-manager' ) );
+		} else {
+			$this->set_amount( $this->get_prop( 'amount' ) );
 		}
 
 		return parent::save();
@@ -92,20 +82,20 @@ class Campaign extends Data {
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public function get_campaign() {
+	public function get_name() {
 		return $this->get_prop( 'name' );
 	}
 
 	/**
 	 * Set campaign name.
 	 *
-	 * @param string $campaign Campaign number.
+	 * @param string $campaign Campaign name.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_campaign( $campaign ) {
-		$this->set_prop( 'name', $campaign );
+	public function set_name( $campaign ) {
+		$this->set_prop( 'name', sanitize_text_field( $campaign ) );
 	}
 
 	/**
@@ -127,7 +117,7 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_amount( $amount ) {
-		$this->set_prop( 'amount', $amount );
+		$this->set_prop( 'amount', floatval( $amount ) );
 	}
 
 	/**
@@ -149,7 +139,7 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_goal( $goal ) {
-		$this->set_prop( 'goal', $goal );
+		$this->set_prop( 'goal', floatval ($goal ) );
 	}
 
 	/**
@@ -171,7 +161,7 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_cause( $cause ) {
-		$this->set_prop( 'cause', $cause );
+		$this->set_prop( 'cause', sanitize_textarea_field( $cause ) );
 	}
 
 	/**
@@ -193,6 +183,11 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_status( $status ) {
-		$this->set_prop( 'status', $status );
+		$status_args = array("published", "private", "draft");
+		if ( in_array( $status, $status_args ) ) {
+			$this->set_prop( 'status', sanitize_key( $status ) );
+		} else {
+			$this->set_prop( 'status', sanitize_key( 'draft' ) );
+		}
 	}
 }

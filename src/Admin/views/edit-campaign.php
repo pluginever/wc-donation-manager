@@ -24,14 +24,14 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 						#<?php echo esc_html( $campaign->get_id() ); ?>
 					</p>
 				</div>
-				<div class="pev-card__body inline--fields">
+				<div class="pev-card__body form-inline">
 
 					<div class="pev-form-field">
 						<label for="name">
 							<?php esc_html_e( 'Campaign Name', 'wc-donation-manager' ); ?>
 						</label>
 
-						<input type="text" name="name" id="name" class="regular-text" value="<?php echo esc_html( $campaign->get_campaign() ); ?>" required/>
+						<input type="text" name="name" id="name" class="regular-text" value="<?php echo esc_html( $campaign->get_name() ); ?>" required/>
 						<p class="description">
 							<?php esc_html_e( 'Edit or update the name of the campaign.', 'wc-donation-manager' ); ?>
 						</p>
@@ -41,7 +41,7 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 						<label for="amount">
 							<?php esc_html_e( 'Amount', 'wc-donation-manager' ); ?>
 						</label>
-						<input type="number" name="amount" id="amount" class="regular-text" value="<?php echo esc_html( $campaign->get_amount() ); ?>" required/>
+						<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="<?php echo esc_html( $campaign->get_amount() ); ?>" required/>
 						<p class="description">
 							<?php esc_html_e( 'Edit or update the amount of the campaign.', 'wc-donation-manager' ); ?>
 						</p>
@@ -51,7 +51,7 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 						<label for="goal">
 							<?php esc_html_e( 'Goal Amount', 'wc-donation-manager' ); ?>
 						</label>
-						<input type="number" name="goal" id="goal" class="regular-text" value="<?php echo esc_html( $campaign->get_goal() ); ?>" required/>
+						<input type="number" min="0" step="any" name="goal" id="goal" class="regular-text" value="<?php echo esc_html( $campaign->get_goal() ); ?>" required/>
 						<p class="description">
 							<?php esc_html_e( 'Edit or update the goal amount of the campaign.', 'wc-donation-manager' ); ?>
 						</p>
@@ -99,6 +99,6 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 	</div>
 
 	<input type="hidden" name="action" value="wcdm_edit_campaign">
-	<input type="hidden" name="campaign_id" value="<?php echo esc_attr( $campaign->get_id() ); ?>">
+	<input type="hidden" name="id" value="<?php echo esc_attr( $campaign->get_id() ); ?>">
 	<?php wp_nonce_field( 'wcdm_edit_campaign' ); ?>
 </form>

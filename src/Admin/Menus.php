@@ -91,14 +91,16 @@ class Menus {
 	 */
 	public function output_campaigns_content() {
 		$add_campaigns  = isset( $_GET['new'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$edit_campaigns = isset( $_GET['edit_campaign'] ) ? absint( wp_unslash( $_GET['edit_campaign'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		 if ( $edit_campaigns && ! wcdm_get_campaigns( $edit_campaigns ) ) {
+		$edit_campaign = isset( $_GET['edit_campaign'] ) ? absint( wp_unslash( $_GET['edit_campaign'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+		if ( $edit_campaign && ! wcdm_get_campaign( $edit_campaign ) ) {
 			wp_safe_redirect( admin_url( 'admin.php?page=wc-donation-manager' ) );
 			exit();
 		}
+
 		if ( $add_campaigns ) {
 			include __DIR__ . '/views/add-campaign.php';
-		} elseif ( $edit_campaigns ) {
+		} elseif ( $edit_campaign ) {
 			include __DIR__ . '/views/edit-campaign.php';
 		} else {
 			include __DIR__ . '/views/list-campaigns.php';
