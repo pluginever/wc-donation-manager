@@ -62,8 +62,10 @@ class Campaign extends Data {
 
 		if ( empty( $this->get_prop( 'amount' ) ) ) {
 			return new \WP_Error( 'missing_required', __( 'Missing required amount.', 'wc-donation-manager' ) );
-		} else {
-			$this->set_amount( $this->get_prop( 'amount' ) );
+		}
+
+		if ( empty( $this->get_prop( 'status' ) ) ) {
+			return new \WP_Error( 'missing_required', __( 'Missing required status.', 'wc-donation-manager' ) );
 		}
 
 		return parent::save();
@@ -139,7 +141,7 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_goal( $goal ) {
-		$this->set_prop( 'goal', floatval ($goal ) );
+		$this->set_prop( 'goal', floatval( $goal ) );
 	}
 
 	/**
@@ -183,8 +185,8 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_status( $status ) {
-		$status_args = array("published", "private", "draft");
-		if ( in_array( $status, $status_args ) ) {
+		$all_status = array( "published", "private", "draft" );
+		if ( in_array( $status, $all_status ) ) {
 			$this->set_prop( 'status', sanitize_key( $status ) );
 		} else {
 			$this->set_prop( 'status', sanitize_key( 'draft' ) );

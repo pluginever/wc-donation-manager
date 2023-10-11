@@ -25,7 +25,7 @@ class DonorsListTable extends AbstractListTable {
 		$args         = (array) wp_parse_args(
 			$args,
 			array(
-				'singular' => 'campaign',
+				'singular' => 'donor',
 				'plural'   => 'donors',
 			)
 		);
@@ -43,14 +43,20 @@ class DonorsListTable extends AbstractListTable {
 		$columns               = $this->get_columns();
 		$sortable              = $this->get_sortable_columns();
 		$hidden                = $this->get_hidden_columns();
-		$per_page = 20;
 		$this->_column_headers = array( $columns, $hidden, $sortable );
-
+		$per_page              = get_option( 'posts_per_page' );;
+		$order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
+		$order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
+		$search                = isset( $_GET['s'] ) ? sanitize_text_field ( wp_unslash( $_GET['s'] ) ) : '';
+		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
 		$args = array(
-			'order'       => 'ASC',
-			'post_status' => 'any',
-			'post_type'   => 'wcdm_donors',
+			'post_type'      => 'wcdm_donors',
+			'post_status'    => 'any',
+			'order'          => $order,
+			'order_by'       => $order_by,
+			's'              => $search,
 			'posts_per_page' => $per_page,
+			'paged'          => $current_page,
 		);
 
 		$this->items       = wcdm_get_donors( $args );
@@ -60,7 +66,7 @@ class DonorsListTable extends AbstractListTable {
 			array(
 				'total_items' => $this->total_count,
 				'per_page'    => $per_page,
-				'total_pages'  => $this->total_pages,
+				'total_pages' => $this->total_pages,
 			)
 		);
 	}
@@ -83,12 +89,13 @@ class DonorsListTable extends AbstractListTable {
 	 */
 	public function get_columns() {
 		return array(
-			'cb'     => '<input type="checkbox" />',
-			'name'   => __( 'Donor', 'wc-donation-manager' ),
-			'amount' => __( 'Amount', 'wc-donation-manager' ),
-			'goal'   => __( 'Goal', 'wc-donation-manager' ),
-			'cause'  => __( 'Cause', 'wc-donation-manager' ),
-			'status' => __( 'Status', 'wc-donation-manager' ),
+			'cb'          => '<input type="checkbox" />',
+			'name'        => __( 'Name', 'wc-donation-manager' ),
+			'donation_no' => __( 'Donation No.', 'wc-donation-manager' ),
+			'order'       => __( 'Order', 'wc-donation-manager' ),
+			'order_id'    => __( 'Order ID', 'wc-donation-manager' ),
+			'amount'      => __( 'Total Amount', 'wc-donation-manager' ),
+			'type'        => __( 'Type', 'wc-donation-manager' ),
 		);
 	}
 
@@ -100,10 +107,12 @@ class DonorsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'   => array( 'post_title', true ),
-			'amount' => array( 'campaign_amount', true ),
-			'goal'   => array( 'campaign_goal', true ),
-			'status' => array( 'post_status', true ),
+			'name'        => array( 'post_title', true ),
+			'donation_no' => array( 'amount', true ),
+			'order'       => array( 'order', true ),
+			'order_id'    => array( 'order_id', true ),
+			'amount'      => array( 'amount', true ),
+			'type'        => array( 'type', true ),
 		);
 	}
 
@@ -155,13 +164,13 @@ class DonorsListTable extends AbstractListTable {
 				case 'delete':
 					$deleted = 0;
 					foreach ( $ids as $id ) {
-						$campaign = wcdm_get_campaign( $id );
-						if ( $campaign && $campaign->delete() ) {
+						$donor = wcdm_get_donor( $id );
+						if ( $donor && $donor->delete() ) {
 							$deleted ++;
 						}
 					}
 					// translators: %d: number of donors deleted.
-					wc_donation_manager()->add_notice( sprintf( _n( '%d campaign deleted.', '%d donors deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
+					wc_donation_manager()->add_notice( sprintf( _n( '%d donor deleted.', '%d donors deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
 					break;
 			}
 
@@ -185,10 +194,10 @@ class DonorsListTable extends AbstractListTable {
 	/**
 	 * Renders the checkbox column in the items list table.
 	 *
-	 * @param Donor $item The current campaign object.
+	 * @param Donor $item The current donor object.
 	 *
-	 * @return string Displays a checkbox.
 	 * @since  1.0.0
+	 * @return string Displays a checkbox.
 	 */
 	public function column_cb( $item ) {
 		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->get_id() ) );
@@ -197,40 +206,41 @@ class DonorsListTable extends AbstractListTable {
 	/**
 	 * Renders the name column in the items list table.
 	 *
-	 * @param Donor $item The current campaign object.
+	 * @param Donor $item The current donor object.
 	 *
-	 * @return string Displays the campaign name.
 	 * @since  1.0.0
+	 * @return string Displays the donor name.
 	 */
 	public function column_name( $item ) {
-		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' );
+		$admin_url = admin_url( 'admin.php?page=wcdm-donors&tab=donors' );
 		$id_url    = add_query_arg( 'id', $item->get_id(), $admin_url );
 		$actions   = array(
-			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
+			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_donor', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
 			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-donors' ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
 
-		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
+		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_donor', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
 	}
 
 	/**
 	 * This function renders most of the columns in the list table.
 	 *
-	 * @param Donor $item The current campaign object.
-	 * @param string   $column_name The name of the column.
+	 * @param Donor $item The current donor object.
+	 * @param string $column_name The name of the column.
 	 *
 	 * @since 1.0.0
+	 * @return string Displays the donor table columns.
 	 */
 	public function column_default( $item, $column_name ) {
 
 		$value = '&mdash;';
 
 		switch ( $column_name ) {
+			case 'order_id':
+				$value = sprintf( '#%s', esc_html( $item->get_order_id() ) );
+				break;
 			case 'amount':
 				$value = sprintf( '$%s', esc_html( $item->get_amount() ) );
-				break;
-			case 'goal':
-				$value = sprintf( '$%s', esc_html( $item->get_goal() ) );
 				break;
 			default:
 				$value = parent::column_default( $item, $column_name );

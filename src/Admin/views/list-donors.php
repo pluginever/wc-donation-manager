@@ -16,7 +16,7 @@ $list_table->prepare_items();
 	<div>
 		<h1 class="wp-heading-inline">
 			<?php esc_html_e( 'Donors', 'wc-donation-manager' ); ?>
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wc-donation-manager&new=1' ) ); ?>" class="page-title-action">
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wcdm-donors&new=1' ) ); ?>" class="page-title-action">
 				<?php esc_html_e( 'Add New', 'wc-donation-manager' ); ?>
 			</a>
 		</h1>
@@ -32,5 +32,3 @@ $list_table->prepare_items();
 	<input type="hidden" name="status" value="<?php echo esc_attr( $status ); ?>">
 	<input type="hidden" name="page" value="wc-donation-manager">
 </form>
-
-

@@ -97,7 +97,8 @@ class Plugin extends Lib\Plugin {
 		// $this->services->add( Cart::class );
 		// $this->services->add( Checkout::class );
 		// $this->services->add( Emails\Emails::class );
-		$this->services->add( Models\Campaign::class );
+//		$this->services->add( Models\Campaign::class );
+//		$this->services->add( Models\Donor::class );
 
 		if ( self::is_request( 'admin' ) ) {
 			$this->services->add( Admin\Admin::class );

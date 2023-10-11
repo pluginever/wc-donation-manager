@@ -27,6 +27,7 @@ class CampaignsListTable extends AbstractListTable {
 			array(
 				'singular' => 'campaign',
 				'plural'   => 'campaigns',
+				'ajax'     => 'true',
 			)
 		);
 		$this->screen = get_current_screen();
@@ -39,18 +40,25 @@ class CampaignsListTable extends AbstractListTable {
 	 * @since 1.0.0
 	 * @return void
 	 */
+
 	public function prepare_items() {
 		$columns               = $this->get_columns();
 		$sortable              = $this->get_sortable_columns();
 		$hidden                = $this->get_hidden_columns();
-		$per_page = 20;
 		$this->_column_headers = array( $columns, $hidden, $sortable );
-
-		$args = array(
-			'order'       => 'ASC',
-			'post_status' => 'any',
-			'post_type'   => 'wcdm_campaigns',
+		$per_page              = get_option( 'posts_per_page' );
+		$order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
+		$order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
+		$search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
+		$args                  = array(
+			'post_type'      => 'wcdm_campaigns',
+			'post_status'    => 'any',
+			'order'          => $order,
+			'order_by'       => $order_by,
+			's'              => $search,
 			'posts_per_page' => $per_page,
+			'paged'          => $current_page,
 		);
 
 		$this->items       = wcdm_get_campaigns( $args );
@@ -60,7 +68,7 @@ class CampaignsListTable extends AbstractListTable {
 			array(
 				'total_items' => $this->total_count,
 				'per_page'    => $per_page,
-				'total_pages'  => $this->total_pages,
+				'total_pages' => $this->total_pages,
 			)
 		);
 	}
@@ -84,7 +92,7 @@ class CampaignsListTable extends AbstractListTable {
 	public function get_columns() {
 		return array(
 			'cb'     => '<input type="checkbox" />',
-			'name'   => __( 'Campaign', 'wc-donation-manager' ),
+			'name'   => __( 'Name', 'wc-donation-manager' ),
 			'amount' => __( 'Amount', 'wc-donation-manager' ),
 			'goal'   => __( 'Goal', 'wc-donation-manager' ),
 			'cause'  => __( 'Cause', 'wc-donation-manager' ),
@@ -101,8 +109,8 @@ class CampaignsListTable extends AbstractListTable {
 	public function get_sortable_columns() {
 		return array(
 			'name'   => array( 'post_title', true ),
-			'amount' => array( 'campaign_amount', true ),
-			'goal'   => array( 'campaign_goal', true ),
+			'amount' => array( 'amount', true ),
+			'goal'   => array( 'goal', true ),
 			'status' => array( 'post_status', true ),
 		);
 	}
@@ -217,7 +225,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * This function renders most of the columns in the list table.
 	 *
 	 * @param Campaign $item The current campaign object.
-	 * @param string   $column_name The name of the column.
+	 * @param string $column_name The name of the column.
 	 *
 	 * @since 1.0.0
 	 */

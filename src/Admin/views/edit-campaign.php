@@ -9,7 +9,6 @@
 defined( 'ABSPATH' ) || exit;
 $campaign_id = filter_input( INPUT_GET, 'edit_campaign', FILTER_SANITIZE_NUMBER_INT );
 $campaign    = wcdm_get_campaign( $campaign_id );
-//var_dump($campaign);
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Campaign', 'wc-donation-manager' ); ?></h1>
 <p><?php esc_html_e( 'Edit and update the campaign.', 'wc-donation-manager' ); ?></p>
@@ -28,7 +27,7 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 
 					<div class="pev-form-field">
 						<label for="name">
-							<?php esc_html_e( 'Campaign Name', 'wc-donation-manager' ); ?>
+							<?php esc_html_e( 'Campaign Name *', 'wc-donation-manager' ); ?>
 						</label>
 
 						<input type="text" name="name" id="name" class="regular-text" value="<?php echo esc_html( $campaign->get_name() ); ?>" required/>
@@ -39,7 +38,7 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 
 					<div class="pev-form-field">
 						<label for="amount">
-							<?php esc_html_e( 'Amount', 'wc-donation-manager' ); ?>
+							<?php esc_html_e( 'Amount *', 'wc-donation-manager' ); ?>
 						</label>
 						<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="<?php echo esc_html( $campaign->get_amount() ); ?>" required/>
 						<p class="description">

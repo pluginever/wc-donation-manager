@@ -7,6 +7,7 @@
  */
 
 use WooCommerceDonationManager\Models\Campaign;
+use WooCommerceDonationManager\Models\Donor;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -14,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  * Get campaigns.
  *
  * @param array $args The args.
- * @param bool  $count Whether to return a count.
+ * @param bool $count Whether to return a count.
  *
  * @return Campaign[]|int The campaigns.
  * @since 1.0.0
@@ -32,6 +33,7 @@ function wcdm_get_campaigns( $args = [], $count = false ) {
 	if ( $count ) {
 		return $query->found_posts;
 	}
+
 	return array_map( 'wcdm_get_campaign', $query->posts );
 }
 
@@ -48,6 +50,50 @@ function wcdm_get_campaign( $campaign ) {
 
 	if ( $campaign->get_id() ) {
 		return $campaign;
+	}
+
+	return null;
+}
+
+/**
+ * Get donors.
+ *
+ * @param array $args The args.
+ * @param bool $count Whether to return a count.
+ *
+ * @return Donor[]|int The donors.
+ * @since 1.0.0
+ */
+function wcdm_get_donors( $args = [], $count = false ) {
+	$defaults = array(
+		'post_type'      => 'wcdm_donors',
+		'posts_per_page' => - 1,
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	);
+	$args     = wp_parse_args( $args, $defaults );
+	$query    = new WP_Query( $args );
+
+	if ( $count ) {
+		return $query->found_posts;
+	}
+
+	return array_map( 'wcdm_get_donor', $query->posts );
+}
+
+/**
+ * Get donor.
+ *
+ * @param mixed $donor Donor object or ID.
+ *
+ * @return Donor|null
+ * @version 1.0.0
+ */
+function wcdm_get_donor( $donor ) {
+	$donor = new Donor( $donor );
+
+	if ( $donor->get_id() ) {
+		return $donor;
 	}
 
 	return null;

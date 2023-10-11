@@ -31,7 +31,6 @@ class Admin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		// require_once __DIR__ . '/Functions.php';
 		// wc_donation_manager()->services->add( Settings::instance() );
 		wc_donation_manager()->services->add( Menus::class );
 		// wc_donation_manager()->services->add( Orders::class );

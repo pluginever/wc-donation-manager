@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 		<tbody>
 		<tr valign="top">
 			<th scope="row">
-				<label for="name"><?php esc_html_e( 'Campaign Name', 'wc-donation-manager' ); ?></label>
+				<label for="name"><?php esc_html_e( 'Campaign Name *', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
 				<input type="text" name="name" id="name" class="regular-text" value="" required/>
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 		</tr>
 		<tr valign="top">
 			<th scope="row">
-				<label for="amount"><?php esc_html_e( 'Amount', 'wc-donation-manager' ); ?></label>
+				<label for="amount"><?php esc_html_e( 'Amount *', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
 				<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="" required/>
