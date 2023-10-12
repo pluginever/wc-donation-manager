@@ -30,5 +30,5 @@ $list_table->prepare_items();
 	$list_table->display();
 	?>
 	<input type="hidden" name="status" value="<?php echo esc_attr( $status ); ?>">
-	<input type="hidden" name="page" value="wc-donation-manager">
+	<input type="hidden" name="page" value="wcdm-donors">
 </form>

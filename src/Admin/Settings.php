@@ -22,8 +22,11 @@ class Settings extends Lib\Settings {
 	 */
 	public function get_tabs() {
 		$tabs = array(
-			'general'  => __( 'General', 'wc-donation-manager' ),
-			'advanced' => __( 'Advanced', 'wc-donation-manager' ),
+			'general'       => __( 'General', 'wc-donation-manager' ),
+			'advanced'      => __( 'Advanced', 'wc-donation-manager' ),
+			'emails'        => __( 'Emails', 'wc-donation-manager' ),
+			'fee_recurring' => __( 'Fee Recurring', 'wc-donation-manager' ),
+			'tributes'      => __( 'Tributes', 'wc-donation-manager' ),
 		);
 
 		return apply_filters( 'wc_donation_manager_settings_tabs', $tabs );
@@ -50,6 +53,13 @@ class Settings extends Lib\Settings {
 						'id'    => 'general_options',
 					],
 					[
+						'title'   => __( 'Enable for product page', 'wc-donation-manager' ),
+						'desc'    => __( 'Enable swatches for product page.', 'wc-donation-manager' ),
+						'id'      => 'wcdm_enable_product_page',
+						'default' => 'yes',
+						'type'    => 'checkbox',
+					],
+					[
 						'title'       => __( 'Example field', 'wc-donation-manager' ),
 						'id'          => 'wcdm_example_field',
 						'desc'        => __( 'This is an example field.', 'wc-donation-manager' ),
@@ -67,23 +77,67 @@ class Settings extends Lib\Settings {
 			case 'advanced':
 				$settings = array(
 					[
-						'title' => __( 'Advanced settings', 'wc-donation-manager' ),
+						'title' => __( 'Advanced Settings', 'wc-donation-manager' ),
 						'type'  => 'title',
-						'desc'  => __( 'The following options affect how the plugin will work.', 'wc-donation-manager' ),
+						'desc'  => __( 'The following options are the plugin advanced settings.', 'wc-donation-manager' ),
 						'id'    => 'advanced_options',
 					],
 					[
-						'title'       => __( 'Example field', 'wc-donation-manager' ),
-						'id'          => 'wcdm_example_field',
-						'desc'        => __( 'This is an example field.', 'wc-donation-manager' ),
-						'desc_tip'    => __( 'This is an example field.', 'wc-donation-manager' ),
-						'type'        => 'text',
-						'default'     => 'I am a default value',
-						'placeholder' => 'I am a placeholder',
+						'title'    => __( 'Minimum amount', 'wc-donation-manager' ),
+						'id'       => 'wcdm_minimum_amount',
+						'desc'     => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
+						'type'     => 'text',
+						'default'    => '0',
+					],
+					[
+						'title'    => __( 'Maximum amount', 'wc-donation-manager' ),
+						'id'       => 'wcdm_maximum_amount',
+						'desc'     => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
+						'type'     => 'text',
+						'default'    => '0',
 					],
 					[
 						'type' => 'sectionend',
 						'id'   => 'advanced_options',
+					],
+				);
+				break;
+			case 'fee_recurring':
+				$settings = array(
+					[
+						'title' => __( 'Fee Recurring Settings', 'wc-donation-manager' ),
+						'type'  => 'title',
+						'desc'  => __( 'The following options are the fee recurring settings.', 'wc-donation-manager' ),
+						'id'    => 'fee_recurring_options',
+					],
+					[
+						'title'   => __( 'Enable fee recurring', 'wc-donation-manager' ),
+						'desc'    => __( 'Enable the donation fee recurring.', 'wc-donation-manager' ),
+						'id'      => 'wcdm_enable_fee_recurring',
+						'default' => 'yes',
+						'type'    => 'checkbox',
+					],
+					[
+						'title'   => __( 'Default fee recurring', 'wc-donation-manager' ),
+						'desc'    => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
+						'desc_tip'    => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
+						'id'      => 'wcif_default_recurring',
+						'type'    => 'select',
+						'options' => array(
+							'recurring'  => __( 'Recurring', 'wc-donation-manager' ),
+							'onetime'   => __( 'Onetime', 'wc-donation-manager' ),
+						),
+						'default' => 'lefrecurringt',
+						'custom_attributes' => array(
+							'data-cond-id'    => 'wcdm_enable_fee_recurring',
+							'data-cond-value' => 'yes',
+						),
+					],
+					[
+						'type' => 'sectionend',
+						'id'   => 'fee_recurring_options',
 					],
 				);
 				break;
@@ -117,7 +171,8 @@ class Settings extends Lib\Settings {
 					<li>- <?php echo esc_html( $feature ); ?></li>
 				<?php endforeach; ?>
 			</ul>
-			<a href="https://pluginever.com/plugins/wc-donation-manager/?utm_source=plugin-settings&utm_medium=banner&utm_campaign=upgrade&utm_id=wc-donation-manager" class="button" target="_blank">
+			<a href="https://pluginever.com/plugins/wc-donation-manager/?utm_source=plugin-settings&utm_medium=banner&utm_campaign=upgrade&utm_id=wc-donation-manager"
+			   class="button" target="_blank">
 				<?php esc_html_e( 'Upgrade to PRO', 'wc-donation-manager' ); ?>
 			</a>
 		</div>

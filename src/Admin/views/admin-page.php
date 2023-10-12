@@ -43,8 +43,6 @@ $current_tab  = ! empty( $current_tab ) && array_key_exists( $current_tab, $tabs
 			</nav>
 		<?php endif; ?>
 
-		<hr class="wp-header-end">
-
 		<?php
 		if ( ! empty( $tabs ) && ! empty( $current_tab ) ) {
 			/**
