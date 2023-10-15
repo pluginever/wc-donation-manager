@@ -34,7 +34,7 @@ class Admin {
 		// wc_donation_manager()->services->add( Settings::instance() );
 		wc_donation_manager()->services->add( Menus::class );
 		// wc_donation_manager()->services->add( Orders::class );
-		// wc_donation_manager()->services->add( Products::class );
+		 wc_donation_manager()->services->add( Metaboxes::class );
 		 wc_donation_manager()->services->add( Actions::class );
 	}
 

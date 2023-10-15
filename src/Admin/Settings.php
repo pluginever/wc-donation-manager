@@ -44,36 +44,6 @@ class Settings extends Lib\Settings {
 		$settings = array();
 
 		switch ( $tab ) {
-			case 'general':
-				$settings = array(
-					[
-						'title' => __( 'General settings', 'wc-donation-manager' ),
-						'type'  => 'title',
-						'desc'  => __( 'The following options affect how the plugin will work.', 'wc-donation-manager' ),
-						'id'    => 'general_options',
-					],
-					[
-						'title'   => __( 'Enable for product page', 'wc-donation-manager' ),
-						'desc'    => __( 'Enable swatches for product page.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_enable_product_page',
-						'default' => 'yes',
-						'type'    => 'checkbox',
-					],
-					[
-						'title'       => __( 'Example field', 'wc-donation-manager' ),
-						'id'          => 'wcdm_example_field',
-						'desc'        => __( 'This is an example field.', 'wc-donation-manager' ),
-						'desc_tip'    => __( 'This is an example field.', 'wc-donation-manager' ),
-						'type'        => 'text',
-						'default'     => 'I am a default value',
-						'placeholder' => 'I am a placeholder',
-					],
-					[
-						'type' => 'sectionend',
-						'id'   => 'general_options',
-					],
-				);
-				break;
 			case 'advanced':
 				$settings = array(
 					[
@@ -143,7 +113,34 @@ class Settings extends Lib\Settings {
 				break;
 		}
 
+		/**
+		 * Filter the settings for the plugin.
+		 *
+		 * @param array  $settings The settings.
+		 * @param string $tab The current tab.
+		 *
+		 * @since 1.0.0
+		 */
 		return apply_filters( 'wc_donation_manager_get_settings_' . $tab, $settings );
+	}
+
+	/**
+	 * Output settings form.
+	 *
+	 * @param array $settings Settings.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	protected function output_form( $settings ) {
+		$current_tab = $this->get_current_tab();
+		/**
+		 * Action hook to output settings form.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'wc_donation_manager_settings_' . $current_tab );
+		parent::output_form( $settings );
 	}
 
 	/**
