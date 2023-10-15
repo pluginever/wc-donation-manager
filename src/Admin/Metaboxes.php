@@ -20,7 +20,6 @@ class Metaboxes {
 		add_filter( 'product_type_options', array( __CLASS__, 'product_type_option' ), 11 );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ) );
 
-//		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ) );
 //		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_write_panel' ) );
 //		add_filter( 'woocommerce_process_product_meta', array( __CLASS__, 'product_save_data' ) );
 //		add_action( 'woocommerce_product_after_variable_attributes', array( __CLASS__, 'variable_product_content' ), 10, 3 );
