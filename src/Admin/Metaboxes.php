@@ -72,7 +72,7 @@ class Metaboxes {
 		woocommerce_wp_text_input( array(
 			'id' => 'donation_default_amount',
 			'label' => esc_html__('Default amount',
-				'donations-for-woocommerce'),
+				'donations-for-woocommerce', 'wc-donation-manager'),
 			'value' => get_post_meta( get_the_ID(), '_price', true ),
 			'data_type' => 'price'
 		));
@@ -80,7 +80,7 @@ class Metaboxes {
 		woocommerce_wp_text_input( array(
 			'id' => 'donation_amount_increment',
 			'label' => esc_html__('Amount increment',
-				'donations-for-woocommerce'),
+				'donations-for-woocommerce', 'wc-donation-manager'),
 			'value' => ( empty( $donationAmountIncrement ) ? 0.01 : $donationAmountIncrement ),
 			'data_type' => 'decimal'
 		));

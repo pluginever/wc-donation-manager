@@ -51,7 +51,7 @@ class WC_Product_Donation extends WC_Product_Simple {
 	 * @return string
 	 */
 	public function add_to_cart_text() {
-		$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'woocommerce' ) : __( 'Read more (Donate)', 'woocommerce' );
+		$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'woocommerce', 'wc-donation-manager' ) : __( 'Read more (Donate)', 'woocommerce', 'wc-donation-manager' );
 
 		return apply_filters( 'woocommerce_product_add_to_cart_text', $text, $this );
 	}
@@ -64,7 +64,7 @@ class WC_Product_Donation extends WC_Product_Simple {
 	 */
 	public function add_to_cart_description() {
 		/* translators: %s: Product title */
-		$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Add &ldquo;%s&rdquo; to your cart (Donate)', 'woocommerce' ) : __( 'Read more about &ldquo;%s&rdquo; (Donate)', 'woocommerce' );
+		$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Add &ldquo;%s&rdquo; to your cart (Donate)', 'woocommerce', 'wc-donation-manager' ) : __( 'Read more about &ldquo;%s&rdquo; (Donate)', 'woocommerce', 'wc-donation-manager' );
 
 		return apply_filters( 'woocommerce_product_add_to_cart_description (Donate)', sprintf( $text, $this->get_name() ), $this );
 	}

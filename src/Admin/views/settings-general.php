@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 			</th>
 			<td>
 				<select id="wcdm_success_page" name="wcdm_success_page" style="width: 300px">
-					<option value="0"><?php echo esc_attr( __( 'Select page' ) ); ?></option>
+					<option value="0"><?php echo esc_attr( __( 'Select page', 'wc-donation-manager' ) ); ?></option>
 					<?php
 					$pages = get_pages();
 					foreach ( $pages as $page ) {
@@ -40,7 +40,7 @@ defined( 'ABSPATH' ) || exit;
 			</th>
 			<td>
 				<select id="wcdm_donor_wall_page" name="wcdm_donor_wall_page" style="width: 300px">
-					<option value="0"><?php echo esc_attr( __( 'Select page' ) ); ?></option>
+					<option value="0"><?php echo esc_attr( __( 'Select page', 'wc-donation-manager' ) ); ?></option>
 					<?php
 					$pages = get_pages();
 					foreach ( $pages as $page ) {
