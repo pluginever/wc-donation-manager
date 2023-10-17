@@ -78,9 +78,9 @@ class Metaboxes {
 			'value' => get_post_meta( get_the_ID(), '_price', true ),
 			'data_type' => 'price',
 		));
-		$amount_increment = get_post_meta( get_the_ID(), 'wcdm_amount_increment', true);
+		$amount_increment = get_post_meta( get_the_ID(), 'wcdm_amount_increment_steps', true);
 		woocommerce_wp_text_input( array(
-			'id' => 'wcdm_amount_increment',
+			'id' => 'wcdm_amount_increment_steps',
 			'label' => esc_html__('Amount increment', 'wc-donation-manager'),
 			'value' => ( empty( $amount_increment ) ? 0.01 : $amount_increment ),
 			'data_type' => 'decimal',
@@ -100,7 +100,7 @@ class Metaboxes {
 		$price = ( $_POST['wcdm_amount'] === '' ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
 		update_post_meta( $product_ID, '_price', $price );
 		update_post_meta( $product_ID, '_regular_price', $price );
-		update_post_meta( $product_ID, 'wcdm_amount_increment', ( !empty( $_POST['wcdm_amount_increment'] ) && is_numeric( $_POST['wcdm_amount_increment'] ) ? number_format( $_POST['wcdm_amount_increment'], 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_ID, 'wcdm_amount_increment_steps', ( !empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
 	}
 
 	/**
@@ -115,7 +115,7 @@ class Metaboxes {
 			?>
 			<script type='text/javascript'>
 				jQuery(document).ready( function () {
-					<?php //  if ( hm_wcdon_get_option('show_tax_donation_product' )) { ?>
+					<?php //  if ( option('show_tax_donation_product' )) { ?>
 					jQuery( '#general_product_data ._tax_status_field' ).parent().addClass( 'show_if_donation' ).show();
 					<?php // } ?>
 					jQuery( '#woocommerce-product-data .type_box label[for=_downloadable].tips' ).addClass( 'show_if_donation' ).show();

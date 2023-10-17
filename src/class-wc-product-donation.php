@@ -11,7 +11,7 @@ if ( class_exists('WC_Product_Simple' ) ) {
 	 */
 	class WC_Product_Donation extends \WC_Product_Simple {
 
-		private int $amount_increment;
+		private int $amount_increment_steps;
 
 		/**
 		 * Initialize simple product.
@@ -40,15 +40,25 @@ if ( class_exists('WC_Product_Simple' ) ) {
 		 * @since 1.0.0
 		 * @return string
 		 */
-		public function get_campaign_amount_increment() {
+		public function get_amount_increment_steps() {
 
-			if ( ! isset( $this->amount_increment ) ) {
-				$this->amount_increment = get_post_meta( $this->get_id(), 'wcdm_campaign_amount_increment', true );
+			if ( ! isset( $this->amount_increment_steps ) ) {
+				$this->amount_increment_steps = get_post_meta( $this->get_id(), 'wcdm_amount_increment_steps', true );
 			} else {
-				$this->amount_increment = 0.01;
+				$this->amount_increment_steps = 0.01;
 			}
 
-			return $this->amount_increment;
+			return $this->amount_increment_steps;
+		}
+
+		/**
+		 * Set the default individual sold status as true.
+		 *
+		 * @since 1.0.0
+		 * @return bool
+		 */
+		public function is_sold_individually() {
+			return true;
 		}
 
 		/**
@@ -58,9 +68,32 @@ if ( class_exists('WC_Product_Simple' ) ) {
 		 * @return string
 		 */
 		public function add_to_cart_text() {
-			$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'wc-donation-manager' ) : __( 'Read more (Donate)', 'wc-donation-manager' );
+			$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'wc-donation-manager' ) : __( 'About donation', 'wc-donation-manager' );
 
 			return apply_filters( 'woocommerce_product_add_to_cart_text', $text, $this );
+		}
+
+		/**
+		 * Get the add to cart button url.
+		 * Disabled add to cart feature from product shop or archive page
+		 *
+		 * @since 1.0.0
+		 * @return string
+		 */
+		function add_to_cart_url() {
+			return get_permalink( $this->id );
+		}
+
+		/**
+		 * Get the single add to cart button text.
+		 *
+		 * @since 1.0.0
+		 * @return string
+		 */
+		public function single_add_to_cart_text() {
+			$text = __('Donate Now', 'wc-donation-manager');
+
+			return apply_filters( 'woocommerce_product_single_add_to_cart_text', $text, $this );
 		}
 
 		/**
@@ -71,9 +104,39 @@ if ( class_exists('WC_Product_Simple' ) ) {
 		 */
 		public function add_to_cart_description() {
 			/* translators: %s: Product title */
-			$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Add &ldquo;%s&rdquo; to your cart (Donate)', 'wc-donation-manager' ) : __( 'Read more about &ldquo;%s&rdquo; (Donate)', 'wc-donation-manager' );
+			$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Add &ldquo;%s&rdquo; to your cart', 'wc-donation-manager' ) : __( 'Read more about &ldquo;%s&rdquo;', 'wc-donation-manager' );
 
 			return apply_filters( 'woocommerce_product_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
+		}
+
+		/**
+		 * Set the default taxable status as false.
+		 *
+		 * @since 1.0.0
+		 * @return bool
+		 */
+		public function is_taxable() {
+			return false;
+		}
+
+		/**
+		 * Set the default shipping status as false.
+		 *
+		 * @since 1.0.0
+		 * @return bool
+		 */
+		public function needs_shipping() {
+			return false;
+		}
+
+		/**
+		 * Set the default virtual product status as true.
+		 *
+		 * @since 1.0.0
+		 * @return bool
+		 */
+		public function is_virtual() {
+			return true;
 		}
 	}
 }
