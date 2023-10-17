@@ -20,6 +20,7 @@ class Metaboxes {
 		add_filter( 'product_type_selector', array( __CLASS__, 'add_type' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter('woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
+		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_product_meta' ) );
 	}
 
 	/**
@@ -76,7 +77,7 @@ class Metaboxes {
 			'value' => get_post_meta( get_the_ID(), '_price', true ),
 			'data_type' => 'price'
 		));
-		$donationAmountIncrement = get_post_meta( get_the_ID(), '_donation_amount_increment', true);
+		$donationAmountIncrement = get_post_meta( get_the_ID(), 'wcdm_donation_amount_increment', true);
 		woocommerce_wp_text_input( array(
 			'id' => 'donation_amount_increment',
 			'label' => esc_html__('Amount increment',
@@ -85,5 +86,20 @@ class Metaboxes {
 			'data_type' => 'decimal'
 		));
 		echo '</div>';
+	}
+
+	/**
+	 * Save donation product meta.
+	 * the method only callable while adding donation type products.
+	 *
+	 * @param int $product_Id donation product id.
+	 * @version 1.0.0
+	 * @return void
+	 */
+	public static function save_product_meta( $product_ID ) {
+		$price = ( $_POST['donation_default_amount'] === '' ) ? '' : wc_format_decimal( $_POST['donation_default_amount'] );
+		update_post_meta( $product_ID, '_price', $price );
+		update_post_meta( $product_ID, '_regular_price', $price );
+		update_post_meta( $product_ID, '_donation_amount_increment', ( !empty( $_POST['donation_amount_increment'] ) && is_numeric( $_POST['donation_amount_increment'] ) ? number_format( $_POST['donation_amount_increment'], 2, '.', '' ) : 0.01 ) );
 	}
 }

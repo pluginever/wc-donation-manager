@@ -49,7 +49,7 @@ class Plugin extends Lib\Plugin {
 	 * @return void
 	 */
 	public function includes() {
-		require_once __DIR__ . '/functions.php';
+		require_once __DIR__ . '/Functions.php';
 	}
 
 	/**
@@ -92,21 +92,21 @@ class Plugin extends Lib\Plugin {
 	 */
 	public function init() {
 		// $this->services->add( Actions::class );
-		// $this->services->add( Installer::class );
+		$this->services->add( Installer::class );
 		$this->services->add( PostTypes::class );
 		// $this->services->add( Cart::class );
 		// $this->services->add( Checkout::class );
 		// $this->services->add( Emails\Emails::class );
-//		$this->services->add( Models\Campaign::class );
-//		$this->services->add( Models\Donor::class );
 
 		if ( self::is_request( 'admin' ) ) {
 			$this->services->add( Admin\Admin::class );
 		}
 
-		// if ( self::is_request( 'frontend' ) ) {
-		// $this->services->add( Frontend\Frontend::class );
-		// }
+		// TODO: Need to include the WC_Product_Donation::class as service
+		require_once __DIR__ . '/class-wc-product-donation.php';
+//		$this->services->add( WC_Product_Donation::class );
+
+		$this->services->add( Products::class );
 
 		// Init action.
 		do_action( 'wc_donation_manager_init' );
