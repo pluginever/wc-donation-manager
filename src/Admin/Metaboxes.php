@@ -21,6 +21,8 @@ class Metaboxes {
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter('woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_product_meta' ) );
+
+		add_action('admin_footer', array( __CLASS__, 'admin_custom_js' ) );
 	}
 
 	/**
@@ -47,18 +49,19 @@ class Metaboxes {
 	 * @return array array of product data tabs.
 	 */
 	public static function product_data_tab( array $tabs = array() ): array {
-		foreach ($tabs as $tabId => $tabData) {
-			if ($tabId != 'general' && $tabId != 'advanced') {
-				$tabs[$tabId]['class'][] = 'hide_if_donation';
+		foreach ( $tabs as $tab_ID => $tab_data ) {
+			if ( $tab_ID != 'general' && $tab_ID != 'advanced' ) {
+				$tabs[$tab_ID]['class'][] = 'hide_if_donation';
 			}
 		}
 
-		$tabs[] =  array(
+		$tabs['wc_donation_manager'] =  array(
 			'label'    => __( 'Donation Manager', 'wc-donation-manager' ),
 			'target'   => 'wcdm_form_data',
-			'class'    => 'show_if_donation hidden hide_if_external',
-			'priority' => 11,
+			'class'    => array( 'show_if_donation', 'hidden', 'hide_if_external' ),
+			'priority' => 12,
 		);
+
 		return $tabs;
 	}
 
@@ -101,5 +104,27 @@ class Metaboxes {
 		update_post_meta( $product_ID, '_price', $price );
 		update_post_meta( $product_ID, '_regular_price', $price );
 		update_post_meta( $product_ID, '_donation_amount_increment', ( !empty( $_POST['donation_amount_increment'] ) && is_numeric( $_POST['donation_amount_increment'] ) ? number_format( $_POST['donation_amount_increment'], 2, '.', '' ) : 0.01 ) );
+	}
+
+
+	// Show taxes options
+
+	public static function admin_custom_js() {
+
+		global $pagenow, $typenow;
+		if ( isset($pagenow) && $pagenow == 'post.php' && isset($typenow) && $typenow == 'product' )   {
+			?>
+			<script type='text/javascript'>
+
+				jQuery(document).ready( function () {
+					<?php //  if ( hm_wcdon_get_option('show_tax_donation_product' )) { ?>
+					jQuery('#general_product_data ._tax_status_field').parent().addClass('show_if_donation').show();
+					<?php // } ?>
+					jQuery('#woocommerce-product-data .type_box label[for=_downloadable].tips').addClass('show_if_donation').show();
+				})
+
+			</script>
+			<?php
+		}
 	}
 }

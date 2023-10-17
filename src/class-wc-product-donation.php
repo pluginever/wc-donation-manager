@@ -7,6 +7,8 @@
  * @since 1.0.0
  */
 class WC_Product_Donation extends \WC_Product_Simple {
+
+	private $donationAmount = 0, $donationAmountIncrement;
 	/**
 	 * Initialize simple product.
 	 *
@@ -28,6 +30,16 @@ class WC_Product_Donation extends \WC_Product_Simple {
 		return 'donation';
 	}
 
+	public function get_donation_amount_increment() {
+		if (!isset($this->donationAmountIncrement)) {
+			$this->donationAmountIncrement = get_post_meta($this->get_id(), '_donation_amount_increment', true);
+			if (empty($this->donationAmountIncrement)) {
+				$this->donationAmountIncrement = 0.01;
+			}
+		}
+		return $this->donationAmountIncrement;
+	}
+
 	/**
 	 * Get the add to cart button text.
 	 *
@@ -35,7 +47,7 @@ class WC_Product_Donation extends \WC_Product_Simple {
 	 * @return string
 	 */
 	public function add_to_cart_text() {
-		$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'woocommerce', 'wc-donation-manager' ) : __( 'Read more (Donate)', 'woocommerce', 'wc-donation-manager' );
+		$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'wc-donation-manager' ) : __( 'Read more (Donate)', 'wc-donation-manager' );
 
 		return apply_filters( 'woocommerce_product_add_to_cart_text', $text, $this );
 	}

@@ -91,7 +91,6 @@ class Plugin extends Lib\Plugin {
 	 * @return void
 	 */
 	public function init() {
-		// $this->services->add( Actions::class );
 		$this->services->add( Installer::class );
 		$this->services->add( PostTypes::class );
 		// $this->services->add( Cart::class );
