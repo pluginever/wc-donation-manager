@@ -31,7 +31,7 @@ class Admin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		// TODO: Settings workes without adding as services
+		// TODO: Settings works without adding as services
 		wc_donation_manager()->services->add( Settings::instance() );
 
 		wc_donation_manager()->services->add( Menus::class );

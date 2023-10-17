@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Advanced Product Type
+ * Class WC_Product_Donation
+ * Donation Product Type.
+ *
+ * @since 1.0.0
  */
 class WC_Product_Donation extends WC_Product_Simple {
 	/**
@@ -30,6 +33,7 @@ class WC_Product_Donation extends WC_Product_Simple {
 	/**
 	 * Get the add to url used mainly in loops.
 	 *
+	 * @since 1.0.0
 	 * @return string
 	 */
 //	public function add_to_cart_url() {
@@ -48,6 +52,7 @@ class WC_Product_Donation extends WC_Product_Simple {
 	/**
 	 * Get the add to cart button text.
 	 *
+	 * @since 1.0.0
 	 * @return string
 	 */
 	public function add_to_cart_text() {
