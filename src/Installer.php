@@ -19,7 +19,7 @@ class Installer {
 	 * @var array
 	 */
 	protected $updates = array(
-		'1.0.1' => 'wcsp_update_101',
+		'1.0.1' => 'wcdm_update_101',
 	);
 
 	/**
@@ -101,7 +101,7 @@ class Installer {
 		// create tables here.
 		Admin\Settings::instance()->save_defaults();
 		wc_donation_manager()->update_db_version( wc_donation_manager()->get_version(), false );
-		add_option( 'wc_donation_manager_install_date', current_time( 'mysql' ) );
+		add_option( 'wcdm_install_date', current_time( 'mysql' ) );
 		set_transient( 'wc_donation_manager_activated', true, 30 );
 		set_transient( 'wc_donation_manager_activation_redirect', true, 30 );
 	}

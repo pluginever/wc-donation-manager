@@ -28,6 +28,7 @@ class PostTypes {
 	 * Register custom post type campaigns.
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
 	public function register_cpt_campaigns() {
 		$labels = array(
@@ -72,6 +73,7 @@ class PostTypes {
 	 * Register custom post type donors.
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
 	public function register_cpt_donors() {
 		$labels = array(
@@ -111,5 +113,4 @@ class PostTypes {
 
 		register_post_type( 'wcdm_donors', apply_filters( 'wcdm_donors_post_type_args', $args ) );
 	}
-
 }

@@ -33,7 +33,6 @@ class Admin {
 	public function init() {
 		// TODO: Settings works without adding as services
 		wc_donation_manager()->services->add( Settings::instance() );
-
 		wc_donation_manager()->services->add( Menus::class );
 		// wc_donation_manager()->services->add( Orders::class );
 		wc_donation_manager()->services->add( Metaboxes::class );

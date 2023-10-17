@@ -21,8 +21,7 @@ class Metaboxes {
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter('woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_product_meta' ) );
-
-		add_action('admin_footer', array( __CLASS__, 'admin_custom_js' ) );
+		add_action( 'admin_footer', array( __CLASS__, 'admin_custom_js' ) );
 	}
 
 	/**
@@ -57,7 +56,7 @@ class Metaboxes {
 
 		$tabs['wc_donation_manager'] =  array(
 			'label'    => __( 'Donation Manager', 'wc-donation-manager' ),
-			'target'   => 'wcdm_form_data',
+			'target'   => 'wcdm_tab_data',
 			'class'    => array( 'show_if_donation', 'hidden', 'hide_if_external' ),
 			'priority' => 12,
 		);
@@ -66,7 +65,7 @@ class Metaboxes {
 	}
 
 	/**
-	 * Add fields to the General product data tab.
+	 * Add fields to the general product data.
 	 *
 	 * @version 1.0.0
 	 * @return void
@@ -74,55 +73,53 @@ class Metaboxes {
 	public static function general_product_data() {
 		echo '<div class="options_group show_if_donation">';
 		woocommerce_wp_text_input( array(
-			'id' => 'donation_default_amount',
-			'label' => esc_html__('Default amount',
-				'donations-for-woocommerce', 'wc-donation-manager'),
+			'id' => 'wcdm_amount',
+			'label' => esc_html__('Default amount', 'wc-donation-manager'),
 			'value' => get_post_meta( get_the_ID(), '_price', true ),
-			'data_type' => 'price'
+			'data_type' => 'price',
 		));
-		$donationAmountIncrement = get_post_meta( get_the_ID(), 'wcdm_donation_amount_increment', true);
+		$amount_increment = get_post_meta( get_the_ID(), 'wcdm_amount_increment', true);
 		woocommerce_wp_text_input( array(
-			'id' => 'donation_amount_increment',
-			'label' => esc_html__('Amount increment',
-				'donations-for-woocommerce', 'wc-donation-manager'),
-			'value' => ( empty( $donationAmountIncrement ) ? 0.01 : $donationAmountIncrement ),
-			'data_type' => 'decimal'
+			'id' => 'wcdm_amount_increment',
+			'label' => esc_html__('Amount increment', 'wc-donation-manager'),
+			'value' => ( empty( $amount_increment ) ? 0.01 : $amount_increment ),
+			'data_type' => 'decimal',
 		));
 		echo '</div>';
 	}
 
 	/**
 	 * Save donation product meta.
-	 * the method only callable while adding donation type products.
+	 * The method only callable while adding/editing donation products type.
 	 *
-	 * @param int $product_Id donation product id.
+	 * @param int $product_ID donation product id.
 	 * @version 1.0.0
 	 * @return void
 	 */
 	public static function save_product_meta( $product_ID ) {
-		$price = ( $_POST['donation_default_amount'] === '' ) ? '' : wc_format_decimal( $_POST['donation_default_amount'] );
+		$price = ( $_POST['wcdm_amount'] === '' ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
 		update_post_meta( $product_ID, '_price', $price );
 		update_post_meta( $product_ID, '_regular_price', $price );
-		update_post_meta( $product_ID, '_donation_amount_increment', ( !empty( $_POST['donation_amount_increment'] ) && is_numeric( $_POST['donation_amount_increment'] ) ? number_format( $_POST['donation_amount_increment'], 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_ID, 'wcdm_amount_increment', ( !empty( $_POST['wcdm_amount_increment'] ) && is_numeric( $_POST['wcdm_amount_increment'] ) ? number_format( $_POST['wcdm_amount_increment'], 2, '.', '' ) : 0.01 ) );
 	}
 
-
-	// Show taxes options
-
+	/**
+	 * Add custom admin script on product add/edit page.
+	 *
+	 * @version 1.0.0
+	 * @return void
+	 */
 	public static function admin_custom_js() {
-
 		global $pagenow, $typenow;
 		if ( isset($pagenow) && $pagenow == 'post.php' && isset($typenow) && $typenow == 'product' )   {
 			?>
 			<script type='text/javascript'>
-
 				jQuery(document).ready( function () {
 					<?php //  if ( hm_wcdon_get_option('show_tax_donation_product' )) { ?>
-					jQuery('#general_product_data ._tax_status_field').parent().addClass('show_if_donation').show();
+					jQuery( '#general_product_data ._tax_status_field' ).parent().addClass( 'show_if_donation' ).show();
 					<?php // } ?>
-					jQuery('#woocommerce-product-data .type_box label[for=_downloadable].tips').addClass('show_if_donation').show();
+					jQuery( '#woocommerce-product-data .type_box label[for=_downloadable].tips' ).addClass( 'show_if_donation' ).show();
 				})
-
 			</script>
 			<?php
 		}

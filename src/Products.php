@@ -50,7 +50,7 @@ class Products {
 		if ( 'donation' == $product->get_type() ) {
 			echo('<div class="wc-donation-amount">
 				<label for="donation_amount_field">'.esc_html__('Amount', 'donations-for-woocommerce').':</label>
-				<input type="number" name="donation_amount" id="donation_amount_field" size="5" min="0" step="'. $product->get_donation_amount_increment().'" value="'.number_format($product->get_price(), 2, '.', '').'" class="input-text text" />
+				<input type="number" name="donation_amount" id="donation_amount_field" size="5" min="0" step="'. $product->get_campaign_amount_increment().'" value="'.number_format($product->get_price(), 2, '.', '').'" class="input-text text" />
 			</div>');
 		}
 	}

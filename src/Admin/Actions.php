@@ -109,5 +109,4 @@ class Actions {
 		wp_safe_redirect( $referer );
 		exit;
 	}
-
 }

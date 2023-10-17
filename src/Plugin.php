@@ -93,8 +93,6 @@ class Plugin extends Lib\Plugin {
 	public function init() {
 		$this->services->add( Installer::class );
 		$this->services->add( PostTypes::class );
-		// $this->services->add( Cart::class );
-		// $this->services->add( Checkout::class );
 		// $this->services->add( Emails\Emails::class );
 
 		if ( self::is_request( 'admin' ) ) {
@@ -103,7 +101,7 @@ class Plugin extends Lib\Plugin {
 
 		// TODO: Need to include the WC_Product_Donation::class as service
 		require_once __DIR__ . '/class-wc-product-donation.php';
-//		$this->services->add( WC_Product_Donation::class );
+		// $this->services->add( WC_Product_Donation::class );
 
 		$this->services->add( Products::class );
 
