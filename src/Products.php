@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 class Products {
+
 	/**
 	 * Products constructor.
 	 *
@@ -24,7 +25,7 @@ class Products {
 		add_action('woocommerce_before_add_to_cart_button', array( __CLASS__, 'before_add_to_cart_button' ) );
 		add_action('woocommerce_donation_add_to_cart', array( __CLASS__, 'add_to_cart_template' ) );
 
-		// TODO: Redirect specific product type isn't completed. It's works for all products
+		// TODO: Need to update redirect weather car or checkout page depends on admin settings.
 		add_filter('woocommerce_add_to_cart_redirect', array( __CLASS__, 'add_to_cart_redirect' ), 10, 2 );
 
 		add_filter('woocommerce_add_cart_item', array( __CLASS__, 'add_cart_item' ) );
@@ -65,24 +66,20 @@ class Products {
 		do_action('woocommerce_simple_add_to_cart' );
 	}
 
-	// TODO: Redirect specific product type isn't completed. It's works for all products
-	// Add to cart redirect to cart or checkout page
+	// Redirecting weather cart or checkout page.
 	public static function add_to_cart_redirect( $url ) {
-
-		$product = new WC_Product_Donation();
-
-		if ( 'donation' === $product->get_type() ) {
-			$direct_checkout = 'yes';
-
-			if ( 'yes' === $direct_checkout ) {
-				return wc_get_checkout_url();
+		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $_POST['add-to-cart'] );
+		if( $product_id ){
+			$product = wc_get_product( $product_id );
+			if ( $product->is_type( 'donation' ) ){
+				// TODO: need to add an option for redirecting role, weather cart page or checkout page.
+				return wc_get_cart_url();
+//				return wc_get_checkout_url();
 			}
-
-			return wc_get_cart_url();
 		}
-
 		return $url;
 	}
+
 
 	// Process donation amount when a Donation product is added to the cart
 	public static function add_cart_item( $item ) {
