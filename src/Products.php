@@ -2,8 +2,6 @@
 
 namespace WooCommerceDonationManager;
 
-use WC_Product_Donation;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -68,7 +66,8 @@ class Products {
 
 	// Redirecting weather cart or checkout page.
 	public static function add_to_cart_redirect( $url ) {
-		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', $_POST['add-to-cart'] );
+
+		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? $_POST['add-to-cart'] : '' );
 		if( $product_id ){
 			$product = wc_get_product( $product_id );
 			if ( $product->is_type( 'donation' ) ){

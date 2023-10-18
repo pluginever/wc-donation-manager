@@ -20,7 +20,6 @@ class Metaboxes {
 		add_filter( 'product_type_selector', array( __CLASS__, 'add_type' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter('woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
-		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_product_meta' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'admin_custom_js' ) );
 	}
 
@@ -86,21 +85,6 @@ class Metaboxes {
 			'data_type' => 'decimal',
 		));
 		echo '</div>';
-	}
-
-	/**
-	 * Save donation product meta.
-	 * The method only callable while adding/editing donation products type.
-	 *
-	 * @param int $product_ID donation product id.
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function save_product_meta( $product_ID ) {
-		$price = ( $_POST['wcdm_amount'] === '' ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
-		update_post_meta( $product_ID, '_price', $price );
-		update_post_meta( $product_ID, '_regular_price', $price );
-		update_post_meta( $product_ID, 'wcdm_amount_increment_steps', ( !empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
 	}
 
 	/**

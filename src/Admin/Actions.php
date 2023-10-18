@@ -26,6 +26,9 @@ class Actions {
 	public function __construct() {
 		add_action( 'admin_post_wcdm_add_campaign', array( __CLASS__, 'add_campaign' ) );
 		add_action( 'admin_post_wcdm_edit_campaign', array( __CLASS__, 'edit_campaign' ) );
+		// Save donation product type meta
+		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_product_meta' ) );
+
 		add_action( 'admin_post_wcdm_add_donor', array( __CLASS__, 'add_donor' ) );
 		add_action( 'admin_post_wcdm_edit_donor', array( __CLASS__, 'edit_donor' ) );
 	}
@@ -68,6 +71,21 @@ class Actions {
 		}
 		wp_safe_redirect( $referer );
 		exit;
+	}
+
+	/**
+	 * Save donation product meta.
+	 * The method only callable while adding/editing donation products type.
+	 *
+	 * @param int $product_ID donation product id.
+	 * @version 1.0.0
+	 * @return void
+	 */
+	public static function save_product_meta( $product_ID ) {
+		$price = ( $_POST['wcdm_amount'] === '' ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
+		update_post_meta( $product_ID, '_price', $price );
+		update_post_meta( $product_ID, '_regular_price', $price );
+		update_post_meta( $product_ID, 'wcdm_amount_increment_steps', ( !empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
 	}
 
 	/**
