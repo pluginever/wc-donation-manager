@@ -43,13 +43,13 @@ class Settings extends Lib\Settings {
 	public function get_settings( $tab ) {
 		$settings = array();
 
-		$pages = get_pages();
+		$pages        = get_pages();
 		$page_options = array(
 			'0' => 'Select a page'
 		);
 
 		foreach ( $pages as $page ) {
-			$page_options[$page->ID] = $page->post_title;
+			$page_options[ $page->ID ] = $page->post_title;
 		}
 
 		switch ( $tab ) {
@@ -62,22 +62,22 @@ class Settings extends Lib\Settings {
 						'id'    => 'general_options',
 					],
 					[
-						'title'   => __( 'Success page', 'wc-donation-manager' ),
-						'desc'    => __( 'Select a success page. This page will display after completed the donation process. Leave blank for default Woocommerce success page.', 'wc-donation-manager' ),
-						'desc_tip'    => __( 'Select a success page. This page will display after completed the donation process. Leave blank for default Woocommerce success page.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_success_page',
-						'type'    => 'select',
-						'options' => $page_options,
-						'default' => '0',
+						'title'    => __( 'Success page', 'wc-donation-manager' ),
+						'desc'     => __( 'Select a success page. This page will display after completed the donation process. Leave blank for default Woocommerce success page.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Select a success page. This page will display after completed the donation process. Leave blank for default Woocommerce success page.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_success_page',
+						'type'     => 'select',
+						'options'  => $page_options,
+						'default'  => '0',
 					],
 					[
-						'title'   => __( 'Donor wall page', 'wc-donation-manager' ),
-						'desc'    => __( 'Select a donor wall page. This page will display donor wall details.', 'wc-donation-manager' ),
-						'desc_tip'    => __( 'Select a donor wall page. This page will display donor wall details.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_donor_wall_page',
-						'type'    => 'select',
-						'options' => $page_options,
-						'default' => '0',
+						'title'    => __( 'Donor wall page', 'wc-donation-manager' ),
+						'desc'     => __( 'Select a donor wall page. This page will display donor wall details.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Select a donor wall page. This page will display donor wall details.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_donor_wall_page',
+						'type'     => 'select',
+						'options'  => $page_options,
+						'default'  => '0',
 					],
 					[
 						'type' => 'sectionend',
@@ -95,7 +95,7 @@ class Settings extends Lib\Settings {
 						'desc'     => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager' ),
 						'type'     => 'text',
-						'default'    => 'Donate Now',
+						'default'  => 'Donate Now',
 					],
 					[
 						'title'   => __( 'Anonymous donation', 'wc-donation-manager' ),
@@ -129,8 +129,32 @@ class Settings extends Lib\Settings {
 						'title'   => __( 'Enable fast checkout', 'wc-donation-manager' ),
 						'desc'    => __( 'Enable fast checkout.', 'wc-donation-manager' ),
 						'id'      => 'wcdm_fast_checkout',
-						'default' => 'yes',
+						'default' => 'no',
 						'type'    => 'checkbox',
+					],
+					[
+						'title'             => __( 'Select add to cart redirect page', 'wc-donation-manager' ),
+						'desc'              => __( 'Select the add to cart redirect page. This will redirect users directly to the selected destination page after click on add to cart/donate button.', 'wc-donation-manager' ),
+						'desc_tip'          => __( 'Select the add to cart redirect page. This will redirect users directly to the selected destination page after click on add to cart/donate button.', 'wc-donation-manager' ),
+						'id'                => 'wcdm_add_to_cart_redirect_page',
+						'type'              => 'select',
+						'options'           => array(
+							'cart'     => __( 'Cart Page', 'wc-donation-manager' ),
+							'checkout' => __( 'Checkout Page', 'wc-donation-manager' ),
+						),
+						'default'           => 'cart',
+						'custom_attributes' => array(
+							'data-cond-id'    => 'wcdm_fast_checkout',
+							'data-cond-value' => 'yes',
+						),
+					],
+					[
+						'title'    => __( 'Disabled tax', 'wc-donation-manager' ),
+						'desc'     => __( 'Disabled tax for donation.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Disabled the tax for donation product. This will hide tax status and tax class from product edit page as well if product type selected as donation.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_disabled_tax',
+						'default'  => 'yes',
+						'type'     => 'checkbox',
 					],
 					[
 						'title'    => __( 'Contribution text', 'wc-donation-manager' ),
@@ -159,7 +183,7 @@ class Settings extends Lib\Settings {
 						'desc'     => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
 						'type'     => 'text',
-						'default'    => '0',
+						'default'  => '0',
 					],
 					[
 						'title'    => __( 'Maximum amount', 'wc-donation-manager' ),
@@ -167,7 +191,7 @@ class Settings extends Lib\Settings {
 						'desc'     => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
 						'type'     => 'text',
-						'default'    => '0',
+						'default'  => '0',
 					],
 					[
 						'type' => 'sectionend',
@@ -191,16 +215,16 @@ class Settings extends Lib\Settings {
 						'type'    => 'checkbox',
 					],
 					[
-						'title'   => __( 'Default fee recurring', 'wc-donation-manager' ),
-						'desc'    => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
-						'desc_tip'    => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_default_recurring',
-						'type'    => 'select',
-						'options' => array(
-							'recurring'  => __( 'Recurring', 'wc-donation-manager' ),
+						'title'             => __( 'Default fee recurring', 'wc-donation-manager' ),
+						'desc'              => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
+						'desc_tip'          => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
+						'id'                => 'wcdm_default_recurring',
+						'type'              => 'select',
+						'options'           => array(
+							'recurring' => __( 'Recurring', 'wc-donation-manager' ),
 							'onetime'   => __( 'Onetime', 'wc-donation-manager' ),
 						),
-						'default' => 'lefrecurringt',
+						'default'           => 'lefrecurringt',
 						'custom_attributes' => array(
 							'data-cond-id'    => 'wcdm_enable_fee_recurring',
 							'data-cond-value' => 'yes',
@@ -217,7 +241,7 @@ class Settings extends Lib\Settings {
 		/**
 		 * Filter the settings for the plugin.
 		 *
-		 * @param array  $settings The settings.
+		 * @param array $settings The settings.
 		 * @param string $tab The current tab.
 		 *
 		 * @since 1.0.0
