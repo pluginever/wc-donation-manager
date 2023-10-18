@@ -23,7 +23,6 @@ class Menus {
 		add_action( 'wc_donation_manager_campaigns_content', array( $this, 'output_campaigns_content' ) );
 		add_action( 'wc_donation_manager_donors_content', array( $this, 'output_donors_content' ) );
 		add_action( 'wc_donation_manager_tools_content', array( $this, 'output_tools_content' ) );
-		add_action( 'wc_donation_manager_settings_general', array( $this, 'output_general_tab_content' ) );
 		add_action( 'wc_donation_manager_settings_emails', array( $this, 'output_emails_tab_content' ) );
 	}
 
@@ -177,16 +176,6 @@ class Menus {
 	 */
 	public function output_tools_content() {
 		echo 'Tools Content';
-	}
-
-	/**
-	 * Output settings general tab content.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function output_general_tab_content() {
-		include __DIR__ . '/views/settings-general.php';
 	}
 
 	/**

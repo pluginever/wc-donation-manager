@@ -98,8 +98,9 @@ class Admin {
 	public static function get_screen_ids() {
 		$screen_ids = [
 			'toplevel_page_wc-donation-manager',
-			'woocommerce_page_plugin-wc-donation-manager',
-			'admin_page_plugin-wc-donation-manager',
+			'donation-manager_page_wcdm-donors',
+			'donation-manager_page_wcdm-tools',
+			'donation-manager_page_wcdm-settings',
 		];
 
 		return apply_filters( 'wc_donation_manager_screen_ids', $screen_ids );
