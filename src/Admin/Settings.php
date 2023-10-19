@@ -183,7 +183,7 @@ class Settings extends Lib\Settings {
 						'desc'     => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
 						'type'     => 'text',
-						'default'  => '0',
+						'default'  => '1',
 					],
 					[
 						'title'    => __( 'Maximum amount', 'wc-donation-manager' ),
@@ -191,7 +191,7 @@ class Settings extends Lib\Settings {
 						'desc'     => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
 						'type'     => 'text',
-						'default'  => '0',
+						'default'  => '100',
 					],
 					[
 						'type' => 'sectionend',

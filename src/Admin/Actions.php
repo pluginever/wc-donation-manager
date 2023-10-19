@@ -80,10 +80,14 @@ class Actions {
 	 * @return void
 	 */
 	public static function save_donation_meta( $product_ID ) {
-		$price = ( $_POST['wcdm_amount'] === '' ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
+		$price = ( '' === $_POST['wcdm_amount'] ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
+		$goal_amount = ( '' === $_POST['wcdm_goal_amount'] ) ? '' : wc_format_decimal( $_POST['wcdm_goal_amount'] );
 		update_post_meta( $product_ID, '_price', $price );
 		update_post_meta( $product_ID, '_regular_price', $price );
-		update_post_meta( $product_ID, 'wcdm_amount_increment_steps', ( !empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_ID, 'wcdm_goal_amount', $goal_amount );
+		update_post_meta( $product_ID, 'wcdm_amount_increment_steps', ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_ID, 'wcdm_min_amount', ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? $_POST['wcdm_min_amount'] : get_option( 'wcdm_minimum_amount' ) ) );
+		update_post_meta( $product_ID, 'wcdm_max_amount', ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? $_POST['wcdm_max_amount'] : get_option( 'wcdm_maximum_amount' ) ) );
 	}
 
 	/**

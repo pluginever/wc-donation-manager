@@ -81,6 +81,7 @@ class Metaboxes {
 			'value'       => get_post_meta( get_the_ID(), '_price', true ),
 			'data_type'   => 'price',
 		) );
+
 		woocommerce_wp_text_input( array(
 			'id'          => 'wcdm_goal_amount',
 			'label'       => __( 'Goal amount', 'wc-donation-manager' ),
@@ -89,6 +90,7 @@ class Metaboxes {
 			'value'       => get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ),
 			'data_type'   => 'price',
 		) );
+
 		$amount_increment = get_post_meta( get_the_ID(), 'wcdm_amount_increment_steps', true );
 		woocommerce_wp_text_input( array(
 			'id'          => 'wcdm_amount_increment_steps',
@@ -109,16 +111,33 @@ class Metaboxes {
 	 */
 	public static function product_data() {
 		echo '<div id="wcdm_tab_data" class="panel woocommerce_options_panel wcdm_tab_data_options"><div class="options_group show_if_donation">';
+		woocommerce_wp_text_input( array(
+			'id'          => 'wcdm_min_amount',
+			'label'       => __( 'Minimum amount', 'wc-donation-manager' ),
+			'description' => __( 'Enter the minimum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
+			'desc_tip'    => true,
+			'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_min_amount', true ) : get_option( 'wcdm_minimum_amount' ),
+			'data_type'   => 'price',
+		) );
 
+		woocommerce_wp_text_input( array(
+			'id'          => 'wcdm_max_amount',
+			'label'       => __( 'Maximum amount', 'wc-donation-manager' ),
+			'description' => __( 'Enter the maximum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
+			'desc_tip'    => true,
+			'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_max_amount', true ) : get_option( 'wcdm_maximum_amount' ),
+			'data_type'   => 'price',
+		) );
 
-
-
-		// TODO: Need to add metabox fields.
+		woocommerce_wp_textarea_input( array(
+				'id'          => 'wcdm_campaign_cause',
+				'label'       => __( 'Campaign cause', 'wc-donation-manager' ),
+				'description' => __( 'Enter the cause of the campaign.', 'wc-donation-manager' ),
+				'desc_tip'    => true,
+				'placeholder' => 'Enter the cause of the campaign...',
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_campaign_cause', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_campaign_cause', true ) : '',
+		) );
 		echo '</div></div>';
-
-//		global $post;
-//		$product = wc_get_product( $post->ID );
-//		include __DIR__ . '/views/product-metaboxes.php';
 	}
 
 	/**

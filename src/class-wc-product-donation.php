@@ -35,23 +35,6 @@ if ( class_exists('WC_Product_Simple' ) ) {
 		}
 
 		/**
-		 * Get the campaign amount increment.
-		 *
-		 * @since 1.0.0
-		 * @return string
-		 */
-		public function get_amount_increment_steps() {
-
-			if ( ! isset( $this->amount_increment_steps ) ) {
-				$this->amount_increment_steps = get_post_meta( $this->get_id(), 'wcdm_amount_increment_steps', true );
-			} else {
-				$this->amount_increment_steps = 0.01;
-			}
-
-			return $this->amount_increment_steps;
-		}
-
-		/**
 		 * Set the default individual sold status as true.
 		 *
 		 * @since 1.0.0

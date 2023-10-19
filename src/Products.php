@@ -51,11 +51,42 @@ class Products {
 	// Add amount field before add to cart button
 	public static function before_add_to_cart_button() {
 		global $product;
+		$currency_symbol = get_woocommerce_currency_symbol();
+		$goal_amount = '' !== get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ) : '0';
+		$raised_amount = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
+		$min_amount = get_post_meta( $product->get_id(), 'wcdm_min_amount', true );
+		$max_amount = get_post_meta( $product->get_id(), 'wcdm_max_amount', true );
 		if ( 'donation' == $product->get_type() ) {
-			echo( '<div class="wc-donation-amount">
-				<label for="donation_amount">'. esc_html__('Amount', 'wc-donation-manager' ) . ':</label>
-				<input type="number" name="donation_amount" id="donation_amount" size="5" min="0" step="'. $product->get_amount_increment_steps().'" value="'. number_format( $product->get_price(), 2, '.', '' ) .'" class="input-text text" />
-			</div>' );
+			ob_start();
+			?>
+			<div class="wc-donation-manager">
+				<div class="campaign-cause">
+					<p>The campaign cause text will be appeared here.</p>
+				</div>
+				<div class="campaign-progress">
+					<div class="progress-label">
+						<label for="campaign-progressbar"><?php echo $currency_symbol . $raised_amount; ?> raised</label>
+						<label for="campaign-progressbar"><?php echo $currency_symbol . $goal_amount; ?> goal</label>
+					</div>
+					<progress id="campaign-progressbar" value="<?php echo $raised_amount ?>>" max="100"><?php echo $raised_amount; ?>%</progress>
+				</div>
+
+				<div class="suggested-amounts">
+					<h4>Suggested amounts:</h4>
+					<button type="button">$25</button>
+					<button type="button">$50</button>
+					<button type="button">$75</button>
+					<button type="button">$100</button>
+				</div>
+
+				<div class="campaign-amount">
+					<label for="donation_amount"><?php esc_html_e('Other Amount', 'wc-donation-manager' ); echo ' (' . $currency_symbol . ')'; ?>:</label>
+					<input type="number" name="donation_amount" id="donation_amount" min="<?php echo get_post_meta( $product->get_id(), 'wcdm_min_amount', true ); ?>" max="<?php echo get_post_meta( $product->get_id(), 'wcdm_max_amount', true ); ?>" step="<?php echo get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ); ?>" value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>" class="input-text text" />
+				</div>
+			</div>
+
+			<?php
+			echo ob_get_clean();
 		}
 	}
 
