@@ -61,7 +61,7 @@ class Products {
 			?>
 			<div class="wc-donation-manager">
 				<div class="campaign-cause">
-					<p>The campaign cause text will be appeared here.</p>
+					<p><?php echo get_post_meta( $product->get_id(), 'wcdm_campaign_cause', true ); ?></p>
 				</div>
 				<div class="campaign-progress">
 					<div class="progress-label">
@@ -81,7 +81,7 @@ class Products {
 
 				<div class="campaign-amount">
 					<label for="donation_amount"><?php esc_html_e('Other Amount', 'wc-donation-manager' ); echo ' (' . $currency_symbol . ')'; ?>:</label>
-					<input type="number" name="donation_amount" id="donation_amount" min="<?php echo get_post_meta( $product->get_id(), 'wcdm_min_amount', true ); ?>" max="<?php echo get_post_meta( $product->get_id(), 'wcdm_max_amount', true ); ?>" step="<?php echo get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ); ?>" value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>" class="input-text text" />
+					<input type="number" name="donation_amount" id="donation_amount" min="<?php echo $min_amount; ?>" max="<?php echo $max_amount; ?>" step="<?php echo get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ); ?>" value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>" class="input-text text" />
 				</div>
 			</div>
 

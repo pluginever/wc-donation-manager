@@ -88,6 +88,7 @@ class Actions {
 		update_post_meta( $product_ID, 'wcdm_amount_increment_steps', ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
 		update_post_meta( $product_ID, 'wcdm_min_amount', ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? $_POST['wcdm_min_amount'] : get_option( 'wcdm_minimum_amount' ) ) );
 		update_post_meta( $product_ID, 'wcdm_max_amount', ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? $_POST['wcdm_max_amount'] : get_option( 'wcdm_maximum_amount' ) ) );
+		update_post_meta( $product_ID, 'wcdm_campaign_cause', ( ! empty( $_POST['wcdm_campaign_cause'] ) ? $_POST['wcdm_campaign_cause'] : '' ) );
 	}
 
 	/**
