@@ -2,6 +2,8 @@
 
 namespace WooCommerceDonationManager;
 
+use WooCommerceDonationManager\Frontend\Products;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -103,7 +105,12 @@ class Plugin extends Lib\Plugin {
 		require_once __DIR__ . '/class-wc-product-donation.php';
 		// $this->services->add( WC_Product_Donation::class );
 
-		$this->services->add( Products::class );
+
+
+		if ( self::is_request( 'frontend' ) ) {
+			$this->services->add( Frontend\Frontend::class );
+			$this->services->add( Frontend\Products::class );
+		}
 
 		// Init action.
 		do_action( 'wc_donation_manager_init' );

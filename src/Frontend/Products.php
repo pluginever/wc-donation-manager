@@ -1,13 +1,13 @@
 <?php
 
-namespace WooCommerceDonationManager;
+namespace WooCommerceDonationManager\Frontend;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Class Products.
  *
- * @package WooCommerceDonationManager
+ * @package WooCommerceDonationManager\Frontend
  * @since 1.0.0
  */
 class Products {
@@ -22,10 +22,7 @@ class Products {
 		add_filter( 'woocommerce_get_price_html', array( __CLASS__, 'get_price_html' ), 10, 2 );
 		add_action('woocommerce_before_add_to_cart_button', array( __CLASS__, 'before_add_to_cart_button' ) );
 		add_action('woocommerce_donation_add_to_cart', array( __CLASS__, 'add_to_cart_template' ) );
-
-		// TODO: Need to update redirect weather car or checkout page depends on admin settings.
 		add_filter('woocommerce_add_to_cart_redirect', array( __CLASS__, 'add_to_cart_redirect' ), 10, 2 );
-
 		add_filter('woocommerce_add_cart_item', array( __CLASS__, 'add_cart_item' ) );
 		add_filter('woocommerce_get_cart_item_from_session', array( __CLASS__, 'get_cart_item_from_session' ) );
 		add_filter('woocommerce_cart_item_price', array( __CLASS__, 'cart_item_price'), 10, 3 );
@@ -54,8 +51,6 @@ class Products {
 		$currency_symbol = get_woocommerce_currency_symbol();
 		$goal_amount = '' !== get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ) : '0';
 		$raised_amount = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
-		$min_amount = get_post_meta( $product->get_id(), 'wcdm_min_amount', true );
-		$max_amount = get_post_meta( $product->get_id(), 'wcdm_max_amount', true );
 		if ( 'donation' == $product->get_type() ) {
 			ob_start();
 			?>
@@ -81,7 +76,7 @@ class Products {
 
 				<div class="campaign-amount">
 					<label for="donation_amount"><?php esc_html_e('Other Amount', 'wc-donation-manager' ); echo ' (' . $currency_symbol . ')'; ?>:</label>
-					<input type="number" name="donation_amount" id="donation_amount" min="<?php echo $min_amount; ?>" max="<?php echo $max_amount; ?>" step="<?php echo get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ); ?>" value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>" class="input-text text" />
+					<input type="number" name="donation_amount" id="donation_amount" min="<?php echo get_post_meta( $product->get_id(), 'wcdm_min_amount', true ); ?>" max="<?php echo get_post_meta( $product->get_id(), 'wcdm_max_amount', true ); ?>" step="<?php echo get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ); ?>" value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>" class="input-text text" />
 				</div>
 			</div>
 
@@ -97,23 +92,25 @@ class Products {
 
 	// Redirecting weather cart or checkout page.
 	public static function add_to_cart_redirect( $url ) {
-
 		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? $_POST['add-to-cart'] : '' );
+
 		if( $product_id ){
 			$product = wc_get_product( $product_id );
-			if ( $product->is_type( 'donation' ) ){
-				// TODO: need to add an option for redirecting role, weather cart page or checkout page.
+			if ( $product->is_type( 'donation' ) && 'yes' === get_option( 'wcdm_fast_checkout', 'no' ) ) {
+				return wc_get_checkout_url();
+			}
+			if ( $product->is_type( 'donation' ) && 'yes' === get_option( 'wcdm_skip_cart', 'yes' ) ) {
 				return wc_get_cart_url();
-//				return wc_get_checkout_url();
 			}
 		}
+
 		return $url;
 	}
 
 
 	// Process donation amount when a Donation product is added to the cart
 	public static function add_cart_item( $item ) {
-		if ($item['data']->get_type() == 'donation') {
+		if ( 'donation' === $item['data']->get_type() ) {
 			if ( isset( $_POST['donation_amount'] ) && is_numeric( $_POST['donation_amount'] ) && $_POST['donation_amount'] >= 0)
 				$item['donation_amount'] = $_POST['donation_amount']*1;
 			$item['data']->set_price( $item['donation_amount'] );
@@ -122,26 +119,25 @@ class Products {
 	}
 
 	// Set Donation product price when loading the cart
-	public static function get_cart_item_from_session($session_data) {
+	public static function get_cart_item_from_session( $session_data ) {
 		if ($session_data['data']->get_type() == 'donation' && isset($session_data['donation_amount']))
-			$session_data['data']->set_price($session_data['donation_amount']);
+			$session_data['data']->set_price( $session_data['donation_amount']);
 		return $session_data;
 	}
 
 	// Add the donation amount field to the cart display
 	public static function cart_item_price( $price, $cart_item, $cart_item_key) {
-
-//		return ( ( $cart_item['data']->get_type() == 'donation' && !get_option('disable_cart_amount_field' ) ) ?
-		return ( ( $cart_item['data']->get_type() == 'donation' ) ?
-			'<input type="number" name="donation_amount_'.$cart_item_key.'" size="5" min="0" step="'. $cart_item['data']->get_amount_increment_steps() . '" value="'.$cart_item['data']->get_price().'" />' :
-			$price );
+		if ( $cart_item['data']->get_type() == 'donation' && 'yes' === get_option( 'wcdm_editable_cart_price', 'yes') ) {
+			return '<label for="donation_amount">' . get_woocommerce_currency_symbol() .'</label><input type="number" name="donation_amount_'. $cart_item_key .'" id="donation_amount" min="' . get_post_meta( $cart_item['product_id'], 'wcdm_min_amount', true ) . '" max="'. get_post_meta( $cart_item['product_id'], 'wcdm_max_amount', true ) .'" step="'. get_post_meta( $cart_item['product_id'], 'wcdm_amount_increment_steps', true ) .'" value="'. number_format( $cart_item['data']->get_price(), 2, '.', '' ) .'" class="input-text text" />';
+		}
+		return $price;
 	}
 
 	// Process donation amount fields in cart updates
 	public static function update_cart( $cart_updated ) {
-//		if ( get_option('disable_cart_amount_field' ) ) {
-//			return $cart_updated;
-//		}
+		if ( 'yes' !== get_option( 'wcdm_editable_cart_price', 'yes' ) ) {
+			return $cart_updated;
+		}
 		global $woocommerce;
 		foreach ($woocommerce->cart->get_cart() as $key => $cartItem) {
 			if ($cartItem['data']->get_type() == 'donation' && isset($_POST['donation_amount_'.$key])
