@@ -11,8 +11,6 @@ if ( class_exists('WC_Product_Simple' ) ) {
 	 */
 	class WC_Product_Donation extends \WC_Product_Simple {
 
-		private int $amount_increment_steps;
-
 		/**
 		 * Initialize simple product.
 		 *

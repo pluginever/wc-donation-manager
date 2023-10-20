@@ -105,7 +105,6 @@ class Plugin extends Lib\Plugin {
 		// $this->services->add( WC_Product_Donation::class );
 
 
-
 		if ( self::is_request( 'frontend' ) ) {
 			$this->services->add( Frontend\Frontend::class );
 			$this->services->add( Frontend\Products::class );

@@ -17,8 +17,8 @@ defined( 'ABSPATH' ) || exit;
  * @param array $args The args.
  * @param bool $count Whether to return a count.
  *
- * @return Campaign[]|int The campaigns.
  * @since 1.0.0
+ * @return Campaign[]|int The campaigns.
  */
 function wcdm_get_campaigns( $args = [], $count = false ) {
 	$defaults = array(
@@ -42,8 +42,8 @@ function wcdm_get_campaigns( $args = [], $count = false ) {
  *
  * @param mixed $campaign Campaign object or ID.
  *
- * @return Campaign|null
  * @version 1.0.0
+ * @return Campaign|null
  */
 function wcdm_get_campaign( $campaign ) {
 	$campaign = new Campaign( $campaign );
@@ -61,8 +61,8 @@ function wcdm_get_campaign( $campaign ) {
  * @param array $args The args.
  * @param bool $count Whether to return a count.
  *
- * @return Donor[]|int The donors.
  * @since 1.0.0
+ * @return Donor[]|int The donors.
  */
 function wcdm_get_donors( $args = [], $count = false ) {
 	$defaults = array(
@@ -86,8 +86,8 @@ function wcdm_get_donors( $args = [], $count = false ) {
  *
  * @param mixed $donor Donor object or ID.
  *
- * @return Donor|null
  * @version 1.0.0
+ * @return Donor|null
  */
 function wcdm_get_donor( $donor ) {
 	$donor = new Donor( $donor );
