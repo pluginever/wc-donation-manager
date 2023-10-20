@@ -1,0 +1,26 @@
+.wc-donation-manager {
+	.campaign-progress {
+		.progress-label {
+			display: flex;
+			justify-content: space-between;
+			gap: 5px;
+		}
+		#campaign-progressbar {
+			width: 100%;
+		}
+	}
+	.suggested-amounts {
+		display: flex;
+		justify-content: space-between;
+		gap: 10px;
+		button {
+			width: 25%;
+		}
+	}
+	.campaign-amount {
+		margin: 15px 0;
+		#donation_amount {
+			min-width: 200px;
+		}
+	}
+}

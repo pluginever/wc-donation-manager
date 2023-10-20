@@ -88,8 +88,8 @@ class Products {
 							  max="100"><?php echo $raised_amount; ?>%
 					</progress>
 				</div>
+				<h4>Suggested amounts:</h4>
 				<div class="suggested-amounts">
-					<h4>Suggested amounts:</h4>
 					<button type="button">$25</button>
 					<button type="button">$50</button>
 					<button type="button">$75</button>
