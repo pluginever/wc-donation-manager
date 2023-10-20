@@ -13,28 +13,13 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager\Frontend
  */
 class Frontend {
-
 	/**
 	 * Frontend constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'init' ), 1 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-	}
-
-	/**
-	 * Init classes.
-	 *
-	 * Example:
-	 * wc_starter_plugin()->services['frontend/my-account'] = new MyAccount();
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function init() {
-		// todo add your frontend classes here.
 	}
 
 	/**
@@ -44,7 +29,7 @@ class Frontend {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-//		wc_starter_plugin()->register_style( 'frontend', 'css/frontend.css' );
-//		wc_starter_plugin()->enqueue_script( 'frontend', 'js/frontend.js', array( 'jquery' ) );
+		wc_donation_manager()->enqueue_style( 'wcdm-frontend', 'css/wcdm-frontend.css' );
+		wc_donation_manager()->enqueue_script( 'wcdm-frontend', 'js/wcdm-frontend.js', array( 'jquery' ) );
 	}
 }

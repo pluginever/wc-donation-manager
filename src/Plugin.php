@@ -2,8 +2,6 @@
 
 namespace WooCommerceDonationManager;
 
-use WooCommerceDonationManager\Frontend\Products;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -95,6 +93,7 @@ class Plugin extends Lib\Plugin {
 	public function init() {
 		$this->services->add( Installer::class );
 		$this->services->add( PostTypes::class );
+		$this->services->add( Cart::class );
 		// $this->services->add( Emails\Emails::class );
 
 		if ( self::is_request( 'admin' ) ) {

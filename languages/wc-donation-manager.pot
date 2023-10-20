@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.0\n"
 "Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
-"POT-Creation-Date: 2023-10-18 05:55:14+00:00\n"
+"POT-Creation-Date: 2023-10-20 15:19:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,11 +24,23 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
+#: src/Admin/views/product-metaboxes.php:121
+msgid "1"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:122
+msgid "2"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:123
+msgid "3"
+msgstr ""
+
 #: lib/Lib/Plugin.php:309
 msgid "Go Pro"
 msgstr ""
 
-#: lib/Lib/Plugin.php:655 src/Admin/Settings.php:247
+#: lib/Lib/Plugin.php:655 src/Admin/Settings.php:323
 msgid "Documentation"
 msgstr ""
 
@@ -44,7 +56,7 @@ msgstr ""
 msgid "More Plugins"
 msgstr ""
 
-#: lib/Lib/Plugin.php:692 src/Admin/Menus.php:83 src/Admin/Menus.php:84
+#: lib/Lib/Plugin.php:692 src/Admin/Menus.php:82 src/Admin/Menus.php:83
 msgid "Settings"
 msgstr ""
 
@@ -78,11 +90,11 @@ msgstr ""
 msgid "Report a Bug"
 msgstr ""
 
-#: src/Admin/Actions.php:50 src/Admin/Actions.php:70
+#: src/Admin/Actions.php:48 src/Admin/Actions.php:68
 msgid "Campaign saved successfully."
 msgstr ""
 
-#: src/Admin/Actions.php:105 src/Admin/Actions.php:125
+#: src/Admin/Actions.php:108 src/Admin/Actions.php:128
 msgid "Donor saved successfully."
 msgstr ""
 
@@ -113,7 +125,7 @@ msgid "Name"
 msgstr ""
 
 #: src/Admin/ListTables/CampaignsListTable.php:96
-#: src/Admin/views/edit-donor.php:66 src/Products.php:56
+#: src/Admin/views/edit-donor.php:66
 msgid "Amount"
 msgstr ""
 
@@ -180,33 +192,79 @@ msgid_plural "%d donors deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Admin/Menus.php:37 src/Admin/Menus.php:38 src/Admin/Metaboxes.php:57
+#: src/Admin/Menus.php:36 src/Admin/Menus.php:37 src/Admin/Metaboxes.php:59
 msgid "Donation Manager"
 msgstr ""
 
-#: src/Admin/Menus.php:48 src/Admin/Menus.php:49
+#: src/Admin/Menus.php:47 src/Admin/Menus.php:48
 msgid "Campaign"
 msgstr ""
 
-#: src/Admin/Menus.php:57 src/Admin/Menus.php:58
+#: src/Admin/Menus.php:56 src/Admin/Menus.php:57
 #: src/Admin/views/list-donors.php:18
 msgid "Donors"
 msgstr ""
 
-#: src/Admin/Menus.php:66 src/Admin/Menus.php:67
+#: src/Admin/Menus.php:65 src/Admin/Menus.php:66
 msgid "Tools"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:36
+#: src/Admin/Metaboxes.php:37
 msgid "Donation"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:76
+#: src/Admin/Metaboxes.php:78
 msgid "Default amount"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:83
-msgid "Amount increment"
+#: src/Admin/Metaboxes.php:79
+msgid "Enter the default amount for the campaign."
+msgstr ""
+
+#: src/Admin/Metaboxes.php:87
+msgid "Goal amount"
+msgstr ""
+
+#: src/Admin/Metaboxes.php:88
+msgid "Enter the goal amount for the campaign."
+msgstr ""
+
+#: src/Admin/Metaboxes.php:97
+msgid "Amount increment steps"
+msgstr ""
+
+#: src/Admin/Metaboxes.php:98
+msgid ""
+"Enter the amount increment steps for the campaign amount field. This will "
+"applicable for increasing or decreasing amounts on the campaign page."
+msgstr ""
+
+#: src/Admin/Metaboxes.php:116 src/Admin/Settings.php:189
+msgid "Minimum amount"
+msgstr ""
+
+#: src/Admin/Metaboxes.php:117
+msgid ""
+"Enter the minimum amount for the campaign. Default amount comes from the "
+"plugin global settings."
+msgstr ""
+
+#: src/Admin/Metaboxes.php:125 src/Admin/Settings.php:197
+msgid "Maximum amount"
+msgstr ""
+
+#: src/Admin/Metaboxes.php:126
+msgid ""
+"Enter the maximum amount for the campaign. Default amount comes from the "
+"plugin global settings."
+msgstr ""
+
+#: src/Admin/Metaboxes.php:134
+msgid "Campaign cause"
+msgstr ""
+
+#: src/Admin/Metaboxes.php:135 src/Admin/views/add-campaign.php:57
+msgid "Enter the cause of the campaign."
 msgstr ""
 
 #: src/Admin/Orders.php:39
@@ -271,112 +329,220 @@ msgid "General Settings"
 msgstr ""
 
 #: src/Admin/Settings.php:61
-msgid "The following options are the plugin general settings."
+msgid ""
+"The following options are the plugin general settings. Theses options "
+"affect how the plugin will work."
 msgstr ""
 
-#: src/Admin/Settings.php:65 src/Admin/Settings.php:78
-msgid "Select a page"
+#: src/Admin/Settings.php:65
+msgid "Success page"
 msgstr ""
 
 #: src/Admin/Settings.php:66 src/Admin/Settings.php:67
-#: src/Admin/Settings.php:79 src/Admin/Settings.php:80
-#: src/Admin/Settings.php:151 src/Admin/Settings.php:152
-msgid "Select the default donation fee recurring option."
-msgstr ""
-
-#: src/Admin/Settings.php:91
-msgid "amount"
-msgstr ""
-
-#: src/Admin/Settings.php:93 src/Admin/Settings.php:94
 msgid ""
-"Enter the amount. This will be apply globally if didn't set the amount "
-"while creating campaigns."
+"Select a success page. This page will display after completed the donation "
+"process. Leave blank for default Woocommerce success page."
 msgstr ""
 
-#: src/Admin/Settings.php:107
-msgid "Advanced Settings"
+#: src/Admin/Settings.php:74
+msgid "Donor wall page"
+msgstr ""
+
+#: src/Admin/Settings.php:75 src/Admin/Settings.php:76
+msgid "Select a donor wall page. This page will display donor wall details."
+msgstr ""
+
+#: src/Admin/Settings.php:87
+msgid "Default Donation Settings"
+msgstr ""
+
+#: src/Admin/Settings.php:89
+msgid ""
+"The following options are the plugin default donation settings. Theses "
+"options are the global settings for all the campaigns."
+msgstr ""
+
+#: src/Admin/Settings.php:93
+msgid "Add to cart button text"
+msgstr ""
+
+#: src/Admin/Settings.php:95 src/Admin/Settings.php:96
+msgid ""
+"Enter the add to cart button text. This will be applicable only for "
+"campaigns or donation product types."
+msgstr ""
+
+#: src/Admin/Settings.php:101
+msgid "Anonymous donation"
+msgstr ""
+
+#: src/Admin/Settings.php:102
+msgid "Enable anonymous donation."
+msgstr ""
+
+#: src/Admin/Settings.php:108
+msgid "Skip cart"
 msgstr ""
 
 #: src/Admin/Settings.php:109
+msgid "Skip cart."
+msgstr ""
+
+#: src/Admin/Settings.php:115
+msgid "Editable cart item price"
+msgstr ""
+
+#: src/Admin/Settings.php:116
+msgid "Editable cart item price."
+msgstr ""
+
+#: src/Admin/Settings.php:117
+msgid "This will make the cart item price editable for the donation products only."
+msgstr ""
+
+#: src/Admin/Settings.php:123
+msgid "Disabled order note"
+msgstr ""
+
+#: src/Admin/Settings.php:124
+msgid "Disabled order note."
+msgstr ""
+
+#: src/Admin/Settings.php:130
+msgid "Disabled coupon field"
+msgstr ""
+
+#: src/Admin/Settings.php:131
+msgid "Disabled coupon field."
+msgstr ""
+
+#: src/Admin/Settings.php:137
+msgid "Enable fast checkout"
+msgstr ""
+
+#: src/Admin/Settings.php:138
+msgid "Enable fast checkout."
+msgstr ""
+
+#: src/Admin/Settings.php:144
+msgid "Select add to cart redirect page"
+msgstr ""
+
+#: src/Admin/Settings.php:145 src/Admin/Settings.php:146
+msgid ""
+"Select the add to cart redirect page. This will redirect users directly to "
+"the selected destination page after click on add to cart/donate button."
+msgstr ""
+
+#: src/Admin/Settings.php:150
+msgid "Cart Page"
+msgstr ""
+
+#: src/Admin/Settings.php:151
+msgid "Checkout Page"
+msgstr ""
+
+#: src/Admin/Settings.php:160
+msgid "Disabled tax"
+msgstr ""
+
+#: src/Admin/Settings.php:161
+msgid "Disabled tax for donation."
+msgstr ""
+
+#: src/Admin/Settings.php:162
+msgid ""
+"Disabled the tax for donation product. This will hide tax status and tax "
+"class from product edit page as well if product type selected as donation."
+msgstr ""
+
+#: src/Admin/Settings.php:168
+msgid "Contribution text"
+msgstr ""
+
+#: src/Admin/Settings.php:170 src/Admin/Settings.php:171
+msgid "Enter the contribution text."
+msgstr ""
+
+#: src/Admin/Settings.php:183
+msgid "Advanced Settings"
+msgstr ""
+
+#: src/Admin/Settings.php:185
 msgid "The following options are the plugin advanced settings."
 msgstr ""
 
-#: src/Admin/Settings.php:113
-msgid "Minimum amount"
-msgstr ""
-
-#: src/Admin/Settings.php:115 src/Admin/Settings.php:116
+#: src/Admin/Settings.php:191 src/Admin/Settings.php:192
 msgid ""
 "Enter the minimum amount. This will be apply globally if didn't set the "
 "minimum amount while creating campaigns."
 msgstr ""
 
-#: src/Admin/Settings.php:121
-msgid "Maximum amount"
-msgstr ""
-
-#: src/Admin/Settings.php:123 src/Admin/Settings.php:124
+#: src/Admin/Settings.php:199 src/Admin/Settings.php:200
 msgid ""
 "Enter the maximum amount. This will be apply globally if didn't set the "
 "maximum amount while creating campaigns."
 msgstr ""
 
-#: src/Admin/Settings.php:137
+#: src/Admin/Settings.php:213
 msgid "Fee Recurring Settings"
 msgstr ""
 
-#: src/Admin/Settings.php:139
+#: src/Admin/Settings.php:215
 msgid "The following options are the fee recurring settings."
 msgstr ""
 
-#: src/Admin/Settings.php:143
+#: src/Admin/Settings.php:219
 msgid "Enable fee recurring"
 msgstr ""
 
-#: src/Admin/Settings.php:144
+#: src/Admin/Settings.php:220
 msgid "Enable the donation fee recurring."
 msgstr ""
 
-#: src/Admin/Settings.php:150
+#: src/Admin/Settings.php:226
 msgid "Default fee recurring"
 msgstr ""
 
-#: src/Admin/Settings.php:156
+#: src/Admin/Settings.php:227 src/Admin/Settings.php:228
+msgid "Select the default donation fee recurring option."
+msgstr ""
+
+#: src/Admin/Settings.php:232
 msgid "Recurring"
 msgstr ""
 
-#: src/Admin/Settings.php:157
+#: src/Admin/Settings.php:233
 msgid "Onetime"
 msgstr ""
 
-#: src/Admin/Settings.php:214
+#: src/Admin/Settings.php:290
 msgid "Feature 1"
 msgstr ""
 
-#: src/Admin/Settings.php:215
+#: src/Admin/Settings.php:291
 msgid "Feature 2"
 msgstr ""
 
-#: src/Admin/Settings.php:216
+#: src/Admin/Settings.php:292
 msgid "Feature 3"
 msgstr ""
 
-#: src/Admin/Settings.php:217
+#: src/Admin/Settings.php:293
 msgid "Many more ..."
 msgstr ""
 
-#: src/Admin/Settings.php:221
+#: src/Admin/Settings.php:297
 msgid "Want More?"
 msgstr ""
 
-#: src/Admin/Settings.php:222
+#: src/Admin/Settings.php:298
 msgid ""
 "This plugin offers a premium version which comes with the following "
 "features:"
 msgstr ""
 
-#: src/Admin/Settings.php:230
+#: src/Admin/Settings.php:306
 msgid "Upgrade to PRO"
 msgstr ""
 
@@ -418,10 +584,6 @@ msgstr ""
 
 #: src/Admin/views/add-campaign.php:55 src/Admin/views/edit-campaign.php:63
 msgid "Enter the cause of the campaign..."
-msgstr ""
-
-#: src/Admin/views/add-campaign.php:57
-msgid "Enter the cause of the campaign."
 msgstr ""
 
 #: src/Admin/views/add-campaign.php:72
@@ -582,6 +744,88 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+#: src/Admin/views/product-metaboxes.php:21
+msgid "Donation Manager Settings"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:22
+msgid "Customize store timer or use global setting."
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:26
+msgid "Global Setting"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:27
+msgid "Customize"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:35
+msgid "Time condition"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:36
+msgid "Select a time range to disable store purchase."
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:39
+msgid "Date"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:40
+msgid "Weekly on ever [Saturday - Sunday] "
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:41
+msgid "Monthly on every [1-31]"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:42
+msgid "On the month of [January - December]"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:43
+msgid "Public Holidays [US - Canada]"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:52
+msgid "Start date"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:53
+msgid "Date start for this product to show in store"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:62
+msgid "End date"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:63
+msgid "Date end for this product to show in store"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:73
+#: src/Admin/views/product-metaboxes.php:97
+#: src/Admin/views/product-metaboxes.php:116
+msgid "Select day or multiple days for every weeks."
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:102
+msgid "January"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:103
+msgid "February"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:134
+msgid "Notice Text"
+msgstr ""
+
+#: src/Admin/views/product-metaboxes.php:135
+msgid "Prefix for the ticket number. Leave blank for no prefix."
+msgstr ""
+
 #: src/Admin/views/settings-emails.php:13
 msgid "Email Settings"
 msgstr ""
@@ -607,99 +851,11 @@ msgid "Enter the email contents."
 msgstr ""
 
 #: src/Admin/views/settings-emails.php:44
-#: src/Admin/views/settings-general.php:150
 msgid "Save Changes"
 msgstr ""
 
-#: src/Admin/views/settings-general.php:13
-msgid "General settings"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:14
-#: src/Admin/views/settings-general.php:60
-msgid ""
-"The following options are the plugin general settings. Theses options "
-"affect how the plugin will work."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:19
-msgid "Success page"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:23
-#: src/Admin/views/settings-general.php:43
-msgid "Select page"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:32
-msgid ""
-"Select a success page. This page will display after completed the donation "
-"process."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:39
-msgid "Donor wall page"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:52
-msgid "Select a donor wall page. This page will display donor wall details."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:59
-msgid "Default Donation Settings"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:66
-msgid "Add to cart button text"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:71
-msgid "Enter the add to cart button text."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:77
-msgid "Anonymous donation"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:82
-msgid "Enable anonymous donation."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:88
-msgid "Skip cart"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:93
-msgid "Skip cart."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:99
-msgid "Disabled order note"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:104
-msgid "Disabled order note."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:110
-msgid "Disabled coupon field"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:115
-msgid "Disabled coupon field."
-msgstr ""
-
-#: src/Admin/views/settings-general.php:121
-#: src/Admin/views/settings-general.php:126
-msgid "Enable fast checkout"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:132
-msgid "Contribution text"
-msgstr ""
-
-#: src/Admin/views/settings-general.php:137
-msgid "Enter the contribution text."
+#: src/Frontend/Products.php:75
+msgid "Other Amount"
 msgstr ""
 
 #: src/Installer.php:79
@@ -796,20 +952,20 @@ msgstr ""
 msgid "No donors found in Trash."
 msgstr ""
 
-#: src/class-wc-product-donation.php:71 src/class-wc-product-donation.php:94
+#: src/class-wc-product-donation.php:54 src/class-wc-product-donation.php:77
 msgid "Donate Now"
 msgstr ""
 
-#: src/class-wc-product-donation.php:71
+#: src/class-wc-product-donation.php:54
 msgid "About donation"
 msgstr ""
 
-#: src/class-wc-product-donation.php:107
+#: src/class-wc-product-donation.php:90
 #. translators: %s: Product title
 msgid "Add &ldquo;%s&rdquo; to your cart"
 msgstr ""
 
-#: src/class-wc-product-donation.php:107
+#: src/class-wc-product-donation.php:90
 msgid "Read more about &ldquo;%s&rdquo;"
 msgstr ""
 

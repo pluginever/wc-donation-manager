@@ -7,11 +7,12 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Class Products.
  *
- * @package WooCommerceDonationManager\Frontend
+ * This class is responsible for all frontend functionality for products shop/archive page.
+ *
  * @since 1.0.0
+ * @package WooCommerceDonationManager\Frontend
  */
 class Products {
-
 	/**
 	 * Products constructor.
 	 *
@@ -24,15 +25,11 @@ class Products {
 		add_action('woocommerce_donation_add_to_cart', array( __CLASS__, 'add_to_cart_template' ) );
 		add_filter('woocommerce_add_to_cart_redirect', array( __CLASS__, 'add_to_cart_redirect' ), 10, 2 );
 		add_filter('woocommerce_add_cart_item', array( __CLASS__, 'add_cart_item' ) );
-		add_filter('woocommerce_get_cart_item_from_session', array( __CLASS__, 'get_cart_item_from_session' ) );
-		add_filter('woocommerce_cart_item_price', array( __CLASS__, 'cart_item_price'), 10, 3 );
-		add_filter('woocommerce_update_cart_action_cart_updated', array( __CLASS__, 'update_cart' ) );
 	}
 
-	//Remove ajax_add_to_cart from add to cart button
-	public static function add_to_cart_link( $linkHtml, $product ) {
-//		var_dump( $product->get_type() );
-		return ( 'donation' == $product->get_type() ? str_replace( 'ajax_add_to_cart', '', $linkHtml ) : $linkHtml );
+	// Remove ajax_add_to_cart from add to cart button
+	public static function add_to_cart_link( $link_Html, $product ) {
+		return ( 'donation' == $product->get_type() ? str_replace( 'ajax_add_to_cart', '', $link_Html ) : $link_Html );
 	}
 
 	//	 Disable price display in frontend for Donation products
@@ -107,7 +104,6 @@ class Products {
 		return $url;
 	}
 
-
 	// Process donation amount when a Donation product is added to the cart
 	public static function add_cart_item( $item ) {
 		if ( 'donation' === $item['data']->get_type() ) {
@@ -118,36 +114,4 @@ class Products {
 		return $item;
 	}
 
-	// Set Donation product price when loading the cart
-	public static function get_cart_item_from_session( $session_data ) {
-		if ($session_data['data']->get_type() == 'donation' && isset($session_data['donation_amount']))
-			$session_data['data']->set_price( $session_data['donation_amount']);
-		return $session_data;
-	}
-
-	// Add the donation amount field to the cart display
-	public static function cart_item_price( $price, $cart_item, $cart_item_key) {
-		if ( $cart_item['data']->get_type() == 'donation' && 'yes' === get_option( 'wcdm_editable_cart_price', 'yes') ) {
-			return '<label for="donation_amount">' . get_woocommerce_currency_symbol() .'</label><input type="number" name="donation_amount_'. $cart_item_key .'" id="donation_amount" min="' . get_post_meta( $cart_item['product_id'], 'wcdm_min_amount', true ) . '" max="'. get_post_meta( $cart_item['product_id'], 'wcdm_max_amount', true ) .'" step="'. get_post_meta( $cart_item['product_id'], 'wcdm_amount_increment_steps', true ) .'" value="'. number_format( $cart_item['data']->get_price(), 2, '.', '' ) .'" class="input-text text" />';
-		}
-		return $price;
-	}
-
-	// Process donation amount fields in cart updates
-	public static function update_cart( $cart_updated ) {
-		if ( 'yes' !== get_option( 'wcdm_editable_cart_price', 'yes' ) ) {
-			return $cart_updated;
-		}
-		global $woocommerce;
-		foreach ($woocommerce->cart->get_cart() as $key => $cartItem) {
-			if ($cartItem['data']->get_type() == 'donation' && isset($_POST['donation_amount_'.$key])
-			    && is_numeric($_POST['donation_amount_'.$key]) && $_POST['donation_amount_'.$key] >= 0 && $_POST['donation_amount_'.$key] != $cartItem['data']->get_price()) {
-				$cartItem['donation_amount'] = $_POST['donation_amount_'.$key]*1;
-				$cartItem['data']->set_price($cartItem['donation_amount']);
-				$woocommerce->cart->cart_contents[$key] = $cartItem;
-				$cart_updated = true;
-			}
-		}
-		return $cart_updated;
-	}
 }
