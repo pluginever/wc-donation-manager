@@ -49,7 +49,7 @@ class Cart {
 	 * @return string
 	 */
 	public static function cart_item_price( $price, $cart_item, $cart_item_key) {
-		if ( $cart_item['data']->get_type() == 'donation' && 'yes' === get_option( 'wcdm_editable_cart_price', 'yes') ) {
+		if ( 'donation' === $cart_item['data']->get_type()  && 'yes' === get_option( 'wcdm_editable_cart_price', 'yes') ) {
 			return '<label for="donation_amount">' . get_woocommerce_currency_symbol() .'</label><input type="number" name="donation_amount_'. $cart_item_key .'" id="donation_amount" min="' . get_post_meta( $cart_item['product_id'], 'wcdm_min_amount', true ) . '" max="'. get_post_meta( $cart_item['product_id'], 'wcdm_max_amount', true ) .'" step="'. get_post_meta( $cart_item['product_id'], 'wcdm_amount_increment_steps', true ) .'" value="'. number_format( $cart_item['data']->get_price(), 2, '.', '' ) .'" class="input-text text" />';
 		}
 		return $price;
