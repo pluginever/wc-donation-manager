@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function wcdm_get_campaigns( $args = [], $count = false ) {
 	$defaults = array(
-		'post_type'      => 'wcdm_campaigns',
+		'post_type'      => 'product',
 		'posts_per_page' => - 1,
 		'orderby'        => 'title',
 		'order'          => 'ASC',

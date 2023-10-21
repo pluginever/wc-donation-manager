@@ -52,7 +52,7 @@ class CampaignsListTable extends AbstractListTable {
 		$search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
 		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
 		$args                  = array(
-			'post_type'      => 'wcdm_campaigns',
+			'post_type'      => 'product',
 			'post_status'    => 'any',
 			'order'          => $order,
 			'order_by'       => $order_by,

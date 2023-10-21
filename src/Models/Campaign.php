@@ -19,7 +19,8 @@ class Campaign extends Data {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $post_type = 'wcdm_campaigns';
+//	protected $post_type = 'wcdm_campaigns';
+	protected $post_type = 'product';
 
 	/**
 	 * All data for this object. Name value pairs (name + default value).

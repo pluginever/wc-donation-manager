@@ -72,6 +72,8 @@ class Orders {
 
 					update_post_meta( $item['product_id'], 'wcdm_orders_id', $orders_id );
 					update_post_meta( $item['product_id'], 'wcdm_raised_amount', $raised_amount );
+
+					// TODO: Need to create "Donor" from here by getting help of Donor model.
 				}
 			}
 		}

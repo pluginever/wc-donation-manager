@@ -86,7 +86,7 @@ class Products {
 						<label for="campaign-progressbar"><?php echo $currency_symbol . $goal_amount; ?> goal</label>
 					</div>
 					<progress id="campaign-progressbar" value="<?php echo $raised_amount ?>"
-							  max="100"><?php echo $raised_amount; ?>%
+							  max="<?php echo $goal_amount ?>"><?php echo $raised_amount; ?>%
 					</progress>
 				</div>
 				<h4>Suggested amounts:</h4>
