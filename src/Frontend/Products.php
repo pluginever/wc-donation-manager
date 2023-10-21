@@ -55,6 +55,7 @@ class Products {
 		if ( 'donation' == $product->get_type() ) {
 			return ( is_admin() ? 'Variable' : '' );
 		}
+
 		return $price;
 	}
 
@@ -84,7 +85,7 @@ class Products {
 							raised</label>
 						<label for="campaign-progressbar"><?php echo $currency_symbol . $goal_amount; ?> goal</label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo $raised_amount ?>>"
+					<progress id="campaign-progressbar" value="<?php echo $raised_amount ?>"
 							  max="100"><?php echo $raised_amount; ?>%
 					</progress>
 				</div>
