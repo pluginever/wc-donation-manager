@@ -93,8 +93,8 @@ class CampaignsListTable extends AbstractListTable {
 		return array(
 			'cb'     => '<input type="checkbox" />',
 			'name'   => __( 'Name', 'wc-donation-manager' ),
-			'amount' => __( 'Amount', 'wc-donation-manager' ),
-			'goal'   => __( 'Goal', 'wc-donation-manager' ),
+			'price' => __( 'Amount', 'wc-donation-manager' ),
+			'goal_amount'   => __( 'Goal', 'wc-donation-manager' ),
 			'cause'  => __( 'Cause', 'wc-donation-manager' ),
 			'status' => __( 'Status', 'wc-donation-manager' ),
 		);
@@ -109,8 +109,8 @@ class CampaignsListTable extends AbstractListTable {
 	public function get_sortable_columns() {
 		return array(
 			'name'   => array( 'post_title', true ),
-			'amount' => array( 'amount', true ),
-			'goal'   => array( 'goal', true ),
+			'price' => array( 'price', true ),
+			'goal_amount'   => array( 'goal_amount', true ),
 			'status' => array( 'post_status', true ),
 		);
 	}
@@ -234,11 +234,17 @@ class CampaignsListTable extends AbstractListTable {
 		$value = '&mdash;';
 
 		switch ( $column_name ) {
-			case 'amount':
-				$value = sprintf( '$%s', esc_html( $item->get_amount() ) );
+			case 'price':
+				$value = sprintf(
+				/* translators: 1: WC currency symbol 2: Product price */
+					__( '%1$s%2$s', 'wc-donation-manager' ), get_woocommerce_currency_symbol(), esc_html( $item->get_price() )
+				);
 				break;
-			case 'goal':
-				$value = sprintf( '$%s', esc_html( $item->get_goal() ) );
+			case 'goal_amount':
+				$value = sprintf(
+				/* translators: 1: WC currency symbol 2: Product price */
+					__( '%1$s%2$s', 'wc-donation-manager' ), get_woocommerce_currency_symbol(), esc_html( $item->get_goal_amount() )
+				);
 				break;
 			default:
 				$value = parent::column_default( $item, $column_name );

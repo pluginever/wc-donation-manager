@@ -70,14 +70,14 @@ class Products {
 	public static function before_add_to_cart_button() {
 		global $product;
 		$currency_symbol = get_woocommerce_currency_symbol();
-		$goal_amount     = '' !== get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_goal_amount', true ) : '0';
+		$goal_amount     = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
 		$raised_amount   = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
 		if ( 'donation' == $product->get_type() ) {
 			ob_start(); // TODO: have a question! Is it right way to use this if the contents displaying without help of ob_start().
 			?>
 			<div class="wc-donation-manager">
 				<div class="campaign-cause">
-					<p><?php echo get_post_meta( $product->get_id(), 'wcdm_campaign_cause', true ); ?></p>
+					<p><?php echo get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true ); ?></p>
 				</div>
 				<div class="campaign-progress">
 					<div class="progress-label">
@@ -100,9 +100,9 @@ class Products {
 					<label for="donation_amount"><?php esc_html_e( 'Other Amount', 'wc-donation-manager' );
 						echo ' (' . $currency_symbol . ')'; ?>:</label>
 					<input type="number" name="donation_amount" id="donation_amount"
-						   min="<?php echo get_post_meta( $product->get_id(), 'wcdm_min_amount', true ); ?>"
-						   max="<?php echo get_post_meta( $product->get_id(), 'wcdm_max_amount', true ); ?>"
-						   step="<?php echo get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ); ?>"
+						   min="<?php echo get_post_meta( $product->get_id(), '_wcdm_min_amount', true ); ?>"
+						   max="<?php echo get_post_meta( $product->get_id(), '_wcdm_max_amount', true ); ?>"
+						   step="<?php echo get_post_meta( $product->get_id(), '_amount_increment_steps', true ); ?>"
 						   value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>"
 						   class="input-text text"/>
 				</div>

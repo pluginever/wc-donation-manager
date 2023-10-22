@@ -24,7 +24,7 @@ function wcdm_get_campaigns( $args = [], $count = false ) {
 	$defaults = array(
 		'post_type'      => 'product',
 		'posts_per_page' => - 1,
-		'orderby'        => 'title',
+		'orderby'        => 'date',
 		'order'          => 'ASC',
 	);
 	$args     = wp_parse_args( $args, $defaults );

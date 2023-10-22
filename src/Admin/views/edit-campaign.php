@@ -24,7 +24,6 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 					</p>
 				</div>
 				<div class="pev-card__body form-inline">
-
 					<div class="pev-form-field">
 						<label for="name">
 							<?php esc_html_e( 'Campaign Name *', 'wc-donation-manager' ); ?>
@@ -35,27 +34,51 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 							<?php esc_html_e( 'Edit or update the name of the campaign.', 'wc-donation-manager' ); ?>
 						</p>
 					</div>
-
 					<div class="pev-form-field">
-						<label for="amount">
+						<label for="price">
 							<?php esc_html_e( 'Amount *', 'wc-donation-manager' ); ?>
 						</label>
-						<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="<?php echo esc_html( $campaign->get_amount() ); ?>" required/>
+						<input type="number" min="0" step="any" name="price" id="price" class="regular-text" value="<?php echo esc_html( $campaign->get_price() ); ?>" required/>
 						<p class="description">
-							<?php esc_html_e( 'Edit or update the amount of the campaign.', 'wc-donation-manager' ); ?>
+							<?php esc_html_e( 'Edit or update the default amount of the campaign.', 'wc-donation-manager' ); ?>
 						</p>
 					</div>
-
 					<div class="pev-form-field">
-						<label for="goal">
+						<label for="goal_amount">
 							<?php esc_html_e( 'Goal Amount', 'wc-donation-manager' ); ?>
 						</label>
-						<input type="number" min="0" step="any" name="goal" id="goal" class="regular-text" value="<?php echo esc_html( $campaign->get_goal() ); ?>" required/>
+						<input type="number" min="0" step="any" name="goal_amount" id="goal_amount" class="regular-text" value="<?php echo esc_html( $campaign->get_goal_amount() ); ?>" required/>
 						<p class="description">
 							<?php esc_html_e( 'Edit or update the goal amount of the campaign.', 'wc-donation-manager' ); ?>
 						</p>
 					</div>
-
+					<div class="pev-form-field">
+						<label for="wcdm_min_amount">
+							<?php esc_html_e( 'Minimum Amount', 'wc-donation-manager' ); ?>
+						</label>
+						<input type="number" min="0" step="any" name="wcdm_min_amount" id="wcdm_min_amount" class="regular-text" value="<?php echo esc_html( $campaign->get_wcdm_min_amount() ); ?>" required/>
+						<p class="description">
+							<?php esc_html_e( 'Edit or update the minimum amount of the campaign.', 'wc-donation-manager' ); ?>
+						</p>
+					</div>
+					<div class="pev-form-field">
+						<label for="wcdm_max_amount">
+							<?php esc_html_e( 'Maximum Amount', 'wc-donation-manager' ); ?>
+						</label>
+						<input type="number" min="0" step="any" name="wcdm_max_amount" id="wcdm_max_amount" class="regular-text" value="<?php echo esc_html( $campaign->get_wcdm_max_amount() ); ?>" required/>
+						<p class="description">
+							<?php esc_html_e( 'Edit or update the maximum amount of the campaign.', 'wc-donation-manager' ); ?>
+						</p>
+					</div>
+					<div class="pev-form-field">
+						<label for="amount_increment_steps">
+							<?php esc_html_e( 'Amount Increment Steps', 'wc-donation-manager' ); ?>
+						</label>
+						<input type="number" min="0" step="any" name="amount_increment_steps" id="amount_increment_steps" class="regular-text" value="<?php echo esc_html( $campaign->get_amount_increment_steps() ); ?>" required/>
+						<p class="description">
+							<?php esc_html_e( 'Edit or update the campaign amount increment steps.', 'wc-donation-manager' ); ?>
+						</p>
+					</div>
 					<div class="pev-form-field">
 						<label for="cause">
 							<?php esc_html_e( 'Cause', 'wc-donation-manager' ); ?>
@@ -80,9 +103,9 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 					</label>
 					<select id="status" name="status" style="width: 300px" required>
 						<?php $status = esc_html( $campaign->get_status() ); ?>
-						<option value="published" <?php echo 'published' === $status ? 'selected' : '' ?>>Published</option>
-						<option value="private" <?php echo 'private' === $status ? 'selected' : '' ?>>Private</option>
-						<option value="draft" <?php echo 'draft' === $status ? 'selected' : '' ?>>Draft</option>
+						<option value="Publish" <?php echo 'Publish' === $status ? 'selected' : ''; ?>>Publish</option>
+						<option value="Pending" <?php echo 'Pending' === $status ? 'selected' : ''; ?>>Pending</option>
+						<option value="Draft" <?php echo 'Draft' === $status ? 'selected' : ''; ?>>Draft</option>
 					</select>
 					<p class="description">
 						<?php esc_html_e( 'Update the campaign status.', 'wc-donation-manager' ); ?>
@@ -96,7 +119,6 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 			</div>
 		</div>
 	</div>
-
 	<input type="hidden" name="action" value="wcdm_edit_campaign">
 	<input type="hidden" name="id" value="<?php echo esc_attr( $campaign->get_id() ); ?>">
 	<?php wp_nonce_field( 'wcdm_edit_campaign' ); ?>

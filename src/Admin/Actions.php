@@ -17,7 +17,6 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager
  */
 class Actions {
-
 	/**
 	 * Actions constructor.
 	 *
@@ -41,32 +40,9 @@ class Actions {
 		check_admin_referer( 'wcdm_add_campaign' );
 		$referer = wp_get_referer();
 		$data    = wp_unslash( $_POST );
-
 		$campaign = Campaign::insert( $data );
-
-		$args = array(
-			'post_content' => $data['cause'],
-			'post_status'  => $data['status'], // (Draft | Pending | Publish)
-			'post_title'   => $data['name'],
-			'post_type'    => "product",
-		);
-
-		// Create a simple WooCommerce product.
-//		$product_id = wp_insert_post( $args );
-
 		// Set the product type as donation.
 		wp_set_object_terms( $campaign->get_id(), 'donation', 'product_type' );
-
-		// Set the post meta for the newly created product
-		update_post_meta( $campaign->get_id(), '_price', (int) $data['amount'] );
-		update_post_meta( $campaign->get_id(), '_regular_price', (int) $data['amount'] );
-		$goal_amount = ( '' === $data['goal'] ) ? '' : wc_format_decimal( $data['goal'] );
-		update_post_meta( $campaign->get_id(), 'wcdm_goal_amount', $goal_amount );
-		update_post_meta( $campaign->get_id(), 'wcdm_amount_increment_steps', ( ! empty( $data['amount_increment_steps'] ) && is_numeric( $data['amount_increment_steps'] ) ? number_format( $data['amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
-		update_post_meta( $campaign->get_id(), 'wcdm_min_amount', ( ! empty( $data['min_amount'] ) ? $data['min_amount'] : get_option( 'wcdm_minimum_amount' ) ) );
-		update_post_meta( $campaign->get_id(), 'wcdm_max_amount', ( ! empty( $data['max_amount'] ) ? $data['max_amount'] : get_option( 'wcdm_maximum_amount' ) ) );
-		update_post_meta( $campaign->get_id(), 'wcdm_campaign_cause', ( ! empty( $data['cause'] ) ? $data['cause'] : '' ) );
-
 		if ( is_wp_error( $campaign ) ) {
 			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
 		} else {
@@ -107,14 +83,14 @@ class Actions {
 	 */
 	public static function save_donation_meta( $product_id ) {
 		$price       = ( '' === $_POST['wcdm_amount'] ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
-		$goal_amount = ( '' === $_POST['wcdm_goal_amount'] ) ? '' : wc_format_decimal( $_POST['wcdm_goal_amount'] );
+		$goal_amount = ( '' === $_POST['_goal_amount'] ) ? '' : wc_format_decimal( $_POST['_goal_amount'] );
 		update_post_meta( $product_id, '_price', $price );
 		update_post_meta( $product_id, '_regular_price', $price );
-		update_post_meta( $product_id, 'wcdm_goal_amount', $goal_amount );
-		update_post_meta( $product_id, 'wcdm_amount_increment_steps', ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( $_POST['wcdm_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
-		update_post_meta( $product_id, 'wcdm_min_amount', ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? $_POST['wcdm_min_amount'] : get_option( 'wcdm_minimum_amount' ) ) );
-		update_post_meta( $product_id, 'wcdm_max_amount', ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? $_POST['wcdm_max_amount'] : get_option( 'wcdm_maximum_amount' ) ) );
-		update_post_meta( $product_id, 'wcdm_campaign_cause', ( ! empty( $_POST['wcdm_campaign_cause'] ) ? $_POST['wcdm_campaign_cause'] : '' ) );
+		update_post_meta( $product_id, '_goal_amount', $goal_amount );
+		update_post_meta( $product_id, '_amount_increment_steps', ( ! empty( $_POST['_amount_increment_steps'] ) && is_numeric( $_POST['_amount_increment_steps'] ) ? number_format( $_POST['_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_id, '_wcdm_min_amount', ( ! empty( $_POST['_wcdm_min_amount'] ) && is_numeric( $_POST['_wcdm_min_amount'] ) ? $_POST['_wcdm_min_amount'] : get_option( 'wcdm_minimum_amount' ) ) );
+		update_post_meta( $product_id, '_wcdm_max_amount', ( ! empty( $_POST['_wcdm_max_amount'] ) && is_numeric( $_POST['_wcdm_max_amount'] ) ? $_POST['_wcdm_max_amount'] : get_option( 'wcdm_maximum_amount' ) ) );
+		update_post_meta( $product_id, '_wcdm_campaign_cause', ( ! empty( $_POST['_wcdm_campaign_cause'] ) ? $_POST['_wcdm_campaign_cause'] : '' ) );
 	}
 
 	/**

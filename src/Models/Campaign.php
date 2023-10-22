@@ -19,7 +19,6 @@ class Campaign extends Data {
 	 * @since 1.0.0
 	 * @var string
 	 */
-//	protected $post_type = 'wcdm_campaigns';
 	protected $post_type = 'product';
 
 	/**
@@ -30,10 +29,14 @@ class Campaign extends Data {
 	 */
 	protected $data = array(
 		'name'   => '',
-		'amount' => 0.00,
-		'goal'   => 0.00,
+		'price' => 0.00,
+		'regular_price' => 0.00,
+		'goal_amount'   => 0.00,
+		'amount_increment_steps' => 0.01,
+		'wcdm_min_amount' => 1,
+		'wcdm_max_amount' => 100,
 		'cause'  => '',
-		'status' => 'published',
+		'status' => 'publish',
 	);
 
 	/**
@@ -46,7 +49,7 @@ class Campaign extends Data {
 	 */
 	protected $postdata_map = array(
 		'name'   => 'post_title',
-		'cause'  => 'post_content',
+		'cause'  => 'post_excerpt',
 		'status' => 'post_status',
 	);
 
@@ -61,8 +64,8 @@ class Campaign extends Data {
 			return new \WP_Error( 'missing_required', __( 'Missing required campaign name.', 'wc-donation-manager' ) );
 		}
 
-		if ( empty( $this->get_prop( 'amount' ) ) ) {
-			return new \WP_Error( 'missing_required', __( 'Missing required amount.', 'wc-donation-manager' ) );
+		if ( empty( $this->get_prop( 'price' ) ) ) {
+			return new \WP_Error( 'missing_required', __( 'Missing required price.', 'wc-donation-manager' ) );
 		}
 
 		if ( empty( $this->get_prop( 'status' ) ) ) {
@@ -102,47 +105,135 @@ class Campaign extends Data {
 	}
 
 	/**
-	 * Get amount.
+	 * Get price.
 	 *
 	 * @since 1.0.0
 	 * @return numeric
 	 */
-	public function get_amount() {
-		return $this->get_prop( 'amount' );
+	public function get_price() {
+		return $this->get_prop( 'price' );
 	}
 
 	/**
-	 * Set amount.
+	 * Set price.
 	 *
-	 * @param numeric $amount Campaign amount.
+	 * @param numeric $price Campaign price.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_amount( $amount ) {
-		$this->set_prop( 'amount', floatval( $amount ) );
+	public function set_price( $price ) {
+		$this->set_prop( 'price', floatval( $price ) );
 	}
 
 	/**
-	 * Get goal.
+	 * Get regular price.
 	 *
 	 * @since 1.0.0
 	 * @return numeric
 	 */
-	public function get_goal() {
-		return $this->get_prop( 'goal' );
+	public function get_regular_price() {
+		return $this->get_prop( 'regular_price' );
 	}
 
 	/**
-	 * Set goal.
+	 * Set regular price.
 	 *
-	 * @param numeric $goal Campaign goal.
+	 * @param numeric $regular_price Campaign regular price.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_goal( $goal ) {
-		$this->set_prop( 'goal', floatval( $goal ) );
+	public function set_regular_price( $regular_price ) {
+		$this->set_prop( 'regular_price', floatval( $regular_price ) );
+	}
+
+	/**
+	 * Get goal amount.
+	 *
+	 * @since 1.0.0
+	 * @return numeric
+	 */
+	public function get_goal_amount() {
+		return $this->get_prop( 'goal_amount' );
+	}
+
+	/**
+	 * Set goal amount.
+	 *
+	 * @param numeric $goal_amount Campaign goal amount.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_goal_amount( $goal_amount ) {
+		$this->set_prop( 'goal_amount', floatval( $goal_amount ) );
+	}
+
+	/**
+	 * Get amount increment steps.
+	 *
+	 * @since 1.0.0
+	 * @return numeric
+	 */
+	public function get_amount_increment_steps() {
+		return $this->get_prop( 'amount_increment_steps' );
+	}
+
+	/**
+	 * Set amount increment steps.
+	 *
+	 * @param numeric $amount_increment_steps Campaign amount increment steps.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_amount_increment_steps( $amount_increment_steps ) {
+		$this->set_prop( 'amount_increment_steps', is_numeric( $amount_increment_steps ) ? number_format( $amount_increment_steps, 2, '.', '' ) : 0.01 );
+	}
+
+	/**
+	 * Get minimum amount.
+	 *
+	 * @since 1.0.0
+	 * @return numeric
+	 */
+	public function get_wcdm_min_amount() {
+		return $this->get_prop( 'wcdm_min_amount' );
+	}
+
+	/**
+	 * Set minimum amount.
+	 *
+	 * @param numeric $wcdm_min_amount Campaign minimum amount.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_wcdm_min_amount( $wcdm_min_amount ) {
+		$this->set_prop( 'wcdm_min_amount', floatval( $wcdm_min_amount ) );
+	}
+
+	/**
+	 * Get maximum amount.
+	 *
+	 * @since 1.0.0
+	 * @return numeric
+	 */
+	public function get_wcdm_max_amount() {
+		return $this->get_prop( 'wcdm_max_amount' );
+	}
+
+	/**
+	 * Set maximum amount.
+	 *
+	 * @param numeric $wcdm_max_amount Campaign maximum amount.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function set_wcdm_max_amount( $wcdm_max_amount ) {
+		$this->set_prop( 'wcdm_max_amount', floatval( $wcdm_max_amount ) );
 	}
 
 	/**
@@ -186,11 +277,12 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_status( $status ) {
-		$all_status = array( "published", "private", "draft" );
+		$all_status = array( "Publish", "Pending", "Draft" );
+		$status = ucfirst($status);
 		if ( in_array( $status, $all_status ) ) {
-			$this->set_prop( 'status', sanitize_key( $status ) );
+			$this->set_prop( 'status', ucfirst( sanitize_key( $status ) ) );
 		} else {
-			$this->set_prop( 'status', sanitize_key( 'draft' ) );
+			$this->set_prop( 'status', ucfirst( sanitize_key( 'Draft' ) ) );
 		}
 	}
 }
