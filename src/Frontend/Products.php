@@ -32,27 +32,27 @@ class Products {
 	 *
 	 * This will only be applied for the donation products.
 	 *
-	 * @param string                     $link_Html
-	 * @param $product \WC_Product object.
+	 * @param string      $link Link html.
+	 * @param \WC_Product $product Product object.
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public static function add_to_cart_link( $link_Html, $product ) {
-		return ( 'donation' == $product->get_type() ? str_replace( 'ajax_add_to_cart', '', $link_Html ) : $link_Html );
+	public static function add_to_cart_link( $link, $product ) {
+		return ( 'donation' === $product->get_type() ? str_replace( 'ajax_add_to_cart', '', $link ) : $link );
 	}
 
 	/**
 	 * Disable price display in frontend for donation products.
 	 *
-	 * @param string                     $price product price html.
-	 * @param $product \WC_Product object.
+	 * @param string      $price product price html.
+	 * @param \WC_Product $product Product object.
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
 	public static function get_price_html( $price, $product ) {
-		if ( 'donation' == $product->get_type() ) {
+		if ( 'donation' === $product->get_type() ) {
 			return ( is_admin() ? 'Variable' : '' );
 		}
 
@@ -73,36 +73,38 @@ class Products {
 		$goal_amount     = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
 		$raised_amount   = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
 		$max_amount      = get_post_meta( $product->get_id(), '_wcdm_max_amount', true );
-		if ( 'donation' == $product->get_type() ) {
+		if ( 'donation' === $product->get_type() ) {
 			ob_start(); // TODO: have a question! Is it right way to use this if the contents displaying without help of ob_start().
 			?>
 			<div class="wc-donation-manager">
 				<div class="campaign-cause">
-					<p><?php echo get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true ); ?></p>
+					<p><?php echo esc_textarea( get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true ) ); ?></p>
 				</div>
 				<div class="campaign-progress">
 					<div class="progress-label">
-						<label for="campaign-progressbar"><?php echo $currency_symbol . $raised_amount; ?>
-							raised</label>
-						<label for="campaign-progressbar"><?php echo $currency_symbol . $goal_amount; ?> goal</label>
+						<label for="campaign-progressbar"><?php sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$s raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $raised_amount ) ); ?></label>
+						<label for="campaign-progressbar"><?php sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$s goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $goal_amount ) ); ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo $raised_amount; ?>"
-								max="<?php echo $goal_amount; ?>"><?php echo $raised_amount; ?>%
-					</progress>
+					<progress id="campaign-progressbar" value="<?php esc_html_e( $raised_amount ); ?>" max="<?php esc_html_e( $goal_amount ); ?>"><?php printf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); ?></progress>
 				</div>
 				<h4>Suggested amounts:</h4>
 				<div class="suggested-amounts">
-					<button id="suggested-amounts-01" value="<?php echo (int) ceil( ( $max_amount / 4 ) ); ?>" type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) ); ?></button>
-					<button id="suggested-amounts-02" value="<?php echo ceil( ( $max_amount / 2 ) ); ?>" type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 2 ) ); ?></button>
-					<button id="suggested-amounts-03" value="<?php echo ceil( ( $max_amount / 4 ) * 3 ); ?>" type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) * 3 ); ?></button>
-					<button id="suggested-amounts-04" value="<?php echo ( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?>" type="button"><?php echo $currency_symbol . ( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?></button>
+					<button id="suggested-amounts-01" value="<?php echo (int) ceil( ( $max_amount / 4 ) ); ?>"
+							type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) ); ?></button>
+					<button id="suggested-amounts-02" value="<?php echo ceil( ( $max_amount / 2 ) ); ?>"
+							type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 2 ) ); ?></button>
+					<button id="suggested-amounts-03" value="<?php echo ceil( ( $max_amount / 4 ) * 3 ); ?>"
+							type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) * 3 ); ?></button>
+					<button id="suggested-amounts-04"
+							value="<?php echo( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?>"
+							type="button"><?php echo $currency_symbol . ( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?></button>
 				</div>
 				<div class="campaign-amount">
 					<label for="donation_amount">
-					<?php
-					esc_html_e( 'Other Amount', 'wc-donation-manager' );
+						<?php
+						esc_html_e( 'Other Amount', 'wc-donation-manager' );
 						echo ' (' . $currency_symbol . ')';
-					?>
+						?>
 						:</label>
 					<input type="number" name="donation_amount" id="donation_amount"
 							min="<?php echo get_post_meta( $product->get_id(), '_wcdm_min_amount', true ); ?>"

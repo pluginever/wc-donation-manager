@@ -40,17 +40,17 @@ class CampaignsListTable extends AbstractListTable {
 	 * @since 1.0.0
 	 * @return void
 	 */
-
 	public function prepare_items() {
+		check_admin_referer( '_nonce' );
 		$columns               = $this->get_columns();
 		$sortable              = $this->get_sortable_columns();
 		$hidden                = $this->get_hidden_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 		$per_page              = get_option( 'posts_per_page' );
-		$order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
-		$order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
-		$search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
+		$order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : ''; // phpcs:ignore
+		$order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : ''; // phpcs:ignore
+		$search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; // phpcs:ignore
+		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1; // phpcs:ignore
 		$args                  = array(
 			'post_type'      => 'product',
 			'post_status'    => 'any',
@@ -237,7 +237,7 @@ class CampaignsListTable extends AbstractListTable {
 			case 'price':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
-					__( '%1$s%2$s', 'wc-donation-manager' ),
+					__( '%1$s%2$s', 'wc-donation-manager' ), // phpcs:ignore
 					get_woocommerce_currency_symbol(),
 					esc_html( $item->get_price() )
 				);
@@ -245,7 +245,7 @@ class CampaignsListTable extends AbstractListTable {
 			case 'goal_amount':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
-					__( '%1$s%2$s', 'wc-donation-manager' ),
+					__( '%1$s%2$s', 'wc-donation-manager' ), // phpcs:ignore
 					get_woocommerce_currency_symbol(),
 					esc_html( $item->get_goal_amount() )
 				);
