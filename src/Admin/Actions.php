@@ -82,15 +82,15 @@ class Actions {
 	 * @return void
 	 */
 	public static function save_donation_meta( $product_id ) {
-		$price       = ( '' === $_POST['wcdm_amount'] ) ? '' : wc_format_decimal( $_POST['wcdm_amount'] );
-		$goal_amount = ( '' === $_POST['_goal_amount'] ) ? '' : wc_format_decimal( $_POST['_goal_amount'] );
+		$price       = isset( $_POST['wcdm_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_amount'] ) ) : '';
+		$goal_amount = isset( $_POST['_goal_amount'] ) ? floatval( wp_unslash( $_POST['_goal_amount'] ) ) : '';
 		update_post_meta( $product_id, '_price', $price );
 		update_post_meta( $product_id, '_regular_price', $price );
 		update_post_meta( $product_id, '_goal_amount', $goal_amount );
-		update_post_meta( $product_id, '_amount_increment_steps', ( ! empty( $_POST['_amount_increment_steps'] ) && is_numeric( $_POST['_amount_increment_steps'] ) ? number_format( $_POST['_amount_increment_steps'], 2, '.', '' ) : 0.01 ) );
-		update_post_meta( $product_id, '_wcdm_min_amount', ( ! empty( $_POST['_wcdm_min_amount'] ) && is_numeric( $_POST['_wcdm_min_amount'] ) ? $_POST['_wcdm_min_amount'] : get_option( 'wcdm_minimum_amount' ) ) );
-		update_post_meta( $product_id, '_wcdm_max_amount', ( ! empty( $_POST['_wcdm_max_amount'] ) && is_numeric( $_POST['_wcdm_max_amount'] ) ? $_POST['_wcdm_max_amount'] : get_option( 'wcdm_maximum_amount' ) ) );
-		update_post_meta( $product_id, '_wcdm_campaign_cause', ( ! empty( $_POST['_wcdm_campaign_cause'] ) ? $_POST['_wcdm_campaign_cause'] : '' ) );
+		update_post_meta( $product_id, '_amount_increment_steps', ( ! empty( $_POST['_amount_increment_steps'] ) && is_numeric( $_POST['_amount_increment_steps'] ) ? number_format( wp_unslash( $_POST['_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_id, '_wcdm_min_amount', ( ! empty( $_POST['_wcdm_min_amount'] ) && is_numeric( $_POST['_wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['_wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ) );
+		update_post_meta( $product_id, '_wcdm_max_amount', ( ! empty( $_POST['_wcdm_max_amount'] ) && is_numeric( $_POST['_wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['_wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ) );
+		update_post_meta( $product_id, '_wcdm_campaign_cause', ( ! empty( $_POST['_wcdm_campaign_cause'] ) ? sanitize_text_field( wp_unslash( $_POST['_wcdm_campaign_cause'] ) ) : '' ) );
 	}
 
 	/**

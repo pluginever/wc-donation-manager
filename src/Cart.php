@@ -33,7 +33,7 @@ class Cart {
 	 * @return array
 	 */
 	public static function get_cart_item_from_session( $session_data ) {
-		if ( $session_data['data']->get_type() == 'donation' && isset( $session_data['donation_amount'] ) ) {
+		if ( $session_data['data']->get_type() === 'donation' && isset( $session_data['donation_amount'] ) ) {
 			$session_data['data']->set_price( $session_data['donation_amount'] );
 		}
 
@@ -44,8 +44,8 @@ class Cart {
 	 * Add the donation amount field to the cart item.
 	 *
 	 * @param string $price item price html.
-	 * @param array  $cart_item
-	 * @param string $cart_item_key
+	 * @param array  $cart_item Cart item.
+	 * @param string $cart_item_key Cart item key.
 	 *
 	 * @since 1.0.0
 	 * @return string
@@ -71,12 +71,11 @@ class Cart {
 			return $cart_updated;
 		}
 		global $woocommerce;
-		foreach ( $woocommerce->cart->get_cart() as $key => $cartItem ) {
-			if ( $cartItem['data']->get_type() == 'donation' && isset( $_POST[ 'donation_amount_' . $key ] )
-				&& is_numeric( $_POST[ 'donation_amount_' . $key ] ) && $_POST[ 'donation_amount_' . $key ] >= 0 && $_POST[ 'donation_amount_' . $key ] != $cartItem['data']->get_price() ) {
-				$cartItem['donation_amount'] = $_POST[ 'donation_amount_' . $key ] * 1;
-				$cartItem['data']->set_price( $cartItem['donation_amount'] );
-				$woocommerce->cart->cart_contents[ $key ] = $cartItem;
+		foreach ( $woocommerce->cart->get_cart() as $key => $cart_item ) {
+			if ( $cart_item['data']->get_type() === 'donation' && isset( $_POST[ 'donation_amount_' . $key ] ) && is_numeric( $_POST[ 'donation_amount_' . $key ] ) && $_POST[ 'donation_amount_' . $key ] >= 0 && $_POST[ 'donation_amount_' . $key ] !== $cart_item['data']->get_price() ) {
+				$cart_item['donation_amount'] = floatval( wp_unslash( $_POST[ 'donation_amount_' . $key ] ) );
+				$cart_item['data']->set_price( $cart_item['donation_amount'] );
+				$woocommerce->cart->cart_contents[ $key ] = $cart_item;
 				$cart_updated                             = true;
 			}
 		}

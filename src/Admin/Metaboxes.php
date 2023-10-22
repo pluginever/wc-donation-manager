@@ -49,9 +49,9 @@ class Metaboxes {
 	 * @return array array of product data tabs.
 	 */
 	public static function product_data_tab( array $tabs = array() ): array {
-		foreach ( $tabs as $tab_ID => $tab_data ) {
-			if ( $tab_ID != 'general' && $tab_ID != 'advanced' ) {
-				$tabs[ $tab_ID ]['class'][] = 'hide_if_donation';
+		foreach ( $tabs as $tab_id => $tab_data ) {
+			if ( 'general' !== $tab_id && 'advanced' !== $tab_id ) {
+				$tabs[ $tab_id ]['class'][] = 'hide_if_donation';
 			}
 		}
 
@@ -160,11 +160,11 @@ class Metaboxes {
 	 */
 	public static function admin_custom_js() {
 		global $pagenow, $typenow;
-		if ( isset( $pagenow ) && $pagenow == 'post.php' && isset( $typenow ) && $typenow == 'product' ) {
+		if ( isset( $pagenow ) && 'post.php' === $pagenow && isset( $typenow ) && 'product' === $typenow ) {
 			?>
 			<script type='text/javascript'>
 				jQuery(document).ready(function () {
-					<?php if ( 'yes' != get_option( 'wcdm_disabled_tax', 'yes' ) ) { ?>
+					<?php if ( 'yes' !== get_option( 'wcdm_disabled_tax', 'yes' ) ) { ?>
 					jQuery('#general_product_data ._tax_status_field').parent().addClass('show_if_donation').show();
 					<?php } ?>
 					jQuery('#woocommerce-product-data .type_box label[for=_downloadable].tips').addClass('show_if_donation').show();

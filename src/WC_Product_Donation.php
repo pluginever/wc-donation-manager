@@ -4,9 +4,6 @@ namespace WooCommerceDonationManager;
 
 defined( 'ABSPATH' ) || exit;
 
-// if( class_exists( '\WC_Product_Simple' ) ){
-// require_once( WC()->plugin_path() . '/includes/class-wc-product-simple.php' );
-// }
 /**
  * Class ProductTypes.
  * ›

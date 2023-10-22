@@ -26,7 +26,7 @@ function wcdm_get_campaigns( $args = array(), $count = false ) {
 		'posts_per_page' => - 1,
 		'orderby'        => 'date',
 		'order'          => 'ASC',
-		'tax_query'      => array(
+		'tax_query'      => array( // phpcs:ignore
 			array(
 				'taxonomy' => 'product_type',
 				'field'    => 'slug',

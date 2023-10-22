@@ -10,18 +10,6 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 	 * @since 1.0.0
 	 */
 	class WC_Product_Donation extends \WC_Product_Simple {
-
-		/**
-		 * Initialize simple product.
-		 *
-		 * @param WC_Product_Simple|int $product Product instance or ID.
-		 *
-		 * @since 1.0.0
-		 */
-		public function __construct( $product = 0 ) {
-			parent::__construct( $product );
-		}
-
 		/**
 		 * Return the product type donation.
 		 *
@@ -61,7 +49,7 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		 * @since 1.0.0
 		 * @return string
 		 */
-		function add_to_cart_url() {
+		public function add_to_cart_url() {
 			return get_permalink( $this->id );
 		}
 

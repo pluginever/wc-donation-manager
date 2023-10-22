@@ -20,8 +20,7 @@ class Orders {
 	 */
 	public function __construct() {
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
-
-		// TODO: This bellow action added only for testing the above action
+		// TODO: This bellow action added only for testing the above action.
 		add_action( 'woocommerce_thankyou', array( $this, 'auto_complete_paid_order_thankyou' ), 20, 1 );
 	}
 
@@ -35,9 +34,9 @@ class Orders {
 	 */
 	public function auto_complete_paid_order_thankyou( $order_id ) {
 		if ( ! $order_id ) {
-			return null;
+			return;
 		}
-		// Get an instance of the WC_Product object
+		// Get an instance of the WC_Product object.
 		$order = wc_get_order( $order_id );
 		$order->update_status( 'completed' );
 	}
@@ -64,7 +63,7 @@ class Orders {
 					$orders_id = array( get_post_meta( $item['product_id'], 'wcdm_orders_id', true ) );
 				}
 
-				if ( ! in_array( $order_id, $orders_id ) ) {
+				if ( ! in_array( $order_id, $orders_id ) ) { // phpcs:ignore
 
 					$orders_id[]    = $order_id;
 					$raised_amount  = (float) get_post_meta( $item['product_id'], 'wcdm_raised_amount', true );

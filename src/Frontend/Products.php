@@ -74,7 +74,6 @@ class Products {
 		$raised_amount   = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
 		$max_amount      = get_post_meta( $product->get_id(), '_wcdm_max_amount', true );
 		if ( 'donation' === $product->get_type() ) {
-			ob_start(); // TODO: have a question! Is it right way to use this if the contents displaying without help of ob_start().
 			?>
 			<div class="wc-donation-manager">
 				<div class="campaign-cause">
@@ -82,41 +81,30 @@ class Products {
 				</div>
 				<div class="campaign-progress">
 					<div class="progress-label">
-						<label for="campaign-progressbar"><?php sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$s raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $raised_amount ) ); ?></label>
-						<label for="campaign-progressbar"><?php sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$s goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $goal_amount ) ); ?></label>
+						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $raised_amount ) ); // phpcs:ignore ?></label>
+						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $goal_amount ) ); // phpcs:ignore ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php esc_html_e( $raised_amount ); ?>" max="<?php esc_html_e( $goal_amount ); ?>"><?php printf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); ?></progress>
+					<progress id="campaign-progressbar" value="<?php esc_html_e( $raised_amount ); ?>" max="<?php esc_html_e( $goal_amount ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); // phpcs:ignore ?></progress>
 				</div>
 				<h4>Suggested amounts:</h4>
 				<div class="suggested-amounts">
-					<button id="suggested-amounts-01" value="<?php echo (int) ceil( ( $max_amount / 4 ) ); ?>"
-							type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) ); ?></button>
-					<button id="suggested-amounts-02" value="<?php echo ceil( ( $max_amount / 2 ) ); ?>"
-							type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 2 ) ); ?></button>
-					<button id="suggested-amounts-03" value="<?php echo ceil( ( $max_amount / 4 ) * 3 ); ?>"
-							type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) * 3 ); ?></button>
-					<button id="suggested-amounts-04"
-							value="<?php echo( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?>"
-							type="button"><?php echo $currency_symbol . ( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?></button>
+					<button id="suggested-amounts-01" value="<?php echo esc_html( ceil( ( $max_amount / 4 ) ) ); ?>" type="button"><?php echo esc_html( $currency_symbol . ceil( ( $max_amount / 4 ) ) ); ?></button>
+					<button id="suggested-amounts-02" value="<?php echo esc_html( ceil( ( $max_amount / 2 ) ) ); ?>" type="button"><?php echo esc_html( $currency_symbol . ceil( ( $max_amount / 2 ) ) ); ?></button>
+					<button id="suggested-amounts-03" value="<?php echo esc_html( ceil( ( $max_amount / 4 ) * 3 ) ); ?>" type="button"><?php echo esc_html( $currency_symbol . ceil( ( $max_amount / 4 ) * 3 ) ); ?></button>
+					<button id="suggested-amounts-04" value="<?php echo esc_html( $max_amount ); ?>" type="button"><?php echo esc_html( $currency_symbol . $max_amount ); ?></button>
 				</div>
 				<div class="campaign-amount">
-					<label for="donation_amount">
-						<?php
-						esc_html_e( 'Other Amount', 'wc-donation-manager' );
-						echo ' (' . $currency_symbol . ')';
-						?>
-						:</label>
+					<label for="donation_amount"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( 'Other Amount (%1$s) :', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
 					<input type="number" name="donation_amount" id="donation_amount"
-							min="<?php echo get_post_meta( $product->get_id(), '_wcdm_min_amount', true ); ?>"
-							max="<?php echo get_post_meta( $product->get_id(), '_wcdm_max_amount', true ); ?>"
-							step="<?php echo get_post_meta( $product->get_id(), '_amount_increment_steps', true ); ?>"
-							value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>"
+							min="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
+							max="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>"
+							step="<?php echo esc_html( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ); ?>"
+							value="<?php echo esc_html( number_format( $product->get_price(), 2, '.', '' ) ); ?>"
 							class="input-text text"/>
 				</div>
 			</div>
 
 			<?php
-			echo ob_get_clean();
 		}
 	}
 
@@ -141,8 +129,7 @@ class Products {
 	 * @return string
 	 */
 	public static function add_to_cart_redirect( $url ) {
-		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? $_POST['add-to-cart'] : '' );
-
+		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? sanitize_key( wp_unslash( $_POST['add-to-cart'] ) ) : '' );
 		if ( $product_id ) {
 			$product = wc_get_product( $product_id );
 			if ( $product->is_type( 'donation' ) && 'yes' === get_option( 'wcdm_fast_checkout', 'no' ) ) {
@@ -167,7 +154,7 @@ class Products {
 	public static function add_cart_item( $item ) {
 		if ( 'donation' === $item['data']->get_type() ) {
 			if ( isset( $_POST['donation_amount'] ) && is_numeric( $_POST['donation_amount'] ) && $_POST['donation_amount'] >= 0 ) {
-				$item['donation_amount'] = $_POST['donation_amount'] * 1;
+				$item['donation_amount'] = floatval( wp_unslash( $_POST['donation_amount'] ) );
 			}
 			$item['data']->set_price( $item['donation_amount'] );
 		}

@@ -35,7 +35,7 @@ class Menus {
 		add_menu_page(
 			esc_html__( 'Donation Manager', 'wc-donation-manager' ),
 			esc_html__( 'Donation Manager', 'wc-donation-manager' ),
-			'manage_woocommerce',
+			'manage_options',
 			'wc-donation-manager',
 			null,
 			'dashicons-money-alt',
@@ -81,7 +81,7 @@ class Menus {
 			'wc-donation-manager',
 			__( 'Settings', 'wc-donation-manager' ),
 			__( 'Settings', 'wc-donation-manager' ),
-			'manage_woocommerce',
+			'manage_options',
 			'wcdm-settings',
 			array( Settings::class, 'output' )
 		);

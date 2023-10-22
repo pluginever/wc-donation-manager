@@ -101,7 +101,7 @@ class Plugin extends Lib\Plugin {
 			$this->services->add( Admin\Admin::class );
 		}
 
-		// TODO: Need to include the WC_Product_Donation::class as service
+		// TODO: Need to include the WC_Product_Donation::class as service.
 		require_once __DIR__ . '/class-wc-product-donation.php';
 		// $this->services->add( WC_Product_Donation::class );
 

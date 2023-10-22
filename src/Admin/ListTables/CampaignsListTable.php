@@ -41,7 +41,6 @@ class CampaignsListTable extends AbstractListTable {
 	 * @return void
 	 */
 	public function prepare_items() {
-		check_admin_referer( '_nonce' );
 		$columns               = $this->get_columns();
 		$sortable              = $this->get_sortable_columns();
 		$hidden                = $this->get_hidden_columns();
