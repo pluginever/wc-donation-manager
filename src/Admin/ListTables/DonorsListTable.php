@@ -44,12 +44,13 @@ class DonorsListTable extends AbstractListTable {
 		$sortable              = $this->get_sortable_columns();
 		$hidden                = $this->get_hidden_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
-		$per_page              = get_option( 'posts_per_page' );;
-		$order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
-		$order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
-		$search                = isset( $_GET['s'] ) ? sanitize_text_field ( wp_unslash( $_GET['s'] ) ) : '';
-		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
-		$args = array(
+		$per_page              = get_option( 'posts_per_page' );
+
+		$order_by     = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
+		$order        = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
+		$search       = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$current_page = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
+		$args         = array(
 			'post_type'      => 'wcdm_donors',
 			'post_status'    => 'any',
 			'order'          => $order,
@@ -166,7 +167,7 @@ class DonorsListTable extends AbstractListTable {
 					foreach ( $ids as $id ) {
 						$donor = wcdm_get_donor( $id );
 						if ( $donor && $donor->delete() ) {
-							$deleted ++;
+							++$deleted;
 						}
 					}
 					// translators: %d: number of donors deleted.
@@ -225,7 +226,7 @@ class DonorsListTable extends AbstractListTable {
 	/**
 	 * This function renders most of the columns in the list table.
 	 *
-	 * @param Donor $item The current donor object.
+	 * @param Donor  $item The current donor object.
 	 * @param string $column_name The name of the column.
 	 *
 	 * @since 1.0.0

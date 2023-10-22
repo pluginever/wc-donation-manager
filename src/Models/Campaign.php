@@ -28,15 +28,15 @@ class Campaign extends Data {
 	 * @var array All data.
 	 */
 	protected $data = array(
-		'name'   => '',
-		'price' => 0.00,
-		'regular_price' => 0.00,
-		'goal_amount'   => 0.00,
+		'name'                   => '',
+		'price'                  => 0.00,
+		'regular_price'          => 0.00,
+		'goal_amount'            => 0.00,
 		'amount_increment_steps' => 0.01,
-		'wcdm_min_amount' => 1,
-		'wcdm_max_amount' => 100,
-		'cause'  => '',
-		'status' => 'publish',
+		'wcdm_min_amount'        => 1,
+		'wcdm_max_amount'        => 100,
+		'cause'                  => '',
+		'status'                 => 'publish',
 	);
 
 	/**
@@ -277,8 +277,8 @@ class Campaign extends Data {
 	 * @return void
 	 */
 	public function set_status( $status ) {
-		$all_status = array( "Publish", "Pending", "Draft" );
-		$status = ucfirst($status);
+		$all_status = array( 'Publish', 'Pending', 'Draft' );
+		$status     = ucfirst( $status );
 		if ( in_array( $status, $all_status ) ) {
 			$this->set_prop( 'status', ucfirst( sanitize_key( $status ) ) );
 		} else {

@@ -95,12 +95,12 @@ class Admin {
 	 * @return array
 	 */
 	public static function get_screen_ids() {
-		$screen_ids = [
+		$screen_ids = array(
 			'toplevel_page_wc-donation-manager',
 			'donation-manager_page_wcdm-donors',
 			'donation-manager_page_wcdm-tools',
 			'donation-manager_page_wcdm-settings',
-		];
+		);
 
 		return apply_filters( 'wc_donation_manager_screen_ids', $screen_ids );
 	}

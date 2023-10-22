@@ -21,7 +21,7 @@ $current_tab  = ! empty( $current_tab ) && array_key_exists( $current_tab, $tabs
 			<nav class="nav-tab-wrapper pev-navbar">
 				<?php
 				foreach ( $tabs as $name => $label ) {
-					echo sprintf(
+					printf(
 						'<a href="%s" class="nav-tab %s">%s</a>',
 						esc_url( admin_url( 'admin.php?page=' . $current_page . '&tab=' . $name ) ),
 						esc_attr( $current_tab === $name ? 'nav-tab-active' : '' ),

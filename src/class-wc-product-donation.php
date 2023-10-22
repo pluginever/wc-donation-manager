@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( class_exists('WC_Product_Simple' ) ) {
+if ( class_exists( 'WC_Product_Simple' ) ) {
 	/**
 	 * Class WC_Product_Donation
 	 * Donation Product Type.
@@ -72,7 +72,7 @@ if ( class_exists('WC_Product_Simple' ) ) {
 		 * @return string
 		 */
 		public function single_add_to_cart_text() {
-			$text = __('Donate Now', 'wc-donation-manager');
+			$text = __( 'Donate Now', 'wc-donation-manager' );
 
 			return apply_filters( 'woocommerce_product_single_add_to_cart_text', $text, $this );
 		}

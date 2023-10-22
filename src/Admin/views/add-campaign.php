@@ -52,7 +52,7 @@ defined( 'ABSPATH' ) || exit;
 				<label for="wcdm_min_amount"><?php esc_html_e( 'Minimum Amount', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" min="0" step="any" name="wcdm_min_amount" id="wcdm_min_amount" class="regular-text" value="<?php echo get_option( 'wcdm_minimum_amount' ); ?>" required/>
+				<input type="number" min="0" step="any" name="wcdm_min_amount" id="wcdm_min_amount" class="regular-text" value="<?php floatval( get_option( 'wcdm_minimum_amount', 1 ) ); ?>" required/>
 				<p class="description">
 					<?php esc_html_e( 'Enter the minimum amount of the campaign.', 'wc-donation-manager' ); ?>
 				</p>
@@ -63,7 +63,7 @@ defined( 'ABSPATH' ) || exit;
 				<label for="wcdm_max_amount"><?php esc_html_e( 'Maximum Amount', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" min="0" step="any" name="wcdm_max_amount" id="wcdm_max_amount" class="regular-text" value="<?php echo get_option( 'wcdm_maximum_amount' ); ?>" required/>
+				<input type="number" min="0" step="any" name="wcdm_max_amount" id="wcdm_max_amount" class="regular-text" value="<?php floatval( get_option( 'wcdm_maximum_amount', 100 ) ); ?>" required/>
 				<p class="description">
 					<?php esc_html_e( 'Enter the maximum amount of the campaign.', 'wc-donation-manager' ); ?>
 				</p>

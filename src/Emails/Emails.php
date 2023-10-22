@@ -21,5 +21,4 @@ class Emails {
 	public function __construct() {
 		// TODO: Implement __construct() method.
 	}
-
 }

@@ -4,12 +4,12 @@ namespace WooCommerceDonationManager;
 
 defined( 'ABSPATH' ) || exit;
 
-//if( class_exists( '\WC_Product_Simple' ) ){
-//	require_once( WC()->plugin_path() . '/includes/class-wc-product-simple.php' );
-//}
+// if( class_exists( '\WC_Product_Simple' ) ){
+// require_once( WC()->plugin_path() . '/includes/class-wc-product-simple.php' );
+// }
 /**
  * Class ProductTypes.
- *›
+ * ›
  * Extends WC product simple type for Donation
  *
  * @package WooCommerceDonationManager
@@ -25,6 +25,7 @@ class WC_Product_Donation extends \WC_Product_Simple {
 
 	/**
 	 * Return the product type
+	 *
 	 * @return string
 	 */
 	public function get_type() {

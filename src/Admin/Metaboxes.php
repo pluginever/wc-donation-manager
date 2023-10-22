@@ -73,33 +73,39 @@ class Metaboxes {
 	 */
 	public static function general_product_data() {
 		echo '<div class="options_group show_if_donation">';
-		woocommerce_wp_text_input( array(
-			'id'          => 'wcdm_amount',
-			'label'       => __( 'Default amount', 'wc-donation-manager' ),
-			'description' => __( 'Enter the default amount for the campaign.', 'wc-donation-manager' ),
-			'desc_tip'    => false,
-			'value'       => get_post_meta( get_the_ID(), '_price', true ),
-			'data_type'   => 'price',
-		) );
+		woocommerce_wp_text_input(
+			array(
+				'id'          => 'wcdm_amount',
+				'label'       => __( 'Default amount', 'wc-donation-manager' ),
+				'description' => __( 'Enter the default amount for the campaign.', 'wc-donation-manager' ),
+				'desc_tip'    => false,
+				'value'       => get_post_meta( get_the_ID(), '_price', true ),
+				'data_type'   => 'price',
+			)
+		);
 
-		woocommerce_wp_text_input( array(
-			'id'          => '_goal_amount',
-			'label'       => __( 'Goal amount', 'wc-donation-manager' ),
-			'description' => __( 'Enter the goal amount for the campaign.', 'wc-donation-manager' ),
-			'desc_tip'    => false,
-			'value'       => get_post_meta( get_the_ID(), '_goal_amount', true ),
-			'data_type'   => 'price',
-		) );
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_goal_amount',
+				'label'       => __( 'Goal amount', 'wc-donation-manager' ),
+				'description' => __( 'Enter the goal amount for the campaign.', 'wc-donation-manager' ),
+				'desc_tip'    => false,
+				'value'       => get_post_meta( get_the_ID(), '_goal_amount', true ),
+				'data_type'   => 'price',
+			)
+		);
 
 		$amount_increment = get_post_meta( get_the_ID(), '_amount_increment_steps', true );
-		woocommerce_wp_text_input( array(
-			'id'          => '_amount_increment_steps',
-			'label'       => __( 'Amount increment steps', 'wc-donation-manager' ),
-			'description' => __( 'Enter the amount increment steps for the campaign amount field. This will applicable for increasing or decreasing amounts on the campaign page.', 'wc-donation-manager' ),
-			'desc_tip'    => false,
-			'value'       => ( empty( $amount_increment ) ? 0.01 : $amount_increment ),
-			'data_type'   => 'decimal',
-		) );
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_amount_increment_steps',
+				'label'       => __( 'Amount increment steps', 'wc-donation-manager' ),
+				'description' => __( 'Enter the amount increment steps for the campaign amount field. This will applicable for increasing or decreasing amounts on the campaign page.', 'wc-donation-manager' ),
+				'desc_tip'    => false,
+				'value'       => ( empty( $amount_increment ) ? 0.01 : $amount_increment ),
+				'data_type'   => 'decimal',
+			)
+		);
 		echo '</div>';
 	}
 
@@ -111,32 +117,38 @@ class Metaboxes {
 	 */
 	public static function product_data() {
 		echo '<div id="wcdm_tab_data" class="panel woocommerce_options_panel wcdm_tab_data_options"><div class="options_group show_if_donation">';
-		woocommerce_wp_text_input( array(
-			'id'          => '_wcdm_min_amount',
-			'label'       => __( 'Minimum amount', 'wc-donation-manager' ),
-			'description' => __( 'Enter the minimum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
-			'desc_tip'    => true,
-			'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) : get_option( 'wcdm_minimum_amount' ),
-			'data_type'   => 'price',
-		) );
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_wcdm_min_amount',
+				'label'       => __( 'Minimum amount', 'wc-donation-manager' ),
+				'description' => __( 'Enter the minimum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
+				'desc_tip'    => true,
+				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) : get_option( 'wcdm_minimum_amount' ),
+				'data_type'   => 'price',
+			)
+		);
 
-		woocommerce_wp_text_input( array(
-			'id'          => '_wcdm_max_amount',
-			'label'       => __( 'Maximum amount', 'wc-donation-manager' ),
-			'description' => __( 'Enter the maximum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
-			'desc_tip'    => true,
-			'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) : get_option( 'wcdm_maximum_amount' ),
-			'data_type'   => 'price',
-		) );
+		woocommerce_wp_text_input(
+			array(
+				'id'          => '_wcdm_max_amount',
+				'label'       => __( 'Maximum amount', 'wc-donation-manager' ),
+				'description' => __( 'Enter the maximum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
+				'desc_tip'    => true,
+				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) : get_option( 'wcdm_maximum_amount' ),
+				'data_type'   => 'price',
+			)
+		);
 
-		woocommerce_wp_textarea_input( array(
+		woocommerce_wp_textarea_input(
+			array(
 				'id'          => '_wcdm_campaign_cause',
 				'label'       => __( 'Campaign cause', 'wc-donation-manager' ),
 				'description' => __( 'Enter the cause of the campaign.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
 				'placeholder' => 'Enter the cause of the campaign...',
 				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) : '',
-		) );
+			)
+		);
 		echo '</div></div>';
 	}
 

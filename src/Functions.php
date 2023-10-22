@@ -15,17 +15,24 @@ defined( 'ABSPATH' ) || exit;
  * Get campaigns.
  *
  * @param array $args The args.
- * @param bool $count Whether to return a count.
+ * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
  * @return Campaign[]|int The campaigns.
  */
-function wcdm_get_campaigns( $args = [], $count = false ) {
+function wcdm_get_campaigns( $args = array(), $count = false ) {
 	$defaults = array(
 		'post_type'      => 'product',
 		'posts_per_page' => - 1,
 		'orderby'        => 'date',
 		'order'          => 'ASC',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'product_type',
+				'field'    => 'slug',
+				'terms'    => 'donation',
+			),
+		),
 	);
 	$args     = wp_parse_args( $args, $defaults );
 	$query    = new WP_Query( $args );
@@ -59,12 +66,12 @@ function wcdm_get_campaign( $campaign ) {
  * Get donors.
  *
  * @param array $args The args.
- * @param bool $count Whether to return a count.
+ * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
  * @return Donor[]|int The donors.
  */
-function wcdm_get_donors( $args = [], $count = false ) {
+function wcdm_get_donors( $args = array(), $count = false ) {
 	$defaults = array(
 		'post_type'      => 'wcdm_donors',
 		'posts_per_page' => - 1,

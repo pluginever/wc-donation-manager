@@ -84,8 +84,8 @@ $donor    = wcdm_get_donor( $donor_id );
 					</label>
 					<select id="type" name="type" style="width: 300px" required>
 						<?php $type = esc_html( $donor->get_type() ); ?>
-						<option value="recurring" <?php echo 'recurring' === $type ? 'selected' : '' ?>>Recurring</option>
-						<option value="onetime" <?php echo 'onetime' === $type ? 'selected' : '' ?>>Onetime</option>
+						<option value="recurring" <?php echo 'recurring' === $type ? 'selected' : ''; ?>>Recurring</option>
+						<option value="onetime" <?php echo 'onetime' === $type ? 'selected' : ''; ?>>Onetime</option>
 					</select>
 					<p class="description">
 						<?php esc_html_e( 'Update the donor type.', 'wc-donation-manager' ); ?>

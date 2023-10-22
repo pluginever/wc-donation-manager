@@ -99,8 +99,8 @@ defined( 'ABSPATH' ) || exit;
 			'desc_tip'          => 'true',
 			'class'             => 'wcdm_months_purchase',
 			'options'           => array(
-				'january'   => __( 'January', 'wc-donation-manager' ),
-				'february'  => __( 'February', 'wc-donation-manager' ),
+				'january'  => __( 'January', 'wc-donation-manager' ),
+				'february' => __( 'February', 'wc-donation-manager' ),
 			),
 			'custom_attributes' => array(
 				'multiple' => 'multiple',
@@ -118,9 +118,9 @@ defined( 'ABSPATH' ) || exit;
 			'desc_tip'          => 'true',
 			'class'             => 'wcdm_month_day_purchase',
 			'options'           => array(
-				'1'  => __( '1', 'wc-donation-manager' ),
-				'2'  => __( '2', 'wc-donation-manager' ),
-				'3'  => __( '3', 'wc-donation-manager' ),
+				'1' => __( '1', 'wc-donation-manager' ),
+				'2' => __( '2', 'wc-donation-manager' ),
+				'3' => __( '3', 'wc-donation-manager' ),
 			),
 			'custom_attributes' => array(
 				'multiple' => 'multiple',

@@ -32,7 +32,7 @@ class Products {
 	 *
 	 * This will only be applied for the donation products.
 	 *
-	 * @param string $link_Html
+	 * @param string                     $link_Html
 	 * @param $product \WC_Product object.
 	 *
 	 * @since 1.0.0
@@ -45,7 +45,7 @@ class Products {
 	/**
 	 * Disable price display in frontend for donation products.
 	 *
-	 * @param string $price product price html.
+	 * @param string                     $price product price html.
 	 * @param $product \WC_Product object.
 	 *
 	 * @since 1.0.0
@@ -72,6 +72,7 @@ class Products {
 		$currency_symbol = get_woocommerce_currency_symbol();
 		$goal_amount     = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
 		$raised_amount   = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
+		$max_amount      = get_post_meta( $product->get_id(), '_wcdm_max_amount', true );
 		if ( 'donation' == $product->get_type() ) {
 			ob_start(); // TODO: have a question! Is it right way to use this if the contents displaying without help of ob_start().
 			?>
@@ -85,26 +86,30 @@ class Products {
 							raised</label>
 						<label for="campaign-progressbar"><?php echo $currency_symbol . $goal_amount; ?> goal</label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo $raised_amount ?>"
-							  max="<?php echo $goal_amount ?>"><?php echo $raised_amount; ?>%
+					<progress id="campaign-progressbar" value="<?php echo $raised_amount; ?>"
+								max="<?php echo $goal_amount; ?>"><?php echo $raised_amount; ?>%
 					</progress>
 				</div>
 				<h4>Suggested amounts:</h4>
 				<div class="suggested-amounts">
-					<button type="button">$25</button>
-					<button type="button">$50</button>
-					<button type="button">$75</button>
-					<button type="button">$100</button>
+					<button id="suggested-amounts-01" value="<?php echo (int) ceil( ( $max_amount / 4 ) ); ?>" type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) ); ?></button>
+					<button id="suggested-amounts-02" value="<?php echo ceil( ( $max_amount / 2 ) ); ?>" type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 2 ) ); ?></button>
+					<button id="suggested-amounts-03" value="<?php echo ceil( ( $max_amount / 4 ) * 3 ); ?>" type="button"><?php echo $currency_symbol . ceil( ( $max_amount / 4 ) * 3 ); ?></button>
+					<button id="suggested-amounts-04" value="<?php echo ( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?>" type="button"><?php echo $currency_symbol . ( $max_amount - ceil( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ) ); ?></button>
 				</div>
 				<div class="campaign-amount">
-					<label for="donation_amount"><?php esc_html_e( 'Other Amount', 'wc-donation-manager' );
-						echo ' (' . $currency_symbol . ')'; ?>:</label>
+					<label for="donation_amount">
+					<?php
+					esc_html_e( 'Other Amount', 'wc-donation-manager' );
+						echo ' (' . $currency_symbol . ')';
+					?>
+						:</label>
 					<input type="number" name="donation_amount" id="donation_amount"
-						   min="<?php echo get_post_meta( $product->get_id(), '_wcdm_min_amount', true ); ?>"
-						   max="<?php echo get_post_meta( $product->get_id(), '_wcdm_max_amount', true ); ?>"
-						   step="<?php echo get_post_meta( $product->get_id(), '_amount_increment_steps', true ); ?>"
-						   value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>"
-						   class="input-text text"/>
+							min="<?php echo get_post_meta( $product->get_id(), '_wcdm_min_amount', true ); ?>"
+							max="<?php echo get_post_meta( $product->get_id(), '_wcdm_max_amount', true ); ?>"
+							step="<?php echo get_post_meta( $product->get_id(), '_amount_increment_steps', true ); ?>"
+							value="<?php echo number_format( $product->get_price(), 2, '.', '' ); ?>"
+							class="input-text text"/>
 				</div>
 			</div>
 

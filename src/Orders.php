@@ -47,7 +47,7 @@ class Orders {
 	 *
 	 * This will increase the raised amount once even if admin changed the order status multiple times.
 	 *
-	 * @param int $order_id Order ID.
+	 * @param int       $order_id Order ID.
 	 * @param \WC_Order $order Order object.
 	 *
 	 * @since 1.0.0
@@ -66,8 +66,8 @@ class Orders {
 
 				if ( ! in_array( $order_id, $orders_id ) ) {
 
-					$orders_id[]   = $order_id;
-					$raised_amount = (float) get_post_meta( $item['product_id'], 'wcdm_raised_amount', true );
+					$orders_id[]    = $order_id;
+					$raised_amount  = (float) get_post_meta( $item['product_id'], 'wcdm_raised_amount', true );
 					$raised_amount += (float) $item['subtotal'];
 
 					update_post_meta( $item['product_id'], 'wcdm_orders_id', $orders_id );

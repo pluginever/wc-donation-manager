@@ -38,8 +38,8 @@ class Actions {
 	 */
 	public static function add_campaign() {
 		check_admin_referer( 'wcdm_add_campaign' );
-		$referer = wp_get_referer();
-		$data    = wp_unslash( $_POST );
+		$referer  = wp_get_referer();
+		$data     = wp_unslash( $_POST );
 		$campaign = Campaign::insert( $data );
 		// Set the product type as donation.
 		wp_set_object_terms( $campaign->get_id(), 'donation', 'product_type' );

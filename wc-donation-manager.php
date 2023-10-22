@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit();
 
 // Autoload function.
 spl_autoload_register(
-	function ( $class ) {
+	function ( $class ) { // phpcs:ignore
 		$prefix = 'WooCommerceDonationManager\\';
 		$len    = strlen( $prefix );
 

@@ -44,7 +44,7 @@ class Cart {
 	 * Add the donation amount field to the cart item.
 	 *
 	 * @param string $price item price html.
-	 * @param array $cart_item
+	 * @param array  $cart_item
 	 * @param string $cart_item_key
 	 *
 	 * @since 1.0.0
@@ -73,7 +73,7 @@ class Cart {
 		global $woocommerce;
 		foreach ( $woocommerce->cart->get_cart() as $key => $cartItem ) {
 			if ( $cartItem['data']->get_type() == 'donation' && isset( $_POST[ 'donation_amount_' . $key ] )
-			     && is_numeric( $_POST[ 'donation_amount_' . $key ] ) && $_POST[ 'donation_amount_' . $key ] >= 0 && $_POST[ 'donation_amount_' . $key ] != $cartItem['data']->get_price() ) {
+				&& is_numeric( $_POST[ 'donation_amount_' . $key ] ) && $_POST[ 'donation_amount_' . $key ] >= 0 && $_POST[ 'donation_amount_' . $key ] != $cartItem['data']->get_price() ) {
 				$cartItem['donation_amount'] = $_POST[ 'donation_amount_' . $key ] * 1;
 				$cartItem['data']->set_price( $cartItem['donation_amount'] );
 				$woocommerce->cart->cart_contents[ $key ] = $cartItem;

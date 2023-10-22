@@ -91,12 +91,12 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_columns() {
 		return array(
-			'cb'     => '<input type="checkbox" />',
-			'name'   => __( 'Name', 'wc-donation-manager' ),
-			'price' => __( 'Amount', 'wc-donation-manager' ),
-			'goal_amount'   => __( 'Goal', 'wc-donation-manager' ),
-			'cause'  => __( 'Cause', 'wc-donation-manager' ),
-			'status' => __( 'Status', 'wc-donation-manager' ),
+			'cb'          => '<input type="checkbox" />',
+			'name'        => __( 'Name', 'wc-donation-manager' ),
+			'price'       => __( 'Amount', 'wc-donation-manager' ),
+			'goal_amount' => __( 'Goal', 'wc-donation-manager' ),
+			'cause'       => __( 'Cause', 'wc-donation-manager' ),
+			'status'      => __( 'Status', 'wc-donation-manager' ),
 		);
 	}
 
@@ -108,10 +108,10 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'   => array( 'post_title', true ),
-			'price' => array( 'price', true ),
-			'goal_amount'   => array( 'goal_amount', true ),
-			'status' => array( 'post_status', true ),
+			'name'        => array( 'post_title', true ),
+			'price'       => array( 'price', true ),
+			'goal_amount' => array( 'goal_amount', true ),
+			'status'      => array( 'post_status', true ),
 		);
 	}
 
@@ -165,7 +165,7 @@ class CampaignsListTable extends AbstractListTable {
 					foreach ( $ids as $id ) {
 						$campaign = wcdm_get_campaign( $id );
 						if ( $campaign && $campaign->delete() ) {
-							$deleted ++;
+							++$deleted;
 						}
 					}
 					// translators: %d: number of campaigns deleted.
@@ -225,7 +225,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * This function renders most of the columns in the list table.
 	 *
 	 * @param Campaign $item The current campaign object.
-	 * @param string $column_name The name of the column.
+	 * @param string   $column_name The name of the column.
 	 *
 	 * @since 1.0.0
 	 */
@@ -237,13 +237,17 @@ class CampaignsListTable extends AbstractListTable {
 			case 'price':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
-					__( '%1$s%2$s', 'wc-donation-manager' ), get_woocommerce_currency_symbol(), esc_html( $item->get_price() )
+					__( '%1$s%2$s', 'wc-donation-manager' ),
+					get_woocommerce_currency_symbol(),
+					esc_html( $item->get_price() )
 				);
 				break;
 			case 'goal_amount':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
-					__( '%1$s%2$s', 'wc-donation-manager' ), get_woocommerce_currency_symbol(), esc_html( $item->get_goal_amount() )
+					__( '%1$s%2$s', 'wc-donation-manager' ),
+					get_woocommerce_currency_symbol(),
+					esc_html( $item->get_goal_amount() )
 				);
 				break;
 			default:
