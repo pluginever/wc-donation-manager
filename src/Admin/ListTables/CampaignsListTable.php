@@ -229,14 +229,12 @@ class CampaignsListTable extends AbstractListTable {
 	 * @since 1.0.0
 	 */
 	public function column_default( $item, $column_name ) {
-
 		$value = '&mdash;';
-
 		switch ( $column_name ) {
 			case 'price':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
-					__( '%1$s%2$s', 'wc-donation-manager' ), // phpcs:ignore
+					( '%1$s%2$.2f' ),
 					get_woocommerce_currency_symbol(),
 					esc_html( $item->get_price() )
 				);
@@ -244,7 +242,7 @@ class CampaignsListTable extends AbstractListTable {
 			case 'goal_amount':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
-					__( '%1$s%2$s', 'wc-donation-manager' ), // phpcs:ignore
+					( '%1$s%2$.2f' ),
 					get_woocommerce_currency_symbol(),
 					esc_html( $item->get_goal_amount() )
 				);

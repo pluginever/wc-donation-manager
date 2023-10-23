@@ -52,7 +52,7 @@ class Cart {
 	 */
 	public static function cart_item_price( $price, $cart_item, $cart_item_key ) {
 		if ( 'donation' === $cart_item['data']->get_type() && 'yes' === get_option( 'wcdm_editable_cart_price', 'yes' ) ) {
-			return '<label for="donation_amount">' . get_woocommerce_currency_symbol() . '</label><input type="number" name="donation_amount_' . $cart_item_key . '" id="donation_amount" min="' . get_post_meta( $cart_item['product_id'], 'wcdm_min_amount', true ) . '" max="' . get_post_meta( $cart_item['product_id'], 'wcdm_max_amount', true ) . '" step="' . get_post_meta( $cart_item['product_id'], 'wcdm_amount_increment_steps', true ) . '" value="' . number_format( $cart_item['data']->get_price(), 2, '.', '' ) . '" class="input-text text" />';
+			return '<div class="donation-product-price"><label class="input-text" for="donation_amount">' . esc_html( get_woocommerce_currency_symbol() ) . '</label><input type="number" name="donation_amount_' . sanitize_key( $cart_item_key ) . '" id="donation_amount" min="' . floatval( get_post_meta( $cart_item['product_id'], '_wcdm_min_amount', true ) ) . '" max="' . floatval( get_post_meta( $cart_item['product_id'], '_wcdm_max_amount', true ) ) . '" step="' . floatval( get_post_meta( $cart_item['product_id'], '_amount_increment_steps', true ) ) . '" value="' . floatval( number_format( $cart_item['data']->get_price(), 2, '.', '' ) ) . '" class="input-text text" /></div>';
 		}
 
 		return $price;

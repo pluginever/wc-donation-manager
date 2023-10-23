@@ -212,7 +212,7 @@ class Donor extends Data {
 	 */
 	public function set_type( $type ) {
 		$types = array( 'recurring', 'onetime' );
-		if ( in_array( $type, $types ) ) { // phpcs:ignore
+		if ( in_array( $type, $types, true ) ) {
 			$this->set_prop( 'type', sanitize_key( $type ) );
 		} else {
 			$this->set_prop( 'type', sanitize_key( 'recurring' ) );

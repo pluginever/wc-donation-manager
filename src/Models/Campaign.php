@@ -279,7 +279,7 @@ class Campaign extends Data {
 	public function set_status( $status ) {
 		$all_status = array( 'Publish', 'Pending', 'Draft' );
 		$status     = ucfirst( $status );
-		if ( in_array( $status, $all_status ) ) { // phpcs:ignore
+		if ( in_array( $status, $all_status, true ) ) {
 			$this->set_prop( 'status', ucfirst( sanitize_key( $status ) ) );
 		} else {
 			$this->set_prop( 'status', ucfirst( sanitize_key( 'Draft' ) ) );

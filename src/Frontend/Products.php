@@ -94,7 +94,7 @@ class Products {
 					<button id="suggested-amounts-04" value="<?php echo esc_html( $max_amount ); ?>" type="button"><?php echo esc_html( $currency_symbol . $max_amount ); ?></button>
 				</div>
 				<div class="campaign-amount">
-					<label for="donation_amount"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( 'Other Amount (%1$s) :', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
+					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( 'Other Amount (%1$s) :', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
 					<input type="number" name="donation_amount" id="donation_amount"
 							min="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
 							max="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>"

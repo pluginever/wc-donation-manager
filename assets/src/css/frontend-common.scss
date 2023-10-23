@@ -1,3 +1,4 @@
+// Product single page
 .wc-donation-manager {
 	.campaign-progress {
 		.progress-label {
@@ -18,9 +19,25 @@
 		}
 	}
 	.campaign-amount {
+		display: flex;
+		flex-direction: row;
 		margin: 15px 0;
-		#donation_amount {
-			min-width: 200px;
+		label {
+			align-self: center;
 		}
+		#donation_amount {
+			align-self: center;
+		}
+	}
+}
+// Cart page
+.donation-product-price {
+	display: flex;
+	flex-direction: row;
+	label {
+		align-self: center;
+	}
+	#donation_amount {
+		align-self: center;
 	}
 }

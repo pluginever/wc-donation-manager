@@ -63,8 +63,7 @@ class Orders {
 					$orders_id = array( get_post_meta( $item['product_id'], 'wcdm_orders_id', true ) );
 				}
 
-				if ( ! in_array( $order_id, $orders_id ) ) { // phpcs:ignore
-
+				if ( ! in_array( $order_id, $orders_id, true ) ) {
 					$orders_id[]    = $order_id;
 					$raised_amount  = (float) get_post_meta( $item['product_id'], 'wcdm_raised_amount', true );
 					$raised_amount += (float) $item['subtotal'];
