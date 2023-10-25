@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Class ProductTypes.
- * ›
+ *
  * Extends WC product simple type for Donation
  *
  * @package WooCommerceDonationManager
