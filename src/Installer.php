@@ -18,9 +18,7 @@ class Installer {
 	 * @since 1.0.0
 	 * @var array
 	 */
-	protected $updates = array(
-		'1.0.1' => 'wcdm_update_101',
-	);
+	protected $updates = array();
 
 	/**
 	 * Installer constructor.

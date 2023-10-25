@@ -95,7 +95,7 @@ class Plugin extends Lib\Plugin {
 		$this->services->add( PostTypes::class );
 		$this->services->add( Cart::class );
 		$this->services->add( Orders::class );
-		// $this->services->add( Emails\Emails::class );
+		$this->services->add( Emails\Emails::class );
 
 		if ( self::is_request( 'admin' ) ) {
 			$this->services->add( Admin\Admin::class );

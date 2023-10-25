@@ -21,7 +21,7 @@ class Orders {
 	public function __construct() {
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
 		// TODO: This bellow action added only for testing the above action.
-		add_action( 'woocommerce_thankyou', array( $this, 'auto_complete_paid_order_thankyou' ), 20, 1 );
+		add_action( 'woocommerce_thankyou', array( $this, 'auto_complete_order' ), 20, 1 );
 	}
 
 	/**
@@ -32,7 +32,7 @@ class Orders {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function auto_complete_paid_order_thankyou( $order_id ) {
+	public function auto_complete_order( $order_id ) {
 		if ( ! $order_id ) {
 			return;
 		}

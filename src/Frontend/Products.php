@@ -84,7 +84,7 @@ class Products {
 						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $raised_amount ) ); // phpcs:ignore ?></label>
 						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( $goal_amount ) ); // phpcs:ignore ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php esc_html_e( $raised_amount ); ?>" max="<?php esc_html_e( $goal_amount ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); // phpcs:ignore ?></progress>
+					<progress id="campaign-progressbar" value="<?php esc_html_e( $raised_amount, 'wc-donation-manager' ); ?>" max="<?php esc_html_e( $goal_amount, 'wc-donation-manager' ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); // phpcs:ignore ?></progress>
 				</div>
 				<h4>Suggested amounts:</h4>
 				<div class="suggested-amounts">
