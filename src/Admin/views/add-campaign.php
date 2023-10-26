@@ -107,6 +107,17 @@ defined( 'ABSPATH' ) || exit;
 			</td>
 		</tr>
 		<tr valign="top">
+			<th scope="row">
+				<label for="donation_products"><?php esc_html_e( 'Donation Products', 'wc-donation-manager' ); ?></label>
+			</th>
+			<td>
+				<select name="donation_products[]" id="donation_products" multiple="multiple" class="regular-text"></select>
+				<p class="description">
+					<?php esc_html_e( 'Select the campaign donation products.', 'wc-donation-manager' ); ?>
+				</p>
+			</td>
+		</tr>
+		<tr valign="top">
 			<th scope="row">&nbsp;</th>
 			<td>
 				<input type="hidden" name="action" value="wcdm_add_campaign"/>

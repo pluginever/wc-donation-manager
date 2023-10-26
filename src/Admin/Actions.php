@@ -28,6 +28,8 @@ class Actions {
 		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_donation_meta' ) );
 		add_action( 'admin_post_wcdm_add_donor', array( __CLASS__, 'add_donor' ) );
 		add_action( 'admin_post_wcdm_edit_donor', array( __CLASS__, 'edit_donor' ) );
+		add_action( 'wp_ajax_wcmmq_pro_search_products', array( __CLASS__, 'search_products' ) );
+		add_action( 'wp_ajax_wcmmq_pro_search_categories', array( __CLASS__, 'search_categories' ) );
 	}
 
 	/**
@@ -40,6 +42,9 @@ class Actions {
 		check_admin_referer( 'wcdm_add_campaign' );
 		$referer  = wp_get_referer();
 		$data     = wp_unslash( $_POST );
+
+		var_dump($data);
+		wp_die();
 		$campaign = Campaign::insert( $data );
 		// Set the product type as donation.
 		wp_set_object_terms( $campaign->get_id(), 'donation', 'product_type' );
@@ -131,5 +136,103 @@ class Actions {
 		}
 		wp_safe_redirect( $referer );
 		exit;
+	}
+
+	/**
+	 * Search products.
+	 *
+	 * @since 1.1.4
+	 */
+	public static function search_products() {
+		check_ajax_referer( 'wc_min_max_quantities', 'nonce' );
+
+		$term = isset( $_POST['term'] ) ? sanitize_text_field( wp_unslash( $_POST['term'] ) ) : '';
+
+		if ( empty( $term ) ) {
+			wp_send_json_success( esc_html__( 'No, search term provided.', 'wc-min-max-quantities-pro' ) );
+			wp_die();
+		}
+
+		$data_store = \WC_Data_Store::load( 'product' );
+		$ids        = $data_store->search_products( $term, '', true, true );
+		$results    = array();
+
+		if ( $ids ) {
+			foreach ( $ids as $id ) {
+				$product = wc_get_product( $id );
+				if ( ! $product ) {
+					continue;
+				}
+				$text = sprintf(
+					'(#%1$s) %2$s',
+					$product->get_id(),
+					wp_strip_all_tags( $product->get_formatted_name() )
+				);
+
+				$results[] = array(
+					'id'   => $product->get_id(),
+					'text' => $text,
+				);
+			}
+		}
+
+		wp_send_json(
+			array(
+				'results'    => $results,
+				'pagination' => array(
+					'more' => false,
+				),
+			)
+		);
+		wp_die();
+	}
+
+	/**
+	 * Search categories.
+	 *
+	 * @since 1.1.4
+	 */
+	public static function search_categories() {
+		check_admin_referer( 'wc_min_max_quantities', 'nonce' );
+		$term = isset( $_POST['term'] ) ? sanitize_text_field( wp_unslash( $_POST['term'] ) ) : '';
+
+		if ( empty( $term ) ) {
+			wp_send_json_success( esc_html__( 'No, search term provided.', 'wc-min-max-quantities-pro' ) );
+			wp_die();
+		}
+
+		$categories = get_terms(
+			array(
+				'taxonomy'   => 'product_cat',
+				'hide_empty' => false,
+				'name__like' => $term,
+			)
+		);
+
+		$results = array();
+
+		if ( $categories ) {
+			foreach ( $categories as $category ) {
+				$text = sprintf(
+					'(#%1$s) %2$s',
+					$category->term_id,
+					wp_strip_all_tags( $category->name )
+				);
+
+				$results[] = array(
+					'id'   => $category->term_id,
+					'text' => $text,
+				);
+			}
+		}
+
+		wp_send_json(
+			array(
+				'results'    => $results,
+				'pagination' => array(
+					'more' => false,
+				),
+			)
+		);
 	}
 }

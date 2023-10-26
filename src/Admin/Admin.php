@@ -120,6 +120,17 @@ class Admin {
 		if ( in_array( $hook, $screen_ids, true ) ) {
 			wp_enqueue_style( 'wcdm-admin' );
 			wp_enqueue_script( 'wcdm-admin' );
+
+			$localize = array(
+				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
+				'security' => wp_create_nonce( 'wc_min_max_quantities' ),
+				'i18n'     => array(
+					'search_products'   => esc_html__( 'Select products', 'wc-min-max-quantities-pro' ),
+					'search_categories' => esc_html__( 'Select categories', 'wc-min-max-quantities-pro' ),
+				),
+			);
+
+			wp_localize_script( 'wcdm-admin', 'wcmmq_pro_admin_vars', $localize );
 		}
 	}
 
