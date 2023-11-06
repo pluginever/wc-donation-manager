@@ -27,10 +27,10 @@ defined( 'ABSPATH' ) || exit;
 		</tr>
 		<tr valign="top">
 			<th scope="row">
-				<label for="price"><?php esc_html_e( 'Amount *', 'wc-donation-manager' ); ?></label>
+				<label for="amount"><?php esc_html_e( 'Amount *', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" min="0" step="any" name="price" id="price" class="regular-text" value="" required/>
+				<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="" required/>
 				<p class="description">
 					<?php esc_html_e( 'Enter the default amount of the campaign. It will use the WooCommerce product currency.', 'wc-donation-manager' ); ?>
 				</p>
@@ -49,34 +49,12 @@ defined( 'ABSPATH' ) || exit;
 		</tr>
 		<tr valign="top">
 			<th scope="row">
-				<label for="wcdm_min_amount"><?php esc_html_e( 'Minimum Amount', 'wc-donation-manager' ); ?></label>
+				<label for="donation_products"><?php esc_html_e( 'Donation Products', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" min="0" step="any" name="wcdm_min_amount" id="wcdm_min_amount" class="regular-text" value="<?php floatval( get_option( 'wcdm_minimum_amount', 1 ) ); ?>" required/>
+				<select name="donation_products[]" id="donation_products" multiple="multiple" class="regular-text"></select>
 				<p class="description">
-					<?php esc_html_e( 'Enter the minimum amount of the campaign.', 'wc-donation-manager' ); ?>
-				</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<th scope="row">
-				<label for="wcdm_max_amount"><?php esc_html_e( 'Maximum Amount', 'wc-donation-manager' ); ?></label>
-			</th>
-			<td>
-				<input type="number" min="0" step="any" name="wcdm_max_amount" id="wcdm_max_amount" class="regular-text" value="<?php floatval( get_option( 'wcdm_maximum_amount', 100 ) ); ?>" required/>
-				<p class="description">
-					<?php esc_html_e( 'Enter the maximum amount of the campaign.', 'wc-donation-manager' ); ?>
-				</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<th scope="row">
-				<label for="amount_increment_steps"><?php esc_html_e( 'Amount Increment Steps', 'wc-donation-manager' ); ?></label>
-			</th>
-			<td>
-				<input type="number" min="0" step="any" name="amount_increment_steps" id="amount_increment_steps" class="regular-text" value="0.01" required/>
-				<p class="description">
-					<?php esc_html_e( 'Enter the campaign amount increment steps.', 'wc-donation-manager' ); ?>
+					<?php esc_html_e( 'Select the campaign donation products.', 'wc-donation-manager' ); ?>
 				</p>
 			</td>
 		</tr>
@@ -103,17 +81,6 @@ defined( 'ABSPATH' ) || exit;
 				</select>
 				<p class="description">
 					<?php esc_html_e( 'Select the campaign status.', 'wc-donation-manager' ); ?>
-				</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<th scope="row">
-				<label for="donation_products"><?php esc_html_e( 'Donation Products', 'wc-donation-manager' ); ?></label>
-			</th>
-			<td>
-				<select name="donation_products[]" id="donation_products" multiple="multiple" class="regular-text"></select>
-				<p class="description">
-					<?php esc_html_e( 'Select the campaign donation products.', 'wc-donation-manager' ); ?>
 				</p>
 			</td>
 		</tr>

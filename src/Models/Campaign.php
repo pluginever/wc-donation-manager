@@ -19,7 +19,7 @@ class Campaign extends Data {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $post_type = 'product';
+	protected $post_type = 'wcdm_campaigns';
 
 	/**
 	 * All data for this object. Name value pairs (name + default value).
@@ -28,15 +28,12 @@ class Campaign extends Data {
 	 * @var array All data.
 	 */
 	protected $data = array(
-		'name'                   => '',
-		'price'                  => 0.00,
-		'regular_price'          => 0.00,
-		'goal_amount'            => 0.00,
-		'amount_increment_steps' => 0.01,
-		'wcdm_min_amount'        => 1,
-		'wcdm_max_amount'        => 100,
-		'cause'                  => '',
-		'status'                 => 'publish',
+		'name'              => '',
+		'amount'            => 0.00,
+		'goal_amount'       => 0.00,
+		'donation_products' => array(),
+		'cause'             => '',
+		'status'            => 'publish',
 	);
 
 	/**
@@ -49,7 +46,7 @@ class Campaign extends Data {
 	 */
 	protected $postdata_map = array(
 		'name'   => 'post_title',
-		'cause'  => 'post_excerpt',
+		'cause'  => 'post_content',
 		'status' => 'post_status',
 	);
 
@@ -64,8 +61,8 @@ class Campaign extends Data {
 			return new \WP_Error( 'missing_required', __( 'Missing required campaign name.', 'wc-donation-manager' ) );
 		}
 
-		if ( empty( $this->get_prop( 'price' ) ) ) {
-			return new \WP_Error( 'missing_required', __( 'Missing required price.', 'wc-donation-manager' ) );
+		if ( empty( $this->get_prop( 'amount' ) ) ) {
+			return new \WP_Error( 'missing_required', __( 'Missing required amount.', 'wc-donation-manager' ) );
 		}
 
 		if ( empty( $this->get_prop( 'status' ) ) ) {
@@ -105,47 +102,25 @@ class Campaign extends Data {
 	}
 
 	/**
-	 * Get price.
+	 * Get amount.
 	 *
 	 * @since 1.0.0
 	 * @return numeric
 	 */
-	public function get_price() {
-		return $this->get_prop( 'price' );
+	public function get_amount() {
+		return $this->get_prop( 'amount' );
 	}
 
 	/**
-	 * Set price.
+	 * Set amount.
 	 *
-	 * @param numeric $price Campaign price.
+	 * @param numeric $amount Campaign amount.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_price( $price ) {
-		$this->set_prop( 'price', floatval( $price ) );
-	}
-
-	/**
-	 * Get regular price.
-	 *
-	 * @since 1.0.0
-	 * @return numeric
-	 */
-	public function get_regular_price() {
-		return $this->get_prop( 'regular_price' );
-	}
-
-	/**
-	 * Set regular price.
-	 *
-	 * @param numeric $regular_price Campaign regular price.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function set_regular_price( $regular_price ) {
-		$this->set_prop( 'regular_price', floatval( $regular_price ) );
+	public function set_amount( $amount ) {
+		$this->set_prop( 'amount', floatval( $amount ) );
 	}
 
 	/**
@@ -171,69 +146,25 @@ class Campaign extends Data {
 	}
 
 	/**
-	 * Get amount increment steps.
+	 * Get campaign products.
 	 *
 	 * @since 1.0.0
-	 * @return numeric
+	 * @return string
 	 */
-	public function get_amount_increment_steps() {
-		return $this->get_prop( 'amount_increment_steps' );
+	public function get_products() {
+		return $this->get_prop( 'donation_products' );
 	}
 
 	/**
-	 * Set amount increment steps.
+	 * Set campaign products.
 	 *
-	 * @param numeric $amount_increment_steps Campaign amount increment steps.
+	 * @param array $campaign_products Campaign products ID.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_amount_increment_steps( $amount_increment_steps ) {
-		$this->set_prop( 'amount_increment_steps', is_numeric( $amount_increment_steps ) ? number_format( $amount_increment_steps, 2, '.', '' ) : 0.01 );
-	}
-
-	/**
-	 * Get minimum amount.
-	 *
-	 * @since 1.0.0
-	 * @return numeric
-	 */
-	public function get_wcdm_min_amount() {
-		return $this->get_prop( 'wcdm_min_amount' );
-	}
-
-	/**
-	 * Set minimum amount.
-	 *
-	 * @param numeric $wcdm_min_amount Campaign minimum amount.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function set_wcdm_min_amount( $wcdm_min_amount ) {
-		$this->set_prop( 'wcdm_min_amount', floatval( $wcdm_min_amount ) );
-	}
-
-	/**
-	 * Get maximum amount.
-	 *
-	 * @since 1.0.0
-	 * @return numeric
-	 */
-	public function get_wcdm_max_amount() {
-		return $this->get_prop( 'wcdm_max_amount' );
-	}
-
-	/**
-	 * Set maximum amount.
-	 *
-	 * @param numeric $wcdm_max_amount Campaign maximum amount.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function set_wcdm_max_amount( $wcdm_max_amount ) {
-		$this->set_prop( 'wcdm_max_amount', floatval( $wcdm_max_amount ) );
+	public function set_products( $campaign_products ) {
+		$this->set_prop( 'donation_products', sanitize_textarea_field( $campaign_products ) );
 	}
 
 	/**

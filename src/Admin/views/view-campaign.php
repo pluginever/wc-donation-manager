@@ -7,7 +7,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-$campaign_id = filter_input( INPUT_GET, 'edit_campaign', FILTER_SANITIZE_NUMBER_INT );
+$campaign_id = filter_input( INPUT_GET, 'view_campaign', FILTER_SANITIZE_NUMBER_INT );
 $campaign    = wcdm_get_campaign( $campaign_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Campaign', 'wc-donation-manager' ); ?></h1>
@@ -59,9 +59,9 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 							<?php esc_html_e( 'Donation Products', 'wc-donation-manager' ); ?>
 						</label>
 						<select name="donation_products[]" id="donation_products" multiple="multiple" class="regular-text" style="width: 300px">
-						<?php foreach ( $donation_products as $donation_product ) : ?>
-							<option value="<?php echo esc_attr( $donation_product ); ?>" selected="selected"><?php echo esc_html( wcdm_get_the_title( $donation_product ) ); ?></option>
-						<?php endforeach; ?>
+							<?php foreach ( $donation_products as $donation_product ) : ?>
+								<option value="<?php echo esc_attr( $donation_product ); ?>" selected="selected"><?php echo esc_html( wcdm_get_the_title( $donation_product ) ); ?></option>
+							<?php endforeach; ?>
 						</select>
 						<p class="description">
 							<?php esc_html_e( 'Select the campaign donation products.', 'wc-donation-manager' ); ?>
@@ -103,12 +103,9 @@ $campaign    = wcdm_get_campaign( $campaign_id );
 
 				<div class="pev-card__footer">
 					<a class="del" href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'action', 'delete', admin_url( 'admin.php?page=wc-donation-manager&id=' . $campaign->get_id() ) ), 'bulk-campaigns' ) ); ?>"><?php esc_html_e( 'Delete', 'wc-donation-manager' ); ?></a>
-					<button class="button button-primary"><?php esc_html_e( 'Save Campaign', 'wc-donation-manager' ); ?></button>
+					<a class="button button-primary" href="<?php echo esc_url( add_query_arg( 'edit_campaign', $campaign->get_id(), admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' ) ) ); ?>"><?php esc_html_e( 'Edit Campaign', 'wc-donation-manager' ); ?></a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<input type="hidden" name="action" value="wcdm_edit_campaign">
-	<input type="hidden" name="id" value="<?php echo esc_attr( $campaign->get_id() ); ?>">
-	<?php wp_nonce_field( 'wcdm_edit_campaign' ); ?>
 </form>

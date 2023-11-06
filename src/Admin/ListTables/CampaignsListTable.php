@@ -51,7 +51,7 @@ class CampaignsListTable extends AbstractListTable {
 		$search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; // phpcs:ignore
 		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1; // phpcs:ignore
 		$args                  = array(
-			'post_type'      => 'product',
+			'post_type'      => 'wcdm_campaigns',
 			'post_status'    => 'any',
 			'order'          => $order,
 			'order_by'       => $order_by,
@@ -92,7 +92,7 @@ class CampaignsListTable extends AbstractListTable {
 		return array(
 			'cb'          => '<input type="checkbox" />',
 			'name'        => __( 'Name', 'wc-donation-manager' ),
-			'price'       => __( 'Amount', 'wc-donation-manager' ),
+			'amount'      => __( 'Amount', 'wc-donation-manager' ),
 			'goal_amount' => __( 'Goal', 'wc-donation-manager' ),
 			'cause'       => __( 'Cause', 'wc-donation-manager' ),
 			'status'      => __( 'Status', 'wc-donation-manager' ),
@@ -108,7 +108,7 @@ class CampaignsListTable extends AbstractListTable {
 	public function get_sortable_columns() {
 		return array(
 			'name'        => array( 'post_title', true ),
-			'price'       => array( 'price', true ),
+			'amount'      => array( 'amount', true ),
 			'goal_amount' => array( 'goal_amount', true ),
 			'status'      => array( 'post_status', true ),
 		);
@@ -215,6 +215,7 @@ class CampaignsListTable extends AbstractListTable {
 		$actions   = array(
 			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
 			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
+			'view'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'view_campaign', $item->get_id(), $admin_url ) ), __( 'View', 'wc-donation-manager' ) ),
 		);
 
 		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
@@ -231,12 +232,12 @@ class CampaignsListTable extends AbstractListTable {
 	public function column_default( $item, $column_name ) {
 		$value = '&mdash;';
 		switch ( $column_name ) {
-			case 'price':
+			case 'amount':
 				$value = sprintf(
 				/* translators: 1: WC currency symbol 2: Product price */
 					( '%1$s%2$.2f' ),
 					get_woocommerce_currency_symbol(),
-					esc_html( $item->get_price() )
+					esc_html( $item->get_amount() )
 				);
 				break;
 			case 'goal_amount':

@@ -21,8 +21,8 @@ class Emails {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_filter( 'woocommerce_email_classes', array( $this, 'add_donation_order_email') );
-		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals'), 10, 3 );
+		add_filter( 'woocommerce_email_classes', array( $this, 'add_donation_order_email' ) );
+		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals' ), 10, 3 );
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Emails {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function order_item_totals( $total_rows, $order, $tax_display ){
+	public function order_item_totals( $total_rows, $order, $tax_display ) {
 		$donation_total = 0;
 		foreach ( $order->get_items() as $item ) {
 			$product = $item->get_product();
@@ -59,7 +59,7 @@ class Emails {
 		}
 
 		$total_rows['cart_subtotal']['value'] = floatval( $order->get_subtotal() - $donation_total );
-		$total_rows['order_total']['value'] = floatval( $order->get_total() - $donation_total );
+		$total_rows['order_total']['value']   = floatval( $order->get_total() - $donation_total );
 
 		return $total_rows;
 	}

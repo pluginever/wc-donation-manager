@@ -22,17 +22,10 @@ defined( 'ABSPATH' ) || exit;
  */
 function wcdm_get_campaigns( $args = array(), $count = false ) {
 	$defaults = array(
-		'post_type'      => 'product',
+		'post_type'      => 'wcdm_campaigns',
 		'posts_per_page' => - 1,
 		'orderby'        => 'date',
 		'order'          => 'ASC',
-		'tax_query'      => array( // phpcs:ignore
-			array(
-				'taxonomy' => 'product_type',
-				'field'    => 'slug',
-				'terms'    => 'donation',
-			),
-		),
 	);
 	$args     = wp_parse_args( $args, $defaults );
 	$query    = new WP_Query( $args );
@@ -60,6 +53,30 @@ function wcdm_get_campaign( $campaign ) {
 	}
 
 	return null;
+}
+
+/**
+ * Get campaign products.
+ *
+ * @param int $product_id The campaign product ID.
+ *
+ * @since 1.0.0
+ * @return Campaign[]|int The campaigns.
+ */
+
+/**
+ * Get the post title.
+ *
+ * @param int $post_id Post id.
+ *
+ * @since 1.0.0
+ * @return void|string The post title.
+ */
+function wcdm_get_the_title( $post_id ) {
+	if ( ! $post_id ) {
+		return;
+	}
+	return sprintf( '(#%1$s) %2$s', $post_id, get_the_title( $post_id ) );
 }
 
 /**
@@ -111,7 +128,7 @@ if ( ! function_exists( 'wc_get_email_order_items' ) ) {
 	 * Get HTML for the order items to be shown in emails.
 	 *
 	 * @param WC_Order $order Order object.
-	 * @param array $args Arguments.
+	 * @param array    $args Arguments.
 	 *
 	 * @since 3.0.0
 	 * @return string

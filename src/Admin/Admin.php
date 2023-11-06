@@ -123,14 +123,13 @@ class Admin {
 
 			$localize = array(
 				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
-				'security' => wp_create_nonce( 'wc_min_max_quantities' ),
+				'security' => wp_create_nonce( 'wc_donation_manager' ),
 				'i18n'     => array(
-					'search_products'   => esc_html__( 'Select products', 'wc-min-max-quantities-pro' ),
-					'search_categories' => esc_html__( 'Select categories', 'wc-min-max-quantities-pro' ),
+					'search_products' => esc_html__( 'Select products', 'wc-donation-manager' ),
 				),
 			);
 
-			wp_localize_script( 'wcdm-admin', 'wcmmq_pro_admin_vars', $localize );
+			wp_localize_script( 'wcdm-admin', 'wcdm_admin_vars', $localize );
 		}
 	}
 
@@ -146,17 +145,17 @@ class Admin {
 		switch ( $list_table ) {
 
 			case 'campaigns':
-				$class = 'WooCommerceDonationManager\Admin\ListTables\CampaignsListTable';
+				$class_name = 'WooCommerceDonationManager\Admin\ListTables\CampaignsListTable';
 				break;
 			case 'donors':
-				$class = 'WooCommerceDonationManager\Admin\ListTables\DonorsListTable';
+				$class_name = 'WooCommerceDonationManager\Admin\ListTables\DonorsListTable';
 				break;
 		}
 
-		if ( $class && class_exists( $class ) && ! isset( $instances[ $class ] ) ) {
-			$instances[ $class ] = new $class();
+		if ( $class_name && class_exists( $class_name ) && ! isset( $instances[ $class_name ] ) ) {
+			$instances[ $class_name ] = new $class_name();
 		}
 
-		return $instances[ $class ];
+		return $instances[ $class_name ];
 	}
 }
