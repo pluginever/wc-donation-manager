@@ -2,8 +2,6 @@
 
 namespace WooCommerceDonationManager\Admin\ListTables;
 
-use WooCommerceDonationManager\Models\Donor;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -49,18 +47,25 @@ class DonorsListTable extends AbstractListTable {
 		$order        = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : ''; // phpcs:ignore
 		$search       = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; // phpcs:ignore
 		$current_page = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1; // phpcs:ignore
-		$args                  = array(
-			'post_type'      => 'wcdm_donors',
-			'post_status'    => 'any',
-			'order'          => $order,
-			'order_by'       => $order_by,
-			's'              => $search,
-			'posts_per_page' => $per_page,
-			'paged'          => $current_page,
+//		$args                  = array(
+//			'post_type'      => 'wcdm_donors',
+//			'post_status'    => 'any',
+//			'order'          => $order,
+//			'order_by'       => $order_by,
+//			's'              => $search,
+//			'posts_per_page' => $per_page,
+//			'paged'          => $current_page,
+//		);
+
+		$args = array(
+			'status' => array('wc-completed'),
 		);
 
 		$this->items       = wcdm_get_donors( $args );
-		$this->total_count = wcdm_get_donors( $args, true );
+		$this->total_count = 20;
+
+//		var_dump($this->items);
+//		wp_die();
 
 		$this->set_pagination_args(
 			array(
@@ -91,10 +96,9 @@ class DonorsListTable extends AbstractListTable {
 		return array(
 			'cb'          => '<input type="checkbox" />',
 			'name'        => __( 'Name', 'wc-donation-manager' ),
+			'email'        => __( 'Email', 'wc-donation-manager' ),
 			'donation_no' => __( 'Donation No.', 'wc-donation-manager' ),
 			'order'       => __( 'Order', 'wc-donation-manager' ),
-			'order_id'    => __( 'Order ID', 'wc-donation-manager' ),
-			'amount'      => __( 'Total Amount', 'wc-donation-manager' ),
 			'type'        => __( 'Type', 'wc-donation-manager' ),
 		);
 	}
@@ -108,10 +112,7 @@ class DonorsListTable extends AbstractListTable {
 	public function get_sortable_columns() {
 		return array(
 			'name'        => array( 'post_title', true ),
-			'donation_no' => array( 'amount', true ),
-			'order'       => array( 'order', true ),
-			'order_id'    => array( 'order_id', true ),
-			'amount'      => array( 'amount', true ),
+			'donation_no' => array( 'donation_no', true ),
 			'type'        => array( 'type', true ),
 		);
 	}
@@ -219,7 +220,7 @@ class DonorsListTable extends AbstractListTable {
 			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-donors' ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
 
-		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_donor', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
+		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_donor', $item->get_id(), $admin_url ) ), esc_html( $item->get_user()->display_name ), $this->row_actions( $actions ) );
 	}
 
 	/**
@@ -234,13 +235,17 @@ class DonorsListTable extends AbstractListTable {
 	public function column_default( $item, $column_name ) {
 
 		$value = '&mdash;';
+//		var_dump($item->get_user());
 
 		switch ( $column_name ) {
-			case 'order_id':
-				$value = sprintf( '#%s', esc_html( $item->get_order_id() ) );
+			case 'email':
+				$value = sprintf( '%1$s', esc_html( $item->get_user()->user_email ) );
 				break;
-			case 'amount':
-				$value = sprintf( '$%s', esc_html( $item->get_amount() ) );
+			case 'donation_no':
+				$value = sprintf( '#%1$s', esc_html( $item->get_id() ) );
+				break;
+			case 'order':
+				$value = sprintf( 'Order ID: #%1$s %2$s Total Amount: %3$.2f', esc_html( $item->get_id() ), '<br>', esc_html( $item->get_total() ) );
 				break;
 			default:
 				$value = parent::column_default( $item, $column_name );

@@ -20,25 +20,6 @@ class Orders {
 	 */
 	public function __construct() {
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
-		// TODO: This bellow action added only for testing the above action.
-		add_action( 'woocommerce_thankyou', array( $this, 'auto_complete_order' ), 20, 1 );
-	}
-
-	/**
-	 * Forced updating order status as completed.
-	 *
-	 * @param int $order_id Order ID.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function auto_complete_order( $order_id ) {
-		if ( ! $order_id ) {
-			return;
-		}
-		// Get an instance of the WC_Product object.
-		$order = wc_get_order( $order_id );
-		$order->update_status( 'completed' );
 	}
 
 	/**

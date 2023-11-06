@@ -83,26 +83,31 @@ function wcdm_get_the_title( $post_id ) {
  * Get donors.
  *
  * @param array $args The args.
- * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
  * @return Donor[]|int The donors.
  */
-function wcdm_get_donors( $args = array(), $count = false ) {
+function wcdm_get_donors( $args = array() ) {
 	$defaults = array(
-		'post_type'      => 'wcdm_donors',
-		'posts_per_page' => - 1,
-		'orderby'        => 'title',
-		'order'          => 'ASC',
+		'status' => array('wc-completed'),
 	);
 	$args     = wp_parse_args( $args, $defaults );
-	$query    = new WP_Query( $args );
 
-	if ( $count ) {
-		return $query->found_posts;
+	$orders = wc_get_orders( $args );
+	$filtered_orders = array();
+
+	foreach ( $orders as $order ) {
+		foreach ( $order->get_items() as $item ) {
+
+			$product = $item->get_product();
+			if ( $product->is_type( 'donation' ) ) {
+				$filtered_orders[] = $order;
+				break;
+			}
+		}
 	}
 
-	return array_map( 'wcdm_get_donor', $query->posts );
+	return $filtered_orders;
 }
 
 /**

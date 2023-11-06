@@ -102,7 +102,7 @@ class Plugin extends Lib\Plugin {
 		}
 
 		// TODO: Need to include the WC_Product_Donation::class as service.
-		// require_once __DIR__ . '/class-wc-product-donation.php';
+		 require_once __DIR__ . '/class-wc-product-donation.php';
 		// $this->services->add( WC_Product_Donation::class );
 
 		if ( self::is_request( 'frontend' ) ) {
