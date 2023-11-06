@@ -63,9 +63,6 @@ class CampaignsListTable extends AbstractListTable {
 		$this->items       = wcdm_get_campaigns( $args );
 		$this->total_count = wcdm_get_campaigns( $args, true );
 
-		var_dump($this->items );
-		wp_die();
-
 		$this->set_pagination_args(
 			array(
 				'total_items' => $this->total_count,
