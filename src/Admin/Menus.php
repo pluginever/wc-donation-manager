@@ -60,14 +60,14 @@ class Menus {
 			array( $this, 'output_donors_page' )
 		);
 
-		add_submenu_page(
-			'wc-donation-manager',
-			esc_html__( 'Tools', 'wc-donation-manager' ),
-			esc_html__( 'Tools', 'wc-donation-manager' ),
-			'manage_options',
-			'wcdm-tools',
-			array( $this, 'output_tools_page' )
-		);
+//		add_submenu_page(
+//			'wc-donation-manager',
+//			esc_html__( 'Tools', 'wc-donation-manager' ),
+//			esc_html__( 'Tools', 'wc-donation-manager' ),
+//			'manage_options',
+//			'wcdm-tools',
+//			array( $this, 'output_tools_page' )
+//		);
 	}
 
 	/**
@@ -159,21 +159,21 @@ class Menus {
 	 * @return void
 	 */
 	public function output_donors_content() {
-		$add_donor  = isset( $_GET['new'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$edit_donor = isset( $_GET['edit_donor'] ) ? absint( wp_unslash( $_GET['edit_donor'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-
-		if ( $edit_donor && ! wcdm_get_donor( $edit_donor ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=wcdm-donors' ) );
-			exit();
-		}
-
-		if ( $add_donor ) {
-			include __DIR__ . '/views/add-donor.php';
-		} elseif ( $edit_donor ) {
-			include __DIR__ . '/views/edit-donor.php';
-		} else {
-			include __DIR__ . '/views/list-donors.php';
-		}
+//		$add_donor  = isset( $_GET['new'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+//		$edit_donor = isset( $_GET['edit_donor'] ) ? absint( wp_unslash( $_GET['edit_donor'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+//
+//		if ( $edit_donor && ! wcdm_get_donor( $edit_donor ) ) {
+//			wp_safe_redirect( admin_url( 'admin.php?page=wcdm-donors' ) );
+//			exit();
+//		}
+//
+//		if ( $add_donor ) {
+//			include __DIR__ . '/views/add-donor.php';
+//		} elseif ( $edit_donor ) {
+//			include __DIR__ . '/views/edit-donor.php';
+//		} else {
+		include __DIR__ . '/views/list-donors.php';
+//		}
 	}
 
 	/**

@@ -80,25 +80,31 @@ function wcdm_get_the_title( $post_id ) {
 }
 
 /**
- * Get donors.
+ * Get donors from the woocommerce order list.
  *
  * @param array $args The args.
+ * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
  * @return Donor[]|int The donors.
  */
-function wcdm_get_donors( $args = array() ) {
+function wcdm_get_donors( $args = array(), $count = false ) {
 	$defaults = array(
-		'status' => array('wc-completed'),
+		'limit' => -1,
+		'paged' => 1,
+		'paginate' => true,
+		'order' => 'DESC',
 	);
 	$args     = wp_parse_args( $args, $defaults );
-
 	$orders = wc_get_orders( $args );
+
+	if ( $count ) {
+		return $orders->total;
+	}
+
 	$filtered_orders = array();
-
-	foreach ( $orders as $order ) {
+	foreach ( $orders->orders as $order ) {
 		foreach ( $order->get_items() as $item ) {
-
 			$product = $item->get_product();
 			if ( $product->is_type( 'donation' ) ) {
 				$filtered_orders[] = $order;

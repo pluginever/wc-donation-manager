@@ -45,7 +45,7 @@ class DonorsListTable extends AbstractListTable {
 		$per_page              = get_option( 'posts_per_page' );
 		$order_by     = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : ''; // phpcs:ignore
 		$order        = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : ''; // phpcs:ignore
-		$search       = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; // phpcs:ignore
+//		$search       = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; // phpcs:ignore
 		$current_page = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1; // phpcs:ignore
 //		$args                  = array(
 //			'post_type'      => 'wcdm_donors',
@@ -59,13 +59,15 @@ class DonorsListTable extends AbstractListTable {
 
 		$args = array(
 			'status' => array('wc-completed'),
+			'limit' => $per_page,
+			'paged' => $current_page,
+			'paginate' => true,
+			'orderby' => $order_by,
+			'order' => $order,
 		);
 
 		$this->items       = wcdm_get_donors( $args );
-		$this->total_count = is_array ( $this->items ) ? count( $this->items ) : 0;
-
-		var_dump($this->total_count);
-//		wp_die();
+		$this->total_count = wcdm_get_donors( $args, true );
 
 		$this->set_pagination_args(
 			array(
@@ -111,7 +113,7 @@ class DonorsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'        => array( 'post_title', true ),
+			'name'        => array( 'name', true ),
 			'donation_amount' => array( 'donation_amount', true ),
 			'type'        => array( 'type', true ),
 		);

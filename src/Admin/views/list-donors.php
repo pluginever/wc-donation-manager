@@ -16,9 +16,6 @@ $list_table->prepare_items();
 	<div>
 		<h1 class="wp-heading-inline">
 			<?php esc_html_e( 'Donors', 'wc-donation-manager' ); ?>
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=wcdm-donors&new=1' ) ); ?>" class="page-title-action">
-				<?php esc_html_e( 'Add New', 'wc-donation-manager' ); ?>
-			</a>
 		</h1>
 	</div>
 </div>
