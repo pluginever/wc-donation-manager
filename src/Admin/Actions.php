@@ -45,6 +45,7 @@ class Actions {
 		if ( is_wp_error( $campaign ) ) {
 			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
 		} else {
+			self::handle_donation_product( $data );
 			wc_donation_manager()->add_notice( __( 'Campaign saved successfully.', 'wc-donation-manager' ), 'success' );
 		}
 		wp_safe_redirect( $referer );
@@ -65,10 +66,42 @@ class Actions {
 		if ( is_wp_error( $campaign ) ) {
 			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
 		} else {
+			self::handle_donation_product( $data );
 			wc_donation_manager()->add_notice( __( 'Campaign saved successfully.', 'wc-donation-manager' ), 'success' );
 		}
 		wp_safe_redirect( $referer );
 		exit;
+	}
+
+	/**
+	 * Update donation products depends on the campaign options.
+	 *
+	 * @param array $data Campaign meta data.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function handle_donation_product( $data ) {
+
+		$product_ids = $data['donation_products'];
+
+		if ( $product_ids && is_array( $product_ids ) ) {
+			foreach ( $product_ids as $product_id ) {
+
+				if ( $data['amount'] ) {
+					update_post_meta( $product_id, '_price', floatval( $data['amount'] ) );
+					update_post_meta( $product_id, '_regular_price', floatval( $data['amount'] ) );
+				}
+
+				if ( $data['goal_amount'] ) {
+					update_post_meta( $product_id, '_goal_amount', floatval( $data['goal_amount'] ) );
+				}
+
+				if ( $data['cause'] ) {
+					update_post_meta( $product_id, '_wcdm_campaign_cause', sanitize_text_field( $data['cause'] ) );
+				}
+			}
+		}
 	}
 
 	/**

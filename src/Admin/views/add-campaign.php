@@ -54,7 +54,7 @@ defined( 'ABSPATH' ) || exit;
 			<td>
 				<select name="donation_products[]" id="donation_products" multiple="multiple" class="regular-text"></select>
 				<p class="description">
-					<?php esc_html_e( 'Select the campaign donation products.', 'wc-donation-manager' ); ?>
+					<?php printf( __('Select the donation products for the campaign. <a href="%1s" target="_blank">Add</a> a new donation product.', 'wc-donation-manager' ), get_admin_url() . 'post-new.php?post_type=product' ); ?>
 				</p>
 			</td>
 		</tr>
