@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name:  WC Donation Manager
- * Description:  TBD.
+ * Description:  A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.
  * Version:      1.0.0
- * Plugin URI:   https://pluginever.com/plugins/woocommerce-donation-manager/
+ * Plugin URI:   https://pluginever.com/plugins/wc-donation-manager/
  * Author:       PluginEver
  * Author URI:   https://pluginever.com/
  * Text Domain:  wc-donation-manager
@@ -87,7 +87,7 @@ function wc_donation_manager() { // phpcs:ignore
 		'file'         => __FILE__,
 		'settings_url' => admin_url( 'admin.php?page=wc-donation-manager' ),
 		'support_url'  => 'https://pluginever.com/support/',
-		'docs_url'     => 'https://pluginever.com/docs/wocommerce-donation-manager/',
+		'docs_url'     => 'https://pluginever.com/docs/wc-donation-manager/',
 	);
 
 	return Plugin::create( $data );
