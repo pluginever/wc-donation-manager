@@ -96,11 +96,11 @@ class Installer {
 			return;
 		}
 
-		// create tables here.
+		// Create tables here.
 		Admin\Settings::instance()->save_defaults();
 		wc_donation_manager()->update_db_version( wc_donation_manager()->get_version(), false );
 		add_option( 'wcdm_install_date', current_time( 'mysql' ) );
-		set_transient( 'wc_donation_manager_activated', true, 30 );
-		set_transient( 'wc_donation_manager_activation_redirect', true, 30 );
+		set_transient( 'wcdm_activated', true, 30 );
+		set_transient( 'wcdm_activation_redirect', true, 30 );
 	}
 }
