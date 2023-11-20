@@ -44,8 +44,8 @@ class Menus {
 
 		add_submenu_page(
 			'wc-donation-manager',
-			esc_html__( 'Campaign', 'wc-donation-manager' ),
-			esc_html__( 'Campaign', 'wc-donation-manager' ),
+			esc_html__( 'Campaigns', 'wc-donation-manager' ),
+			esc_html__( 'Campaigns', 'wc-donation-manager' ),
 			'manage_options',
 			'wc-donation-manager',
 			array( $this, 'output_main_page' )

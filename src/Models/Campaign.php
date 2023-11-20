@@ -29,10 +29,9 @@ class Campaign extends Data {
 	 */
 	protected $data = array(
 		'name'              => '',
-		'amount'            => 0.00,
-		'goal_amount'       => 0.00,
-		'donation_products' => array(),
 		'cause'             => '',
+		'goal_amount'       => 0.00,
+		'end_date'       => '',
 		'status'            => 'publish',
 	);
 
@@ -61,7 +60,7 @@ class Campaign extends Data {
 			return new \WP_Error( 'missing_required', __( 'Missing required campaign name.', 'wc-donation-manager' ) );
 		}
 
-		if ( empty( $this->get_prop( 'amount' ) ) ) {
+		if ( empty( $this->get_prop( 'goal_amount' ) ) ) {
 			return new \WP_Error( 'missing_required', __( 'Missing required amount.', 'wc-donation-manager' ) );
 		}
 
@@ -102,25 +101,25 @@ class Campaign extends Data {
 	}
 
 	/**
-	 * Get amount.
+	 * Get cause.
 	 *
 	 * @since 1.0.0
-	 * @return numeric
+	 * @return string
 	 */
-	public function get_amount() {
-		return $this->get_prop( 'amount' );
+	public function get_cause() {
+		return $this->get_prop( 'cause' );
 	}
 
 	/**
-	 * Set amount.
+	 * Set cause.
 	 *
-	 * @param numeric $amount Campaign amount.
+	 * @param string $cause Campaign cause.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_amount( $amount ) {
-		$this->set_prop( 'amount', floatval( $amount ) );
+	public function set_cause( $cause ) {
+		$this->set_prop( 'cause', sanitize_textarea_field( $cause ) );
 	}
 
 	/**
@@ -146,47 +145,25 @@ class Campaign extends Data {
 	}
 
 	/**
-	 * Get campaign products.
+	 * Get campaign end date.
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
-	public function get_products() {
-		return $this->get_prop( 'donation_products' );
+	public function get_end_date() {
+		return $this->get_prop( 'end_date' );
 	}
 
 	/**
-	 * Set campaign products.
+	 * Set campaign end date.
 	 *
-	 * @param array $campaign_products Campaign products ID.
+	 * @param string $end_date Campaign end date.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function set_products( $campaign_products ) {
-		$this->set_prop( 'donation_products', sanitize_textarea_field( $campaign_products ) );
-	}
-
-	/**
-	 * Get cause.
-	 *
-	 * @since 1.0.0
-	 * @return string
-	 */
-	public function get_cause() {
-		return $this->get_prop( 'cause' );
-	}
-
-	/**
-	 * Set cause.
-	 *
-	 * @param string $cause Campaign cause.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function set_cause( $cause ) {
-		$this->set_prop( 'cause', sanitize_textarea_field( $cause ) );
+	public function set_end_date( $end_date ) {
+		$this->set_prop( 'end_date', sanitize_text_field( $end_date ) );
 	}
 
 	/**

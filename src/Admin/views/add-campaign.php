@@ -27,18 +27,18 @@ defined( 'ABSPATH' ) || exit;
 		</tr>
 		<tr valign="top">
 			<th scope="row">
-				<label for="amount"><?php esc_html_e( 'Amount *', 'wc-donation-manager' ); ?></label>
+				<label for="cause"><?php esc_html_e( 'Cause', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<input type="number" min="0" step="any" name="amount" id="amount" class="regular-text" value="" required/>
+				<textarea name="cause" id="cause" rows="6" placeholder="<?php esc_html_e( 'Enter the cause of the campaign...', 'wc-donation-manager' ); ?>"></textarea>
 				<p class="description">
-					<?php esc_html_e( 'Enter the default amount of the campaign. It will use the WooCommerce product currency.', 'wc-donation-manager' ); ?>
+					<?php esc_html_e( 'Enter the cause of the campaign.', 'wc-donation-manager' ); ?>
 				</p>
 			</td>
 		</tr>
 		<tr valign="top">
 			<th scope="row">
-				<label for="goal_amount"><?php esc_html_e( 'Goal Amount', 'wc-donation-manager' ); ?></label>
+				<label for="goal_amount"><?php esc_html_e( 'Goal amount', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
 				<input type="number" min="0" step="any" name="goal_amount" id="goal_amount" class="regular-text" value="" required/>
@@ -49,23 +49,12 @@ defined( 'ABSPATH' ) || exit;
 		</tr>
 		<tr valign="top">
 			<th scope="row">
-				<label for="donation_products"><?php esc_html_e( 'Donation Products', 'wc-donation-manager' ); ?></label>
+				<label for="end_date"><?php esc_html_e( 'End date', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<select name="donation_products[]" id="donation_products" multiple="multiple" class="regular-text"></select>
+				<input type="date" name="end_date" id="end_date" class="regular-text" value="" required/>
 				<p class="description">
-					<?php printf( __('Select the donation products for the campaign. <a href="%1s" target="_blank">Add</a> a new donation product.', 'wc-donation-manager' ), get_admin_url() . 'post-new.php?post_type=product' ); ?>
-				</p>
-			</td>
-		</tr>
-		<tr valign="top">
-			<th scope="row">
-				<label for="cause"><?php esc_html_e( 'Cause', 'wc-donation-manager' ); ?></label>
-			</th>
-			<td>
-				<textarea name="cause" id="cause" rows="6" placeholder="<?php esc_html_e( 'Enter the cause of the campaign...', 'wc-donation-manager' ); ?>"></textarea>
-				<p class="description">
-					<?php esc_html_e( 'Enter the cause of the campaign.', 'wc-donation-manager' ); ?>
+					<?php esc_html_e( 'Enter the end date of the campaign.', 'wc-donation-manager' ); ?>
 				</p>
 			</td>
 		</tr>

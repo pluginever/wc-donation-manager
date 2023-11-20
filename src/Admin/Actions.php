@@ -3,7 +3,6 @@
 namespace WooCommerceDonationManager\Admin;
 
 use WooCommerceDonationManager\Models\Campaign;
-use WooCommerceDonationManager\Models\Donor;
 
 defined( 'ABSPATH' ) || exit;
 
