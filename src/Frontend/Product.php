@@ -71,8 +71,6 @@ class Product {
 		global $product;
 		if ( 'donation' === $product->get_type() ) {
 			$currency_symbol       = get_woocommerce_currency_symbol();
-			$goal_amount           = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
-			$raised_amount         = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
 			$is_predefined_amounts = get_post_meta( $product->get_id(), '_is_predefined_amounts', true );
 			$is_custom_amount      = get_post_meta( $product->get_id(), '_is_custom_amount', true );
 			$campaign_id           = get_post_meta( $product->get_id(), '_wcdm_campaign_id', true );
@@ -87,7 +85,7 @@ class Product {
 						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ); // phpcs:ignore ?></label>
 						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_goal_amount', true ) ) ); // phpcs:ignore ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign_id, '_goal_amount', true ) ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); // phpcs:ignore ?></progress>
+					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign_id, '_goal_amount', true ) ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ); // phpcs:ignore ?></progress>
 				</div>
 				<?php endif; ?>
 				<?php
