@@ -31,7 +31,6 @@ class Admin {
 	 * @since 1.0.0
 	 */
 	public function init() {
-		// TODO: Settings works without adding as services.
 		wc_donation_manager()->services->add( Settings::instance() );
 		wc_donation_manager()->services->add( Menus::class );
 		wc_donation_manager()->services->add( Metaboxes::class );
@@ -98,7 +97,6 @@ class Admin {
 		$screen_ids = array(
 			'toplevel_page_wc-donation-manager',
 			'donation-manager_page_wcdm-donors',
-			'donation-manager_page_wcdm-tools',
 			'donation-manager_page_wcdm-settings',
 		);
 

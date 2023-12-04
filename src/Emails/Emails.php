@@ -22,7 +22,7 @@ class Emails {
 	 */
 	public function __construct() {
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_donation_order_email' ) );
-		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals' ), 10, 3 );
+		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals' ), 10, 2 );
 	}
 
 	/**
@@ -36,20 +36,19 @@ class Emails {
 	public function add_donation_order_email( $email_classes ) {
 		require_once __DIR__ . '/class-wc-donation-order-email.php';
 		$email_classes['WC_Donation_Order_Email'] = new WC_Donation_Order_Email();
-//
-		return $email_classes;
+				return $email_classes;
 	}
 
 	/**
-	 *  Add a custom email to the list of emails WooCommerce should load.
+	 *  Get order item total for donation product only.
 	 *
-	 * @param array $email_classes available email classes.
-	 * @return array filtered available email.
+	 * @param array  $total_rows Available order total rows.
+	 * @param Object $order Order object.
 	 *
 	 * @since 1.0.0
-	 * @return void
+	 * @return array
 	 */
-	public function order_item_totals( $total_rows, $order, $tax_display ) {
+	public function order_item_totals( $total_rows, $order ) {
 		$donation_total = 0;
 		foreach ( $order->get_items() as $item ) {
 			$product = $item->get_product();

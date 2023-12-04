@@ -96,13 +96,11 @@ class Plugin extends Lib\Plugin {
 		$this->services->add( Cart::class );
 		$this->services->add( Orders::class );
 		$this->services->add( Emails\Emails::class );
+		require_once __DIR__ . '/Donation/class-wc-product-donation.php';
 
 		if ( self::is_request( 'admin' ) ) {
 			$this->services->add( Admin\Admin::class );
 		}
-
-		// TODO: Need to include the WC_Product_Donation::class as service.
-		require_once __DIR__ . '/Donation/class-wc-product-donation.php';
 
 		if ( self::is_request( 'frontend' ) ) {
 			$this->services->add( Frontend\Frontend::class );
