@@ -14,16 +14,29 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
+		margin-bottom: 15px;
+		.suggested-amount{
+			&.selected{
+				background: #0a53be;
+				color: #ffffff;
+
+			;
+			}
+		}
 	}
 	.campaign-amount {
 		display: flex;
 		flex-direction: row;
-		margin: 15px 0;
+		margin-bottom: 15px;
 		label {
 			align-self: center;
 		}
 		#donation_amount {
 			align-self: center;
+		}
+		&.disabled{
+			display: none;
+			opacity: 0;
 		}
 	}
 }

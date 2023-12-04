@@ -158,7 +158,7 @@ class WC_Donation_Order_Email extends WC_Email {
 			'heading'    => array(
 				'title'       => 'Email Heading',
 				'type'        => 'text',
-				'description' => sprintf( __( 'This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>.' ), $this->heading ),
+				'description' => sprintf( __( 'This controls the main heading contained within the email notification. Leave blank to use the default heading: <code>%s</code>.', 'wc-donation-manager' ), $this->heading ),
 				'placeholder' => '',
 				'default'     => '',
 			),

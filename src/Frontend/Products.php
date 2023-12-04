@@ -73,8 +73,8 @@ class Products {
 			$currency_symbol       = get_woocommerce_currency_symbol();
 			$goal_amount           = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
 			$raised_amount         = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
-			$max_amount            = get_post_meta( $product->get_id(), '_wcdm_max_amount', true );
 			$is_predefined_amounts = get_post_meta( $product->get_id(), '_is_predefined_amounts', true );
+			$is_custom_amount      = get_post_meta( $product->get_id(), '_is_custom_amount', true );
 			?>
 			<div class="wc-donation-manager">
 				<div class="campaign-cause">
@@ -99,7 +99,7 @@ class Products {
 					<button class="suggested-amount" value="<?php echo esc_html( $predefined_amount ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?></button>
 				<?php endforeach; ?>
 				</div>
-				<div class="campaign-amount">
+				<div class="campaign-amount <?php echo sanitize_html_class( $is_custom_amount ? 'disabled' : '' ); ?>">
 					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( 'Other Amount (%1$s) :', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
 					<input type="number" name="donation_amount" id="donation_amount"
 							min="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
@@ -109,7 +109,6 @@ class Products {
 							class="input-text text"/>
 				</div>
 			</div>
-
 			<?php
 		}
 	}
