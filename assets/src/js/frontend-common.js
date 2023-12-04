@@ -1,44 +1,13 @@
 (function ($) {
-	var wcDonationManager = function() {
-
-		$('#suggested-amounts-01').on('click', function() {
-			$(this).addClass('selected');
-			$('#donation_amount').val($(this).val());
-
-			$('#suggested-amounts-02').removeClass('selected');
-			$('#suggested-amounts-03').removeClass('selected');
-			$('#suggested-amounts-04').removeClass('selected');
-		});
-
-		$('#suggested-amounts-02').on('click', function () {
-			$(this).addClass('selected');
-			$('#donation_amount').val($(this).val());
-
-			$('#suggested-amounts-01').removeClass('selected');
-			$('#suggested-amounts-03').removeClass('selected');
-			$('#suggested-amounts-04').removeClass('selected');
-		});
-
-		$('#suggested-amounts-03').on('click', function () {
-			$(this).addClass('selected');
-			$('#donation_amount').val($(this).val());
-
-			$('#suggested-amounts-01').removeClass('selected');
-			$('#suggested-amounts-02').removeClass('selected');
-			$('#suggested-amounts-04').removeClass('selected');
-		});
-
-		$('#suggested-amounts-04').on('click', function () {
-			$(this).addClass('selected');
-			$('#donation_amount').val($(this).val());
-
-			$('#suggested-amounts-01').removeClass('selected');
-			$('#suggested-amounts-02').removeClass('selected');
-			$('#suggested-amounts-03').removeClass('selected');
+	var suggestedAmounts = function () {
+		$( ".suggested-amount" ).each(function() {
+			$(this).on("click", function(){
+				$('#donation_amount').val(Number($(this).attr('value')).toFixed(2));
+			});
 		});
 	}
 	// Dom Ready
 	$(function () {
-		wcDonationManager();
+		suggestedAmounts();
 	});
 })(jQuery);

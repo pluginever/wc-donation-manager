@@ -17,7 +17,7 @@ class Metaboxes {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_filter( 'product_type_selector', array( __CLASS__, 'add_type' ) );
+		add_filter( 'product_type_selector', array( __CLASS__, 'add_product_type' ) );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_data' ) );
@@ -33,7 +33,7 @@ class Metaboxes {
 	 * @version 1.0.0
 	 * @return array array of product types.
 	 */
-	public static function add_type( $product_type ) {
+	public static function add_product_type( $product_type ) {
 		$product_type['donation'] = __( 'Donation', 'wc-donation-manager' );
 
 		return $product_type;
@@ -75,23 +75,57 @@ class Metaboxes {
 		echo '<div class="options_group show_if_donation">';
 		woocommerce_wp_text_input(
 			array(
-				'id'          => 'wcdm_amount',
-				'label'       => __( 'Default amount', 'wc-donation-manager' ),
-				'description' => __( 'Enter the default amount for the campaign.', 'wc-donation-manager' ),
-				'desc_tip'    => false,
-				'value'       => get_post_meta( get_the_ID(), '_price', true ),
-				'data_type'   => 'price',
+				'id'            => 'wcdm_amount',
+				'label'         => __( 'Default amount', 'wc-donation-manager' ),
+				'description'   => __( 'Enter the default amount for the campaign.', 'wc-donation-manager' ),
+				'desc_tip'      => false,
+				'value'         => get_post_meta( get_the_ID(), '_price', true ),
+				'data_type'     => 'price',
+				'wrapper_class' => 'options_group',
+			)
+		);
+
+		woocommerce_wp_checkbox(
+			array(
+				'id'          => '_is_predefined_amounts',
+				'label'       => __( 'Allow predefined amounts', 'wc-donation-manager' ),
+				'description' => __( 'When enabled donors will be able to donate by chosing an option from the predefined/suggested amounts.', 'wc-donation-manager' ),
+				'value'       => get_post_meta( get_the_ID(), '_is_predefined_amounts', true ),
+				'desc_tip'    => true,
 			)
 		);
 
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_goal_amount',
-				'label'       => __( 'Goal amount', 'wc-donation-manager' ),
-				'description' => __( 'Enter the goal amount for the campaign.', 'wc-donation-manager' ),
+				'id'          => '_predefined_amounts_title',
+				'label'       => __( 'Predefined amounts title', 'wc-donation-manager' ),
+				'description' => __( 'Enter the title text of predefined/suggested amounts for the campaign.', 'wc-donation-manager' ),
 				'desc_tip'    => false,
-				'value'       => get_post_meta( get_the_ID(), '_goal_amount', true ),
-				'data_type'   => 'price',
+				'value'       => get_post_meta( get_the_ID(), '_predefined_amounts_title', true ),
+				'data_type'   => 'text',
+			)
+		);
+
+		woocommerce_wp_text_input(
+			array(
+				'id'            => '_predefined_amounts',
+				'label'         => __( 'Predefined amounts', 'wc-donation-manager' ),
+				'description'   => __( 'Enter the list of predefined/suggested amounts for the campaign. Each amount should be separated by comma.', 'wc-donation-manager' ),
+				'desc_tip'      => false,
+				'value'         => get_post_meta( get_the_ID(), '_predefined_amounts', true ),
+				'data_type'     => 'text',
+				'wrapper_class' => 'options_group',
+			)
+		);
+
+		woocommerce_wp_checkbox(
+			array(
+				'id'            => '_is_custom_amount',
+				'label'         => __( 'Allow custom amount', 'wc-donation-manager' ),
+				'description'   => __( 'When enabled donors will be able to donate the custom amount.', 'wc-donation-manager' ),
+				'value'         => get_post_meta( get_the_ID(), '_is_custom_amount', true ),
+				'wrapper_class' => 'options_group',
+				'desc_tip'      => true,
 			)
 		);
 
@@ -168,7 +202,18 @@ class Metaboxes {
 					jQuery('#general_product_data ._tax_status_field').parent().addClass('show_if_donation').show();
 					<?php } ?>
 					jQuery('#woocommerce-product-data .type_box label[for=_downloadable].tips').addClass('show_if_donation').show();
-				})
+
+					jQuery('#_is_predefined_amounts').on( 'change', function() {
+						if ( jQuery(this).is(":checked") ) {
+							jQuery( '._predefined_amounts_title_field').show();
+							jQuery( '._predefined_amounts_field').show();
+						} else {
+							jQuery( '._predefined_amounts_title_field').hide();
+							jQuery( '._predefined_amounts_field').hide();
+						}
+					}).trigger('change');
+				});
+
 			</script>
 			<?php
 		}

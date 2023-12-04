@@ -69,11 +69,12 @@ class Products {
 	 */
 	public static function before_add_to_cart_button() {
 		global $product;
-		$currency_symbol = get_woocommerce_currency_symbol();
-		$goal_amount     = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
-		$raised_amount   = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
-		$max_amount      = get_post_meta( $product->get_id(), '_wcdm_max_amount', true );
 		if ( 'donation' === $product->get_type() ) {
+			$currency_symbol       = get_woocommerce_currency_symbol();
+			$goal_amount           = '' !== get_post_meta( get_the_ID(), '_goal_amount', true ) ? get_post_meta( get_the_ID(), '_goal_amount', true ) : '0';
+			$raised_amount         = '' !== get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) ? get_post_meta( get_the_ID(), 'wcdm_raised_amount', true ) : '0';
+			$max_amount            = get_post_meta( $product->get_id(), '_wcdm_max_amount', true );
+			$is_predefined_amounts = get_post_meta( $product->get_id(), '_is_predefined_amounts', true );
 			?>
 			<div class="wc-donation-manager">
 				<div class="campaign-cause">
@@ -86,12 +87,17 @@ class Products {
 					</div>
 					<progress id="campaign-progressbar" value="<?php esc_html_e( $raised_amount, 'wc-donation-manager' ); ?>" max="<?php esc_html_e( $goal_amount, 'wc-donation-manager' ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), $raised_amount ); // phpcs:ignore ?></progress>
 				</div>
-				<h4>Suggested amounts:</h4>
+				<?php
+				if ( $is_predefined_amounts ) {
+					printf( '<h4>%s</h4>', esc_html( get_post_meta( $product->get_id(), '_predefined_amounts_title', true ) ) );
+				}
+
+				$predefined_amounts = esc_html( get_post_meta( $product->get_id(), '_predefined_amounts', true ) );
+				?>
 				<div class="suggested-amounts">
-					<button id="suggested-amounts-01" value="<?php echo esc_html( ceil( ( $max_amount / 4 ) ) ); ?>" type="button"><?php echo esc_html( $currency_symbol . ceil( ( $max_amount / 4 ) ) ); ?></button>
-					<button id="suggested-amounts-02" value="<?php echo esc_html( ceil( ( $max_amount / 2 ) ) ); ?>" type="button"><?php echo esc_html( $currency_symbol . ceil( ( $max_amount / 2 ) ) ); ?></button>
-					<button id="suggested-amounts-03" value="<?php echo esc_html( ceil( ( $max_amount / 4 ) * 3 ) ); ?>" type="button"><?php echo esc_html( $currency_symbol . ceil( ( $max_amount / 4 ) * 3 ) ); ?></button>
-					<button id="suggested-amounts-04" value="<?php echo esc_html( $max_amount ); ?>" type="button"><?php echo esc_html( $currency_symbol . $max_amount ); ?></button>
+				<?php foreach ( explode( ',', $predefined_amounts ) as $predefined_amount ) : ?>
+					<button class="suggested-amount" value="<?php echo esc_html( $predefined_amount ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?></button>
+				<?php endforeach; ?>
 				</div>
 				<div class="campaign-amount">
 					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( 'Other Amount (%1$s) :', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>

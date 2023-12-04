@@ -34,8 +34,8 @@ class Emails {
 	 * @return array filtered available email.
 	 */
 	public function add_donation_order_email( $email_classes ) {
-		require_once __DIR__ . '/../class-wc-donation-order-email.php';
-		$email_classes['WC_Donation_Order_Email'] = new WC_Donation_Order_Email();
+//		require_once __DIR__ . '/../class-wc-donation-order-email.php';
+//		$email_classes['WC_Donation_Order_Email'] = new WC_Donation_Order_Email();
 
 		return $email_classes;
 	}

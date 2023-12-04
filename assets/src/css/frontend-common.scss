@@ -12,11 +12,8 @@
 	}
 	.suggested-amounts {
 		display: flex;
-		justify-content: space-between;
+		flex-wrap: wrap;
 		gap: 10px;
-		button {
-			width: 25%;
-		}
 	}
 	.campaign-amount {
 		display: flex;
