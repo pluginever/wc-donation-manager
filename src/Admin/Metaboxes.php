@@ -173,6 +173,29 @@ class Metaboxes {
 			)
 		);
 
+		$args = array(
+			'post_status' => 'publish',
+		);
+
+		$wcdm_campaigns   = wcdm_get_campaigns( $args );
+		$campaign_options = array(
+			'0' => 'Select a campaign',
+		);
+		foreach ( $wcdm_campaigns as $wcdm_campaign ) {
+			$campaign_options[ $wcdm_campaign->get_id() ] = sprintf( '%1$s (%2$s)', $wcdm_campaign->get_name(), $wcdm_campaign->get_id() );
+		}
+
+		woocommerce_wp_select(
+			array(
+				'id'          => '_wcdm_campaign_id',
+				'label'       => __( 'Select a campaign', 'wc-donation-manager' ),
+				'description' => __( 'Select a campaign to assign this donation product. After selected a campaign, the campaign cause & the goal amount will be inherited.', 'wc-donation-manager' ),
+				'desc_tip'    => true,
+				'options'     => $campaign_options,
+				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_campaign_id', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_campaign_id', true ) : '0',
+			)
+		);
+
 		woocommerce_wp_textarea_input(
 			array(
 				'id'          => '_wcdm_campaign_cause',
