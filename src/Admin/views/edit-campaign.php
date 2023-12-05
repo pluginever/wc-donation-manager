@@ -7,9 +7,10 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-$campaign_id     = filter_input( INPUT_GET, 'edit_campaign', FILTER_SANITIZE_NUMBER_INT );
-$campaign        = wcdm_get_campaign( $campaign_id );
-$currency_symbol = get_woocommerce_currency_symbol();
+$campaign_id       = filter_input( INPUT_GET, 'edit_campaign', FILTER_SANITIZE_NUMBER_INT );
+$campaign          = wcdm_get_campaign( $campaign_id );
+$currency_symbol   = get_woocommerce_currency_symbol();
+$campaign_products = wcdm_get_campaign_products( $campaign->get_id() );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Campaign', 'wc-donation-manager' ); ?></h1>
 <p><?php esc_html_e( 'Edit and update the campaign.', 'wc-donation-manager' ); ?></p>
@@ -118,3 +119,44 @@ $currency_symbol = get_woocommerce_currency_symbol();
 	<input type="hidden" name="id" value="<?php echo esc_attr( $campaign->get_id() ); ?>">
 	<?php wp_nonce_field( 'wcdm_edit_campaign' ); ?>
 </form>
+<?php if ( $campaign_products ) : ?>
+	<div class="campaign-products">
+		<div class="pev-poststuff">
+			<div class="column-1">
+				<div class="pev-card">
+					<div class="pev-card__header">
+						<h3 class="pev-card__title"><?php esc_html_e( 'Campaign Products', 'wc-donation-manager' ); ?></h3>
+					</div>
+					<div class="pev-card__body">
+						<table>
+							<?php
+							foreach ( $campaign_products as $campaign_product ) :
+								$edit_url = add_query_arg(
+									array(
+										'post' => $campaign_product->ID,
+									),
+									admin_url( 'post.php?action=edit' )
+								);
+								?>
+								<tr class="campaign-product">
+									<td>
+										<div class="product-thumbnail">
+											<a href="<?php echo esc_url( $edit_url ); ?>"><?php echo get_the_post_thumbnail( $campaign_product->ID, 'thumbnail' ); ?></a>
+										</div>
+										<div class="product-title">
+											<a href="<?php echo esc_url( $edit_url ); ?>"><strong><?php echo esc_html( $campaign_product->post_title ); ?></strong></a>
+											<div class="product-action">
+												<a href="<?php echo esc_url( $edit_url ); ?>"><?php esc_html_e( 'Edit', 'wc-donation-manager' ); ?></a>
+												<a href="<?php echo esc_url( get_the_permalink( $campaign_product->ID ) ); ?>" target="_blank"><?php esc_html_e( 'View', 'wc-donation-manager' ); ?></a>
+											</div>
+										</div>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

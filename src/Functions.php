@@ -58,11 +58,28 @@ function wcdm_get_campaign( $campaign ) {
 /**
  * Get campaign products.
  *
- * @param int $product_id The campaign product ID.
+ * @param int $campaign_id The campaign ID.
  *
  * @since 1.0.0
- * @return Campaign[]|int The campaigns.
+ * @return void|WP_Post[] The campaigns.
  */
+function wcdm_get_campaign_products( $campaign_id ) {
+	if ( ! $campaign_id ) {
+		return;
+	}
+
+	$args  = array(
+		'post_type'      => 'product',
+		'posts_per_page' => - 1,
+		'orderby'        => 'date',
+		'meta_key'       => '_wcdm_campaign_id', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		'meta_value'     => $campaign_id, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+		'order'          => 'ASC',
+	);
+	$query = new WP_Query( $args );
+
+	return $query->posts;
+}
 
 /**
  * Get the post title.
@@ -86,17 +103,17 @@ function wcdm_get_the_title( $post_id ) {
  * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
- * @return Donor[]|int The donors.
+ * @return array|int
  */
 function wcdm_get_donors( $args = array(), $count = false ) {
 	$defaults = array(
-		'limit' => -1,
-		'paged' => 1,
+		'limit'    => -1,
+		'paged'    => 1,
 		'paginate' => true,
-		'order' => 'DESC',
+		'order'    => 'DESC',
 	);
 	$args     = wp_parse_args( $args, $defaults );
-	$orders = wc_get_orders( $args );
+	$orders   = wc_get_orders( $args );
 
 	if ( $count ) {
 		return $orders->total;
@@ -116,23 +133,7 @@ function wcdm_get_donors( $args = array(), $count = false ) {
 	return $filtered_orders;
 }
 
-/**
- * Get donor.
- *
- * @param mixed $donor Donor object or ID.
- *
- * @version 1.0.0
- * @return Donor|null
- */
-function wcdm_get_donor( $donor ) {
-	$donor = new Donor( $donor );
 
-	if ( $donor->get_id() ) {
-		return $donor;
-	}
-
-	return null;
-}
 
 if ( ! function_exists( 'wc_get_email_order_items' ) ) {
 	/**

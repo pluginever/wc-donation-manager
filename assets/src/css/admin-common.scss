@@ -26,10 +26,9 @@
 			p{
 				width: 100%;
 			}
-			textarea,
-			input{
-				width: 100%;
-			}
+		}
+		&:last-child {
+			border-bottom: none;
 		}
 	}
 }
@@ -41,5 +40,36 @@
 	}
 	#campaign-progressbar {
 		width: 100%;
+	}
+}
+.campaign-products{
+	.campaign-product{
+		td{
+			display: flex;
+			gap: 15px;
+			border-bottom: 1px solid #f5f5f5;
+		}
+		.product-thumbnail{
+			img{
+				width: 60px;
+				height: auto;
+			}
+		}
+		.product-title{
+			align-self: center;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			a{
+				text-decoration: none;
+			}
+		}
+		.product-action{
+			display: flex;
+			gap: 10px;
+		}
+		&:last-child td{
+			border-bottom: none;
+		}
 	}
 }
