@@ -22,11 +22,11 @@ class Emails {
 	 */
 	public function __construct() {
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_donation_order_email' ) );
-		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals' ), 10, 2 );
+//		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals' ), 10, 2 );
 	}
 
 	/**
-	 *  Add a custom email to the list of emails WooCommerce should load.
+	 *  Add a donation email to the list of emails WooCommerce should load.
 	 *
 	 * @param array $email_classes available email classes.
 	 *
@@ -36,7 +36,8 @@ class Emails {
 	public function add_donation_order_email( $email_classes ) {
 		require_once __DIR__ . '/class-wc-donation-order-email.php';
 		$email_classes['WC_Donation_Order_Email'] = new WC_Donation_Order_Email();
-				return $email_classes;
+
+		return $email_classes;
 	}
 
 	/**

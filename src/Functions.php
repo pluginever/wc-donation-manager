@@ -134,7 +134,6 @@ function wcdm_get_donors( $args = array(), $count = false ) {
 }
 
 
-
 if ( ! function_exists( 'wc_get_email_order_items' ) ) {
 	/**
 	 * Get HTML for the order items to be shown in emails.
@@ -145,6 +144,7 @@ if ( ! function_exists( 'wc_get_email_order_items' ) ) {
 	 * @since 3.0.0
 	 * @return string
 	 */
+/*
 	function wc_get_email_order_items( $order, $args = array() ) {
 		ob_start();
 
@@ -187,4 +187,5 @@ if ( ! function_exists( 'wc_get_email_order_items' ) ) {
 
 		return apply_filters( 'woocommerce_email_order_items_table', ob_get_clean(), $order );
 	}
+*/
 }

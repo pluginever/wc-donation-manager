@@ -39,7 +39,7 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		public function add_to_cart_text() {
 			$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Donate Now', 'wc-donation-manager' ) : __( 'About donation', 'wc-donation-manager' );
 
-			return apply_filters( 'woocommerce_product_add_to_cart_text', $text, $this );
+			return apply_filters( 'wcdm_donation_product_add_to_cart_text', $text, $this );
 		}
 
 		/**
@@ -62,7 +62,7 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		public function single_add_to_cart_text() {
 			$text = get_option( 'wcdm_add_to_cart_btn_text', __( 'Donate Now', 'wc-donation-manager' ) );
 
-			return apply_filters( 'woocommerce_product_donation_add_to_cart_text', $text, $this );
+			return apply_filters( 'wcdm_donation_product_single_add_to_cart_text', $text, $this );
 		}
 
 		/**
@@ -75,7 +75,7 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 			/* translators: %s: Product title */
 			$text = $this->is_purchasable() && $this->is_in_stock() ? __( 'Add &ldquo;%s&rdquo; to your cart', 'wc-donation-manager' ) : __( 'Read more about &ldquo;%s&rdquo;', 'wc-donation-manager' );
 
-			return apply_filters( 'woocommerce_product_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
+			return apply_filters( 'wcdm_donation_product_add_to_cart_description', sprintf( $text, $this->get_name() ), $this );
 		}
 
 		/**
