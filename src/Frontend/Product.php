@@ -121,11 +121,12 @@ class Product {
 	 * @return void
 	 */
 	public static function add_to_cart_template() {
-		$campaign_id       = get_post_meta( get_the_ID(), '_wcdm_campaign_id', true );
-		$campaign_end_date = intval( str_replace( '-', '', get_post_meta( $campaign_id, '_end_date', true ) ) );
+		$campaign_id           = get_post_meta( get_the_ID(), '_wcdm_campaign_id', true );
+		$campaign_end_date     = intval( str_replace( '-', '', get_post_meta( $campaign_id, '_end_date', true ) ) );
+		$campaign_expired_text = get_option( 'wcdm_expired_text', __( 'The campaign expired!', 'wc-donation-manager' ) );
 
 		if ( intval( ( gmdate( 'Ymd' ) ) > $campaign_end_date ) ) {
-			printf( '%1$s%2$s%3$s', '<p class="expired">', esc_html__( 'The campaign expired!', 'wc-donation-manager' ), '</p>' );
+			printf( '%1$s%2$s%3$s', '<p class="expired">', esc_html( $campaign_expired_text ), '</p>' );
 			return;
 		}
 

@@ -200,7 +200,7 @@ class Metaboxes {
 			array(
 				'id'          => '_wcdm_campaign_cause',
 				'label'       => __( 'Campaign cause', 'wc-donation-manager' ),
-				'description' => __( 'Enter the cause of the campaign.', 'wc-donation-manager' ),
+				'description' => __( 'Enter the cause of the campaign. This will be override the assigned campaign cause text. Leave it empty to use the campaign default cause text.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
 				'placeholder' => 'Enter the cause of the campaign...',
 				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) : '',

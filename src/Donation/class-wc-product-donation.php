@@ -60,9 +60,9 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		 * @return string
 		 */
 		public function single_add_to_cart_text() {
-			$text = __( 'Donate Now', 'wc-donation-manager' );
+			$text = get_option( 'wcdm_add_to_cart_btn_text', __( 'Donate Now', 'wc-donation-manager' ) );
 
-			return apply_filters( 'woocommerce_product_single_add_to_cart_text', $text, $this );
+			return apply_filters( 'woocommerce_product_donation_add_to_cart_text', $text, $this );
 		}
 
 		/**
@@ -85,7 +85,11 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		 * @return bool
 		 */
 		public function is_taxable() {
-			return false;
+			if ( 'yes' === get_option( 'wcdm_disabled_tax', 'yes' ) ) {
+				return false;
+			}
+
+			return true;
 		}
 
 		/**

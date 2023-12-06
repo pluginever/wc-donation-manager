@@ -23,10 +23,9 @@ class Settings extends Lib\Settings {
 	public function get_tabs() {
 		$tabs = array(
 			'general'       => __( 'General', 'wc-donation-manager' ),
-			'advanced'      => __( 'Advanced', 'wc-donation-manager' ),
 			'emails'        => __( 'Emails', 'wc-donation-manager' ),
 			'fee_recurring' => __( 'Fee Recurring', 'wc-donation-manager' ),
-			'tributes'      => __( 'Tributes', 'wc-donation-manager' ),
+			'advanced'      => __( 'Advanced', 'wc-donation-manager' ),
 		);
 
 		return apply_filters( 'wc_donation_manager_settings_tabs', $tabs );
@@ -98,40 +97,10 @@ class Settings extends Lib\Settings {
 						'default'  => 'Donate Now',
 					),
 					array(
-						'title'   => __( 'Anonymous donation', 'wc-donation-manager' ),
-						'desc'    => __( 'Enable anonymous donation.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_anonymous_donation',
-						'default' => 'yes',
-						'type'    => 'checkbox',
-					),
-					array(
 						'title'    => __( 'Skip cart', 'wc-donation-manager' ),
 						'desc'     => __( 'Skip cart.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'This will redirect donors to the cart page after adding a donation product to the cart item.', 'wc-donation-manager' ),
 						'id'       => 'wcdm_skip_cart',
-						'default'  => 'yes',
-						'type'     => 'checkbox',
-					),
-					array(
-						'title'    => __( 'Editable cart item price', 'wc-donation-manager' ),
-						'desc'     => __( 'Editable cart item price.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'This will make the cart item price editable for the donation products only.', 'wc-donation-manager' ),
-						'id'       => 'wcdm_editable_cart_price',
-						'default'  => 'yes',
-						'type'     => 'checkbox',
-					),
-					array(
-						'title'   => __( 'Disabled order note', 'wc-donation-manager' ),
-						'desc'    => __( 'Disabled order note.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_disabled_order_note',
-						'default' => 'yes',
-						'type'    => 'checkbox',
-					),
-					array(
-						'title'    => __( 'Disabled coupon field', 'wc-donation-manager' ),
-						'desc'     => __( 'Disabled coupon field.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'This will disabled coupon fields from cart and checkout page if cart has at least a donation product.', 'wc-donation-manager' ),
-						'id'       => 'wcdm_disabled_coupon_field',
 						'default'  => 'yes',
 						'type'     => 'checkbox',
 					),
@@ -144,6 +113,29 @@ class Settings extends Lib\Settings {
 						'type'     => 'checkbox',
 					),
 					array(
+						'title'    => __( 'Editable cart item price', 'wc-donation-manager' ),
+						'desc'     => __( 'Editable cart item price.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'This will make the cart item price editable for the donation products only.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_editable_cart_price',
+						'default'  => 'yes',
+						'type'     => 'checkbox',
+					),
+					array(
+						'title'    => __( 'Disabled coupon field', 'wc-donation-manager' ),
+						'desc'     => __( 'Disabled coupon field.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'This will disabled coupon fields from cart and checkout page if cart has at least a donation product.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_disabled_coupon_field',
+						'default'  => 'yes',
+						'type'     => 'checkbox',
+					),
+					array(
+						'title'   => __( 'Disabled order note', 'wc-donation-manager' ),
+						'desc'    => __( 'Disabled order note.', 'wc-donation-manager' ),
+						'id'      => 'wcdm_disabled_order_note',
+						'default' => 'yes',
+						'type'    => 'checkbox',
+					),
+					array(
 						'title'    => __( 'Disabled tax', 'wc-donation-manager' ),
 						'desc'     => __( 'Disabled tax for donation.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Disabled the tax for donation product. This will hide tax status and tax class from product edit page as well if product type selected as donation.', 'wc-donation-manager' ),
@@ -152,10 +144,11 @@ class Settings extends Lib\Settings {
 						'type'     => 'checkbox',
 					),
 					array(
-						'title'    => __( 'Contribution text', 'wc-donation-manager' ),
-						'id'       => 'wcdm_contribution_text',
-						'desc'     => __( 'Enter the contribution text.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'Enter the contribution text.', 'wc-donation-manager' ),
+						'title'    => __( 'Campaign expired text', 'wc-donation-manager' ),
+						'desc'     => __( 'Enter the campaign expired text. This will be visible to the donation products if the campaign end date is exceeded.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Enter the campaign expired text. This will be visible to the donation products if the campaign end date is exceeded.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_expired_text',
+						'default'  => 'The campaign expired!',
 						'type'     => 'text',
 					),
 					array(
@@ -174,19 +167,27 @@ class Settings extends Lib\Settings {
 					),
 					array(
 						'title'    => __( 'Minimum amount', 'wc-donation-manager' ),
-						'id'       => 'wcdm_minimum_amount',
 						'desc'     => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the minimum amount. This will be apply globally if didn\'t set the minimum amount while creating campaigns.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_minimum_amount',
 						'type'     => 'text',
 						'default'  => '1',
 					),
 					array(
 						'title'    => __( 'Maximum amount', 'wc-donation-manager' ),
-						'id'       => 'wcdm_maximum_amount',
 						'desc'     => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'Enter the maximum amount. This will be apply globally if didn\'t set the maximum amount while creating campaigns.', 'wc-donation-manager' ),
+						'id'       => 'wcdm_maximum_amount',
 						'type'     => 'text',
 						'default'  => '100',
+					),
+					array(
+						'title'    => __( 'Delete plugin data', 'wc-email-attachments' ),
+						'desc'     => __( 'Delete plugin data.', 'wc-email-attachments' ),
+						'desc_tip' => __( 'Enabling this will delete all the data while uninstalling the plugin.', 'wc-email-attachments' ),
+						'id'       => 'wcdm_delete_data',
+						'default'  => 'no',
+						'type'     => 'checkbox',
 					),
 					array(
 						'type' => 'sectionend',
@@ -216,10 +217,9 @@ class Settings extends Lib\Settings {
 						'id'                => 'wcdm_default_recurring',
 						'type'              => 'select',
 						'options'           => array(
-							'recurring' => __( 'Recurring', 'wc-donation-manager' ),
-							'onetime'   => __( 'Onetime', 'wc-donation-manager' ),
+							'onetime' => __( 'Onetime', 'wc-donation-manager' ),
 						),
-						'default'           => 'lefrecurringt',
+						'default'           => 'onetime',
 						'custom_attributes' => array(
 							'data-cond-id'    => 'wcdm_enable_fee_recurring',
 							'data-cond-value' => 'yes',
