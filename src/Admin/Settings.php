@@ -22,10 +22,9 @@ class Settings extends Lib\Settings {
 	 */
 	public function get_tabs() {
 		$tabs = array(
-			'general'       => __( 'General', 'wc-donation-manager' ),
-			'emails'        => __( 'Emails', 'wc-donation-manager' ),
-			'fee_recurring' => __( 'Fee Recurring', 'wc-donation-manager' ),
-			'advanced'      => __( 'Advanced', 'wc-donation-manager' ),
+			'general'  => __( 'General', 'wc-donation-manager' ),
+			'emails'   => __( 'Emails', 'wc-donation-manager' ),
+			'advanced' => __( 'Advanced', 'wc-donation-manager' ),
 		);
 
 		return apply_filters( 'wc_donation_manager_settings_tabs', $tabs );
@@ -42,15 +41,6 @@ class Settings extends Lib\Settings {
 	public function get_settings( $tab ) {
 		$settings = array();
 
-		$pages        = get_pages();
-		$page_options = array(
-			'0' => 'Select a page',
-		);
-
-		foreach ( $pages as $page ) {
-			$page_options[ $page->ID ] = $page->post_title;
-		}
-
 		switch ( $tab ) {
 			case 'general':
 				$settings = array(
@@ -59,34 +49,6 @@ class Settings extends Lib\Settings {
 						'type'  => 'title',
 						'desc'  => __( 'The following options are the plugin general settings. Theses options affect how the plugin will work.', 'wc-donation-manager' ),
 						'id'    => 'general_options',
-					),
-					array(
-						'title'    => __( 'Success page', 'wc-donation-manager' ),
-						'desc'     => __( 'Select a success page. This page will display after completed the donation process. Leave blank for default Woocommerce success page.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'Select a success page. This page will display after completed the donation process. Leave blank for default Woocommerce success page.', 'wc-donation-manager' ),
-						'id'       => 'wcdm_success_page',
-						'type'     => 'select',
-						'options'  => $page_options,
-						'default'  => '0',
-					),
-					array(
-						'title'    => __( 'Donor wall page', 'wc-donation-manager' ),
-						'desc'     => __( 'Select a donor wall page. This page will display donor wall details.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'Select a donor wall page. This page will display donor wall details.', 'wc-donation-manager' ),
-						'id'       => 'wcdm_donor_wall_page',
-						'type'     => 'select',
-						'options'  => $page_options,
-						'default'  => '0',
-					),
-					array(
-						'type' => 'sectionend',
-						'id'   => 'general_options',
-					),
-					array(
-						'title' => __( 'Default Donation Settings', 'wc-donation-manager' ),
-						'type'  => 'title',
-						'desc'  => __( 'The following options are the plugin default donation settings. Theses options are the global settings for all the campaigns.', 'wc-donation-manager' ),
-						'id'    => 'general_donation_options',
 					),
 					array(
 						'title'    => __( 'Add to cart button text', 'wc-donation-manager' ),
@@ -153,7 +115,7 @@ class Settings extends Lib\Settings {
 					),
 					array(
 						'type' => 'sectionend',
-						'id'   => 'general_donation_options',
+						'id'   => 'general_options',
 					),
 				);
 				break;
@@ -192,42 +154,6 @@ class Settings extends Lib\Settings {
 					array(
 						'type' => 'sectionend',
 						'id'   => 'advanced_options',
-					),
-				);
-				break;
-			case 'fee_recurring':
-				$settings = array(
-					array(
-						'title' => __( 'Fee Recurring Settings', 'wc-donation-manager' ),
-						'type'  => 'title',
-						'desc'  => __( 'The following options are the fee recurring settings.', 'wc-donation-manager' ),
-						'id'    => 'fee_recurring_options',
-					),
-					array(
-						'title'   => __( 'Enable fee recurring', 'wc-donation-manager' ),
-						'desc'    => __( 'Enable the donation fee recurring.', 'wc-donation-manager' ),
-						'id'      => 'wcdm_enable_fee_recurring',
-						'default' => 'yes',
-						'type'    => 'checkbox',
-					),
-					array(
-						'title'             => __( 'Default fee recurring', 'wc-donation-manager' ),
-						'desc'              => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
-						'desc_tip'          => __( 'Select the default donation fee recurring option.', 'wc-donation-manager' ),
-						'id'                => 'wcdm_default_recurring',
-						'type'              => 'select',
-						'options'           => array(
-							'onetime' => __( 'Onetime', 'wc-donation-manager' ),
-						),
-						'default'           => 'onetime',
-						'custom_attributes' => array(
-							'data-cond-id'    => 'wcdm_enable_fee_recurring',
-							'data-cond-value' => 'yes',
-						),
-					),
-					array(
-						'type' => 'sectionend',
-						'id'   => 'fee_recurring_options',
 					),
 				);
 				break;
