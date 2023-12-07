@@ -94,7 +94,7 @@ class CampaignsListTable extends AbstractListTable {
 			'name'        => __( 'Name', 'wc-donation-manager' ),
 			'cause'       => __( 'Cause', 'wc-donation-manager' ),
 			'goal_amount' => __( 'Goal', 'wc-donation-manager' ),
-			'end_date' => __( 'End date', 'wc-donation-manager' ),
+			'end_date'    => __( 'End date', 'wc-donation-manager' ),
 			'status'      => __( 'Status', 'wc-donation-manager' ),
 		);
 	}
@@ -109,7 +109,7 @@ class CampaignsListTable extends AbstractListTable {
 		return array(
 			'name'        => array( 'post_title', true ),
 			'goal_amount' => array( 'goal_amount', true ),
-			'end_date'      => array( 'end_date', true ),
+			'end_date'    => array( 'end_date', true ),
 			'status'      => array( 'post_status', true ),
 		);
 	}

@@ -144,9 +144,9 @@ class Settings extends Lib\Settings {
 						'default'  => '100',
 					),
 					array(
-						'title'    => __( 'Delete plugin data', 'wc-email-attachments' ),
-						'desc'     => __( 'Delete plugin data.', 'wc-email-attachments' ),
-						'desc_tip' => __( 'Enabling this will delete all the data while uninstalling the plugin.', 'wc-email-attachments' ),
+						'title'    => __( 'Delete plugin data', 'wc-donation-manager' ),
+						'desc'     => __( 'Delete plugin data.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Enabling this will delete all the data while uninstalling the plugin.', 'wc-donation-manager' ),
 						'id'       => 'wcdm_delete_data',
 						'default'  => 'no',
 						'type'     => 'checkbox',

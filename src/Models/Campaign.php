@@ -28,11 +28,11 @@ class Campaign extends Data {
 	 * @var array All data.
 	 */
 	protected $data = array(
-		'name'              => '',
-		'cause'             => '',
-		'goal_amount'       => 0.00,
-		'end_date'       => '',
-		'status'            => 'publish',
+		'name'        => '',
+		'cause'       => '',
+		'goal_amount' => 0.00,
+		'end_date'    => '',
+		'status'      => 'publish',
 	);
 
 	/**
