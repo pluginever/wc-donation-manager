@@ -82,6 +82,7 @@ class Product {
 					<?php echo wp_kses_post( $campaign_cause ); ?>
 				</div>
 				<?php endif; ?>
+
 				<?php if ( $campaign_id ) : ?>
 				<div class="campaign-progress">
 					<div class="progress-label">
