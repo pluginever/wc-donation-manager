@@ -74,11 +74,14 @@ class Product {
 			$is_predefined_amounts = get_post_meta( $product->get_id(), '_is_predefined_amounts', true );
 			$is_custom_amount      = get_post_meta( $product->get_id(), '_is_custom_amount', true );
 			$campaign_id           = get_post_meta( $product->get_id(), '_wcdm_campaign_id', true );
+			$campaign_cause        = ! empty( get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true ) ) ? '<p>' . get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true ) . '</p>' : apply_filters( 'the_content', get_post_field( 'post_content', $campaign_id ) );
 			?>
 			<div class="wc-donation-manager">
+				<?php if ( $campaign_cause ) : ?>
 				<div class="campaign-cause">
-					<p><?php echo esc_textarea( get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true ) ); ?></p>
+					<?php echo wp_kses_post( $campaign_cause ); ?>
 				</div>
+				<?php endif; ?>
 				<?php if ( $campaign_id ) : ?>
 				<div class="campaign-progress">
 					<div class="progress-label">
@@ -89,18 +92,25 @@ class Product {
 				</div>
 				<?php endif; ?>
 				<?php
-				if ( $is_predefined_amounts ) {
-					printf( '<h4>%s</h4>', esc_html( get_post_meta( $product->get_id(), '_predefined_amounts_title', true ) ) );
-				}
-
-				$predefined_amounts = esc_html( get_post_meta( $product->get_id(), '_predefined_amounts', true ) );
-				?>
-				<div class="suggested-amounts">
-				<?php foreach ( explode( ',', $predefined_amounts ) as $predefined_amount ) : ?>
-					<button class="suggested-amount" value="<?php echo esc_html( $predefined_amount ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?></button>
-				<?php endforeach; ?>
-				</div>
-				<div class="campaign-amount <?php echo sanitize_html_class( $is_custom_amount ? '' : 'disabled' ); ?>">
+				if ( $is_predefined_amounts ) :
+					$predefined_amounts_title = get_post_meta( $product->get_id(), '_predefined_amounts_title', true );
+					$predefined_amounts       = esc_html( get_post_meta( $product->get_id(), '_predefined_amounts', true ) );
+					if ( $predefined_amounts_title ) {
+						printf( '<h4>%s</h4>', esc_html( $predefined_amounts_title ) );
+					}
+					if ( $predefined_amounts ) {
+						?>
+					<div class="suggested-amounts">
+						<button class="suggested-amount selected" value="<?php echo esc_html( $product->get_price() ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $product->get_price() ) ); ?></button>
+						<?php foreach ( explode( ',', $predefined_amounts ) as $predefined_amount ) : ?>
+							<?php if ( $predefined_amount ) { ?>
+							<button class="suggested-amount" value="<?php echo esc_html( $predefined_amount ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?></button>
+							<?php } ?>
+						<?php endforeach; ?>
+					<?php } ?>
+					</div>
+				<?php endif; ?>
+				<div class="campaign-amount <?php echo sanitize_html_class( 'yes' === $is_custom_amount ? '' : 'disabled' ); ?>">
 					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( 'Other Amount (%1$s) :', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
 					<input type="number" name="donation_amount" id="donation_amount"
 							min="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
@@ -125,7 +135,7 @@ class Product {
 		$campaign_end_date     = intval( str_replace( '-', '', get_post_meta( $campaign_id, '_end_date', true ) ) );
 		$campaign_expired_text = get_option( 'wcdm_expired_text', __( 'The campaign expired!', 'wc-donation-manager' ) );
 
-		if ( intval( ( gmdate( 'Ymd' ) ) > $campaign_end_date ) ) {
+		if ( $campaign_id && intval( ( gmdate( 'Ymd' ) ) > $campaign_end_date ) ) {
 			printf( '%1$s%2$s%3$s', '<p class="expired">', esc_html( $campaign_expired_text ), '</p>' );
 			return;
 		}

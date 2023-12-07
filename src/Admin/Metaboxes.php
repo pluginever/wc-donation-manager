@@ -123,7 +123,7 @@ class Metaboxes {
 				'id'            => '_is_custom_amount',
 				'label'         => __( 'Allow custom amount', 'wc-donation-manager' ),
 				'description'   => __( 'When enabled donors will be able to donate the custom amount.', 'wc-donation-manager' ),
-				'value'         => get_post_meta( get_the_ID(), '_is_custom_amount', true ),
+				'value'         => empty( get_post_meta( get_the_ID(), '_is_custom_amount', true ) ) ? 'yes' : get_post_meta( get_the_ID(), '_is_custom_amount', true ),
 				'wrapper_class' => 'options_group',
 				'desc_tip'      => true,
 			)
@@ -217,7 +217,7 @@ class Metaboxes {
 	 */
 	public static function admin_custom_js() {
 		global $pagenow, $typenow;
-		if ( isset( $pagenow ) && 'post.php' === $pagenow && isset( $typenow ) && 'product' === $typenow ) {
+		if ( isset( $pagenow ) && ( 'post.php' === $pagenow || 'post-new.php' === $pagenow ) && isset( $typenow ) && 'product' === $typenow ) {
 			?>
 			<script type='text/javascript'>
 				jQuery(document).ready(function () {
