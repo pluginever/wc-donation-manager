@@ -17,6 +17,13 @@ defined( 'ABSPATH' ) || exit;
 class WC_Donation_Order_Email extends \WC_Email {
 
 	/**
+	 * Donation amount.
+	 *
+	 * @var int
+	 */
+	protected $donation_amount;
+
+	/**
 	 * Set email defaults
 	 *
 	 * @since 0.1
@@ -26,8 +33,9 @@ class WC_Donation_Order_Email extends \WC_Email {
 		$this->customer_email = true;
 		$this->title          = __( 'Completed donation', 'wc-donation-manager' );
 		$this->description    = __( 'Donation order completed notification emails are sent when a customer places an donation order.', 'wc-donation-manager' );
-		$this->template_html  = 'emails/customer-completed-order.php';
-		$this->template_plain = 'emails/plain/customer-completed-order.php';
+		$this->template_html  = 'emails/customer-completed-donation.php';
+		$this->template_plain = 'emails/plain/customer-completed-donation.php';
+		$this->template_base  = WCDM_PATH . 'templates/';
 		$this->placeholders   = array(
 			'{order_date}'   => '',
 			'{order_number}' => '',
@@ -61,6 +69,13 @@ class WC_Donation_Order_Email extends \WC_Email {
 			$this->recipient                      = $this->object->get_billing_email();
 			$this->placeholders['{order_date}']   = wc_format_datetime( $this->object->get_date_created() );
 			$this->placeholders['{order_number}'] = $this->object->get_order_number();
+
+			foreach ( $order->get_items() as $item ) {
+				$product = $item->get_product();
+				if ( $product->is_type( 'donation' ) ) {
+					$this->donation_amount += (float) $item['subtotal'];
+				}
+			}
 		}
 
 		if ( $this->is_enabled() && $this->get_recipient() ) {
@@ -85,7 +100,10 @@ class WC_Donation_Order_Email extends \WC_Email {
 				'sent_to_admin'      => false,
 				'plain_text'         => false,
 				'email'              => $this,
-			)
+				'donation_amount'    => $this->donation_amount,
+			),
+			'',
+			$this->template_base,
 		);
 	}
 
@@ -104,7 +122,10 @@ class WC_Donation_Order_Email extends \WC_Email {
 				'sent_to_admin'      => false,
 				'plain_text'         => true,
 				'email'              => $this,
-			)
+				'donation_amount'    => $this->donation_amount,
+			),
+			'',
+			$this->template_base,
 		);
 	}
 

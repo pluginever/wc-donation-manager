@@ -22,7 +22,6 @@ class Emails {
 	 */
 	public function __construct() {
 		add_filter( 'woocommerce_email_classes', array( $this, 'add_donation_order_email' ) );
-//		add_filter( 'woocommerce_get_order_item_totals', array( $this, 'order_item_totals' ), 10, 2 );
 	}
 
 	/**
@@ -38,29 +37,5 @@ class Emails {
 		$email_classes['WC_Donation_Order_Email'] = new WC_Donation_Order_Email();
 
 		return $email_classes;
-	}
-
-	/**
-	 *  Get order item total for donation product only.
-	 *
-	 * @param array  $total_rows Available order total rows.
-	 * @param Object $order Order object.
-	 *
-	 * @since 1.0.0
-	 * @return array
-	 */
-	public function order_item_totals( $total_rows, $order ) {
-		$donation_total = 0;
-		foreach ( $order->get_items() as $item ) {
-			$product = $item->get_product();
-			if ( $product->is_type( 'donation' ) ) {
-				$donation_total += $item->get_total();
-			}
-		}
-
-		$total_rows['cart_subtotal']['value'] = floatval( $order->get_subtotal() - $donation_total );
-		$total_rows['order_total']['value']   = floatval( $order->get_total() - $donation_total );
-
-		return $total_rows;
 	}
 }
