@@ -115,10 +115,6 @@ function wcdm_get_donors( $args = array(), $count = false ) {
 	$args     = wp_parse_args( $args, $defaults );
 	$orders   = wc_get_orders( $args );
 
-	if ( $count ) {
-		return $orders->total;
-	}
-
 	$filtered_orders = array();
 	foreach ( $orders->orders as $order ) {
 		foreach ( $order->get_items() as $item ) {
@@ -128,6 +124,10 @@ function wcdm_get_donors( $args = array(), $count = false ) {
 				break;
 			}
 		}
+	}
+
+	if ( $count ) {
+		return count( $filtered_orders );
 	}
 
 	return $filtered_orders;

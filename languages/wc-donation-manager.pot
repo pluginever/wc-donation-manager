@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.0\n"
 "Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
-"POT-Creation-Date: 2023-12-07 06:27:23+00:00\n"
+"POT-Creation-Date: 2023-12-10 04:37:55+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -80,6 +80,10 @@ msgstr ""
 
 #: src/Admin/Actions.php:48 src/Admin/Actions.php:69
 msgid "Campaign saved successfully."
+msgstr ""
+
+#: src/Admin/Actions.php:122
+msgid "Suggested amounts"
 msgstr ""
 
 #: src/Admin/Actions.php:146 src/Admin/Actions.php:166
@@ -609,19 +613,19 @@ msgid "Campaign overview"
 msgstr ""
 
 #: src/Admin/views/edit-campaign.php:85 src/Admin/views/view-campaign.php:80
-#: src/Frontend/Product.php:85
+#: src/Frontend/Product.php:89
 #. translators: 1: WC currency symbol 2: Raised amount
 msgid "%1$s%2$.2f raised"
 msgstr ""
 
 #: src/Admin/views/edit-campaign.php:86 src/Admin/views/view-campaign.php:81
-#: src/Frontend/Product.php:86
+#: src/Frontend/Product.php:90
 #. translators: 1: WC currency symbol 2: Raised amount
 msgid "%1$s%2$.2f goal"
 msgstr ""
 
 #: src/Admin/views/edit-campaign.php:88 src/Admin/views/view-campaign.php:83
-#: src/Frontend/Product.php:88
+#: src/Frontend/Product.php:92
 #. translators: 1: Raised amount
 msgid "%1$s%%"
 msgstr ""
@@ -752,12 +756,12 @@ msgid ""
 "and it is now being processed:"
 msgstr ""
 
-#: src/Frontend/Product.php:104
+#: src/Frontend/Product.php:115
 #. translators: 1: WC currency symbol
 msgid "Other Amount (%1$s) :"
 msgstr ""
 
-#: src/Frontend/Product.php:126
+#: src/Frontend/Product.php:137
 msgid "The campaign expired!"
 msgstr ""
 

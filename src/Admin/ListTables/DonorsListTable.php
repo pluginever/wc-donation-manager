@@ -88,7 +88,7 @@ class DonorsListTable extends AbstractListTable {
 		return array(
 			'name'            => __( 'Name', 'wc-donation-manager' ),
 			'email'           => __( 'Email', 'wc-donation-manager' ),
-			'donation_amount' => __( 'Donation Amount.', 'wc-donation-manager' ),
+			'donation_amount' => __( 'Donation Amount', 'wc-donation-manager' ),
 			'order'           => __( 'Order', 'wc-donation-manager' ),
 			'type'            => __( 'Type', 'wc-donation-manager' ),
 		);
