@@ -32,8 +32,8 @@ class Menus {
 	 */
 	public function main_menu() {
 		add_menu_page(
-			esc_html__( 'Donation Manager', 'wc-donation-manager' ),
-			esc_html__( 'Donation Manager', 'wc-donation-manager' ),
+			esc_html__( 'Donations', 'wc-donation-manager' ),
+			esc_html__( 'Donations', 'wc-donation-manager' ),
 			'manage_options',
 			'wc-donation-manager',
 			null,
@@ -100,17 +100,6 @@ class Menus {
 	}
 
 	/**
-	 * Output tools page.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function output_tools_page() {
-		$page_hook = 'tools';
-		include __DIR__ . '/views/admin-page.php';
-	}
-
-	/**
 	 * Render campaigns content.
 	 *
 	 * @since 1.0.0
@@ -166,7 +155,7 @@ class Menus {
 			$email_templates,
 			function ( $email ) {
 				// Check if class name contains 'WC_Donation_Order_Email'.
-				return false !== strpos( get_class( $email ), 'WC_Donation_Order_Email' );
+				return str_contains( get_class( $email ), 'WC_Donation_Order_Email' );
 			}
 		);
 
