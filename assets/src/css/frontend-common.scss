@@ -16,11 +16,26 @@
 		gap: 10px;
 		margin-bottom: 15px;
 		.suggested-amount{
+			cursor: pointer;
+			padding: 10px 15px;
+			background: #f5f5f5;
+			color: #000000;
 			&.selected{
 				background: #0a53be;
 				color: #ffffff;
-
-			;
+				&:hover{
+					background: #0a53be;
+					color: #ffffff;
+				}
+			}
+			input {
+				position: absolute;
+				opacity: 0;
+				cursor: pointer;
+				display: none;
+			}
+			&:hover{
+				background: #eeeeee;
 			}
 		}
 	}
@@ -33,6 +48,9 @@
 		}
 		#donation_amount {
 			align-self: center;
+			&:focus{
+				outline: none;
+			}
 		}
 		&.disabled{
 			display: none;

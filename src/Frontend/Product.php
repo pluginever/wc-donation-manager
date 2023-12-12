@@ -102,10 +102,14 @@ class Product {
 					if ( $predefined_amounts ) {
 						?>
 					<div class="suggested-amounts">
-						<button class="suggested-amount selected" value="<?php echo esc_html( $product->get_price() ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $product->get_price() ) ); ?></button>
+						<label class="suggested-amount selected"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $product->get_price() ) ); ?>
+							<input type="radio" name="suggested-amount[]" value="<?php echo esc_html( $product->get_price() ); ?>" checked="checked">
+						</label>
 						<?php foreach ( explode( ',', $predefined_amounts ) as $predefined_amount ) : ?>
 							<?php if ( $predefined_amount ) { ?>
-							<button class="suggested-amount" value="<?php echo esc_html( $predefined_amount ); ?>" type="button"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?></button>
+								<label class="suggested-amount"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?>
+									<input type="radio" name="suggested-amount[]" value="<?php echo esc_html( $predefined_amount ); ?>">
+								</label>
 							<?php } ?>
 						<?php endforeach; ?>
 					<?php } ?>
