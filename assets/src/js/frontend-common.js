@@ -20,27 +20,13 @@
 
 		$('#donation_amount').on('change', function (){
 			let value = $(this).val();
-			// $(".suggested-amount").each(function() {
-			// 	$(this).removeClass('selected');
-			// });
-			console.log(value);
 			$("input[name='suggested-amount[]']").map(function () {
-				// return $(this).val();
-				let thiss = $(this).val();
-				$(".suggested-amount").each(function() {
-					$(this).removeClass('selected');
-					if(value == thiss ){
-						$(this).addClass('selected');
-					}
-				});
+				if ( value === $(this).val() ) {
+					$(this).parent().addClass('selected');
+				} else {
+					$(this).parent().removeClass('selected');
+				}
 			});
-
-			// console.log(arr);
-
-			// if($.inArray($(this).val(), arr) !== -1){
-				// e.addClass('selected');
-				// console.log('Hi modhu!');
-			// }
 		});
 	});
 }(jQuery));

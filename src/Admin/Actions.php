@@ -113,14 +113,17 @@ class Actions {
 	 * @return void
 	 */
 	public static function save_donation_meta( $product_id ) {
-		$price        = isset( $_POST['wcdm_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_amount'] ) ) : '';
-		$goal_amounts = isset( $_POST['_goal_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['_goal_amount'] ) ) : '';
+		$price              = isset( $_POST['wcdm_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_amount'] ) ) : '';
+		$goal_amounts       = isset( $_POST['_goal_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['_goal_amount'] ) ) : '';
+		$predefined_amounts = ! empty( $_POST['_predefined_amounts'] ) ? explode( ',', preg_replace( '/\s*/m', '', sanitize_text_field( wp_unslash( $_POST['_predefined_amounts'] ) ) ) ) : array();
+		$predefined_amounts = array_filter( array_unique( $predefined_amounts ) );
+
 		update_post_meta( $product_id, '_price', $price );
 		update_post_meta( $product_id, '_regular_price', $price );
 		update_post_meta( $product_id, '_goal_amount', $goal_amounts );
 		update_post_meta( $product_id, '_is_predefined_amounts', isset( $_POST['_is_predefined_amounts'] ) ? sanitize_text_field( wp_unslash( $_POST['_is_predefined_amounts'] ) ) : '' );
 		update_post_meta( $product_id, '_predefined_amounts_title', ( ! empty( $_POST['_predefined_amounts_title'] ) ? sanitize_text_field( wp_unslash( $_POST['_predefined_amounts_title'] ) ) : __( 'Suggested amounts', 'wc-donation-manager' ) ) );
-		update_post_meta( $product_id, '_predefined_amounts', ( ! empty( $_POST['_predefined_amounts'] ) ? sanitize_text_field( wp_unslash( $_POST['_predefined_amounts'] ) ) : '' ) );
+		update_post_meta( $product_id, '_predefined_amounts', $predefined_amounts );
 		update_post_meta( $product_id, '_is_custom_amount', isset( $_POST['_is_custom_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['_is_custom_amount'] ) ) : 'no' );
 		update_post_meta( $product_id, '_amount_increment_steps', ( ! empty( $_POST['_amount_increment_steps'] ) && is_numeric( $_POST['_amount_increment_steps'] ) ? number_format( wp_unslash( $_POST['_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ) );
 		update_post_meta( $product_id, '_wcdm_min_amount', ( ! empty( $_POST['_wcdm_min_amount'] ) && is_numeric( $_POST['_wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['_wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ) );

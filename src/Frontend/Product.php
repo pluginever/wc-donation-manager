@@ -95,7 +95,8 @@ class Product {
 				<?php
 				if ( $is_predefined_amounts ) :
 					$predefined_amounts_title = get_post_meta( $product->get_id(), '_predefined_amounts_title', true );
-					$predefined_amounts       = esc_html( get_post_meta( $product->get_id(), '_predefined_amounts', true ) );
+					$predefined_amounts       = get_post_meta( $product->get_id(), '_predefined_amounts', true );
+
 					if ( $predefined_amounts_title ) {
 						printf( '<h4>%s</h4>', esc_html( $predefined_amounts_title ) );
 					}
@@ -105,8 +106,8 @@ class Product {
 						<label class="suggested-amount selected"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $product->get_price() ) ); ?>
 							<input type="radio" name="suggested-amount[]" value="<?php echo esc_html( $product->get_price() ); ?>" checked="checked">
 						</label>
-						<?php foreach ( explode( ',', $predefined_amounts ) as $predefined_amount ) : ?>
-							<?php if ( $predefined_amount ) { ?>
+						<?php foreach ( $predefined_amounts as $predefined_amount ) : ?>
+							<?php if ( $predefined_amount && $product->get_price() !== $predefined_amount ) { ?>
 								<label class="suggested-amount"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $predefined_amount ) ); ?>
 									<input type="radio" name="suggested-amount[]" value="<?php echo esc_html( $predefined_amount ); ?>">
 								</label>
@@ -117,11 +118,11 @@ class Product {
 				<?php endif; ?>
 				<div class="campaign-amount <?php echo sanitize_html_class( 'yes' === $is_custom_amount ? '' : 'disabled' ); ?>">
 					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( '%1$s', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
-					<input type="number" name="donation_amount" id="donation_amount"
-							min="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
-							max="<?php echo esc_html( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>"
-							step="<?php echo esc_html( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ); ?>"
-							value="<?php echo esc_html( number_format( $product->get_price(), 2, '.', '' ) ); ?>"
+					<input type="<?php echo esc_attr( 'yes' === $is_custom_amount ? 'number' : 'hidden' ); ?>" name="donation_amount" id="donation_amount"
+							min="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
+							max="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>"
+							step="<?php echo esc_attr( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ); ?>"
+							value="<?php echo esc_attr( number_format( floatval( $product->get_price() ), 2, '.', '' ) ); ?>"
 							class="input-text text"/>
 				</div>
 			</div>
