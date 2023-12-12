@@ -112,7 +112,7 @@ class Metaboxes {
 				'label'         => __( 'Predefined amounts', 'wc-donation-manager' ),
 				'description'   => __( 'Enter the list of predefined/suggested amounts for the campaign. Each amount should be separated by comma.', 'wc-donation-manager' ),
 				'desc_tip'      => false,
-				'value'         => implode( ',', get_post_meta( get_the_ID(), '_predefined_amounts', true ) ),
+				'value'         => implode( ',', (array) get_post_meta( get_the_ID(), '_predefined_amounts', true ) ?? array() ),
 				'data_type'     => 'text',
 				'wrapper_class' => 'options_group',
 			)
