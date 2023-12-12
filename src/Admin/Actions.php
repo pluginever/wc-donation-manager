@@ -113,6 +113,7 @@ class Actions {
 	 * @return void
 	 */
 	public static function save_donation_meta( $product_id ) {
+		wp_verify_nonce( '_wpnonce' );
 		$price              = isset( $_POST['wcdm_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_amount'] ) ) : '';
 		$goal_amounts       = isset( $_POST['_goal_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['_goal_amount'] ) ) : '';
 		$predefined_amounts = ! empty( $_POST['_predefined_amounts'] ) ? explode( ',', preg_replace( '/\s*/m', '', sanitize_text_field( wp_unslash( $_POST['_predefined_amounts'] ) ) ) ) : array();
