@@ -71,6 +71,7 @@ class Cart {
 	 * @return bool
 	 */
 	public static function update_cart( $cart_updated ) {
+		wp_verify_nonce( '_wpnonce' );
 		if ( 'yes' !== get_option( 'wcdm_editable_cart_price', 'yes' ) ) {
 			return $cart_updated;
 		}
