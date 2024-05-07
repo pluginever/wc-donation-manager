@@ -111,9 +111,12 @@ function wcdm_get_donors( $args = array(), $count = false ) {
 		'paged'    => 1,
 		'paginate' => true,
 		'order'    => 'DESC',
+		'key'      => '_has_product_type',
+		'value'    => 'donation',
 	);
-	$args     = wp_parse_args( $args, $defaults );
-	$orders   = wc_get_orders( $args );
+
+	$args   = wp_parse_args( $args, $defaults );
+	$orders = wc_get_orders( $args );
 
 	$filtered_orders = array();
 	foreach ( $orders->orders as $order ) {

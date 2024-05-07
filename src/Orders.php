@@ -19,7 +19,36 @@ class Orders {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		//add_action( 'woocommerce_checkout_create_order', array( __CLASS__, 'before_checkout_create_order' ), 20 );
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
+	}
+
+	/**
+	 * Updating order custom metadata.
+	 *
+	 * This will add a custom order metadata if the order has donation product.
+	 *
+	 * @param \WC_Order $order Order object.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public static function before_checkout_create_order( $order ) {
+
+		$is_type_donation = false;
+
+		foreach ( $order->get_items() as $item_id => $item ) {
+			$product = $item->get_product();
+
+			if ( $product->is_type( 'donation' ) ) {
+				$is_type_donation = true;
+				break;
+			}
+		}
+
+		if ( true === $is_type_donation ) {
+			$order->update_meta_data( '_has_product_type', 'donation' );
+		}
 	}
 
 	/**

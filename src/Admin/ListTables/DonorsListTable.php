@@ -46,6 +46,7 @@ class DonorsListTable extends AbstractListTable {
 		$order_by     = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : ''; // phpcs:ignore
 		$order        = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : ''; // phpcs:ignore
 		$current_page = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1; // phpcs:ignore
+		$search       = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : ''; // phpcs:ignore
 
 		$args = array(
 			'status'   => array( 'wc-completed' ),
@@ -54,6 +55,7 @@ class DonorsListTable extends AbstractListTable {
 			'paginate' => true,
 			'orderby'  => $order_by,
 			'order'    => $order,
+			's'        => $search,
 		);
 
 		$this->items       = wcdm_get_donors( $args );
@@ -102,9 +104,8 @@ class DonorsListTable extends AbstractListTable {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'            => array( 'name', true ),
-			'donation_amount' => array( 'donation_amount', true ),
-			'type'            => array( 'type', true ),
+			'name' => array( 'name', true ),
+			'type' => array( 'type', true ),
 		);
 	}
 

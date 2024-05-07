@@ -1,14 +1,14 @@
-# Copyright (C) 2023 PluginEver
+# Copyright (C) 2024 PluginEver
 # This file is distributed under the same license as the WC Donation Manager package.
 msgid ""
 msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.0\n"
 "Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
-"POT-Creation-Date: 2023-12-11 06:35:20+00:00\n"
+"POT-Creation-Date: 2024-05-07 05:19:46+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: en\n"
@@ -48,33 +48,31 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: lib/Lib/Settings.php:96
+#: lib/Lib/Settings.php:97
 msgid "Settings saved."
 msgstr ""
 
-#: lib/Lib/Settings.php:310 lib/Lib/Settings.php:398 lib/Lib/Settings.php:406
-#: lib/Lib/Settings.php:414
+#: lib/Lib/Settings.php:236 lib/Lib/Settings.php:324
 msgid "Recommended"
 msgstr ""
 
-#: lib/Lib/Settings.php:311 lib/Lib/Settings.php:399 lib/Lib/Settings.php:407
-#: lib/Lib/Settings.php:415
+#: lib/Lib/Settings.php:237 lib/Lib/Settings.php:325
 msgid "Install Now"
 msgstr ""
 
-#: lib/Lib/Settings.php:370
+#: lib/Lib/Settings.php:296
 msgid "Need Help?"
 msgstr ""
 
-#: lib/Lib/Settings.php:429
+#: lib/Lib/Settings.php:339
 msgid "Join our Community"
 msgstr ""
 
-#: lib/Lib/Settings.php:433
+#: lib/Lib/Settings.php:343
 msgid "Request a Feature"
 msgstr ""
 
-#: lib/Lib/Settings.php:437
+#: lib/Lib/Settings.php:347
 msgid "Report a Bug"
 msgstr ""
 
@@ -82,15 +80,15 @@ msgstr ""
 msgid "Campaign saved successfully."
 msgstr ""
 
-#: src/Admin/Actions.php:122
+#: src/Admin/Actions.php:126
 msgid "Suggested amounts"
 msgstr ""
 
-#: src/Admin/Actions.php:146 src/Admin/Actions.php:166
+#: src/Admin/Actions.php:150 src/Admin/Actions.php:170
 msgid "Donor saved successfully."
 msgstr ""
 
-#: src/Admin/Actions.php:183
+#: src/Admin/Actions.php:187
 msgid "No, search term provided."
 msgstr ""
 
@@ -760,12 +758,12 @@ msgid ""
 "and it is now being processed:"
 msgstr ""
 
-#: src/Frontend/Product.php:145
+#: src/Frontend/Product.php:120
 #. translators: 1: WC currency symbol
 msgid "%1$s"
 msgstr ""
 
-#: src/Frontend/Product.php:167
+#: src/Frontend/Product.php:142
 msgid "The campaign expired!"
 msgstr ""
 
@@ -1059,11 +1057,38 @@ msgstr ""
 msgid "This is a dummy theme"
 msgstr ""
 
-#: vendor/wp-cli/wp-cli/php/utils-wp.php:246
+#: vendor/wp-cli/core-command/src/Core_Command.php:749
+msgid "Wildcard DNS may not be configured correctly."
+msgstr ""
+
+#: vendor/wp-cli/entity-command/src/Site_Command.php:157
+msgid "Uncategorized"
+msgstr ""
+
+#: vendor/wp-cli/export-command/src/WP_Export_XML_Over_HTTP.php:20
+#: vendor/wp-cli/export-command/src/WP_Export_XML_Over_HTTP.php:25
+msgid "Export Error"
+msgstr ""
+
+#: vendor/wp-cli/extension-command/src/WP_CLI/CommandWithUpgrade.php:770
+msgid " Try again"
+msgstr ""
+
+#: vendor/wp-cli/extension-command/src/WP_CLI/CommandWithUpgrade.php:776
+msgid "API error. Try Again."
+msgstr ""
+
+#: vendor/wp-cli/media-command/src/Media_Command.php:151
+msgid "image"
+msgid_plural "images"
+msgstr[0] ""
+msgstr[1] ""
+
+#: vendor/wp-cli/wp-cli/php/utils-wp.php:247
 msgid "Inactive Widgets"
 msgstr ""
 
-#: vendor/wp-cli/wp-cli/php/utils-wp.php:249
+#: vendor/wp-cli/wp-cli/php/utils-wp.php:250
 msgid "Drag widgets here to remove them from the sidebar but keep their settings."
 msgstr ""
 
@@ -1115,4 +1140,18 @@ msgstr ""
 #: src/PostTypes.php:38
 msgctxt "campaign"
 msgid "Add New"
+msgstr ""
+
+#: vendor/wp-cli/core-command/src/Core_Command.php:491
+#: vendor/wp-cli/core-command/src/Core_Command.php:565
+#. translators: placeholder is blog name
+#. translators: placeholder is user supplied title
+msgctxt "Default network name"
+msgid "%s Sites"
+msgstr ""
+
+#: vendor/wp-cli/entity-command/src/Site_Command.php:160
+#. translators: Default category slug
+msgctxt "Default category slug"
+msgid "Uncategorized"
 msgstr ""
