@@ -1,4 +1,4 @@
-===Donation Manager for WooCommerce===
+=== Donation Manager for WooCommerce ===
 Tags: donation, donations, donate, help, charitable, fund.
 Requires at least: 5.0
 Tested up to: 6.4
@@ -8,7 +8,6 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Easily manage donations and accept donation within your WooCommerce shop.
-
 
 == Description ==
 Donation Manager for WooCommerce is the most powerful WooCommerce donation plugin created for WooCommerce store owners.

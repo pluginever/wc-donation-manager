@@ -2,7 +2,7 @@
   "name": "wc-donation-manager",
   "title": "WC Donation Manager",
   "version": "1.0.0",
-  "description": "TBD.",
+  "description": "A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.",
   "homepage": "https://pluginever.com/plugins/wc-donation-manager/",
   "license": "GPL-3.0+",
   "prettier": "@wordpress/prettier-config",
@@ -20,9 +20,12 @@
     "start": "wp-scripts start",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "analyze-bundles": "cross-env WP_BUNDLE_ANALYZER=1 npm run build",
+    "reformat-files": "prettier --ignore-path .eslintignore --write \"**/*.{js,jsx,json,ts,tsx}\""
   },
   "devDependencies": {
+    "@wordpress/browserslist-config": "^4.1.0",
     "@lodder/time-grunt": "^4.0.0",
     "@wordpress/prettier-config": "^2.19.0",
     "@wordpress/scripts": "^26.6.0",
@@ -37,7 +40,8 @@
     "load-grunt-tasks": "^5.1.0",
     "mini-css-extract-plugin": "^2.7.6",
     "webpack-remove-empty-scripts": "^0.8.4",
-    "wp-prettier": "^2.8.5"
+    "wp-prettier": "^2.8.5",
+    "postcss-editor-styles": "^0.3.0"
   },
   "stylelint": {
     "extends": "@wordpress/stylelint-config",
@@ -49,8 +53,6 @@
     ]
   },
   "browserslist": [
-    "> 0.1%",
-    "ie 8",
-    "ie 9"
+    "extends @wordpress/browserslist-config"
   ]
 }

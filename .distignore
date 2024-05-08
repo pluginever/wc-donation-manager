@@ -83,3 +83,5 @@ Thumbs.db
 /assets/js
 /assets/css
 vendor
+lib
+development.md

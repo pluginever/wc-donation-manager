@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name:  WC Donation Manager
- * Description:  A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.
- * Version:      1.0.0
- * Plugin URI:   https://pluginever.com/plugins/wc-donation-manager/
- * Author:       PluginEver
- * Author URI:   https://pluginever.com/
- * Text Domain:  wc-donation-manager
+ * Plugin Name: WC Donation Manager
+ * Description: A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.
+ * Version: 1.0.0
+ * Plugin URI: https://pluginever.com/plugins/wc-donation-manager/
+ * Author: PluginEver
+ * Author URI: https://pluginever.com/
+ * Text Domain: wc-donation-manager
  * Domain Path: /languages/
  * Requires PHP: 5.6
  * WC requires at least: 3.0.0
@@ -25,44 +25,11 @@
  * GNU General Public License for more details.
  */
 
-use WooCommerceDonationManager\Plugin;
-
 // don't call the file directly.
 defined( 'ABSPATH' ) || exit();
 
-// Autoload function.
-spl_autoload_register(
-	function ( $class_name ) { // phpcs:ignore
-		$prefix = 'WooCommerceDonationManager\\';
-		$len    = strlen( $prefix );
-
-		// Bail out if the class name doesn't start with our prefix.
-		if ( strncmp( $prefix, $class_name, $len ) !== 0 ) {
-			return;
-		}
-
-		// Remove the prefix from the class name.
-		$relative_class = substr( $class_name, $len );
-		// Replace the namespace separator with the directory separator.
-		$file = str_replace( '\\', DIRECTORY_SEPARATOR, $relative_class ) . '.php';
-
-		// Look for the file in the src and lib directories.
-		$file_paths = array(
-			__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . $file,
-			__DIR__ . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . $file,
-		);
-
-		foreach ( $file_paths as $file_path ) {
-			if ( file_exists( $file_path ) ) {
-				require_once $file_path;
-				break;
-			}
-		}
-	}
-);
-
 /**
- * Plugin compatibility with WooCommerce HPOS
+ * Plugin compatibility with WooCommerce HPOS.
  *
  * @since 1.0.0
  * @return void
@@ -76,22 +43,4 @@ add_action(
 	}
 );
 
-/**
- * Get the plugin instance.
- *
- * @since 1.0.0
- * @return Plugin
- */
-function wc_donation_manager() { // phpcs:ignore
-	$data = array(
-		'file'         => __FILE__,
-		'settings_url' => admin_url( 'admin.php?page=wc-donation-manager' ),
-		'support_url'  => 'https://pluginever.com/support/',
-		'docs_url'     => 'https://pluginever.com/docs/wc-donation-manager/',
-	);
-
-	return Plugin::create( $data );
-}
-
-// Initialize the plugin.
-wc_donation_manager();
+// Welcome to the WooCommerce Donation Manager Plugin.

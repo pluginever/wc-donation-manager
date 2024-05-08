@@ -50,7 +50,5 @@ codeception.yml
 # Framework
 lib
 
-
 # Build
 assets/dist
-
