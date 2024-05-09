@@ -16,6 +16,7 @@ Donation Manager for WooCommerce is a powerful & user-friendly WordPress plugin 
 
 - **Donation Products:** Ability to create donation products.
 - **Donation Options:** Ability to update donation settings with the varieties of options.
+- **Donation Emails:** Ability to sent donation custom mail to the donors.
 
 == Installation ==
 
