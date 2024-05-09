@@ -1,0 +1,225 @@
+# Copyright (C) 2024 PluginEver
+# This file is distributed under the same license as the WC Donation Manager package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WC Donation Manager 1.0.0\n"
+"Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
+"POT-Creation-Date: 2024-05-09 10:18:25+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n 1.0.3\n"
+
+#: includes/Controllers/Admin.php:37
+msgid "Donation"
+msgstr ""
+
+#: includes/Controllers/Admin.php:59
+msgid "Donation Manager"
+msgstr ""
+
+#: includes/Controllers/Admin.php:80
+msgid "Default amount"
+msgstr ""
+
+#: includes/Controllers/Admin.php:81
+msgid "Enter the default amount for the campaign."
+msgstr ""
+
+#: includes/Controllers/Admin.php:92
+msgid "Allow custom amount"
+msgstr ""
+
+#: includes/Controllers/Admin.php:93
+msgid "When enabled donors will be able to donate the custom amount."
+msgstr ""
+
+#: includes/Controllers/Admin.php:104
+msgid "Amount increment steps"
+msgstr ""
+
+#: includes/Controllers/Admin.php:105
+msgid ""
+"Enter the amount increment steps for the campaign amount field. This will "
+"applicable for increasing or decreasing amounts on the campaign page."
+msgstr ""
+
+#: includes/Controllers/Admin.php:125
+msgid "Minimum amount"
+msgstr ""
+
+#: includes/Controllers/Admin.php:126
+msgid ""
+"Enter the minimum amount for the campaign. Default amount comes from the "
+"plugin global settings."
+msgstr ""
+
+#: includes/Controllers/Admin.php:136
+msgid "Maximum amount"
+msgstr ""
+
+#: includes/Controllers/Admin.php:137
+msgid ""
+"Enter the maximum amount for the campaign. Default amount comes from the "
+"plugin global settings."
+msgstr ""
+
+#: includes/Controllers/Admin.php:147
+msgid "Enable fast checkout"
+msgstr ""
+
+#: includes/Controllers/Admin.php:148
+msgid ""
+"This will redirect donors to the checkout page after adding a donation "
+"product to the cart item."
+msgstr ""
+
+#: includes/Controllers/Admin.php:157
+msgid "Campaign cause"
+msgstr ""
+
+#: includes/Controllers/Admin.php:158
+msgid ""
+"Enter the cause of the campaign. This will be override the assigned "
+"campaign cause text. Leave it empty to use the campaign default cause text."
+msgstr ""
+
+#: includes/Controllers/Product.php:99
+#. translators: 1: WC currency symbol
+msgid "%1$s"
+msgstr ""
+
+#: includes/Donation/class-wc-product-donation.php:42
+#: includes/Donation/class-wc-product-donation.php:65
+msgid "Donate Now"
+msgstr ""
+
+#: includes/Donation/class-wc-product-donation.php:42
+msgid "About donation"
+msgstr ""
+
+#: includes/Donation/class-wc-product-donation.php:76
+#. translators: %s: Product title
+msgid "Add &ldquo;%s&rdquo; to your cart"
+msgstr ""
+
+#: includes/Donation/class-wc-product-donation.php:76
+msgid "Read more about &ldquo;%s&rdquo;"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:34
+msgid "Completed donation"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:35
+msgid ""
+"Donation order completed notification emails are sent when a customer "
+"places an donation order."
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:171
+#. translators: 1: Email subject
+msgid ""
+"This controls the email subject line. Leave blank to use the default "
+"subject: %s."
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:179
+#. translators: 1: Email heading
+msgid ""
+"This controls the main heading contained within the email notification. "
+"Leave blank to use the default heading: %s."
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:185
+msgid "Additional content"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:186
+msgid ""
+"Text to appear below the main email content. Available placeholders: "
+"{site_title}, {site_address}, {site_url}, {order_date}, {order_number}"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:190
+msgid "N/A"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:194
+msgid "Email type"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:196
+msgid "Choose which format of email to send."
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:212
+msgid "Your {site_title} donation has been received!"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:222
+msgid "Thank you for your donation"
+msgstr ""
+
+#: includes/Emails/class-wc-donation-order-email.php:231
+msgid ""
+"Just to let you know — we've received your donation order #{order_number}, "
+"and it is now being processed:"
+msgstr ""
+
+#: templates/emails/customer-completed-donation.php:19
+#: templates/emails/plain/customer-completed-donation.php:16
+#. translators: %s: Customer first name
+msgid "Hi %s,"
+msgstr ""
+
+#: templates/emails/customer-completed-donation.php:20
+#: templates/emails/plain/customer-completed-donation.php:18
+#. translators: %s: Site title
+msgid "We have finished processing your donation."
+msgstr ""
+
+#: templates/emails/customer-completed-donation.php:22
+#: templates/emails/plain/customer-completed-donation.php:22
+#. translators: 1: Woocommerce currency symbol 2: Donated amount
+msgid "Your donated amount: %1$s%2$.2f"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "WC Donation Manager"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://pluginever.com/plugins/wc-donation-manager/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"A powerful and user-friendly WordPress plugin designed to seamlessly "
+"integrate donation functionality into the WooCommerce platform. This plugin "
+"is the ultimate solution for effortlessly managing and receiving donations "
+"for a charitable organization, a non-profit, or a business looking to "
+"support a cause."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "PluginEver"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://pluginever.com/"
+msgstr ""

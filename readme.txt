@@ -1,7 +1,7 @@
 === Donation Manager for WooCommerce ===
-Tags: donation, donations, donate, help, charitable, fund.
+Tags: donation, donations, donate, help, charitable
 Requires at least: 5.0
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -10,14 +10,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Easily manage donations and accept donation within your WooCommerce shop.
 
 == Description ==
-Donation Manager for WooCommerce is the most powerful WooCommerce donation plugin created for WooCommerce store owners.
+Donation Manager for WooCommerce is a powerful & user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.
 
 === ✨ Donation Manager for WooCommerce Features: ===
 
-- **Donation Campaign Options:** Ability to create donation campaign with the varieties of campaign options.
 - **Donation Products:** Ability to create donation products.
-- **Doners data:** Ability to track doners list with the donation amount.
-- **Donation Settings:** Ability to update donation settings with the varieties of plugin options.
+- **Donation Options:** Ability to update donation settings with the varieties of options.
 
 == Installation ==
 
@@ -31,7 +29,7 @@ Donation Manager for WooCommerce is the most powerful WooCommerce donation plugi
 
 = Automatic installation =
 
-Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't need to leave your web browser. To do an automatic install of Donation Manager for WooCommerce, log in to your WordPress dashboard, navigate to the Plugins menu and click "Add New".
+Automatic installation is the easiest option as WordPress handles the file transfers itself, and you don't need to leave your web browser. To do an automatic installation of Donation Manager for WooCommerce, log in to your WordPress dashboard, navigate to the Plugins menu and click "Add New".
 
 In the search field type "Donation Manager for WooCommerce" and click Search Plugins. Once you have found the plugin you can view details about it such as plugin version, rating, and description. Most importantly, of course, you can install it by simply clicking "Install Now".
 

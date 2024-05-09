@@ -1,0 +1,32 @@
+// Product single page
+.wc-donation-manager {
+	.campaign-amount {
+		display: flex;
+		flex-direction: row;
+		margin-bottom: 15px;
+		label {
+			align-self: center;
+		}
+		#donation_amount {
+			align-self: center;
+			&:focus{
+				outline: none;
+			}
+		}
+		&.disabled{
+			display: none;
+			opacity: 0;
+		}
+	}
+}
+// Cart page
+.donation-product-price {
+	display: flex;
+	flex-direction: row;
+	label {
+		align-self: center;
+	}
+	#donation_amount {
+		align-self: center;
+	}
+}

@@ -65,8 +65,8 @@ module.exports = function( grunt ) {
 					options: {
 						domainPath: 'languages',
 						exclude: [ 'packages/*', '.git/*', 'node_modules/*', 'tests/*' ],
-						mainFile: '<%= package.name %>.php',
-						potFilename: '<%= package.name %>.pot',
+						mainFile: 'wc-donation-manager.php',
+						potFilename: 'wc-donation-manager.pot',
 						potHeaders: {
 							'report-msgid-bugs-to': '<%= package.homepage %>',
 							'project-id-version': '<%= package.title %> <%= package.version %>',
@@ -74,7 +74,7 @@ module.exports = function( grunt ) {
 							'x-poedit-keywordslist': true,
 						},
 						type: 'wp-plugin',
-						updateTimestamp: false,
+						// updateTimestamp: false,
 					},
 				},
 			},
