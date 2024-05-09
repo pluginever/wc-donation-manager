@@ -1,4 +1,5 @@
 === Donation Manager for WooCommerce ===
+Contributors: pluginever
 Tags: donation, donations, donate, help, charitable
 Requires at least: 5.0
 Tested up to: 6.5
