@@ -96,7 +96,7 @@ class Product {
 				<?php endif; ?>
 
 				<div class="campaign-amount <?php echo sanitize_html_class( 'yes' === $is_custom_amount ? '' : 'disabled' ); ?>">
-					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( '%1$s', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
+					<label for="donation_amount" class="input-text"><?php echo esc_html( $currency_symbol ); ?></label>
 					<input type="<?php echo esc_attr( 'yes' === $is_custom_amount ? 'number' : 'hidden' ); ?>" name="donation_amount" id="donation_amount" min="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>" step="<?php echo esc_attr( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ); ?>" value="<?php echo esc_attr( number_format( floatval( $product->get_price() ), 2, '.', '' ) ); ?>" class="input-text text"/>
 				</div>
 			</div>
