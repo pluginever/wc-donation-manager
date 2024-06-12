@@ -12,7 +12,7 @@
  * Requires PHP: 5.6
  * Tested up to: 6.5
  * WC requires at least: 3.0.0
- * WC tested up to: 8.8
+ * WC tested up to: 8.9
  *
  * @package WooCommerceDonationManager
  *
