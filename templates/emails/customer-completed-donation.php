@@ -2,8 +2,8 @@
 /**
  * Customer completed donation email
  *
+ * @since 1.0.0
  * @package WooCommerceDonationManager\Templates\Emails
- * @version 3.7.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

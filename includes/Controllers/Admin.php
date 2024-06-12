@@ -1,6 +1,6 @@
 <?php
 
-namespace PluginEver\WooCommerceDonationManager\Controllers;
+namespace WooCommerceDonationManager\Controllers;
 
 defined( 'ABSPATH' ) || exit; // Exist if accessed directly.
 
@@ -18,6 +18,7 @@ class Admin {
 	 */
 	public function __construct() {
 		add_filter( 'product_type_selector', array( __CLASS__, 'add_product_type' ) );
+		add_filter( 'woocommerce_product_class', array( __CLASS__, 'product_type_class' ), 10, 2 );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_data' ) );
@@ -37,6 +38,23 @@ class Admin {
 		$product_type['donation'] = __( 'Donation', 'wc-donation-manager' );
 
 		return $product_type;
+	}
+
+	/**
+	 * Add "Donation" product class.
+	 *
+	 * @param string $class_name Class name.
+	 * @param string $product_type Product type name.
+	 *
+	 * @version 1.0.0
+	 * @return string Class name.
+	 */
+	public static function product_type_class( $class_name, $product_type ) {
+		if ( 'donation' === $product_type ) {
+			$class_name = 'WCDM_Donation_Product';
+		}
+
+		return $class_name;
 	}
 
 	/**
@@ -88,19 +106,19 @@ class Admin {
 
 		woocommerce_wp_checkbox(
 			array(
-				'id'            => '_is_custom_amount',
+				'id'            => 'wcdm_is_custom_amount',
 				'label'         => __( 'Allow custom amount', 'wc-donation-manager' ),
 				'description'   => __( 'When enabled donors will be able to donate the custom amount.', 'wc-donation-manager' ),
-				'value'         => empty( get_post_meta( get_the_ID(), '_is_custom_amount', true ) ) ? 'yes' : get_post_meta( get_the_ID(), '_is_custom_amount', true ),
+				'value'         => empty( get_post_meta( get_the_ID(), 'wcdm_is_custom_amount', true ) ) ? 'yes' : get_post_meta( get_the_ID(), 'wcdm_is_custom_amount', true ),
 				'wrapper_class' => 'options_group',
 				'desc_tip'      => true,
 			)
 		);
 
-		$amount_increment = get_post_meta( get_the_ID(), '_amount_increment_steps', true );
+		$amount_increment = get_post_meta( get_the_ID(), 'wcdm_amount_increment_steps', true );
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_amount_increment_steps',
+				'id'          => 'wcdm_amount_increment_steps',
 				'label'       => __( 'Amount increment steps', 'wc-donation-manager' ),
 				'description' => __( 'Enter the amount increment steps for the campaign amount field. This will applicable for increasing or decreasing amounts on the campaign page.', 'wc-donation-manager' ),
 				'desc_tip'    => false,
@@ -121,44 +139,44 @@ class Admin {
 		echo '<div id="wcdm_tab_data" class="panel woocommerce_options_panel wcdm_tab_data_options"><div class="options_group show_if_donation">';
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_wcdm_min_amount',
+				'id'          => 'wcdm_min_amount',
 				'label'       => __( 'Minimum amount', 'wc-donation-manager' ),
 				'description' => __( 'Enter the minimum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) : intval( '1' ),
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_min_amount', true ) : intval( '1' ),
 				'data_type'   => 'price',
 			)
 		);
 
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_wcdm_max_amount',
+				'id'          => 'wcdm_max_amount',
 				'label'       => __( 'Maximum amount', 'wc-donation-manager' ),
 				'description' => __( 'Enter the maximum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) : intval( '1000' ),
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_max_amount', true ) : intval( '1000' ),
 				'data_type'   => 'price',
 			)
 		);
 
 		woocommerce_wp_checkbox(
 			array(
-				'id'          => '_wcdm_is_fast_checkout',
+				'id'          => 'wcdm_is_fast_checkout',
 				'label'       => __( 'Enable fast checkout', 'wc-donation-manager' ),
 				'description' => __( 'This will redirect donors to the checkout page after adding a donation product to the cart item.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
-				'value'       => empty( get_post_meta( get_the_ID(), '_wcdm_is_fast_checkout', true ) ) ? 'no' : get_post_meta( get_the_ID(), '_wcdm_is_fast_checkout', true ),
+				'value'       => empty( get_post_meta( get_the_ID(), 'wcdm_is_fast_checkout', true ) ) ? 'no' : get_post_meta( get_the_ID(), 'wcdm_is_fast_checkout', true ),
 			)
 		);
 
 		woocommerce_wp_textarea_input(
 			array(
-				'id'          => '_wcdm_campaign_cause',
+				'id'          => 'wcdm_campaign_cause',
 				'label'       => __( 'Campaign cause', 'wc-donation-manager' ),
 				'description' => __( 'Enter the cause of the campaign. This will be override the assigned campaign cause text. Leave it empty to use the campaign default cause text.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
 				'placeholder' => 'Enter the cause of the campaign...',
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) : '',
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_campaign_cause', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_campaign_cause', true ) : '',
 			)
 		);
 		echo '</div></div>';
@@ -179,11 +197,11 @@ class Admin {
 
 		update_post_meta( $product_id, '_price', $price );
 		update_post_meta( $product_id, '_regular_price', $price );
-		update_post_meta( $product_id, '_is_custom_amount', isset( $_POST['_is_custom_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['_is_custom_amount'] ) ) : 'no' );
-		update_post_meta( $product_id, '_wcdm_is_fast_checkout', isset( $_POST['_wcdm_is_fast_checkout'] ) ? sanitize_text_field( wp_unslash( $_POST['_wcdm_is_fast_checkout'] ) ) : 'no' );
-		update_post_meta( $product_id, '_amount_increment_steps', ( ! empty( $_POST['_amount_increment_steps'] ) && is_numeric( $_POST['_amount_increment_steps'] ) ? number_format( wp_unslash( $_POST['_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ) );
-		update_post_meta( $product_id, '_wcdm_min_amount', ( ! empty( $_POST['_wcdm_min_amount'] ) && is_numeric( $_POST['_wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['_wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ) );
-		update_post_meta( $product_id, '_wcdm_max_amount', ( ! empty( $_POST['_wcdm_max_amount'] ) && is_numeric( $_POST['_wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['_wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ) );
-		update_post_meta( $product_id, '_wcdm_campaign_cause', ( ! empty( $_POST['_wcdm_campaign_cause'] ) ? sanitize_text_field( wp_unslash( $_POST['_wcdm_campaign_cause'] ) ) : '' ) );
+		update_post_meta( $product_id, 'wcdm_is_custom_amount', isset( $_POST['wcdm_is_custom_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_custom_amount'] ) ) : 'no' );
+		update_post_meta( $product_id, 'wcdm_is_fast_checkout', isset( $_POST['wcdm_is_fast_checkout'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_fast_checkout'] ) ) : 'no' );
+		update_post_meta( $product_id, 'wcdm_amount_increment_steps', ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( wp_unslash( $_POST['wcdm_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ) );
+		update_post_meta( $product_id, 'wcdm_min_amount', ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ) );
+		update_post_meta( $product_id, 'wcdm_max_amount', ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ) );
+		update_post_meta( $product_id, 'wcdm_campaign_cause', ( ! empty( $_POST['wcdm_campaign_cause'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_campaign_cause'] ) ) : '' ) );
 	}
 }

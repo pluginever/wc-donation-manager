@@ -1,6 +1,6 @@
 <?php
 
-namespace PluginEver\WooCommerceDonationManager\Controllers;
+namespace WooCommerceDonationManager\Controllers;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * This class is responsible for all frontend functionality for products shop/archive page.
  *
  * @since 1.0.0
- * @package PluginEver\WooCommerceDonationManager\Controllers
+ * @package WooCommerceDonationManager\Controllers
  */
 class Product {
 	/**
@@ -83,8 +83,8 @@ class Product {
 		global $product;
 		if ( 'donation' === $product->get_type() ) {
 			$currency_symbol  = get_woocommerce_currency_symbol();
-			$is_custom_amount = get_post_meta( $product->get_id(), '_is_custom_amount', true );
-			$campaign_cause   = get_post_meta( $product->get_id(), '_wcdm_campaign_cause', true );
+			$is_custom_amount = get_post_meta( $product->get_id(), 'wcdm_is_custom_amount', true );
+			$campaign_cause   = get_post_meta( $product->get_id(), 'wcdm_campaign_cause', true );
 			?>
 			<div class="wc-donation-manager">
 				<?php if ( $campaign_cause ) : ?>
@@ -97,7 +97,7 @@ class Product {
 
 				<div class="campaign-amount <?php echo sanitize_html_class( 'yes' === $is_custom_amount ? '' : 'disabled' ); ?>">
 					<label for="donation_amount" class="input-text"><?php echo esc_html( $currency_symbol ); ?></label>
-					<input type="<?php echo esc_attr( 'yes' === $is_custom_amount ? 'number' : 'hidden' ); ?>" name="donation_amount" id="donation_amount" min="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>" step="<?php echo esc_attr( get_post_meta( $product->get_id(), '_amount_increment_steps', true ) ); ?>" value="<?php echo esc_attr( number_format( floatval( $product->get_price() ), 2, '.', '' ) ); ?>" class="input-text text"/>
+					<input type="<?php echo esc_attr( 'yes' === $is_custom_amount ? 'number' : 'hidden' ); ?>" name="donation_amount" id="donation_amount" min="<?php echo esc_attr( get_post_meta( $product->get_id(), 'wcdm_min_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $product->get_id(), 'wcdm_max_amount', true ) ); ?>" step="<?php echo esc_attr( get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ) ); ?>" value="<?php echo esc_attr( number_format( floatval( $product->get_price() ), 2, '.', '' ) ); ?>" class="input-text text"/>
 				</div>
 			</div>
 			<?php
@@ -120,7 +120,7 @@ class Product {
 		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? sanitize_key( wp_unslash( $_POST['add-to-cart'] ) ) : '' );
 		if ( $product_id ) {
 			$product = wc_get_product( $product_id );
-			if ( $product->is_type( 'donation' ) && 'yes' === get_post_meta( $product_id, '_wcdm_is_fast_checkout', true ) ) {
+			if ( $product->is_type( 'donation' ) && 'yes' === get_post_meta( $product_id, 'wcdm_is_fast_checkout', true ) ) {
 				return wc_get_checkout_url();
 			}
 		}

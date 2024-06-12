@@ -1,16 +1,24 @@
 <?php
+/**
+ * Class WCDM_Donation_Product.
+ *
+ * @since 1.0.0
+ * @package WooCommerceDonationManager\Donation
+ */
 
 defined( 'ABSPATH' ) || exit;
 
 if ( class_exists( 'WC_Product_Simple' ) ) {
 
 	/**
-	 * Class WC_Product_Donation
+	 * Class WCDM_Donation_Product
 	 * Donation Product Type.
+	 *
+	 * @extends \WC_Product_Simple
 	 *
 	 * @since 1.0.0
 	 */
-	class WC_Product_Donation extends \WC_Product_Simple {
+	class WCDM_Donation_Product extends \WC_Product_Simple {
 
 		/**
 		 * Return the product type donation.

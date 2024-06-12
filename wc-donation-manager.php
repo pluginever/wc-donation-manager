@@ -14,7 +14,7 @@
  * WC requires at least: 3.0.0
  * WC tested up to: 8.8
  *
- * @package PluginEver\WooCommerceDonationManager
+ * @package WooCommerceDonationManager
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,7 @@
  * GNU General Public License for more details.
  */
 
-namespace PluginEver\WooCommerceKeyManager;
-
-use PluginEver\WooCommerceDonationManager\Plugin;
+use WooCommerceDonationManager\Plugin;
 
 // Don't call the file directly.
 defined( 'ABSPATH' ) || exit();
@@ -37,7 +35,7 @@ defined( 'ABSPATH' ) || exit();
 // Autoload function.
 spl_autoload_register(
 	function ( $class_name ) {
-		$prefix = 'PluginEver\\WooCommerceDonationManager\\';
+		$prefix = 'WooCommerceDonationManager\\';
 		$len    = strlen( $prefix );
 
 		// Bail out if the class name doesn't start with our prefix.
@@ -53,7 +51,6 @@ spl_autoload_register(
 		// Look for the file in the src and lib directories.
 		$file_paths = array(
 			__DIR__ . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . $file,
-			__DIR__ . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . $file,
 		);
 
 		foreach ( $file_paths as $file_path ) {
