@@ -1,8 +1,8 @@
 <?php
 
-namespace PluginEver\WooCommerceDonationManager\Emails;
+namespace WooCommerceDonationManager\Emails;
 
-use WC_Donation_Order_Email;
+use WCDM_Donation_Order_Email;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -34,9 +34,9 @@ class Emails {
 	 * @return array filtered available email.
 	 */
 	public function add_donation_order_email( $email_classes ) {
-		require_once __DIR__ . '/class-wc-donation-order-email.php';
+		require_once __DIR__ . '/class-donation-order-email.php';
 
-		$email_classes['WC_Donation_Order_Email'] = new WC_Donation_Order_Email();
+		$email_classes['WCDM_Donation_Order_Email'] = new WCDM_Donation_Order_Email();
 
 		return $email_classes;
 	}

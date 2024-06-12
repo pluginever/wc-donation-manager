@@ -2,8 +2,8 @@
 /**
  * Customer completed donation email (plain text)
  *
+ * @since 1.0.0
  * @package WooCommerceDonationManager\Templates\Emails\Plain
- * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
