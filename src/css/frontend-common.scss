@@ -1,0 +1,71 @@
+// Product single page
+.wc-donation-manager {
+	.campaign-progress {
+		.progress-label {
+			display: flex;
+			justify-content: space-between;
+			gap: 5px;
+		}
+		#campaign-progressbar {
+			width: 100%;
+		}
+	}
+	.suggested-amounts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		margin-bottom: 15px;
+		.suggested-amount{
+			cursor: pointer;
+			padding: 10px 15px;
+			background: #f5f5f5;
+			color: #000000;
+			&.selected{
+				background: #0a53be;
+				color: #ffffff;
+				&:hover{
+					background: #0a53be;
+					color: #ffffff;
+				}
+			}
+			input {
+				position: absolute;
+				opacity: 0;
+				cursor: pointer;
+				display: none;
+			}
+			&:hover{
+				background: #eeeeee;
+			}
+		}
+	}
+	.campaign-amount {
+		display: flex;
+		flex-direction: row;
+		margin-bottom: 15px;
+		label {
+			align-self: center;
+		}
+		#donation_amount {
+			align-self: center;
+			&:focus{
+				outline: none;
+			}
+		}
+		&.disabled{
+			display: none;
+			opacity: 0;
+		}
+	}
+}
+// Cart page
+.donation-product-price {
+	display: flex;
+	flex-direction: row;
+	label {
+		align-self: center;
+	}
+	#donation_amount {
+		align-self: center;
+	}
+}

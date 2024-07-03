@@ -1,0 +1,75 @@
+@import "../../../lib/Lib/assets/css/layout";
+@import "../../../lib/Lib/assets/css/card";
+@import "../../../lib/Lib/assets/css/grid";
+
+.select2-container--default {
+	.select2-results__option--highlighted[aria-selected],
+	.select2-results__option--highlighted[data-selected]{
+		background-color: #2563eb!important;
+	}
+}
+// Campaign form scss
+.campaign{
+	.pev-form-field{
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		border-bottom: 1px solid #f5f5f5;
+		margin-bottom: 15px;
+		label{
+			width: 20%;
+		}
+		.field-group{
+			display: flex;
+			flex-direction: column;
+			width: 78%;
+			p{
+				width: 100%;
+			}
+		}
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}
+.campaign-progress {
+	.progress-label {
+		display: flex;
+		justify-content: space-between;
+		gap: 5px;
+	}
+	#campaign-progressbar {
+		width: 100%;
+	}
+}
+.campaign-products{
+	.campaign-product{
+		td{
+			display: flex;
+			gap: 15px;
+			border-bottom: 1px solid #f5f5f5;
+		}
+		.product-thumbnail{
+			img{
+				width: 60px;
+				height: auto;
+			}
+		}
+		.product-title{
+			align-self: center;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			a{
+				text-decoration: none;
+			}
+		}
+		.product-action{
+			display: flex;
+			gap: 10px;
+		}
+		&:last-child td{
+			border-bottom: none;
+		}
+	}
+}
