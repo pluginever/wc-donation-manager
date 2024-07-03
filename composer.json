@@ -10,6 +10,7 @@
   "require-dev": {
     "byteever/byteever-sniffs": "dev-master",
     "byteever/bytekit-plugin": "dev-master",
+    "byteever/bytekit-settings": "dev-master",
     "coenjacobs/mozart": "^0.7.1"
   },
   "autoload": {
@@ -32,6 +33,10 @@
     {
       "type": "github",
       "url": "git@github.com:byteever/bytekit-plugin.git"
+    },
+    {
+      "type": "github",
+      "url": "git@github.com:byteever/bytekit-settings.git"
     }
   ],
   "scripts": {
@@ -54,7 +59,8 @@
       "classmap_prefix": "WooCommerceDonationManager_",
       "delete_vendor_directories": true,
       "packages": [
-        "byteever/bytekit-plugin"
+        "byteever/bytekit-plugin",
+        "byteever/bytekit-settings"
       ]
     }
   }
