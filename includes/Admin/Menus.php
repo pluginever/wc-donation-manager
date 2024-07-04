@@ -45,7 +45,6 @@ class Menus {
 
 		// Pro tabs.
 		if ( ! WCDM()->is_plugin_active( 'wc-donation-manager-pro.php' ) ) {
-			add_action( 'wc_donation_manager_campaigns_content', array( $this, 'render_campaigns_content' ) );
 			add_action( 'wc_donation_manager_donors_content', array( $this, 'render_donors_content' ) );
 			add_action( 'wc_donation_manager_settings_emails_content', array( $this, 'render_emails_settings' ) );
 		}
@@ -182,8 +181,8 @@ class Menus {
 				add_screen_option( 'per_page', $args );
 				break;
 			case 'wcdm-donors':
-				$this->list_table = new ListTables\DonorsTable();
-				$this->list_table->prepare_items();
+				$this->list_table = ''; // TODO: new ListTables\DonorsTable();
+//				$this->list_table->prepare_items();
 				$args['option'] = 'wcdm_activations_per_page';
 				add_screen_option( 'per_page', $args );
 				break;

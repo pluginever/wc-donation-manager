@@ -13,7 +13,10 @@ defined( 'ABSPATH' ) || exit;
 $current_tab  = filter_input( INPUT_GET, 'tab' );
 $current_page = filter_input( INPUT_GET, 'page' );
 $tabs         = isset( $tabs ) ? $tabs : array();
-$tabs         = apply_filters( 'wc_donation_manager_' . $page_hook . '_tabs', $tabs );
+$tabs         = array(
+	'wcdm-donors',
+); // apply_filters( 'wc_donation_manager_' . $page_hook . '_tabs', $tabs );
+$page_hook = 'donors'; // TODO: need to remove it.
 $current_tab  = ! empty( $current_tab ) && array_key_exists( $current_tab, $tabs ) ? $current_tab : key( $tabs );
 ?>
 	<div class="wrap pev-wrap woocommerce">
