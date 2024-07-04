@@ -155,6 +155,6 @@ class Installer {
 	 * @return void
 	 */
 	public static function save_default_settings() {
-		// TODO: Admin\Settings::instance()->save_defaults();
+		Admin\Settings::instance()->save_defaults();
 	}
 }

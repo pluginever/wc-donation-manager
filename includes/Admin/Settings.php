@@ -2,17 +2,15 @@
 
 namespace WooCommerceDonationManager\Admin;
 
-use WooCommerceDonationManager\Lib;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Class Settings.
+ * Settings class.
  *
- * @since   1.0.0
+ * @since 1.0.0
  * @package WooCommerceDonationManager\Admin
  */
-class Settings extends Lib\Settings {
+class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 
 	/**
 	 * Get settings tabs.
@@ -21,26 +19,27 @@ class Settings extends Lib\Settings {
 	 * @return array
 	 */
 	public function get_tabs() {
-		$tabs = array(
-			'general'  => __( 'General', 'wc-donation-manager' ),
-			'emails'   => __( 'Emails', 'wc-donation-manager' ),
-			'advanced' => __( 'Advanced', 'wc-donation-manager' ),
+		return apply_filters(
+			'wc_donation_manager_settings_tabs',
+			array(
+				'general'  => __( 'General', 'wc-donation-manager' ),
+				'advanced' => __( 'Advanced', 'wc-donation-manager' ),
+				'emails'   => __( 'Emails', 'wc-donation-manager' ),
+				'tutorial' => __( 'Tutorial', 'wc-donation-manager' ),
+			)
 		);
-
-		return apply_filters( 'wc_donation_manager_settings_tabs', $tabs );
 	}
 
 	/**
 	 * Get settings.
 	 *
-	 * @param string $tab Current tab.
+	 * @param string $tab Tab name.
 	 *
 	 * @since 1.0.0
 	 * @return array
 	 */
 	public function get_settings( $tab ) {
 		$settings = array();
-
 		switch ( $tab ) {
 			case 'general':
 				$settings = array(
@@ -119,6 +118,7 @@ class Settings extends Lib\Settings {
 					),
 				);
 				break;
+
 			case 'advanced':
 				$settings = array(
 					array(
@@ -157,17 +157,29 @@ class Settings extends Lib\Settings {
 					),
 				);
 				break;
+
+			default:
+				break;
 		}
 
 		/**
 		 * Filter the settings for the plugin.
 		 *
 		 * @param array $settings The settings.
+		 *
+		 * @deprecated 1.0.0
+		 */
+		$settings = apply_filters( 'wc_donation_manager_' . $tab . '_settings', $settings );
+
+		/**
+		 * Filter the settings for the plugin.
+		 *
+		 * @param array  $settings The settings.
 		 * @param string $tab The current tab.
 		 *
 		 * @since 1.0.0
 		 */
-		return apply_filters( 'wc_donation_manager_get_settings_' . $tab, $settings );
+		return apply_filters( 'wc_donation_manager_settings', $settings, $tab );
 	}
 
 	/**
@@ -175,65 +187,22 @@ class Settings extends Lib\Settings {
 	 *
 	 * @param array $settings Settings.
 	 *
-	 * @return void
 	 * @since 1.0.0
+	 * @return void
 	 */
 	protected function output_form( $settings ) {
 		$current_tab = $this->get_current_tab();
-		/**
-		 * Action hook to output settings form.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'wc_donation_manager_settings_' . $current_tab );
-		parent::output_form( $settings );
-	}
+		$hook        = 'wc_donation_manager_settings_' . $current_tab . '_content';
+		if ( has_action( $hook ) ) {
+			/**
+			 * Action hook to output settings form.
+			 *
+			 * @since 1.0.0
+			 */
+			do_action( $hook );
 
-	/**
-	 * Output premium widget.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	protected function output_premium_widget() {
-		if ( wc_donation_manager()->is_premium_active() ) {
 			return;
 		}
-		$features = array(
-			__( 'Feature 1', 'wc-donation-manager' ),
-			__( 'Feature 2', 'wc-donation-manager' ),
-			__( 'Feature 3', 'wc-donation-manager' ),
-			__( 'Many more ...', 'wc-donation-manager' ),
-		);
-		?>
-		<div class="pev-panel promo-panel">
-			<h3><?php esc_html_e( 'Want More?', 'wc-donation-manager' ); ?></h3>
-			<p><?php esc_attr_e( 'This plugin offers a premium version which comes with the following features:', 'wc-donation-manager' ); ?></p>
-			<ul>
-				<?php foreach ( $features as $feature ) : ?>
-					<li>- <?php echo esc_html( $feature ); ?></li>
-				<?php endforeach; ?>
-			</ul>
-			<a href="https://pluginever.com/plugins/wc-donation-manager/?utm_source=plugin-settings&utm_medium=banner&utm_campaign=upgrade&utm_id=wc-donation-manager"
-				class="button" target="_blank">
-				<?php esc_html_e( 'Upgrade to PRO', 'wc-donation-manager' ); ?>
-			</a>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Output tabs.
-	 *
-	 * @param array $tabs Tabs.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function output_tabs( $tabs ) {
-		parent::output_tabs( $tabs );
-		if ( wc_donation_manager()->get_docs_url() ) {
-			printf( '<a href="%s" class="nav-tab" target="_blank">%s</a>', esc_url( wc_donation_manager()->get_docs_url() ), esc_html__( 'Documentation', 'wc-donation-manager' ) );
-		}
+		parent::output_form( $settings );
 	}
 }

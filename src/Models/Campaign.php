@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager\Models;
+namespace OLDWooCommerceDonationManager\Models;
 
 use WooCommerceDonationManager\Lib\Data;
 

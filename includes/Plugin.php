@@ -50,7 +50,7 @@ final class Plugin extends ByteKit\Plugin {
 	 * @return void
 	 */
 	public function includes() {
-		require_once __DIR__ . '/functions.php';
+		require_once __DIR__ . '/Functions.php';
 	}
 
 	/**
@@ -96,9 +96,9 @@ final class Plugin extends ByteKit\Plugin {
 		if ( is_admin() ) {
 			$this->set(
 				array(
-//					Admin\Admin::class,
-//					Admin\Menus::class,
-//					Admin\Settings::instance(),
+					Admin\Admin::class,
+					Admin\Menus::class,
+					Admin\Settings::instance(),
 				)
 			);
 		}

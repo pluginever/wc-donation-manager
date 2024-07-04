@@ -2,14 +2,23 @@
 /**
  * Usefully functions.
  *
- * @since 1.0.0
  * @package WooCommerceDonationManager
+ * @since 1.0.0
  */
 
-use WooCommerceDonationManager\Models\Campaign;
-use WooCommerceDonationManager\Models\Donor;
+use WooCommerceDonationManager\Plugin;
 
-defined( 'ABSPATH' ) || exit;
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+
+/**
+ * Get the plugin instance.
+ *
+ * @since 1.0.0
+ * @return WooCommerceDonationManager\Plugin
+ */
+function WCDM() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+	return Plugin::instance();
+}
 
 /**
  * Get campaigns.
@@ -93,6 +102,7 @@ function wcdm_get_the_title( $post_id ) {
 	if ( ! $post_id ) {
 		return;
 	}
+
 	return sprintf( '(#%1$s) %2$s', $post_id, get_the_title( $post_id ) );
 }
 
@@ -100,14 +110,14 @@ function wcdm_get_the_title( $post_id ) {
  * Get donors from the woocommerce order list.
  *
  * @param array $args The args.
- * @param bool  $count Whether to return a count.
+ * @param bool $count Whether to return a count.
  *
  * @since 1.0.0
  * @return array|int
  */
 function wcdm_get_donors( $args = array(), $count = false ) {
 	$defaults = array(
-		'limit'    => -1,
+		'limit'    => - 1,
 		'paged'    => 1,
 		'paginate' => true,
 		'order'    => 'DESC',
