@@ -40,6 +40,7 @@ class Actions {
 		check_admin_referer( 'wcdm_add_campaign' );
 		$referer  = wp_get_referer();
 		$data     = wp_unslash( $_POST );
+		// TODO: Need to add a helper method that will be handle the insert posts.
 		var_dump( $data );
 		wp_die();
 		$campaign = Campaign::insert( $data );
@@ -63,6 +64,10 @@ class Actions {
 		check_admin_referer( 'wcdm_edit_campaign' );
 		$referer  = wp_get_referer();
 		$data     = wp_unslash( $_POST );
+		// TODO: Need to add a helper method that will be handle the insert posts.
+		var_dump( $data );
+		wp_die();
+
 		$campaign = Campaign::insert( $data );
 		if ( is_wp_error( $campaign ) ) {
 			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
