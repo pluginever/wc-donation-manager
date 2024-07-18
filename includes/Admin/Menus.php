@@ -37,11 +37,10 @@ class Menus {
 		add_filter( 'set-screen-option', array( $this, 'screen_option' ), 10, 3 );
 		add_action( 'current_screen', array( $this, 'setup_list_table' ) );
 
-		// Keys page.
 		add_action( 'wc_donation_manager_campaigns_content', array( $this, 'render_campaigns_content' ) );
 
 		// Settings tabs.
-		add_action( 'wc_donation_manager_settings_tutorial', array( $this, 'render_tutorial_content' ) );
+		add_action( 'wc_donation_manager_settings_tutorial_content', array( $this, 'render_tutorial_content' ) );
 
 		// Pro tabs.
 		if ( ! WCDM()->is_plugin_active( 'wc-donation-manager-pro.php' ) ) {
@@ -69,19 +68,6 @@ class Menus {
 		);
 		$admin_page_hooks['wc-donation-manager'] = 'wc-donation-manager';
 
-		add_submenu_page(
-			self::PARENT_SLUG,
-			__( 'Campaigns', 'wc-donation-manager' ),
-			__( 'Campaigns', 'wc-donation-manager' ),
-			'manage_options',
-			self::PARENT_SLUG,
-			function () {
-				$page_id = 'campaigns';
-				var_dump( $page_id );
-// TODO:				include_once __DIR__ . '/views/dashboard.php';
-			},
-		);
-
 		$submenus = Utilities::get_menus();
 		usort(
 			$submenus,
@@ -92,6 +78,7 @@ class Menus {
 				return $a - $b;
 			}
 		);
+
 		foreach ( $submenus as $submenu ) {
 			$submenu = wp_parse_args(
 				$submenu,
@@ -144,7 +131,7 @@ class Menus {
 			'wc_donation_manager_screen_options',
 			array(
 				'wcdm_campaigns_per_page',
-				'wcdm_activations_per_page',
+				'wcdm_donors_per_page',
 			)
 		);
 		if ( in_array( $option, $options, true ) ) {
@@ -174,16 +161,16 @@ class Menus {
 		$page = ! empty( $tab ) ? $page . '-' . $tab : $page;
 
 		switch ( $page ) {
-			case 'wcdm-campaigns':
-				$this->list_table = new ListTables\CampaignsTable();
+			case 'toplevel_page_wc-donation-manager':
+				$this->list_table = new ListTables\CampaignsListTable();
 				$this->list_table->prepare_items();
 				$args['option'] = 'wcdm_campaigns_per_page';
 				add_screen_option( 'per_page', $args );
 				break;
 			case 'wcdm-donors':
-				$this->list_table = ''; // TODO: new ListTables\DonorsTable();
-//				$this->list_table->prepare_items();
-				$args['option'] = 'wcdm_activations_per_page';
+				$this->list_table = new ListTables\DonorsListTable();
+				$this->list_table->prepare_items();
+				$args['option'] = 'wcdm_donors_per_page';
 				add_screen_option( 'per_page', $args );
 				break;
 		}
@@ -197,8 +184,9 @@ class Menus {
 	 */
 	public function render_campaigns_content() {
 		$edit = Utilities::is_edit_screen();
-		$key  = Key::make( $edit );
-		if ( ! empty( $edit ) && ! $key->exists() ) {
+		$api  = ! empty( $edit ) ? get_post( $edit ) : '';
+
+		if ( ! empty( $edit ) && empty( $api ) ) {
 			wp_safe_redirect( remove_query_arg( 'edit' ) );
 			exit();
 		}
@@ -210,31 +198,6 @@ class Menus {
 		} else {
 			include __DIR__ . '/views/campaigns/campaigns.php';
 		}
-
-		// TOFO: bellow are old code.
-//		$add_campaign  = isset( $_GET['new'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-//		$edit_campaign = isset( $_GET['edit_campaign'] ) ? absint( wp_unslash( $_GET['edit_campaign'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-//		$view_campaign = isset( $_GET['view_campaign'] ) ? absint( wp_unslash( $_GET['view_campaign'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-//
-//		if ( $edit_campaign && ! wcdm_get_campaign( $edit_campaign ) ) {
-//			wp_safe_redirect( admin_url( 'admin.php?page=wc-donation-manager' ) );
-//			exit();
-//		}
-//
-//		if ( $view_campaign && ! wcdm_get_campaign( $view_campaign ) ) {
-//			wp_safe_redirect( admin_url( 'admin.php?page=wc-donation-manager' ) );
-//			exit();
-//		}
-//
-//		if ( $add_campaign ) {
-//			include __DIR__ . '/views/add-campaign.php';
-//		} elseif ( $edit_campaign ) {
-//			include __DIR__ . '/views/edit-campaign.php';
-//		} elseif ( $view_campaign ) {
-//			include __DIR__ . '/views/view-campaign.php';
-//		} else {
-//			include __DIR__ . '/views/list-campaigns.php';
-//		}
 	}
 
 	/**
@@ -244,7 +207,7 @@ class Menus {
 	 * @return void
 	 */
 	public function render_donors_content() {
-		include __DIR__ . '/views/list-donors.php';
+		include __DIR__ . '/views/donors/donors.php';
 	}
 
 	/**
@@ -265,90 +228,94 @@ class Menus {
 			}
 		);
 
-		?>
-		<tr valign="top">
-			<td class="wc_emails_wrapper" colspan="2">
-				<table class="wc_emails widefat" cellspacing="0">
-					<thead>
-					<tr>
+		if ( ! empty( $donation_emails ) ) {
+			?>
+			<tr valign="top">
+				<td class="wc_emails_wrapper" colspan="2">
+					<table class="wc_emails widefat" cellspacing="0">
+						<thead>
+						<tr>
+							<?php
+							$columns = apply_filters(
+								'woocommerce_email_setting_columns',
+								array(
+									'status'     => '',
+									'name'       => __( 'Email', 'wc-donation-manager' ),
+									'email_type' => __( 'Content type', 'wc-donation-manager' ),
+									'recipient'  => __( 'Recipient(s)', 'wc-donation-manager' ),
+									'actions'    => '',
+								)
+							);
+							foreach ( $columns as $key => $column ) {
+								echo '<th class="wc-email-settings-table-' . esc_attr( $key ) . '">' . esc_html( $column ) . '</th>';
+							}
+							?>
+						</tr>
+						<tbody>
 						<?php
-						$columns = apply_filters(
-							'woocommerce_email_setting_columns',
-							array(
-								'status'     => '',
-								'name'       => __( 'Email', 'wc-donation-manager' ),
-								'email_type' => __( 'Content type', 'wc-donation-manager' ),
-								'recipient'  => __( 'Recipient(s)', 'wc-donation-manager' ),
-								'actions'    => '',
-							)
-						);
-						foreach ( $columns as $key => $column ) {
-							echo '<th class="wc-email-settings-table-' . esc_attr( $key ) . '">' . esc_html( $column ) . '</th>';
+
+						foreach ( $donation_emails as $email_key => $email ) {
+							echo '<tr>';
+
+							$manage_url = add_query_arg(
+								array(
+									'section' => strtolower( $email_key ),
+								),
+								admin_url( 'admin.php?page=wc-settings&tab=email' )
+							);
+
+							foreach ( $columns as $key => $column ) {
+
+								switch ( $key ) {
+									case 'name':
+										echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
+											<a href="' . esc_url( $manage_url ) . '">' . esc_html( $email->get_title() ) . '</a>
+											' . wc_help_tip( $email->get_description() ) . '</td>';  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+										break;
+									case 'recipient':
+										echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
+											' . esc_html( $email->is_customer_email() ? __( 'Customer', 'wc-donation-manager' ) : $email->get_recipient() ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+										break;
+									case 'status':
+										echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">';
+
+										if ( $email->is_manual() ) {
+											echo '<span class="status-manual tips" data-tip="' . esc_attr__( 'Manually sent', 'wc-donation-manager' ) . '">' . esc_html__( 'Manual', 'wc-donation-manager' ) . '</span>';
+										} elseif ( $email->is_enabled() ) {
+											echo '<span class="status-enabled tips" data-tip="' . esc_attr__( 'Enabled', 'wc-donation-manager' ) . '">' . esc_html__( 'Yes', 'wc-donation-manager' ) . '</span>';
+										} else {
+											echo '<span class="status-disabled tips" data-tip="' . esc_attr__( 'Disabled', 'wc-donation-manager' ) . '">-</span>';
+										}
+
+										echo '</td>';
+										break;
+									case 'email_type':
+										echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
+												' . esc_html( $email->get_content_type() ) . '
+											</td>';
+										break;
+									case 'actions':
+										echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
+												<a class="button alignright" href="' . esc_url( $manage_url ) . '">' . esc_html__( 'Manage', 'wc-donation-manager' ) . '</a>
+											</td>';
+										break;
+									default:
+										do_action( 'woocommerce_email_setting_column_' . $key, $email );
+										break;
+								}
+							}
+
+							echo '</tr>';
 						}
 						?>
-					</tr>
-					<tbody>
-					<?php
-
-					foreach ( $donation_emails as $email_key => $email ) {
-						echo '<tr>';
-
-						$manage_url = add_query_arg(
-							array(
-								'section' => strtolower( $email_key ),
-							),
-							admin_url( 'admin.php?page=wc-settings&tab=email' )
-						);
-
-						foreach ( $columns as $key => $column ) {
-
-							switch ( $key ) {
-								case 'name':
-									echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
-										<a href="' . esc_url( $manage_url ) . '">' . esc_html( $email->get_title() ) . '</a>
-										' . wc_help_tip( $email->get_description() ) . '</td>';  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									break;
-								case 'recipient':
-									echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
-										' . esc_html( $email->is_customer_email() ? __( 'Customer', 'wc-donation-manager' ) : $email->get_recipient() ) . '</td>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									break;
-								case 'status':
-									echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">';
-
-									if ( $email->is_manual() ) {
-										echo '<span class="status-manual tips" data-tip="' . esc_attr__( 'Manually sent', 'wc-donation-manager' ) . '">' . esc_html__( 'Manual', 'wc-donation-manager' ) . '</span>';
-									} elseif ( $email->is_enabled() ) {
-										echo '<span class="status-enabled tips" data-tip="' . esc_attr__( 'Enabled', 'wc-donation-manager' ) . '">' . esc_html__( 'Yes', 'wc-donation-manager' ) . '</span>';
-									} else {
-										echo '<span class="status-disabled tips" data-tip="' . esc_attr__( 'Disabled', 'wc-donation-manager' ) . '">-</span>';
-									}
-
-									echo '</td>';
-									break;
-								case 'email_type':
-									echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
-											' . esc_html( $email->get_content_type() ) . '
-										</td>';
-									break;
-								case 'actions':
-									echo '<td class="wc-email-settings-table-' . esc_attr( $key ) . '">
-											<a class="button alignright" href="' . esc_url( $manage_url ) . '">' . esc_html__( 'Manage', 'wc-donation-manager' ) . '</a>
-										</td>';
-									break;
-								default:
-									do_action( 'woocommerce_email_setting_column_' . $key, $email );
-									break;
-							}
-						}
-
-						echo '</tr>';
-					}
-					?>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		<?php
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<?php
+		} else {
+			esc_html_e( 'No email templates found.', 'wc-donation-manager' );
+		}
 	}
 
 	/**

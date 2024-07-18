@@ -2,8 +2,6 @@
 
 namespace WooCommerceDonationManager\Admin\ListTables;
 
-use WooCommerceDonationManager\Models\Campaign;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -60,14 +58,14 @@ class CampaignsListTable extends AbstractListTable {
 			'paged'          => $current_page,
 		);
 
-		$this->items       = wcdm_get_campaigns( $args );
-		$this->total_count = wcdm_get_campaigns( $args, true );
+		$query       = new \WP_Query( $args );
+		$this->items = $query->posts;
+		$total       = $query->found_posts;
 
 		$this->set_pagination_args(
 			array(
-				'total_items' => $this->total_count,
+				'total_items' => $total,
 				'per_page'    => $per_page,
-				'total_pages' => $this->total_pages,
 			)
 		);
 	}
@@ -198,7 +196,7 @@ class CampaignsListTable extends AbstractListTable {
 	 * @since  1.0.0
 	 */
 	public function column_cb( $item ) {
-		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->get_id() ) );
+		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->ID ) );
 	}
 
 	/**
@@ -211,14 +209,14 @@ class CampaignsListTable extends AbstractListTable {
 	 */
 	public function column_name( $item ) {
 		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' );
-		$id_url    = add_query_arg( 'id', $item->get_id(), $admin_url );
+		$id_url    = add_query_arg( 'id', $item->ID, $admin_url );
 		$actions   = array(
-			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
+			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->ID, $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
 			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
-			'view'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'view_campaign', $item->get_id(), $admin_url ) ), __( 'View', 'wc-donation-manager' ) ),
+			'view'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'view_campaign', $item->ID, $admin_url ) ), __( 'View', 'wc-donation-manager' ) ),
 		);
 
-		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->get_id(), $admin_url ) ), esc_html( $item->get_name() ), $this->row_actions( $actions ) );
+		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->ID, $admin_url ) ), esc_html( $item->post_title ), $this->row_actions( $actions ) );
 	}
 
 	/**
@@ -237,7 +235,8 @@ class CampaignsListTable extends AbstractListTable {
 				/* translators: 1: WC currency symbol 2: Product price */
 					( '%1$s%2$.2f' ),
 					get_woocommerce_currency_symbol(),
-					esc_html( $item->get_goal_amount() )
+					// TODO: Need to recheck this // esc_html( $item->get_goal_amount() );
+					esc_html( 'Goal amount' )
 				);
 				break;
 			default:

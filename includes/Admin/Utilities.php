@@ -23,6 +23,16 @@ class Utilities {
 	 */
 	public static function get_menus() {
 		$menus = array(
+			// Campaigns page.
+			array(
+				'page_title' => __( 'Campaigns', 'wc-donation-manager' ),
+				'menu_title' => __( 'Campaigns', 'wc-donation-manager' ),
+				'capability' => 'manage_options',
+				'menu_slug'  => 'wc-donation-manager',
+				'page_id'    => 'campaigns',
+				'callback'   => null,
+			),
+
 			// Donors page.
 			array(
 				'page_title' => __( 'Donors', 'wc-donation-manager' ),

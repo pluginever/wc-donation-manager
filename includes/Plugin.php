@@ -84,15 +84,14 @@ final class Plugin extends ByteKit\Plugin {
 	 * @return void
 	 */
 	public function on_init() {
-		// Common controllers.
+		// Include common classes.
 		$this->set(
 			array(
-//				Handlers\Orders::class,
-//				Emails\Emails::class,
+				Emails\Emails::class,
 			)
 		);
 
-		// Admin only controllers.
+		// Include Admin classes.
 		if ( is_admin() ) {
 			$this->set(
 				array(

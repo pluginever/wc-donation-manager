@@ -35,9 +35,9 @@ class Admin {
 	public function enqueue_scripts( $hook ) {
 //		$is_order_page    = ( in_array( $hook, array( 'post.php', 'post-new.php' ), true ) && in_array( get_post_type(), array( 'shop_order' ), true ) ) || 'woocommerce_page_wc-orders' === $hook;
 //		$is_product_page  = in_array( $hook, array( 'post.php', 'post-new.php' ), true ) && in_array( get_post_type(), array( 'product' ), true );
-//		$is_settings_page = Menus::PARENT_SLUG . '_page_wckm-settings' === $hook;
-//		WCDM()->scripts->enqueue_style( 'wckm-admin', 'css/admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
-//		WCDM()->scripts->register_script( 'wckm-admin', 'js/admin.js' );
+//		$is_settings_page = Menus::PARENT_SLUG . '_page_wcdm-settings' === $hook;
+//		WCDM()->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
+//		WCDM()->scripts->register_script( 'wcdm-admin', 'js/admin.js' );
 //
 //		if ( ! in_array( $hook, Utilities::get_screen_ids(), true ) && ! $is_product_page && ! $is_order_page ) {
 //			return;
@@ -52,19 +52,19 @@ class Admin {
 //				'search_customers' => esc_html__( 'Select customers', 'wc-donation-manager' ),
 //			),
 //			'key_settings' => array(
-//				'pattern' => get_option( 'wckm_key_pattern', '####-####-####-####' ),
-//				'chars'   => get_option( 'wckm_key_characters', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ' ),
+//				'pattern' => get_option( 'wcdm_key_pattern', '####-####-####-####' ),
+//				'chars'   => get_option( 'wcdm_key_characters', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ' ),
 //			),
 //		);
 //
 //		wp_enqueue_style( 'jquery-ui-style' );
 //		wp_enqueue_script( 'jquery-ui-datepicker' );
-//		wp_localize_script( 'wckm-admin', 'wckm_admin_vars', $localize );
-//		wp_enqueue_script( 'wckm-admin' );
-//		wp_enqueue_style( 'wckm-admin' );
+//		wp_localize_script( 'wcdm-admin', 'wcdm_admin_vars', $localize );
+//		wp_enqueue_script( 'wcdm-admin' );
+//		wp_enqueue_style( 'wcdm-admin' );
 
 		$screen_ids = Utilities::get_screen_ids();
-		WCDM()->scripts->enqueue_style( 'wcdm-admin', 'css/wcdm-admin.css' );
+		WCDM()->scripts->enqueue_style( 'wcdm-admin', 'css/wcdm-admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
 		WCDM()->scripts->register_script( 'wcdm-admin', 'js/wcdm-admin.js' );
 
 		if ( in_array( $hook, $screen_ids, true ) ) {
