@@ -98,6 +98,7 @@ final class Plugin extends ByteKit\Plugin {
 					Admin\Admin::class,
 					Admin\Menus::class,
 					Admin\Settings::instance(),
+					Admin\Actions::class,
 				)
 			);
 		}
