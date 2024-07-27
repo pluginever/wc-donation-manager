@@ -1,10 +1,10 @@
 # Copyright (C) 2024 PluginEver
-# This file is distributed under the same license as the WC Donation Manager package.
+# This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WC Donation Manager 1.0.0\n"
+"Project-Id-Version: WC Donation Manager 1.0.1\n"
 "Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
-"POT-Creation-Date: 2024-05-07 05:19:46+00:00\n"
+"POT-Creation-Date: 2024-07-27 10:19:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,164 +24,111 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: lib/Lib/Plugin.php:309
-msgid "Go Pro"
-msgstr ""
-
-#: lib/Lib/Plugin.php:655 src/Admin/Settings.php:236
-msgid "Documentation"
-msgstr ""
-
-#: lib/Lib/Plugin.php:662
-msgid "Support"
-msgstr ""
-
-#: lib/Lib/Plugin.php:669
-msgid "Review"
-msgstr ""
-
-#: lib/Lib/Plugin.php:675
-msgid "More Plugins"
-msgstr ""
-
-#: lib/Lib/Plugin.php:692 src/Admin/Menus.php:72 src/Admin/Menus.php:73
-msgid "Settings"
-msgstr ""
-
-#: lib/Lib/Settings.php:97
-msgid "Settings saved."
-msgstr ""
-
-#: lib/Lib/Settings.php:236 lib/Lib/Settings.php:324
-msgid "Recommended"
-msgstr ""
-
-#: lib/Lib/Settings.php:237 lib/Lib/Settings.php:325
-msgid "Install Now"
-msgstr ""
-
-#: lib/Lib/Settings.php:296
-msgid "Need Help?"
-msgstr ""
-
-#: lib/Lib/Settings.php:339
-msgid "Join our Community"
-msgstr ""
-
-#: lib/Lib/Settings.php:343
-msgid "Request a Feature"
-msgstr ""
-
-#: lib/Lib/Settings.php:347
-msgid "Report a Bug"
-msgstr ""
-
-#: src/Admin/Actions.php:48 src/Admin/Actions.php:69
+#: includes/Admin/Actions.php:51 includes/Admin/Actions.php:76
 msgid "Campaign saved successfully."
 msgstr ""
 
-#: src/Admin/Actions.php:126
+#: includes/Admin/Actions.php:133
 msgid "Suggested amounts"
 msgstr ""
 
-#: src/Admin/Actions.php:150 src/Admin/Actions.php:170
+#: includes/Admin/Actions.php:157 includes/Admin/Actions.php:177
 msgid "Donor saved successfully."
 msgstr ""
 
-#: src/Admin/Actions.php:187
+#: includes/Admin/Actions.php:194
 msgid "No, search term provided."
 msgstr ""
 
-#: src/Admin/Admin.php:64
-#. translators: 1: Plugin name 2: WordPress
-msgid ""
-"Thank you for using %1$s. If you like it, please leave us a %2$s rating. A "
-"huge thank you from PluginEver in advance!"
+#: includes/Admin/Admin.php:79
+msgid "Select products"
 msgstr ""
 
-#: src/Admin/Admin.php:66
-msgid "Thanks :)"
+#: includes/Admin/Admin.php:112
+#. translators: %s: Plugin name
+msgid "Thank you for using %s!"
 msgstr ""
 
-#: src/Admin/Admin.php:84
+#: includes/Admin/Admin.php:118
+#. translators: %s: Plugin name
+msgid " Share your appreciation with a five-star review %s."
+msgstr ""
+
+#: includes/Admin/Admin.php:139
 #. translators: 1: Plugin version
 msgid "Version %s"
 msgstr ""
 
-#: src/Admin/Admin.php:126
-msgid "Select products"
-msgstr ""
-
-#: src/Admin/ListTables/CampaignsListTable.php:82
-#: src/Admin/ListTables/DonorsListTable.php:78
+#: includes/Admin/ListTables/CampaignsListTable.php:81
+#: includes/Admin/ListTables/DonorsListTable.php:81
 msgid "No items found."
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:94
-#: src/Admin/ListTables/DonorsListTable.php:89
+#: includes/Admin/ListTables/CampaignsListTable.php:93
+#: includes/Admin/ListTables/DonorsListTable.php:92
 msgid "Name"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:95
-#: src/Admin/views/add-campaign.php:30 src/Admin/views/edit-campaign.php:42
-#: src/Admin/views/view-campaign.php:42
+#: includes/Admin/ListTables/CampaignsListTable.php:94
+#: includes/Admin/views/campaigns/add.php:30
+#: includes/Admin/views/campaigns/edit.php:43
+#: includes/Admin/views/campaigns/view.php:42
 msgid "Cause"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:96
+#: includes/Admin/ListTables/CampaignsListTable.php:95
 msgid "Goal"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:97
-#: src/Admin/views/add-campaign.php:52
+#: includes/Admin/ListTables/CampaignsListTable.php:96
+#: includes/Admin/views/campaigns/add.php:52
 msgid "End date"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:98
-#: src/Admin/views/add-campaign.php:63 src/Admin/views/edit-campaign.php:98
+#: includes/Admin/ListTables/CampaignsListTable.php:97
+#: includes/Admin/views/campaigns/add.php:63
+#: includes/Admin/views/campaigns/edit.php:99
 msgid "Status"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:136
-#: src/Admin/ListTables/CampaignsListTable.php:217
-#: src/Admin/views/edit-campaign.php:112 src/Admin/views/view-campaign.php:101
+#: includes/Admin/ListTables/CampaignsListTable.php:135
+#: includes/Admin/ListTables/CampaignsListTable.php:216
+#: includes/Admin/views/campaigns/edit.php:113
+#: includes/Admin/views/campaigns/view.php:101
 msgid "Delete"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:171
+#: includes/Admin/ListTables/CampaignsListTable.php:170
 #. translators: %d: number of campaigns deleted.
 msgid "%d campaign deleted."
 msgid_plural "%d campaigns deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:216
-#: src/Admin/views/edit-campaign.php:149 src/Admin/views/view-campaign.php:135
+#: includes/Admin/ListTables/CampaignsListTable.php:215
+#: includes/Admin/views/campaigns/edit.php:150
+#: includes/Admin/views/campaigns/view.php:135
 msgid "Edit"
 msgstr ""
 
-#: src/Admin/ListTables/CampaignsListTable.php:218
-#: src/Admin/views/edit-campaign.php:150 src/Admin/views/view-campaign.php:136
-msgid "View"
-msgstr ""
-
-#: src/Admin/ListTables/DonorsListTable.php:90 src/Admin/Menus.php:173
+#: includes/Admin/ListTables/DonorsListTable.php:93
+#: includes/Admin/Menus.php:243
 msgid "Email"
 msgstr ""
 
-#: src/Admin/ListTables/DonorsListTable.php:91
+#: includes/Admin/ListTables/DonorsListTable.php:94
 msgid "Donation Amount"
 msgstr ""
 
-#: src/Admin/ListTables/DonorsListTable.php:92
+#: includes/Admin/ListTables/DonorsListTable.php:95
 msgid "Order"
 msgstr ""
 
-#: src/Admin/ListTables/DonorsListTable.php:93
+#: includes/Admin/ListTables/DonorsListTable.php:96
 msgid "Type"
 msgstr ""
 
-#: src/Admin/ListTables/DonorsListTable.php:175
+#: includes/Admin/ListTables/DonorsListTable.php:177
 #. translators: 1: Order ID 2: HTML tag 3: Woocommerce currency 4: HTML tag 5:
 #. Admin order url
 msgid ""
@@ -189,587 +136,665 @@ msgid ""
 "Order</a>"
 msgstr ""
 
-#: src/Admin/ListTables/DonorsListTable.php:185
+#: includes/Admin/ListTables/DonorsListTable.php:187
 msgid "Onetime"
 msgstr ""
 
-#: src/Admin/Menus.php:35 src/Admin/Menus.php:36
+#: includes/Admin/Menus.php:61 includes/Admin/Menus.php:62
 msgid "Donations"
 msgstr ""
 
-#: src/Admin/Menus.php:46 src/Admin/Menus.php:47
-#: src/Admin/views/list-campaigns.php:19
-msgid "Campaigns"
+#: includes/Admin/Menus.php:156
+msgid "Per page"
 msgstr ""
 
-#: src/Admin/Menus.php:55 src/Admin/Menus.php:56
-#: src/Admin/views/list-donors.php:18
-msgid "Donors"
-msgstr ""
-
-#: src/Admin/Menus.php:174
+#: includes/Admin/Menus.php:244
 msgid "Content type"
 msgstr ""
 
-#: src/Admin/Menus.php:175
+#: includes/Admin/Menus.php:245
 msgid "Recipient(s)"
 msgstr ""
 
-#: src/Admin/Menus.php:207
+#: includes/Admin/Menus.php:277
 msgid "Customer"
 msgstr ""
 
-#: src/Admin/Menus.php:213
+#: includes/Admin/Menus.php:283
 msgid "Manually sent"
 msgstr ""
 
-#: src/Admin/Menus.php:213
+#: includes/Admin/Menus.php:283
 msgid "Manual"
 msgstr ""
 
-#: src/Admin/Menus.php:215
+#: includes/Admin/Menus.php:285
 msgid "Enabled"
 msgstr ""
 
-#: src/Admin/Menus.php:215
+#: includes/Admin/Menus.php:285
 msgid "Yes"
 msgstr ""
 
-#: src/Admin/Menus.php:217
+#: includes/Admin/Menus.php:287
 msgid "Disabled"
 msgstr ""
 
-#: src/Admin/Menus.php:229
+#: includes/Admin/Menus.php:299
 msgid "Manage"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:37
-msgid "Donation"
+#: includes/Admin/Menus.php:317
+msgid "No email templates found."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:59
+#: includes/Admin/Menus.php:329
+msgid "Lorem lipsum is a dollar site. Update this text first then use it."
+msgstr ""
+
+#: includes/Admin/Metaboxes.php:43
 msgid "Donation Manager"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:79
+#: includes/Admin/Metaboxes.php:63
 msgid "Default amount"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:80
+#: includes/Admin/Metaboxes.php:64
 msgid "Enter the default amount for the campaign."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:91
+#: includes/Admin/Metaboxes.php:75
 msgid "Allow predefined amounts"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:92
+#: includes/Admin/Metaboxes.php:76
 msgid ""
 "When enabled donors will be able to donate by chosing an option from the "
 "predefined/suggested amounts."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:101
+#: includes/Admin/Metaboxes.php:85
 msgid "Predefined amounts title"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:102
+#: includes/Admin/Metaboxes.php:86
 msgid "Enter the title text of predefined/suggested amounts for the campaign."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:112
+#: includes/Admin/Metaboxes.php:96
 msgid "Predefined amounts"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:113
+#: includes/Admin/Metaboxes.php:97
 msgid ""
 "Enter the list of predefined/suggested amounts for the campaign. Each "
 "amount should be separated by comma."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:124
+#: includes/Admin/Metaboxes.php:108
 msgid "Allow custom amount"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:125
+#: includes/Admin/Metaboxes.php:109
 msgid "When enabled donors will be able to donate the custom amount."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:136
+#: includes/Admin/Metaboxes.php:120
 msgid "Amount increment steps"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:137
+#: includes/Admin/Metaboxes.php:121
 msgid ""
 "Enter the amount increment steps for the campaign amount field. This will "
 "applicable for increasing or decreasing amounts on the campaign page."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:157 src/Admin/Settings.php:131
+#: includes/Admin/Metaboxes.php:141 includes/Admin/Settings.php:131
 msgid "Minimum amount"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:158
+#: includes/Admin/Metaboxes.php:142
 msgid ""
 "Enter the minimum amount for the campaign. Default amount comes from the "
 "plugin global settings."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:168 src/Admin/Settings.php:139
+#: includes/Admin/Metaboxes.php:152 includes/Admin/Settings.php:139
 msgid "Maximum amount"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:169
+#: includes/Admin/Metaboxes.php:153
 msgid ""
 "Enter the maximum amount for the campaign. Default amount comes from the "
 "plugin global settings."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:191
+#: includes/Admin/Metaboxes.php:175
 msgid "Select a campaign"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:192
+#: includes/Admin/Metaboxes.php:176
 msgid ""
 "Select a campaign to assign this donation product. After selected a "
 "campaign, the campaign cause & the goal amount will be inherited."
 msgstr ""
 
-#: src/Admin/Metaboxes.php:202
+#: includes/Admin/Metaboxes.php:186
 msgid "Campaign cause"
 msgstr ""
 
-#: src/Admin/Metaboxes.php:203
+#: includes/Admin/Metaboxes.php:187
 msgid ""
 "Enter the cause of the campaign. This will be override the assigned "
 "campaign cause text. Leave it empty to use the campaign default cause text."
 msgstr ""
 
-#: src/Admin/Settings.php:25
+#: includes/Admin/Settings.php:25
 msgid "General"
 msgstr ""
 
-#: src/Admin/Settings.php:26
-msgid "Emails"
-msgstr ""
-
-#: src/Admin/Settings.php:27
+#: includes/Admin/Settings.php:26
 msgid "Advanced"
 msgstr ""
 
-#: src/Admin/Settings.php:48
+#: includes/Admin/Settings.php:27
+msgid "Emails"
+msgstr ""
+
+#: includes/Admin/Settings.php:28
+msgid "Tutorial"
+msgstr ""
+
+#: includes/Admin/Settings.php:47
 msgid "General Settings"
 msgstr ""
 
-#: src/Admin/Settings.php:50
+#: includes/Admin/Settings.php:49
 msgid ""
 "The following options are the plugin general settings. Theses options "
 "affect how the plugin will work."
 msgstr ""
 
-#: src/Admin/Settings.php:54
+#: includes/Admin/Settings.php:53
 msgid "Add to cart button text"
 msgstr ""
 
-#: src/Admin/Settings.php:56 src/Admin/Settings.php:57
+#: includes/Admin/Settings.php:55 includes/Admin/Settings.php:56
 msgid ""
 "Enter the add to cart button text. This will be applicable only for "
 "campaigns or donation product types."
 msgstr ""
 
-#: src/Admin/Settings.php:62
+#: includes/Admin/Settings.php:61
 msgid "Skip cart"
 msgstr ""
 
-#: src/Admin/Settings.php:63
+#: includes/Admin/Settings.php:62
 msgid "Skip cart."
 msgstr ""
 
-#: src/Admin/Settings.php:64
+#: includes/Admin/Settings.php:63
 msgid ""
 "This will redirect donors to the cart page after adding a donation product "
 "to the cart item."
 msgstr ""
 
-#: src/Admin/Settings.php:70
+#: includes/Admin/Settings.php:69
 msgid "Enable fast checkout"
 msgstr ""
 
-#: src/Admin/Settings.php:71
+#: includes/Admin/Settings.php:70
 msgid "Enable fast checkout."
 msgstr ""
 
-#: src/Admin/Settings.php:72
+#: includes/Admin/Settings.php:71
 msgid ""
 "This will redirect donors to the checkout page after adding a donation "
 "product to the cart item."
 msgstr ""
 
-#: src/Admin/Settings.php:78
+#: includes/Admin/Settings.php:77
 msgid "Editable cart item price"
 msgstr ""
 
-#: src/Admin/Settings.php:79
+#: includes/Admin/Settings.php:78
 msgid "Editable cart item price."
 msgstr ""
 
-#: src/Admin/Settings.php:80
+#: includes/Admin/Settings.php:79
 msgid "This will make the cart item price editable for the donation products only."
 msgstr ""
 
-#: src/Admin/Settings.php:86
+#: includes/Admin/Settings.php:85
 msgid "Disabled coupon field"
 msgstr ""
 
-#: src/Admin/Settings.php:87
+#: includes/Admin/Settings.php:86
 msgid "Disabled coupon field."
 msgstr ""
 
-#: src/Admin/Settings.php:88
+#: includes/Admin/Settings.php:87
 msgid ""
 "This will disabled coupon fields from cart and checkout page if cart has at "
 "least a donation product."
 msgstr ""
 
-#: src/Admin/Settings.php:94
+#: includes/Admin/Settings.php:93
 msgid "Disabled order note"
 msgstr ""
 
-#: src/Admin/Settings.php:95
+#: includes/Admin/Settings.php:94
 msgid "Disabled order note."
 msgstr ""
 
-#: src/Admin/Settings.php:101
+#: includes/Admin/Settings.php:100
 msgid "Disabled tax"
 msgstr ""
 
-#: src/Admin/Settings.php:102
+#: includes/Admin/Settings.php:101
 msgid "Disabled tax for donation."
 msgstr ""
 
-#: src/Admin/Settings.php:103
+#: includes/Admin/Settings.php:102
 msgid ""
 "Disabled the tax for donation product. This will hide tax status and tax "
 "class from product edit page as well if product type selected as donation."
 msgstr ""
 
-#: src/Admin/Settings.php:109
+#: includes/Admin/Settings.php:108
 msgid "Campaign expired text"
 msgstr ""
 
-#: src/Admin/Settings.php:110 src/Admin/Settings.php:111
+#: includes/Admin/Settings.php:109 includes/Admin/Settings.php:110
 msgid ""
 "Enter the campaign expired text. This will be visible to the donation "
 "products if the campaign end date is exceeded."
 msgstr ""
 
-#: src/Admin/Settings.php:125
+#: includes/Admin/Settings.php:125
 msgid "Advanced Settings"
 msgstr ""
 
-#: src/Admin/Settings.php:127
+#: includes/Admin/Settings.php:127
 msgid "The following options are the plugin advanced settings."
 msgstr ""
 
-#: src/Admin/Settings.php:132 src/Admin/Settings.php:133
+#: includes/Admin/Settings.php:132 includes/Admin/Settings.php:133
 msgid ""
 "Enter the minimum amount. This will be apply globally if didn't set the "
 "minimum amount while creating campaigns."
 msgstr ""
 
-#: src/Admin/Settings.php:140 src/Admin/Settings.php:141
+#: includes/Admin/Settings.php:140 includes/Admin/Settings.php:141
 msgid ""
 "Enter the maximum amount. This will be apply globally if didn't set the "
 "maximum amount while creating campaigns."
 msgstr ""
 
-#: src/Admin/Settings.php:147
+#: includes/Admin/Settings.php:147
 msgid "Delete plugin data"
 msgstr ""
 
-#: src/Admin/Settings.php:148
+#: includes/Admin/Settings.php:148
 msgid "Delete plugin data."
 msgstr ""
 
-#: src/Admin/Settings.php:149
+#: includes/Admin/Settings.php:149
 msgid "Enabling this will delete all the data while uninstalling the plugin."
 msgstr ""
 
-#: src/Admin/Settings.php:203
-msgid "Feature 1"
+#: includes/Admin/Utilities.php:28 includes/Admin/Utilities.php:29
+#: includes/Admin/views/campaigns/campaigns.php:12
+msgid "Campaigns"
 msgstr ""
 
-#: src/Admin/Settings.php:204
-msgid "Feature 2"
+#: includes/Admin/Utilities.php:38 includes/Admin/Utilities.php:39
+#: includes/Admin/views/donors/donors.php:12
+msgid "Donors"
 msgstr ""
 
-#: src/Admin/Settings.php:205
-msgid "Feature 3"
+#: includes/Admin/Utilities.php:47 includes/Admin/Utilities.php:48
+#: lib/ByteKit/Traits/HasPlugin.php:266
+msgid "Settings"
 msgstr ""
 
-#: src/Admin/Settings.php:206
-msgid "Many more ..."
-msgstr ""
-
-#: src/Admin/Settings.php:210
-msgid "Want More?"
-msgstr ""
-
-#: src/Admin/Settings.php:211
-msgid ""
-"This plugin offers a premium version which comes with the following "
-"features:"
-msgstr ""
-
-#: src/Admin/Settings.php:219
-msgid "Upgrade to PRO"
-msgstr ""
-
-#: src/Admin/views/add-campaign.php:12 src/PostTypes.php:39
+#: includes/Admin/views/campaigns/add.php:12 includes/PostTypes.php:39
 msgid "Add New Campaign"
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:13
+#: includes/Admin/views/campaigns/add.php:13
 msgid ""
 "You can create a new campaign here. This form will create a "
 "campaign/donation product. It will be available on woocommerce products "
 "page as well for latter edit or updates."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:19 src/Admin/views/edit-campaign.php:31
-#: src/Admin/views/view-campaign.php:31
+#: includes/Admin/views/campaigns/add.php:19
+#: includes/Admin/views/campaigns/edit.php:32
+#: includes/Admin/views/campaigns/view.php:31
 msgid "Campaign Name *"
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:24
+#: includes/Admin/views/campaigns/add.php:24
 msgid "Enter the name of the campaign."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:33 src/Admin/views/edit-campaign.php:45
+#: includes/Admin/views/campaigns/add.php:33
+#: includes/Admin/views/campaigns/edit.php:46
 msgid "Enter the cause of the campaign..."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:35
+#: includes/Admin/views/campaigns/add.php:35
 msgid "Enter the cause of the campaign."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:41
+#: includes/Admin/views/campaigns/add.php:41
 msgid "Goal amount"
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:46
+#: includes/Admin/views/campaigns/add.php:46
 msgid "Enter the goal amount of the campaign."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:57
+#: includes/Admin/views/campaigns/add.php:57
 msgid "Enter the end date of the campaign."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:72
+#: includes/Admin/views/campaigns/add.php:72
 msgid "Select the campaign status."
 msgstr ""
 
-#: src/Admin/views/add-campaign.php:81
+#: includes/Admin/views/campaigns/add.php:81
 msgid "Add Campaign"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:15 src/Admin/views/view-campaign.php:102
-#: src/PostTypes.php:41
+#: includes/Admin/views/campaigns/campaigns.php:14
+msgid "Add New"
+msgstr ""
+
+#: includes/Admin/views/campaigns/campaigns.php:18
+#: includes/Admin/views/donors/donors.php:15
+#. translators: %s: search query.
+msgid "Search results for \"%s\""
+msgstr ""
+
+#: includes/Admin/views/campaigns/campaigns.php:25
+#: includes/Admin/views/donors/donors.php:22
+msgid "Search"
+msgstr ""
+
+#: includes/Admin/views/campaigns/edit.php:16
+#: includes/Admin/views/campaigns/view.php:102 includes/PostTypes.php:41
 msgid "Edit Campaign"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:16
+#: includes/Admin/views/campaigns/edit.php:17
 msgid "Edit and update the campaign."
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:23 src/Admin/views/view-campaign.php:23
+#: includes/Admin/views/campaigns/edit.php:24
+#: includes/Admin/views/campaigns/view.php:23
 msgid "Campaign Details"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:36
+#: includes/Admin/views/campaigns/edit.php:37
 msgid "Edit or update the name of the campaign."
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:47
+#: includes/Admin/views/campaigns/edit.php:48
 msgid "Edit or update the cause of the campaign."
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:54 src/Admin/views/view-campaign.php:50
+#: includes/Admin/views/campaigns/edit.php:55
+#: includes/Admin/views/campaigns/view.php:50
 msgid "Goal Amount *"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:59
+#: includes/Admin/views/campaigns/edit.php:60
 msgid "Edit or update the goal amount of the campaign."
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:66 src/Admin/views/view-campaign.php:61
+#: includes/Admin/views/campaigns/edit.php:67
+#: includes/Admin/views/campaigns/view.php:61
 msgid "End date *"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:71
+#: includes/Admin/views/campaigns/edit.php:72
 msgid "Edit or update the end date of the campaign."
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:81 src/Admin/views/view-campaign.php:76
+#: includes/Admin/views/campaigns/edit.php:82
+#: includes/Admin/views/campaigns/view.php:76
 msgid "Campaign overview"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:85 src/Admin/views/view-campaign.php:80
-#: src/Frontend/Product.php:89
+#: includes/Admin/views/campaigns/edit.php:86
+#: includes/Admin/views/campaigns/view.php:80 includes/Frontend/Product.php:91
 #. translators: 1: WC currency symbol 2: Raised amount
 msgid "%1$s%2$.2f raised"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:86 src/Admin/views/view-campaign.php:81
-#: src/Frontend/Product.php:90
+#: includes/Admin/views/campaigns/edit.php:87
+#: includes/Admin/views/campaigns/view.php:81 includes/Frontend/Product.php:92
 #. translators: 1: WC currency symbol 2: Raised amount
 msgid "%1$s%2$.2f goal"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:88 src/Admin/views/view-campaign.php:83
-#: src/Frontend/Product.php:92
+#: includes/Admin/views/campaigns/edit.php:89
+#: includes/Admin/views/campaigns/view.php:83 includes/Frontend/Product.php:94
 #. translators: 1: Raised amount
 msgid "%1$s%%"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:93 src/Admin/views/view-campaign.php:88
+#: includes/Admin/views/campaigns/edit.php:94
+#: includes/Admin/views/campaigns/view.php:88
 msgid "Actions"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:107
+#: includes/Admin/views/campaigns/edit.php:108
 msgid "Update the campaign status."
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:113
+#: includes/Admin/views/campaigns/edit.php:114
 msgid "Save Campaign"
 msgstr ""
 
-#: src/Admin/views/edit-campaign.php:128 src/Admin/views/view-campaign.php:114
+#: includes/Admin/views/campaigns/edit.php:129
+#: includes/Admin/views/campaigns/view.php:114
 msgid "Campaign Products"
 msgstr ""
 
-#: src/Admin/views/list-campaigns.php:21
-msgid "Add New"
+#: includes/Admin/views/campaigns/edit.php:151
+#: includes/Admin/views/campaigns/view.php:136
+msgid "View"
 msgstr ""
 
-#: src/Admin/views/list-campaigns.php:30 src/Admin/views/list-donors.php:26
-msgid "Search"
-msgstr ""
-
-#: src/Admin/views/view-campaign.php:16
+#: includes/Admin/views/campaigns/view.php:16
 msgid "The campaign details."
 msgstr ""
 
-#: src/Admin/views/view-campaign.php:36
+#: includes/Admin/views/campaigns/view.php:36
 msgid "The name of the campaign."
 msgstr ""
 
-#: src/Admin/views/view-campaign.php:55
+#: includes/Admin/views/campaigns/view.php:55
 msgid "The goal amount of the campaign."
 msgstr ""
 
-#: src/Admin/views/view-campaign.php:66
+#: includes/Admin/views/campaigns/view.php:66
 msgid "The end date of the campaign."
 msgstr ""
 
-#: src/Admin/views/view-campaign.php:92
+#: includes/Admin/views/campaigns/view.php:92
 msgid "Status: "
 msgstr ""
 
-#: src/Admin/views/view-campaign.php:96
+#: includes/Admin/views/campaigns/view.php:96
 msgid "The campaign status."
 msgstr ""
 
-#: src/Donation/class-wc-product-donation.php:40
-#: src/Donation/class-wc-product-donation.php:63
+#: includes/Donation/Donation.php:33
+msgid "Donation"
+msgstr ""
+
+#: includes/Donation/class-donation-product.php:48
+#: includes/Donation/class-donation-product.php:71
 msgid "Donate Now"
 msgstr ""
 
-#: src/Donation/class-wc-product-donation.php:40
+#: includes/Donation/class-donation-product.php:48
 msgid "About donation"
 msgstr ""
 
-#: src/Donation/class-wc-product-donation.php:76
+#: includes/Donation/class-donation-product.php:84
 #. translators: %s: Product title
 msgid "Add &ldquo;%s&rdquo; to your cart"
 msgstr ""
 
-#: src/Donation/class-wc-product-donation.php:76
+#: includes/Donation/class-donation-product.php:84
 msgid "Read more about &ldquo;%s&rdquo;"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:34
+#: includes/Emails/class-wc-donation-order-email.php:34
 msgid "Completed donation"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:35
+#: includes/Emails/class-wc-donation-order-email.php:35
 msgid ""
 "Donation order completed notification emails are sent when a customer "
 "places an donation order."
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:171
+#: includes/Emails/class-wc-donation-order-email.php:171
 #. translators: 1: Email subject
 msgid ""
 "This controls the email subject line. Leave blank to use the default "
 "subject: %s."
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:179
+#: includes/Emails/class-wc-donation-order-email.php:179
 #. translators: 1: Email heading
 msgid ""
 "This controls the main heading contained within the email notification. "
 "Leave blank to use the default heading: %s."
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:185
+#: includes/Emails/class-wc-donation-order-email.php:185
 msgid "Additional content"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:186
+#: includes/Emails/class-wc-donation-order-email.php:186
 msgid ""
 "Text to appear below the main email content. Available placeholders: "
 "{site_title}, {site_address}, {site_url}, {order_date}, {order_number}"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:190
+#: includes/Emails/class-wc-donation-order-email.php:190
 msgid "N/A"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:194
+#: includes/Emails/class-wc-donation-order-email.php:194
 msgid "Email type"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:196
+#: includes/Emails/class-wc-donation-order-email.php:196
 msgid "Choose which format of email to send."
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:212
+#: includes/Emails/class-wc-donation-order-email.php:212
 msgid "Your {site_title} donation has been received!"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:222
+#: includes/Emails/class-wc-donation-order-email.php:222
 msgid "Thank you for your donation"
 msgstr ""
 
-#: src/Emails/class-wc-donation-order-email.php:231
+#: includes/Emails/class-wc-donation-order-email.php:231
 msgid ""
 "Just to let you know — we've received your donation order #{order_number}, "
 "and it is now being processed:"
 msgstr ""
 
-#: src/Frontend/Product.php:120
+#: includes/Frontend/Product.php:122
 #. translators: 1: WC currency symbol
 msgid "%1$s"
 msgstr ""
 
-#: src/Frontend/Product.php:142
+#: includes/Frontend/Product.php:144
 msgid "The campaign expired!"
 msgstr ""
 
-#: src/Installer.php:77
-#. translators: 1: plugin name 2: version number
-msgid "%1$s updated to version %2$s successfully."
+#: includes/PostTypes.php:40
+msgid "New Campaign"
+msgstr ""
+
+#: includes/PostTypes.php:42
+msgid "View Campaign"
+msgstr ""
+
+#: includes/PostTypes.php:43
+msgid "All Campaign"
+msgstr ""
+
+#: includes/PostTypes.php:44
+msgid "Search Campaign"
+msgstr ""
+
+#: includes/PostTypes.php:45
+msgid "Parent Campaign:"
+msgstr ""
+
+#: includes/PostTypes.php:46
+msgid "No campaigns found."
+msgstr ""
+
+#: includes/PostTypes.php:47
+msgid "No campaigns found in Trash."
+msgstr ""
+
+#: lib/ByteKit/Admin/Notices.php:137
+msgid "Dismiss this notice"
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:87
+msgid "Settings saved."
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:251 lib/ByteKit/Admin/Settings.php:346
+msgid "Recommended"
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:252 lib/ByteKit/Admin/Settings.php:347
+msgid "Install Now"
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:315
+msgid "Need Help?"
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:361
+msgid "Join our Community"
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:365
+msgid "Request a Feature"
+msgstr ""
+
+#: lib/ByteKit/Admin/Settings.php:369
+msgid "Report a Bug"
+msgstr ""
+
+#: lib/ByteKit/Traits/HasPlugin.php:227
+msgid "Documentation"
+msgstr ""
+
+#: lib/ByteKit/Traits/HasPlugin.php:234
+msgid "Support"
+msgstr ""
+
+#: lib/ByteKit/Traits/HasPlugin.php:241
+msgid "Review"
 msgstr ""
 
 #: src/Models/Campaign.php:60
@@ -782,43 +807,6 @@ msgstr ""
 
 #: src/Models/Campaign.php:68
 msgid "Missing required status."
-msgstr ""
-
-#: src/Plugin.php:79
-#. translators: 1: plugin name 2: WooCommerce
-msgid "%1$s requires %2$s to be installed and active."
-msgstr ""
-
-#: src/Plugin.php:81
-msgid "WooCommerce"
-msgstr ""
-
-#: src/PostTypes.php:40
-msgid "New Campaign"
-msgstr ""
-
-#: src/PostTypes.php:42
-msgid "View Campaign"
-msgstr ""
-
-#: src/PostTypes.php:43
-msgid "All Campaign"
-msgstr ""
-
-#: src/PostTypes.php:44
-msgid "Search Campaign"
-msgstr ""
-
-#: src/PostTypes.php:45
-msgid "Parent Campaign:"
-msgstr ""
-
-#: src/PostTypes.php:46
-msgid "No campaigns found."
-msgstr ""
-
-#: src/PostTypes.php:47
-msgid "No campaigns found in Trash."
 msgstr ""
 
 #: templates/emails/customer-completed-donation.php:19
@@ -839,261 +827,8 @@ msgstr ""
 msgid "Your donated amount: %1$s%2$.2f"
 msgstr ""
 
-#: vendor/lucatume/wp-browser/src/data/plugins/internationalized-plugin.php:11
-msgid "This is a dummy plugin"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:42
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:72
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:80
-msgid "There was an error when reading this WXR file"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:43
-msgid ""
-"Details are shown above. The importer will now try again with a different "
-"parser..."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:84
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:89
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:306
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/parsers.php:495
-msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:132
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:141
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:192
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:196
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:205
-msgid "Sorry, there has been an error."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:133
-msgid "The file does not exist, please try again."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:176
-msgid "All done."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:176
-msgid "Have fun!"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:177
-msgid "Remember to update the passwords and roles of imported users."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:197
-msgid ""
-"The export file could not be found at <code>%s</code>. It is likely that "
-"this was caused by a permissions problem."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:213
-msgid ""
-"This WXR file (version %s) may not be supported by this version of the "
-"importer. Please consider updating."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:238
-msgid ""
-"Failed to import author %s. Their posts will be attributed to the current "
-"user."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:264
-msgid "Assign Authors"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:265
-msgid ""
-"To make it easier for you to edit and save the imported content, you may "
-"want to reassign the author of the imported item to an existing user of "
-"this site. For example, you may want to import all the entries as "
-"<code>admin</code>s entries."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:267
-msgid ""
-"If a new user is created by WordPress, a new password will be randomly "
-"generated and the new user&#8217;s role will be set as %s. Manually "
-"changing the new user&#8217;s details will be necessary."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:277
-msgid "Import Attachments"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:280
-msgid "Download and import file attachments"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:284
-msgid "Submit"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:297
-msgid "Import author:"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:308
-msgid "or create new user with login name:"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:311
-msgid "as a new user:"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:319
-msgid "assign posts to an existing user:"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:321
-msgid "or assign posts to an existing user:"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:322
-msgid "- Select -"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:372
-msgid ""
-"Failed to create new user for %s. Their posts will be attributed to the "
-"current user."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:424
-msgid "Failed to import category %s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:467
-msgid "Failed to import post tag %s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:516
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:738
-msgid "Failed to import %s %s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:605
-msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:642
-msgid "%s &#8220;%s&#8221; already exists."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:704
-msgid "Failed to import %s &#8220;%s&#8221;"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:869
-msgid "Menu item skipped due to missing menu slug"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:876
-msgid "Menu item skipped due to invalid menu slug: %s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:939
-msgid "Fetching attachments is not enabled"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:952
-msgid "Invalid file type"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:996
-msgid "Remote server did not respond"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1002
-msgid "Remote server returned error response %1$d %2$s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1009
-msgid "Remote file is incorrect size"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1014
-msgid "Zero size file downloaded"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1020
-msgid "Remote file is too large, limit is %s"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1119
-msgid "Import WordPress"
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1126
-msgid ""
-"A new version of this importer is available. Please update to version %s to "
-"ensure compatibility with newer export files."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1141
-msgid ""
-"Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import "
-"the posts, pages, comments, custom fields, categories, and tags into this "
-"site."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1142
-msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/plugins/wordpress-importer/wordpress-importer.php:1216
-msgid ""
-"Import <strong>posts, pages, comments, custom fields, categories, and "
-"tags</strong> from a WordPress export file."
-msgstr ""
-
-#: vendor/lucatume/wp-browser/src/data/themedir1/internationalized-theme/functions.php:7
-msgid "This is a dummy theme"
-msgstr ""
-
-#: vendor/wp-cli/core-command/src/Core_Command.php:749
-msgid "Wildcard DNS may not be configured correctly."
-msgstr ""
-
-#: vendor/wp-cli/entity-command/src/Site_Command.php:157
-msgid "Uncategorized"
-msgstr ""
-
-#: vendor/wp-cli/export-command/src/WP_Export_XML_Over_HTTP.php:20
-#: vendor/wp-cli/export-command/src/WP_Export_XML_Over_HTTP.php:25
-msgid "Export Error"
-msgstr ""
-
-#: vendor/wp-cli/extension-command/src/WP_CLI/CommandWithUpgrade.php:770
-msgid " Try again"
-msgstr ""
-
-#: vendor/wp-cli/extension-command/src/WP_CLI/CommandWithUpgrade.php:776
-msgid "API error. Try Again."
-msgstr ""
-
-#: vendor/wp-cli/media-command/src/Media_Command.php:151
-msgid "image"
-msgid_plural "images"
-msgstr[0] ""
-msgstr[1] ""
-
-#: vendor/wp-cli/wp-cli/php/utils-wp.php:247
-msgid "Inactive Widgets"
-msgstr ""
-
-#: vendor/wp-cli/wp-cli/php/utils-wp.php:250
-msgid "Drag widgets here to remove them from the sidebar but keep their settings."
-msgstr ""
-
 #. Plugin Name of the plugin/theme
-msgid "WC Donation Manager"
+msgid "Donation Manager for WooCommerce"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -1117,41 +852,27 @@ msgstr ""
 msgid "https://pluginever.com/"
 msgstr ""
 
-#: src/PostTypes.php:34
+#: includes/PostTypes.php:34
 msgctxt "post type general name"
 msgid "Campaign"
 msgstr ""
 
-#: src/PostTypes.php:35
+#: includes/PostTypes.php:35
 msgctxt "post type singular name"
 msgid "Campaign"
 msgstr ""
 
-#: src/PostTypes.php:36
+#: includes/PostTypes.php:36
 msgctxt "admin menu"
 msgid "Campaign"
 msgstr ""
 
-#: src/PostTypes.php:37
+#: includes/PostTypes.php:37
 msgctxt "add new on admin bar"
 msgid "Campaign"
 msgstr ""
 
-#: src/PostTypes.php:38
+#: includes/PostTypes.php:38
 msgctxt "campaign"
 msgid "Add New"
-msgstr ""
-
-#: vendor/wp-cli/core-command/src/Core_Command.php:491
-#: vendor/wp-cli/core-command/src/Core_Command.php:565
-#. translators: placeholder is blog name
-#. translators: placeholder is user supplied title
-msgctxt "Default network name"
-msgid "%s Sites"
-msgstr ""
-
-#: vendor/wp-cli/entity-command/src/Site_Command.php:160
-#. translators: Default category slug
-msgctxt "Default category slug"
-msgid "Uncategorized"
 msgstr ""

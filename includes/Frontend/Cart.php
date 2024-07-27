@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager;
+namespace WooCommerceDonationManager\Frontend;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,9 +10,10 @@ defined( 'ABSPATH' ) || exit;
  * Handles cart functionality.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package WooCommerceDonationManager\Frontend
  */
 class Cart {
+
 	/**
 	 * Cart Constructor.
 	 *

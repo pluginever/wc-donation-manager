@@ -153,7 +153,7 @@ class Menus {
 			return;
 		}
 		$args = array(
-			'label'   => __( 'Per page', 'wp-ever-accounting', 'wc-donation-manager' ),
+			'label'   => __( 'Per page', 'wc-donation-manager' ),
 			'default' => 20,
 		);
 		$page = preg_replace( '/^.*?wcdm-/', 'wcdm-', $screen->id );
@@ -194,8 +194,6 @@ class Menus {
 		if ( Utilities::is_add_screen() ) {
 			include __DIR__ . '/views/campaigns/add.php';
 		} elseif ( $edit ) {
-//			var_dump( $edit );
-//			var_dump( $campaign );
 			include __DIR__ . '/views/campaigns/edit.php';
 		} else {
 			include __DIR__ . '/views/campaigns/campaigns.php';

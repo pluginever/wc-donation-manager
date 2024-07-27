@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager;
+namespace WooCommerceDonationManager\Frontend;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,16 +10,17 @@ defined( 'ABSPATH' ) || exit;
  * Handles order functionality weather admin or customer.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package WooCommerceDonationManager\Frontend
  */
 class Orders {
+
 	/**
 	 * Orders Constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		//add_action( 'woocommerce_checkout_create_order', array( __CLASS__, 'before_checkout_create_order' ), 20 );
+		add_action( 'woocommerce_checkout_create_order', array( __CLASS__, 'before_checkout_create_order' ), 20 );
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
 	}
 

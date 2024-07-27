@@ -94,6 +94,8 @@ final class Plugin extends ByteKit\Plugin {
 				Emails\Emails::class,
 				Frontend\Frontend::class,
 				Frontend\Product::class,
+				Frontend\Cart::class,
+				Frontend\Orders::class,
 			)
 		);
 

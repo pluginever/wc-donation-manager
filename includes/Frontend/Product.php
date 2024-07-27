@@ -88,10 +88,10 @@ class Product {
 				<?php if ( $campaign_id ) : ?>
 				<div class="campaign-progress">
 					<div class="progress-label">
-						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ); // phpcs:ignore ?></label>
-						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_goal_amount', true ) ) ); // phpcs:ignore ?></label>
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ) ); ?></label>
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_goal_amount', true ) ) ) ); ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign_id, '_goal_amount', true ) ); ?>"><?php echo sprintf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ); // phpcs:ignore ?></progress>
+					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign_id, '_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?></progress>
 				</div>
 				<?php endif; ?>
 				<?php
@@ -119,7 +119,7 @@ class Product {
 					</div>
 				<?php endif; ?>
 				<div class="campaign-amount <?php echo sanitize_html_class( 'yes' === $is_custom_amount ? '' : 'disabled' ); ?>">
-					<label for="donation_amount" class="input-text"><?php echo sprintf( /* translators: 1: WC currency symbol */ __( '%1$s', 'wc-donation-manager' ), esc_html( $currency_symbol ) ); // phpcs:ignore ?></label>
+					<label for="donation_amount" class="input-text"><?php echo esc_html( $currency_symbol ); ?></label>
 					<input type="<?php echo esc_attr( 'yes' === $is_custom_amount ? 'number' : 'hidden' ); ?>" name="donation_amount" id="donation_amount"
 							min="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_min_amount', true ) ); ?>"
 							max="<?php echo esc_attr( get_post_meta( $product->get_id(), '_wcdm_max_amount', true ) ); ?>"
