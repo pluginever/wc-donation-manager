@@ -187,6 +187,7 @@ class Product {
 	 */
 	public static function add_cart_item( $item ) {
 		wp_verify_nonce( '_wpnonce' );
+
 		if ( 'donation' === $item['data']->get_type() ) {
 			if ( isset( $_POST['donation_amount'] ) && is_numeric( $_POST['donation_amount'] ) && $_POST['donation_amount'] >= 0 ) {
 				$item['donation_amount'] = floatval( wp_unslash( $_POST['donation_amount'] ) );
