@@ -17,44 +17,10 @@ class Metaboxes {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_filter( 'product_type_selector', array( __CLASS__, 'add_product_type' ) );
-		add_filter( 'woocommerce_product_class', array( __CLASS__, 'product_type_class' ), 10, 2 );
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_data' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'admin_custom_js' ) );
-	}
-
-	/**
-	 * Add "Donation" as a product type selector.
-	 * Only if this option is selected one can donate to the product.
-	 *
-	 * @param array $product_type array of product types.
-	 *
-	 * @version 1.0.0
-	 * @return array array of product types.
-	 */
-	public static function add_product_type( $product_type ) {
-		$product_type['donation'] = __( 'Donation', 'wc-donation-manager' );
-
-		return $product_type;
-	}
-
-	/**
-	 * Add "Donation" product class.
-	 *
-	 * @param string $class_name Class name.
-	 * @param string $product_type Product type name.
-	 *
-	 * @version 1.0.0
-	 * @return string Class name.
-	 */
-	public static function product_type_class( $class_name, $product_type ) {
-		if ( 'donation' === $product_type ) {
-			$class_name = 'WCDM_Donation_Product';
-		}
-
-		return $class_name;
 	}
 
 	/**

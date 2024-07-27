@@ -153,7 +153,7 @@ class Menus {
 			return;
 		}
 		$args = array(
-			'label'   => __( 'Per page', 'wp-ever-accounting' ),
+			'label'   => __( 'Per page', 'wp-ever-accounting', 'wc-donation-manager' ),
 			'default' => 20,
 		);
 		$page = preg_replace( '/^.*?wcdm-/', 'wcdm-', $screen->id );

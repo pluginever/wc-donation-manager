@@ -72,9 +72,11 @@ class Cart {
 	 */
 	public static function update_cart( $cart_updated ) {
 		wp_verify_nonce( '_wpnonce' );
+
 		if ( 'yes' !== get_option( 'wcdm_editable_cart_price', 'yes' ) ) {
 			return $cart_updated;
 		}
+
 		global $woocommerce;
 		foreach ( $woocommerce->cart->get_cart() as $key => $cart_item ) {
 			if ( $cart_item['data']->get_type() === 'donation' && isset( $_POST[ 'donation_amount_' . $key ] ) && is_numeric( $_POST[ 'donation_amount_' . $key ] ) && $_POST[ 'donation_amount_' . $key ] >= 0 && $_POST[ 'donation_amount_' . $key ] !== $cart_item['data']->get_price() ) {

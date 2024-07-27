@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager\Frontend
  */
 class Product {
+
 	/**
 	 * Products constructor.
 	 *
@@ -69,6 +70,7 @@ class Product {
 	 */
 	public static function before_add_to_cart_button() {
 		global $product;
+
 		if ( 'donation' === $product->get_type() ) {
 			$currency_symbol       = get_woocommerce_currency_symbol();
 			$is_predefined_amounts = get_post_meta( $product->get_id(), '_is_predefined_amounts', true );

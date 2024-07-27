@@ -90,7 +90,10 @@ final class Plugin extends ByteKit\Plugin {
 		// Include common classes.
 		$this->set(
 			array(
+				Donation\Donation::class,
 				Emails\Emails::class,
+				Frontend\Frontend::class,
+				Frontend\Product::class,
 			)
 		);
 

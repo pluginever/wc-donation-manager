@@ -11,8 +11,8 @@
 		}
 	}
 	.suggested-amounts {
-		display: flex;
-		flex-wrap: wrap;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
 		gap: 10px;
 		margin-bottom: 15px;
 		.suggested-amount{

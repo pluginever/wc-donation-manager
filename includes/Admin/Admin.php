@@ -107,13 +107,13 @@ class Admin {
 		if ( in_array( get_current_screen()->id, Utilities::get_screen_ids(), true ) ) {
 			$text = sprintf(
 			/* translators: %s: Plugin name */
-				__( 'Thank you for using %s!', 'starter-plugin' ),
+				__( 'Thank you for using %s!', 'starter-plugin', 'wc-donation-manager' ),
 				'<strong>' . esc_html( WCDM()->get_name() ) . '</strong>',
 			);
 			if ( WCDM()->get_review_url() ) {
 				$text .= sprintf(
 				/* translators: %s: Plugin name */
-					__( ' Share your appreciation with a five-star review %s.', 'starter-plugin' ),
+					__( ' Share your appreciation with a five-star review %s.', 'starter-plugin', 'wc-donation-manager' ),
 					'<a href="' . esc_url( WCDM()->get_review_url() ) . '" target="_blank">here</a>'
 				);
 			}
@@ -133,7 +133,7 @@ class Admin {
 	public function update_footer( $text ) {
 		if ( in_array( get_current_screen()->id, Utilities::get_screen_ids(), true ) ) {
 			/* translators: 1: Plugin version */
-			$text = sprintf( esc_html__( 'Version %s', 'starter-plugin' ), WCDM()->get_version() );
+			$text = sprintf( esc_html__( 'Version %s', 'starter-plugin', 'wc-donation-manager' ), WCDM()->get_version() );
 		}
 
 		return $text;

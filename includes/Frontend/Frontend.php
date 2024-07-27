@@ -13,6 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager\Frontend
  */
 class Frontend {
+
 	/**
 	 * Frontend constructor.
 	 *
