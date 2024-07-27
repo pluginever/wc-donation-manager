@@ -21,13 +21,34 @@ function WCDM() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.
 }
 
 /**
+ * Get campaign.
+ *
+ * @param mixed $campaign Campaign object or ID.
+ *
+ * @version 1.0.0
+ * @return WP_Post|false The campaign object, or false if not found.
+ */
+function wcdm_get_campaign( $campaign ) {
+
+	if ( is_numeric( $campaign ) ) {
+		$campaign = get_post( $campaign );
+	}
+
+	if ( $campaign instanceof WP_Post && 'wcdm_campaigns' === $campaign->post_type ) {
+		return $campaign;
+	}
+
+	return false;
+}
+
+/**
  * Get campaigns.
  *
- * @param array $args The args.
+ * @param array $args The campaign args.
  * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
- * @return Campaign[]|int The campaigns.
+ * @return array|int The campaigns.
  */
 function wcdm_get_campaigns( $args = array(), $count = false ) {
 	$defaults = array(
@@ -44,24 +65,6 @@ function wcdm_get_campaigns( $args = array(), $count = false ) {
 	}
 
 	return array_map( 'wcdm_get_campaign', $query->posts );
-}
-
-/**
- * Get campaign.
- *
- * @param mixed $campaign Campaign object or ID.
- *
- * @version 1.0.0
- * @return Campaign|null
- */
-function wcdm_get_campaign( $campaign ) {
-	$campaign = new Campaign( $campaign );
-
-	if ( $campaign->get_id() ) {
-		return $campaign;
-	}
-
-	return null;
 }
 
 /**

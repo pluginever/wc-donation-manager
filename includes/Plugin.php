@@ -84,6 +84,9 @@ final class Plugin extends ByteKit\Plugin {
 	 * @return void
 	 */
 	public function on_init() {
+		// Including donation product type class.
+		require_once __DIR__ . '/Donation/class-donation-product.php';
+
 		// Include common classes.
 		$this->set(
 			array(

@@ -200,7 +200,7 @@ class Metaboxes {
 			'0' => 'Select a campaign',
 		);
 		foreach ( $wcdm_campaigns as $wcdm_campaign ) {
-			$campaign_options[ $wcdm_campaign->get_id() ] = sprintf( '%1$s (%2$s)', $wcdm_campaign->get_name(), $wcdm_campaign->get_id() );
+			$campaign_options[ $wcdm_campaign->ID ] = sprintf( '%1$s (%2$s)', $wcdm_campaign->post_title, $wcdm_campaign->ID );
 		}
 
 		woocommerce_wp_select(
