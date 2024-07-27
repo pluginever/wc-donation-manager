@@ -183,10 +183,10 @@ class Menus {
 	 * @return void
 	 */
 	public function render_campaigns_content() {
-		$edit = Utilities::is_edit_screen();
-		$api  = ! empty( $edit ) ? get_post( $edit ) : '';
+		$edit     = Utilities::is_edit_screen();
+		$campaign = ! empty( $edit ) ? get_post( $edit ) : '';
 
-		if ( ! empty( $edit ) && empty( $api ) ) {
+		if ( ! empty( $edit ) && empty( $campaign ) ) {
 			wp_safe_redirect( remove_query_arg( 'edit' ) );
 			exit();
 		}
@@ -194,6 +194,8 @@ class Menus {
 		if ( Utilities::is_add_screen() ) {
 			include __DIR__ . '/views/campaigns/add.php';
 		} elseif ( $edit ) {
+//			var_dump( $edit );
+//			var_dump( $campaign );
 			include __DIR__ . '/views/campaigns/edit.php';
 		} else {
 			include __DIR__ . '/views/campaigns/campaigns.php';

@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @package WooCommerceDonationManager
  */
-class CampaignsListTable extends AbstractListTable {
+class CampaignsListTable extends ListTable {
 	/**
 	 * Get campaigns started
 	 *
@@ -166,7 +166,7 @@ class CampaignsListTable extends AbstractListTable {
 						}
 					}
 					// translators: %d: number of campaigns deleted.
-					wc_donation_manager()->add_notice( sprintf( _n( '%d campaign deleted.', '%d campaigns deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
+					WCDM()->flash->success( sprintf( _n( '%d campaign deleted.', '%d campaigns deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
 					break;
 			}
 
@@ -211,12 +211,11 @@ class CampaignsListTable extends AbstractListTable {
 		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' );
 		$id_url    = add_query_arg( 'id', $item->ID, $admin_url );
 		$actions   = array(
-			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit_campaign', $item->ID, $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
+			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit', $item->ID, $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
 			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
-			'view'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'view_campaign', $item->ID, $admin_url ) ), __( 'View', 'wc-donation-manager' ) ),
 		);
 
-		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit_campaign', $item->ID, $admin_url ) ), esc_html( $item->post_title ), $this->row_actions( $actions ) );
+		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit', $item->ID, $admin_url ) ), esc_html( $item->post_title ), $this->row_actions( $actions ) );
 	}
 
 	/**

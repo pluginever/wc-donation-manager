@@ -50,7 +50,7 @@ final class Plugin extends ByteKit\Plugin {
 	 * @return void
 	 */
 	public function includes() {
-		require_once __DIR__ . '/Functions.php';
+		require_once __DIR__ . '/functions.php';
 	}
 
 	/**
@@ -99,6 +99,7 @@ final class Plugin extends ByteKit\Plugin {
 					Admin\Menus::class,
 					Admin\Settings::instance(),
 					Admin\Actions::class,
+					Admin\Metaboxes::class,
 				)
 			);
 		}

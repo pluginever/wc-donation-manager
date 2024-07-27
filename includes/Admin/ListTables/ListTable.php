@@ -15,7 +15,7 @@ if ( ! class_exists( '\WP_List_Table' ) ) {
  * @since 1.0.0
  * @package WooCommerceDonationManager
  */
-abstract class AbstractListTable extends \WP_List_Table {
+class ListTable extends \WP_List_Table {
 	/**
 	 * Tab Post
 	 *

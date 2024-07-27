@@ -49,7 +49,7 @@ class Frontend {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		wc_donation_manager()->enqueue_style( 'wcdm-frontend', 'css/wcdm-frontend.css' );
-		wc_donation_manager()->enqueue_script( 'wcdm-frontend', 'js/wcdm-frontend.js', array( 'jquery' ) );
+		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'css/wcdm-frontend.css' );
+		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'js/wcdm-frontend.js', array( 'jquery' ) );
 	}
 }

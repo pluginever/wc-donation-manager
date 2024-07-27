@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  * @package WooCommerceDonationManager
  */
-class DonorsListTable extends AbstractListTable {
+class DonorsListTable extends ListTable {
 	/**
 	 * Get donors started
 	 *
