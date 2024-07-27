@@ -17,16 +17,16 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 <p><?php esc_html_e( 'Edit and update the campaign.', 'wc-donation-manager' ); ?></p>
 
 <form class="campaign" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-	<div class="pev-poststuff">
+	<div class="bk-poststuff">
 		<div class="column-1">
-			<div class="pev-card">
-				<div class="pev-card__header">
-					<h3 class="pev-card__title"><?php esc_html_e( 'Campaign Details', 'wc-donation-manager' ); ?></h3>
-					<p class="pev-card__subtitle">
+			<div class="bk-card">
+				<div class="bk-card__header">
+					<h3 class="bk-card__title"><?php esc_html_e( 'Campaign Details', 'wc-donation-manager' ); ?></h3>
+					<p class="bk-card__subtitle">
 						#<?php echo esc_html( $campaign->ID ); ?>
 					</p>
 				</div>
-				<div class="pev-card__body form-inline">
+				<div class="bk-card__body form-inline">
 					<div class="pev-form-field">
 						<label for="name">
 							<?php esc_html_e( 'Campaign Name *', 'wc-donation-manager' ); ?>
@@ -55,7 +55,7 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 							<?php esc_html_e( 'Goal Amount *', 'wc-donation-manager' ); ?>
 						</label>
 						<div class="field-group">
-							<input type="number" min="0" step="any" name="goal_amount" id="goal_amount" class="regular-text" value="<?php echo esc_attr( get_post_meta( $campaign->ID, 'goal_amount', true ) ); ?>" required/>
+							<input type="number" min="0" step="any" name="goal_amount" id="goal_amount" class="regular-text" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_goal_amount', true ) ); ?>" required/>
 							<p class="description">
 								<?php esc_html_e( 'Edit or update the goal amount of the campaign.', 'wc-donation-manager' ); ?>
 							</p>
@@ -67,7 +67,7 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 							<?php esc_html_e( 'End date *', 'wc-donation-manager' ); ?>
 						</label>
 						<div class="field-group">
-							<input type="date" name="end_date" id="end_date" class="regular-text" value="<?php echo esc_attr( get_post_meta( $campaign->ID, 'end_date', true ) ); ?>" required/>
+							<input type="date" name="end_date" id="end_date" class="regular-text" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_end_date', true ) ); ?>" required/>
 							<p class="description">
 								<?php esc_html_e( 'Edit or update the end date of the campaign.', 'wc-donation-manager' ); ?>
 							</p>
@@ -77,41 +77,41 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 			</div>
 		</div>
 		<div class="column-2">
-			<div class="pev-card">
-				<div class="pev-card__header">
-					<h3 class="pev-card__title"><?php esc_html_e( 'Campaign overview', 'wc-donation-manager' ); ?></h3>
+			<div class="bk-card">
+				<div class="bk-card__header">
+					<h3 class="bk-card__title"><?php esc_html_e( 'Campaign overview', 'wc-donation-manager' ); ?></h3>
 				</div>
-				<div class="pev-card__main campaign-progress">
+				<div class="bk-card__body campaign-progress">
 					<div class="progress-label">
-						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ) ); // phpcs:ignore ?></label>
-						<label for="campaign-progressbar"><?php echo sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_goal_amount', true ) ) ); // phpcs:ignore ?></label>
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ) ) ); ?></label>
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_goal_amount', true ) ) ) ); ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign->ID, '_goal_amount', true ) ); ?>"><?php echo esc_html( printf( /* translators: 1: Raised amount */ __( '%1$s%%', 'wc-donation-manager' ), esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ) ) ); ?></progress>
+					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign->ID, '_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?></progress>
 				</div>
 			</div>
-			<div class="pev-card">
-				<div class="pev-card__header">
-					<h3 class="pev-card__title"><?php esc_html_e( 'Actions', 'wc-donation-manager' ); ?></h3>
+			<div class="bk-card">
+				<div class="bk-card__header">
+					<h3 class="bk-card__title"><?php esc_html_e( 'Actions', 'wc-donation-manager' ); ?></h3>
 				</div>
 
-				<div class="pev-card__main">
+				<div class="bk-card__body">
 					<label for="status">
 						<?php esc_html_e( 'Status', 'wc-donation-manager' ); ?>
 					</label>
 					<select id="status" name="status" style="width: 300px" required>
 						<?php $status = esc_html( $campaign->post_status ); ?>
-						<option value="Publish" <?php echo 'publish' === $status ? 'selected' : ''; ?>>Publish</option>
-						<option value="Pending" <?php echo 'pending' === $status ? 'selected' : ''; ?>>Pending</option>
-						<option value="Draft" <?php echo 'draft' === $status ? 'selected' : ''; ?>>Draft</option>
+						<option value="publish" <?php echo 'publish' === $status ? 'selected' : ''; ?>>Publish</option>
+						<option value="pending" <?php echo 'pending' === $status ? 'selected' : ''; ?>>Pending</option>
+						<option value="draft" <?php echo 'draft' === $status ? 'selected' : ''; ?>>Draft</option>
 					</select>
 					<p class="description">
 						<?php esc_html_e( 'Update the campaign status.', 'wc-donation-manager' ); ?>
 					</p>
 				</div>
 
-				<div class="pev-card__footer">
+				<div class="bk-card__footer">
 					<a class="del" href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'action', 'delete', admin_url( 'admin.php?page=wc-donation-manager&id=' . $campaign->ID ) ), 'bulk-campaigns' ) ); ?>"><?php esc_html_e( 'Delete', 'wc-donation-manager' ); ?></a>
-					<button class="button button-primary"><?php esc_html_e( 'Save Campaign', 'wc-donation-manager' ); ?></button>
+					<button class="button button-primary"><?php esc_html_e( 'Save Changes', 'wc-donation-manager' ); ?></button>
 				</div>
 			</div>
 		</div>
@@ -122,13 +122,13 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 </form>
 <?php if ( $campaign_products ) : ?>
 	<div class="campaign-products">
-		<div class="pev-poststuff">
+		<div class="bk-poststuff">
 			<div class="column-1">
-				<div class="pev-card">
-					<div class="pev-card__header">
-						<h3 class="pev-card__title"><?php esc_html_e( 'Campaign Products', 'wc-donation-manager' ); ?></h3>
+				<div class="bk-card">
+					<div class="bk-card__header">
+						<h3 class="bk-card__title"><?php esc_html_e( 'Campaign Products', 'wc-donation-manager' ); ?></h3>
 					</div>
-					<div class="pev-card__body">
+					<div class="bk-card__body">
 						<table>
 							<?php
 							foreach ( $campaign_products as $campaign_product ) :

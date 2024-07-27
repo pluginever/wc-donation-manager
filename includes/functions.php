@@ -73,14 +73,14 @@ function wcdm_get_campaigns( $args = array(), $count = false ) {
  * @param int $campaign_id The campaign ID.
  *
  * @since 1.0.0
- * @return void|WP_Post[] The campaigns.
+ * @return void|array|WP_Post[] The campaigns.
  */
 function wcdm_get_campaign_products( $campaign_id ) {
 	if ( ! $campaign_id ) {
 		return;
 	}
 
-	$args  = array(
+	$args = array(
 		'post_type'      => 'product',
 		'posts_per_page' => - 1,
 		'orderby'        => 'date',
@@ -88,6 +88,7 @@ function wcdm_get_campaign_products( $campaign_id ) {
 		'meta_value'     => $campaign_id, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 		'order'          => 'ASC',
 	);
+
 	$query = new WP_Query( $args );
 
 	return $query->posts;
@@ -113,7 +114,7 @@ function wcdm_get_the_title( $post_id ) {
  * Get donors from the woocommerce order list.
  *
  * @param array $args The args.
- * @param bool $count Whether to return a count.
+ * @param bool  $count Whether to return a count.
  *
  * @since 1.0.0
  * @return array|int

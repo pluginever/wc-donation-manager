@@ -38,18 +38,50 @@ class Actions {
 	 */
 	public static function add_campaign() {
 		check_admin_referer( 'wcdm_add_campaign' );
-		$referer  = wp_get_referer();
-		$data     = wp_unslash( $_POST );
+		$referer = wp_get_referer();
+
+		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+		$cause       = isset( $_POST['cause'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cause'] ) ) : '';
+		$goal_amount = isset( $_POST['goal_amount'] ) ? floatval( wp_unslash( $_POST['goal_amount'] ) ) : floatval( '0' );
+		$end_date    = isset( $_POST['end_date'] ) ? sanitize_text_field( wp_unslash( $_POST['end_date'] ) ) : '';
+		$status      = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : 'pending';
+		$id          = isset( $_POST['id'] ) ? intval( wp_unslash( $_POST['id'] ) ) : intval( '0' );
+
+		$args = array(
+			'ID'           => $id,
+			'post_type'    => 'wcdm_campaigns',
+			'post_title'   => wp_strip_all_tags( $name ),
+			'post_content' => wp_kses_post( $cause ),
+			'post_status'  => $status,
+			'meta_input'   => array(
+				'_goal_amount' => $goal_amount,
+				'_end_date'    => $end_date,
+			),
+		);
+
+		var_dump( $name );
+		var_dump( $cause );
+		var_dump( $goal_amount );
+		var_dump( $end_date );
+		var_dump( $status );
+		var_dump( $id );
+		var_dump( $args );
+		var_dump( $campaign );
+
+		var_dump( wp_unslash( $_POST ) );
+		// wp_die();
+
 		// TODO: Need to add a helper method that will be handle the insert posts.
 		var_dump( $data );
 		wp_die();
 		$campaign = Campaign::insert( $data );
 		if ( is_wp_error( $campaign ) ) {
-			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
+			WCDM()->flash->error( $campaign->get_error_message() );
 		} else {
 			self::handle_donation_product( $data );
-			wc_donation_manager()->add_notice( __( 'Campaign saved successfully.', 'wc-donation-manager' ), 'success' );
+			WCDM()->flash->success( __( 'Campaign saved successfully.', 'wc-donation-manager' ) );
 		}
+
 		wp_safe_redirect( $referer );
 		exit;
 	}
@@ -62,52 +94,37 @@ class Actions {
 	 */
 	public static function edit_campaign() {
 		check_admin_referer( 'wcdm_edit_campaign' );
-		$referer  = wp_get_referer();
-		$data     = wp_unslash( $_POST );
-		// TODO: Need to add a helper method that will be handle the insert posts.
-		var_dump( $data );
-		wp_die();
+		$referer = wp_get_referer();
 
-		$campaign = Campaign::insert( $data );
+		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+		$cause       = isset( $_POST['cause'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cause'] ) ) : '';
+		$goal_amount = isset( $_POST['goal_amount'] ) ? floatval( wp_unslash( $_POST['goal_amount'] ) ) : floatval( '0' );
+		$end_date    = isset( $_POST['end_date'] ) ? sanitize_text_field( wp_unslash( $_POST['end_date'] ) ) : '';
+		$status      = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : 'pending';
+		$id          = isset( $_POST['id'] ) ? intval( wp_unslash( $_POST['id'] ) ) : intval( '0' );
+
+		$args = array(
+			'ID'           => $id,
+			'post_type'    => 'wcdm_campaigns',
+			'post_title'   => wp_strip_all_tags( $name ),
+			'post_content' => wp_kses_post( $cause ),
+			'post_status'  => $status,
+			'meta_input'   => array(
+				'_goal_amount' => $goal_amount,
+				'_end_date'    => $end_date,
+			),
+		);
+
+		$campaign = wp_insert_post( $args );
+
 		if ( is_wp_error( $campaign ) ) {
-			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
+			WCDM()->flash->error( $campaign->get_error_message() );
 		} else {
-			self::handle_donation_product( $data );
-			wc_donation_manager()->add_notice( __( 'Campaign saved successfully.', 'wc-donation-manager' ), 'success' );
+			WCDM()->flash->success( __( 'Campaign updated successfully.', 'wc-donation-manager' ) );
 		}
+
 		wp_safe_redirect( $referer );
 		exit;
-	}
-
-	/**
-	 * Update donation products depends on the campaign options.
-	 *
-	 * @param array $data Campaign meta data.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function handle_donation_product( $data ) {
-
-		$product_ids = $data['donation_products'];
-
-		if ( $product_ids && is_array( $product_ids ) ) {
-			foreach ( $product_ids as $product_id ) {
-
-				if ( $data['amount'] ) {
-					update_post_meta( $product_id, '_price', floatval( $data['amount'] ) );
-					update_post_meta( $product_id, '_regular_price', floatval( $data['amount'] ) );
-				}
-
-				if ( $data['goal_amount'] ) {
-					update_post_meta( $product_id, '_goal_amount', floatval( $data['goal_amount'] ) );
-				}
-
-				if ( $data['cause'] ) {
-					update_post_meta( $product_id, '_wcdm_campaign_cause', sanitize_text_field( $data['cause'] ) );
-				}
-			}
-		}
 	}
 
 	/**
