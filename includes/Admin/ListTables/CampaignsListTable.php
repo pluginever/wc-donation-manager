@@ -11,6 +11,7 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager
  */
 class CampaignsListTable extends ListTable {
+
 	/**
 	 * Get campaigns started
 	 *
@@ -191,7 +192,7 @@ class CampaignsListTable extends ListTable {
 	/**
 	 * Renders the checkbox column in the items list table.
 	 *
-	 * @param Campaign $item The current campaign object.
+	 * @param \WP_Post $item The current campaign post object.
 	 *
 	 * @return string Displays a checkbox.
 	 * @since  1.0.0
@@ -203,10 +204,10 @@ class CampaignsListTable extends ListTable {
 	/**
 	 * Renders the name column in the items list table.
 	 *
-	 * @param Campaign $item The current campaign object.
+	 * @param \WP_Post $item The current campaign post object.
 	 *
-	 * @return string Displays the campaign name.
 	 * @since  1.0.0
+	 * @return string Displays the campaign name.
 	 */
 	public function column_name( $item ) {
 		$admin_url = admin_url( 'admin.php?page=wc-donation-manager&tab=campaign' );
@@ -220,29 +221,59 @@ class CampaignsListTable extends ListTable {
 	}
 
 	/**
-	 * This function renders most of the columns in the list table.
+	 * Renders the cause column in the items list table.
 	 *
-	 * @param Campaign $item The current campaign object.
-	 * @param string   $column_name The name of the column.
+	 * @param \WP_Post $item The current campaign post object.
 	 *
-	 * @since 1.0.0
+	 * @since  1.0.0
+	 * @return string Displays the campaign cause.
 	 */
-	public function column_default( $item, $column_name ) {
-		$value = '&mdash;';
-		switch ( $column_name ) {
-			case 'goal_amount':
-				$value = sprintf(
-				/* translators: 1: WC currency symbol 2: Product price */
-					( '%1$s%2$.2f' ),
-					get_woocommerce_currency_symbol(),
-					// TODO: Need to recheck this // esc_html( $item->get_goal_amount() );
-					esc_html( 'Goal amount' )
-				);
-				break;
-			default:
-				$value = parent::column_default( $item, $column_name );
-		}
+	public function column_cause( $item ) {
+		// Get the post content and trim it to 20 words.
+		$cause_excerpt = wp_trim_words( $item->post_content, 10, '...' );
 
-		return $value;
+		return $cause_excerpt ?? '&mdash;';
+	}
+
+	/**
+	 * Renders the goal_amount column in the items list table.
+	 *
+	 * @param \WP_Post $item The current campaign post object.
+	 *
+	 * @since  1.0.0
+	 * @return string Displays the campaign goal_amount.
+	 */
+	public function column_goal_amount( $item ) {
+		$goal_amount = get_woocommerce_currency_symbol() . get_post_meta( $item->ID, '_goal_amount', true );
+
+		return $goal_amount ?? '&mdash;';
+	}
+
+	/**
+	 * Renders the end_date column in the items list table.
+	 *
+	 * @param \WP_Post $item The current campaign post object.
+	 *
+	 * @since  1.0.0
+	 * @return string Displays the campaign end_date.
+	 */
+	public function column_end_date( $item ) {
+		$end_date = get_post_meta( $item->ID, '_end_date', true );
+
+		return $end_date ?? '&mdash;';
+	}
+
+	/**
+	 * Renders the status column in the items list table.
+	 *
+	 * @param \WP_Post $item The current campaign post object.
+	 *
+	 * @since  1.0.0
+	 * @return string Displays the campaign status.
+	 */
+	public function column_status( $item ) {
+		$status = ucfirst( $item->post_status );
+
+		return $status ?? '&mdash;';
 	}
 }

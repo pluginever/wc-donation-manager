@@ -7,6 +7,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
 ?>
 	<h1 class="wp-heading-inline">
 		<?php esc_html_e( 'Campaigns', 'wc-donation-manager' ); ?>
@@ -24,6 +25,6 @@ defined( 'ABSPATH' ) || exit;
 		<?php $this->list_table->views(); ?>
 		<?php $this->list_table->search_box( __( 'Search', 'wc-donation-manager' ), 'search' ); ?>
 		<?php $this->list_table->display(); ?>
-		<input type="hidden" name="page" value="wcdm-campaigns"/>
+		<input type="hidden" name="page" value="wc-donation-manager"/>
 	</form>
 <?php
