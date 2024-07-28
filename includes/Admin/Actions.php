@@ -2,8 +2,6 @@
 
 namespace WooCommerceDonationManager\Admin;
 
-use WooCommerceDonationManager\Models\Campaign;
-
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -16,6 +14,7 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager
  */
 class Actions {
+
 	/**
 	 * Actions constructor.
 	 *
@@ -25,9 +24,6 @@ class Actions {
 		add_action( 'admin_post_wcdm_add_campaign', array( __CLASS__, 'add_campaign' ) );
 		add_action( 'admin_post_wcdm_edit_campaign', array( __CLASS__, 'edit_campaign' ) );
 		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_donation_meta' ) );
-		add_action( 'admin_post_wcdm_add_donor', array( __CLASS__, 'add_donor' ) );
-		add_action( 'admin_post_wcdm_edit_donor', array( __CLASS__, 'edit_donor' ) );
-		add_action( 'wp_ajax_wcdm_search_products', array( __CLASS__, 'search_products' ) );
 	}
 
 	/**
@@ -59,27 +55,17 @@ class Actions {
 			),
 		);
 
-		var_dump( $name );
-		var_dump( $cause );
-		var_dump( $goal_amount );
-		var_dump( $end_date );
-		var_dump( $status );
-		var_dump( $id );
-		var_dump( $args );
-		var_dump( $campaign );
+		$campaign = wp_insert_post( $args );
 
-		var_dump( wp_unslash( $_POST ) );
-		// wp_die();
-
-		// TODO: Need to add a helper method that will be handle the insert posts.
-		var_dump( $data );
-		wp_die();
-		$campaign = Campaign::insert( $data );
 		if ( is_wp_error( $campaign ) ) {
 			WCDM()->flash->error( $campaign->get_error_message() );
 		} else {
-			self::handle_donation_product( $data );
-			WCDM()->flash->success( __( 'Campaign saved successfully.', 'wc-donation-manager' ) );
+			WCDM()->flash->success( __( 'Campaign created successfully.', 'wc-donation-manager' ) );
+
+			$referer = add_query_arg(
+				array( 'edit' => absint( $campaign ) ),
+				remove_query_arg( 'add', $referer )
+			);
 		}
 
 		wp_safe_redirect( $referer );
@@ -155,94 +141,5 @@ class Actions {
 		update_post_meta( $product_id, '_wcdm_max_amount', ( ! empty( $_POST['_wcdm_max_amount'] ) && is_numeric( $_POST['_wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['_wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ) );
 		update_post_meta( $product_id, '_wcdm_campaign_id', ( ! empty( $_POST['_wcdm_campaign_id'] ) ? sanitize_text_field( wp_unslash( $_POST['_wcdm_campaign_id'] ) ) : '' ) );
 		update_post_meta( $product_id, '_wcdm_campaign_cause', ( ! empty( $_POST['_wcdm_campaign_cause'] ) ? sanitize_text_field( wp_unslash( $_POST['_wcdm_campaign_cause'] ) ) : '' ) );
-	}
-
-	/**
-	 * Add a donor.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function add_donor() {
-		check_admin_referer( 'wcdm_add_donor' );
-		$referer = wp_get_referer();
-		$data    = wp_unslash( $_POST );
-		$donor   = Donor::insert( $data );
-		if ( is_wp_error( $donor ) ) {
-			wc_donation_manager()->add_notice( $donor->get_error_message(), 'error' );
-		} else {
-			wc_donation_manager()->add_notice( __( 'Donor saved successfully.', 'wc-donation-manager' ), 'success' );
-		}
-		wp_safe_redirect( $referer );
-		exit;
-	}
-
-	/**
-	 * Edit a donor.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public static function edit_donor() {
-		check_admin_referer( 'wcdm_edit_donor' );
-		$referer  = wp_get_referer();
-		$data     = wp_unslash( $_POST );
-		$campaign = Donor::insert( $data );
-		if ( is_wp_error( $campaign ) ) {
-			wc_donation_manager()->add_notice( $campaign->get_error_message(), 'error' );
-		} else {
-			wc_donation_manager()->add_notice( __( 'Donor saved successfully.', 'wc-donation-manager' ), 'success' );
-		}
-		wp_safe_redirect( $referer );
-		exit;
-	}
-
-	/**
-	 * Search products.
-	 *
-	 * @since 1.1.4
-	 */
-	public static function search_products() {
-		check_ajax_referer( 'wc_donation_manager', 'nonce' );
-
-		$term = isset( $_POST['term'] ) ? sanitize_text_field( wp_unslash( $_POST['term'] ) ) : '';
-
-		if ( empty( $term ) ) {
-			wp_send_json_success( esc_html__( 'No, search term provided.', 'wc-donation-manager' ) );
-			wp_die();
-		}
-
-		$data_store = \WC_Data_Store::load( 'product' );
-		$ids        = $data_store->search_products( $term, '', true, true );
-		$results    = array();
-
-		if ( $ids ) {
-			foreach ( $ids as $id ) {
-				$product = wc_get_product( $id );
-				if ( ! $product ) {
-					continue;
-				}
-				$text = sprintf(
-					'(#%1$s) %2$s',
-					$product->get_id(),
-					wp_strip_all_tags( $product->get_formatted_name() )
-				);
-
-				$results[] = array(
-					'id'   => $product->get_id(),
-					'text' => $text,
-				);
-			}
-		}
-
-		wp_send_json(
-			array(
-				'results'    => $results,
-				'pagination' => array(
-					'more' => false,
-				),
-			)
-		);
-		wp_die();
 	}
 }
