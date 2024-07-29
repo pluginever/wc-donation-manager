@@ -1,9 +1,10 @@
-===Donation Manager for WooCommerce===
+===WC Donation Manager - Effortlessly Collect Donations Through WooCommerce===
+Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable, fund.
 Requires at least: 5.0
-Tested up to: 6.4
-Requires PHP: 5.6
-Stable tag: 1.0.0
+Tested up to: 6.6
+Requires PHP: 7.4
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +18,7 @@ Donation Manager for WooCommerce is the most powerful WooCommerce donation plugi
 
 - **Donation Campaign Options:** Ability to create donation campaign with the varieties of campaign options.
 - **Donation Products:** Ability to create donation products.
-- **Doners data:** Ability to track doners list with the donation amount.
+- **Donor's data:** Ability to track donors list with the donation amount.
 - **Donation Settings:** Ability to update donation settings with the varieties of plugin options.
 
 == Installation ==
