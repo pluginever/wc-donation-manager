@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  WC Donation Manager
  * Description:  Effortlessly Collect Donations Through WooCommerce.
- * Version:      1.0.0
+ * Version:      1.0.1
  * Plugin URI:   https://pluginever.com/plugins/wc-donation-manager/
  * Author:       PluginEver
  * Author URI:   https://pluginever.com/
