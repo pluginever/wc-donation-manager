@@ -15,7 +15,7 @@ module.exports = function( grunt ) {
 				options: {
 					expand: true,
 					text_domain: 'wc-donation-manager',
-					updateDomains: [ 'framework-text-domain' ],
+					updateDomains: [ 'bytekit-textdomain' ],
 				},
 				plugin: {
 					files: {
