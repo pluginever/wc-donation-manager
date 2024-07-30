@@ -20,7 +20,8 @@ class Frontend {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'wp', array( __CLASS__, 'remove_coupon' ) );
+		add_action( 'woocommerce_before_cart', array( __CLASS__, 'remove_coupon' ) );
+		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'remove_coupon' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 

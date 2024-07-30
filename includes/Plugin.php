@@ -94,7 +94,6 @@ final class Plugin extends ByteKit\Plugin {
 		$this->set(
 			array(
 				Donation\Donation::class,
-				Emails\Emails::class,
 				Frontend\Frontend::class,
 				Frontend\Product::class,
 				Frontend\Cart::class,

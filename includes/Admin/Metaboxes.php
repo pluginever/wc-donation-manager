@@ -180,16 +180,13 @@ class Metaboxes {
 			)
 		);
 
-		woocommerce_wp_textarea_input(
-			array(
-				'id'          => '_wcdm_campaign_cause',
-				'label'       => __( 'Campaign cause', 'wc-donation-manager' ),
-				'description' => __( 'Enter the cause of the campaign. This will be override the assigned campaign cause text. Leave it empty to use the campaign default cause text.', 'wc-donation-manager' ),
-				'desc_tip'    => true,
-				'placeholder' => 'Enter the cause of the campaign...',
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_campaign_cause', true ) : '',
-			)
-		);
+		/**
+		 * Hook for adding more campaign data.
+		 *
+		 * @since 1.0.1
+		 */
+		do_action( 'wc_donation_manager_after_product_campaign_data', $wcdm_campaign );
+
 		echo '</div></div>';
 	}
 

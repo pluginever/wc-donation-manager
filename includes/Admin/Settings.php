@@ -25,7 +25,6 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 				'general'  => __( 'General', 'wc-donation-manager' ),
 				'advanced' => __( 'Advanced', 'wc-donation-manager' ),
 				'emails'   => __( 'Emails', 'wc-donation-manager' ),
-				'tutorial' => __( 'Tutorial', 'wc-donation-manager' ),
 			)
 		);
 	}
@@ -48,14 +47,6 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 						'type'  => 'title',
 						'desc'  => __( 'The following options are the plugin general settings. Theses options affect how the plugin will work.', 'wc-donation-manager' ),
 						'id'    => 'general_options',
-					),
-					array(
-						'title'    => __( 'Add to cart button text', 'wc-donation-manager' ),
-						'id'       => 'wcdm_add_to_cart_btn_text',
-						'desc'     => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager' ),
-						'type'     => 'text',
-						'default'  => 'Donate Now',
 					),
 					array(
 						'title'    => __( 'Skip cart', 'wc-donation-manager' ),
@@ -103,14 +94,6 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 						'id'       => 'wcdm_disabled_tax',
 						'default'  => 'yes',
 						'type'     => 'checkbox',
-					),
-					array(
-						'title'    => __( 'Campaign expired text', 'wc-donation-manager' ),
-						'desc'     => __( 'Enter the campaign expired text. This will be visible to the donation products if the campaign end date is exceeded.', 'wc-donation-manager' ),
-						'desc_tip' => __( 'Enter the campaign expired text. This will be visible to the donation products if the campaign end date is exceeded.', 'wc-donation-manager' ),
-						'id'       => 'wcdm_expired_text',
-						'default'  => 'The campaign expired!',
-						'type'     => 'text',
 					),
 					array(
 						'type' => 'sectionend',
