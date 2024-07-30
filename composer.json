@@ -1,35 +1,24 @@
 {
   "name": "pluginever/wc-donation-manager",
-  "description": "WC Donation Manager.",
+  "description": "A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.",
   "homepage": "https://pluginever.com/plugins/wc-donation-manager/",
   "type": "wordpress-plugin",
   "license": "GPL-3.0-or-later",
-  "prefer-stable": true,
-  "minimum-stability": "dev",
-  "repositories": [
-    {
-      "url": "git@github.com:pluginever/framework-plugin.git",
-      "type": "github"
-    },
-    {
-      "url": "git@github.com:pluginever/framework-data.git",
-      "type": "github"
-    },
-    {
-      "url": "git@github.com:pluginever/framework-settings.git",
-      "type": "github"
-    }
-  ],
   "require": {
     "php": ">=7.4"
   },
   "require-dev": {
     "byteever/byteever-sniffs": "dev-master",
-    "coenjacobs/mozart": "^0.7.1",
-    "pluginever/framework-plugin": "dev-master",
-    "pluginever/framework-settings": "dev-master",
-    "pluginever/framework-data": "dev-master"
+    "byteever/bytekit-plugin": "dev-master",
+    "byteever/bytekit-settings": "dev-master",
+    "coenjacobs/mozart": "^0.7.1"
   },
+  "autoload": {
+    "psr-4": {
+      "WooCommerceDonationManager\\": ["includes/", "lib/"]
+    }
+  },
+  "autoload-dev": {},
   "config": {
     "optimize-autoloader": true,
     "sort-packages": true,
@@ -38,8 +27,18 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
-  "autoload": {},
-  "autoload-dev": {},
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "github",
+      "url": "git@github.com:byteever/bytekit-plugin.git"
+    },
+    {
+      "type": "github",
+      "url": "git@github.com:byteever/bytekit-settings.git"
+    }
+  ],
   "scripts": {
     "post-install-cmd": [
       "\"vendor/bin/mozart\" compose",
@@ -60,9 +59,8 @@
       "classmap_prefix": "WooCommerceDonationManager_",
       "delete_vendor_directories": true,
       "packages": [
-        "pluginever/framework-plugin",
-        "pluginever/framework-settings",
-        "pluginever/framework-data"
+        "byteever/bytekit-plugin",
+        "byteever/bytekit-settings"
       ]
     }
   }
