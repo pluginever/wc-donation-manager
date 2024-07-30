@@ -1,24 +1,21 @@
-module.exports = function (grunt) {
+module.exports = function( grunt ) {
 	'use strict';
 
 	// Load all grunt tasks matching the `grunt-*` pattern.
-	require('load-grunt-tasks')(grunt);
+	require( 'load-grunt-tasks' )( grunt );
 
 	// Show elapsed time.
-	require('@lodder/time-grunt')(grunt);
+	require( '@lodder/time-grunt' )( grunt );
 
 	// Project configuration.
 	grunt.initConfig(
 		{
+			package: grunt.file.readJSON( 'package.json' ),
 			addtextdomain: {
 				options: {
 					expand: true,
 					text_domain: 'wc-donation-manager',
-<<<<<<< HEAD
-					updateDomains: [ 'bytekit-textdomain', 'textdomain' ],
-=======
-					updateDomains: ['framework-text-domain'],
->>>>>>> master
+					updateDomains: [ 'textdomain', 'bytekit-textdomain' ],
 				},
 				plugin: {
 					files: {
@@ -67,10 +64,12 @@ module.exports = function (grunt) {
 				target: {
 					options: {
 						domainPath: 'languages',
-						exclude: ['packages/*', '.git/*', 'node_modules/*', 'tests/*'],
-						mainFile: 'wc-donation-manager.php',
-						potFilename: 'wc-donation-manager.pot',
+						exclude: [ 'packages/*', '.git/*', 'node_modules/*', 'tests/*' ],
+						mainFile: '<%= package.name %>.php',
+						potFilename: '<%= package.name %>.pot',
 						potHeaders: {
+							'report-msgid-bugs-to': '<%= package.homepage %>',
+							'project-id-version': '<%= package.title %> <%= package.version %>',
 							poedit: true,
 							'x-poedit-keywordslist': true,
 						},
@@ -89,6 +88,6 @@ module.exports = function (grunt) {
 		}
 	);
 
-	grunt.registerTask('i18n', ['addtextdomain', 'checktextdomain', 'makepot']);
-	grunt.registerTask('build', ['i18n']);
+	grunt.registerTask( 'i18n', [ 'addtextdomain', 'checktextdomain', 'makepot' ] );
+	grunt.registerTask( 'build', [ 'i18n' ] );
 };
