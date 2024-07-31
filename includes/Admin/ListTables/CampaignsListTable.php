@@ -43,17 +43,6 @@ class CampaignsListTable extends ListTable {
 	 * @return void
 	 */
 	public function prepare_items() {
-		wp_verify_nonce( '_nonce' );
-		// $columns               = $this->get_columns();
-		// $sortable              = $this->get_sortable_columns();
-		// $hidden                = $this->get_hidden_columns();
-		// $this->_column_headers = array( $columns, $hidden, $sortable );
-		// $per_page              = $this->get_items_per_page( 'wcdm_campaigns_per_page', 20 );
-		// $order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
-		// $order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
-		// $search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-		// $current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
-
 		$this->process_actions();
 		$per_page = $this->get_items_per_page( 'wcdm_campaigns_per_page', 20 );
 		$paged    = $this->get_pagenum();
