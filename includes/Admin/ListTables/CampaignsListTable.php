@@ -187,8 +187,8 @@ class CampaignsListTable extends ListTable {
 	 * @return string Displays a checkbox.
 	 * @since  1.0.0
 	 */
-	public function column_cb( $item ) {
-		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->ID ) );
+	protected function column_cb( $item ) {
+		return sprintf( '<input type="checkbox" name="id[]" value="%d"/>', esc_attr( $item->ID ) );
 	}
 
 	/**
@@ -204,7 +204,7 @@ class CampaignsListTable extends ListTable {
 		$id_url    = add_query_arg( 'id', $item->ID, $admin_url );
 		$actions   = array(
 			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit', $item->ID, $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
-			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
+			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-' . $this->_args['plural'] ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
 
 		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit', $item->ID, $admin_url ) ), esc_html( $item->post_title ), $this->row_actions( $actions ) );
