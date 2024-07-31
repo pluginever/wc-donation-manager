@@ -42,6 +42,7 @@ class Menus {
 		if ( ! WCDM()->is_plugin_active( 'wc-donation-manager-pro' ) ) {
 			add_action( 'wc_donation_manager_donors_content', array( $this, 'render_donors_content' ) );
 			add_action( 'wc_donation_manager_settings_emails_content', array( $this, 'render_emails_settings' ) );
+			add_action( 'woocommerce_admin_field_wcdm_add_to_cart_btn_text', array( $this, 'render_customizable_settings' ) );
 		}
 	}
 
@@ -197,7 +198,18 @@ class Menus {
 	 * @return void
 	 */
 	public function render_donors_content() {
-		echo esc_html__( 'The donors list table is a PRO module!', 'wc-donation-manager' );
+		?>
+		<h1><?php esc_html_e( 'Donors', 'wc-donation-manager' ); ?></h1>
+		<p><?php esc_html_e( 'The list of donors and their donation information(s)', 'wc-donation-manager' ); ?></p>
+		<hr class="wp-header-end">
+		<div class="wcdm-feature-promo-banner">
+			<div class="wcdm-feature-promo-banner__content">
+				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
+				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
+			</div>
+			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/donors.png' ); ?>" alt="<?php esc_attr_e( 'Import Serial Numbers', 'wc-donation-manager' ); ?>"/>
+		</div>
+		<?php
 	}
 
 	/**
@@ -207,6 +219,32 @@ class Menus {
 	 * @return void
 	 */
 	public function render_emails_settings() {
-		echo esc_html__( 'The donation emails is a PRO module!', 'wc-donation-manager' );
+		?>
+		<div class="wcdm-feature-promo-banner">
+			<div class="wcdm-feature-promo-banner__content">
+				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
+				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
+			</div>
+			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/emails.png' ); ?>" alt="<?php esc_attr_e( 'Import Serial Numbers', 'wc-donation-manager' ); ?>"/>
+		</div>
+		<?php
+	}
+
+	/**
+	 * Render customizable settings.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function render_customizable_settings() {
+		?>
+		<div class="wcdm-feature-promo-banner">
+			<div class="wcdm-feature-promo-banner__content">
+				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
+				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
+			</div>
+			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/customizable-options.png' ); ?>" alt="<?php esc_attr_e( 'Import Serial Numbers', 'wc-donation-manager' ); ?>"/>
+		</div>
+		<?php
 	}
 }
