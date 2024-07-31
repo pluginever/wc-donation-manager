@@ -47,13 +47,23 @@ In the search field type "Donation Manager for WooCommerce" and click Search Plu
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Screenshots ==
+1. Campaigns
+2. Add New Campaign
+3. Edit Campaign
+4. Donation Product - General option
+5. Donation Manager - Product metabox
+6. Settings - General
+7. Settings - Advance
+8. Frontend - Product single page for the Donation product type
 
 == Changelog ==
-= 1.0.1 (July 30, 2024) =
+= 1.0.1 (July 31, 2024) =
 * New Feature: Add a new feature to create donation campaigns.
 * Enhance: Updating and creating campaigns
+* Enhance: Campaigns list table
 * Fix: Few known issues.
-* Notice: THis is a major release, please update the plugin as per your needs.
+* Notice: This is a major release, please update the plugin as per your needs.
+* Add banner, icon and screenshots.
 
 = 1.0.0 (Jun 12, 2024) =
 * Initial Release
