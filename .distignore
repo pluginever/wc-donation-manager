@@ -80,6 +80,5 @@ Thumbs.db
 *.*.map
 
 # Build related files
-/assets/js
-/assets/css
-vendor
+src
+/src/
