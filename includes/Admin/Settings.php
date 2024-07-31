@@ -100,17 +100,17 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 						'id'   => 'general_options',
 					),
 					array(
-						'title' => __( 'Customize Labels & Buttons', 'wc-donation-manager-pro' ),
+						'title' => __( 'Customize Labels & Buttons', 'wc-donation-manager' ),
 						'type'  => 'title',
 						'id'    => 'section_customizable_options',
-						'desc'  => __( 'The following options are the premium plugin general settings. ', 'wc-donation-manager-pro' ),
+						'desc'  => __( 'The following options are the premium plugin general settings. ', 'wc-donation-manager' ),
 					),
 					array(
-						'title'    => __( 'Add to cart button text', 'wc-donation-manager-pro' ),
+						'title'    => __( 'Add to cart button text', 'wc-donation-manager' ),
 						'type'     => 'wcdm_add_to_cart_btn_text',
 						'id'       => 'wcdm_add_to_cart_btn_text',
-						'desc'     => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager-pro' ),
-						'desc_tip' => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager-pro' ),
+						'desc'     => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager' ),
+						'desc_tip' => __( 'Enter the add to cart button text. This will be applicable only for campaigns or donation product types.', 'wc-donation-manager' ),
 						'default'  => __( 'Donate Now', 'wc-donation-manager' ),
 					),
 					array(
