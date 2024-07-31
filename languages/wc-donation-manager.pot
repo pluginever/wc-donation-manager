@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.1\n"
 "Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
-"POT-Creation-Date: 2024-07-31 06:58:56+00:00\n"
+"POT-Creation-Date: 2024-07-31 07:37:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,48 +55,46 @@ msgstr ""
 msgid "Version %s"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:82
+#: includes/Admin/ListTables/CampaignsListTable.php:92
+#. translators: %s: number of accounts.
+msgid "%s campaign(s) deleted successfully."
+msgstr ""
+
+#: includes/Admin/ListTables/CampaignsListTable.php:103
 msgid "No items found."
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:94
+#: includes/Admin/ListTables/CampaignsListTable.php:115
 msgid "Name"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:95
+#: includes/Admin/ListTables/CampaignsListTable.php:116
 #: includes/Admin/views/campaigns/add.php:30
 #: includes/Admin/views/campaigns/edit.php:43
 msgid "Cause"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:96
+#: includes/Admin/ListTables/CampaignsListTable.php:117
 msgid "Goal"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:97
+#: includes/Admin/ListTables/CampaignsListTable.php:118
 msgid "End date"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:98
+#: includes/Admin/ListTables/CampaignsListTable.php:119
 #: includes/Admin/views/campaigns/add.php:63
 #: includes/Admin/views/campaigns/edit.php:99
 msgid "Status"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:136
-#: includes/Admin/ListTables/CampaignsListTable.php:217
+#: includes/Admin/ListTables/CampaignsListTable.php:157
+#: includes/Admin/ListTables/CampaignsListTable.php:196
 #: includes/Admin/views/campaigns/edit.php:113
 msgid "Delete"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:171
-#. translators: %d: number of campaigns deleted.
-msgid "%d campaign deleted."
-msgid_plural "%d campaigns deleted."
-msgstr[0] ""
-msgstr[1] ""
-
-#: includes/Admin/ListTables/CampaignsListTable.php:216
+#: includes/Admin/ListTables/CampaignsListTable.php:195
 #: includes/Admin/views/campaigns/edit.php:150
 msgid "Edit"
 msgstr ""
@@ -109,34 +107,34 @@ msgstr ""
 msgid "Per page"
 msgstr ""
 
-#: includes/Admin/Menus.php:202 includes/Admin/Utilities.php:38
+#: includes/Admin/Menus.php:203 includes/Admin/Utilities.php:38
 #: includes/Admin/Utilities.php:39
 msgid "Donors"
 msgstr ""
 
-#: includes/Admin/Menus.php:203
+#: includes/Admin/Menus.php:204
 msgid "The list of donors and their donation information(s)"
-msgstr ""
-
-#: includes/Admin/Menus.php:207 includes/Admin/Menus.php:225
-#: includes/Admin/Menus.php:243
-msgid "Available in Pro Version"
 msgstr ""
 
 #: includes/Admin/Menus.php:208 includes/Admin/Menus.php:226
 #: includes/Admin/Menus.php:244
+msgid "Available in Pro Version"
+msgstr ""
+
+#: includes/Admin/Menus.php:209 includes/Admin/Menus.php:227
+#: includes/Admin/Menus.php:245
 msgid "Upgrade to Pro Now"
 msgstr ""
 
-#: includes/Admin/Menus.php:210
+#: includes/Admin/Menus.php:211
 msgid "Donors list table"
 msgstr ""
 
-#: includes/Admin/Menus.php:228
+#: includes/Admin/Menus.php:229
 msgid "Customer completed emails"
 msgstr ""
 
-#: includes/Admin/Menus.php:246
+#: includes/Admin/Menus.php:247
 msgid "Add customizable settings"
 msgstr ""
 
@@ -457,12 +455,7 @@ msgstr ""
 msgid "Add New"
 msgstr ""
 
-#: includes/Admin/views/campaigns/campaigns.php:19
-#. translators: %s: search query.
-msgid "Search results for \"%s\""
-msgstr ""
-
-#: includes/Admin/views/campaigns/campaigns.php:26
+#: includes/Admin/views/campaigns/campaigns.php:22
 msgid "Search"
 msgstr ""
 
