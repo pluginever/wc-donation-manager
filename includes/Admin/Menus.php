@@ -159,6 +159,7 @@ class Menus {
 
 		switch ( $page ) {
 			case 'toplevel_page_wc-donation-manager':
+			case 'toplevel_page_wc-donation-manager-campaign':
 				$this->list_table = new ListTables\CampaignsListTable();
 				$this->list_table->prepare_items();
 				$args['option'] = 'wcdm_campaigns_per_page';

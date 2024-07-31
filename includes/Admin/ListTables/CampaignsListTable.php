@@ -145,12 +145,14 @@ class CampaignsListTable extends ListTable {
 	 * @since 1.0.2
 	 */
 	public function process_bulk_action( $doaction ) {
+		wp_verify_nonce( '_nonce' );
+
 		if ( ! empty( $doaction ) && check_admin_referer( 'bulk-' . $this->_args['plural'] ) ) {
 			$id  = filter_input( INPUT_GET, 'id' );
 			$ids = filter_input( INPUT_GET, 'ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
 			if ( ! empty( $id ) ) {
 				$ids      = wp_parse_id_list( $id );
-				$doaction = ( - 1 !== $_REQUEST['action'] ) ? $_REQUEST['action'] : $_REQUEST['action2']; // phpcs:ignore
+				$doaction = ( - 1 !== $_REQUEST['action'] ) ? $_REQUEST['action'] : $_REQUEST['action2'];
 			} elseif ( ! empty( $ids ) ) {
 				$ids = array_map( 'absint', $ids );
 			} elseif ( wp_get_referer() ) {
