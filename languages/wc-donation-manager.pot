@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.1\n"
 "Report-Msgid-Bugs-To: https://pluginever.com/plugins/wc-donation-manager/\n"
-"POT-Creation-Date: 2024-07-31 05:26:41+00:00\n"
+"POT-Creation-Date: 2024-07-31 06:58:56+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -101,20 +101,43 @@ msgstr[1] ""
 msgid "Edit"
 msgstr ""
 
-#: includes/Admin/Menus.php:57 includes/Admin/Menus.php:58
+#: includes/Admin/Menus.php:58 includes/Admin/Menus.php:59
 msgid "Donations"
 msgstr ""
 
-#: includes/Admin/Menus.php:152
+#: includes/Admin/Menus.php:153
 msgid "Per page"
 msgstr ""
 
-#: includes/Admin/Menus.php:200
-msgid "The donors list table is a PRO module!"
+#: includes/Admin/Menus.php:202 includes/Admin/Utilities.php:38
+#: includes/Admin/Utilities.php:39
+msgid "Donors"
+msgstr ""
+
+#: includes/Admin/Menus.php:203
+msgid "The list of donors and their donation information(s)"
+msgstr ""
+
+#: includes/Admin/Menus.php:207 includes/Admin/Menus.php:225
+#: includes/Admin/Menus.php:243
+msgid "Available in Pro Version"
+msgstr ""
+
+#: includes/Admin/Menus.php:208 includes/Admin/Menus.php:226
+#: includes/Admin/Menus.php:244
+msgid "Upgrade to Pro Now"
 msgstr ""
 
 #: includes/Admin/Menus.php:210
-msgid "The donation emails is a PRO module!"
+msgid "Donors list table"
+msgstr ""
+
+#: includes/Admin/Menus.php:228
+msgid "Customer completed emails"
+msgstr ""
+
+#: includes/Admin/Menus.php:246
+msgid "Add customizable settings"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:43
@@ -175,7 +198,7 @@ msgid ""
 "applicable for increasing or decreasing amounts on the campaign page."
 msgstr ""
 
-#: includes/Admin/Metaboxes.php:141 includes/Admin/Settings.php:114
+#: includes/Admin/Metaboxes.php:141 includes/Admin/Settings.php:140
 msgid "Minimum amount"
 msgstr ""
 
@@ -185,7 +208,7 @@ msgid ""
 "plugin global settings."
 msgstr ""
 
-#: includes/Admin/Metaboxes.php:152 includes/Admin/Settings.php:122
+#: includes/Admin/Metaboxes.php:152 includes/Admin/Settings.php:148
 msgid "Maximum amount"
 msgstr ""
 
@@ -303,45 +326,75 @@ msgid ""
 "class from product edit page as well if product type selected as donation."
 msgstr ""
 
-#: includes/Admin/Settings.php:108
+#: includes/Admin/Settings.php:103
+msgid "Customize Labels & Buttons"
+msgstr ""
+
+#: includes/Admin/Settings.php:106
+msgid "The following options are the premium plugin general settings. "
+msgstr ""
+
+#: includes/Admin/Settings.php:109
+msgid "Add to cart button text"
+msgstr ""
+
+#: includes/Admin/Settings.php:112 includes/Admin/Settings.php:113
+msgid ""
+"Enter the add to cart button text. This will be applicable only for "
+"campaigns or donation product types."
+msgstr ""
+
+#: includes/Admin/Settings.php:114
+#: includes/Donation/class-donation-product.php:48
+#: includes/Donation/class-donation-product.php:71
+msgid "Donate Now"
+msgstr ""
+
+#: includes/Admin/Settings.php:117
+msgid "Campaign expired text"
+msgstr ""
+
+#: includes/Admin/Settings.php:120 includes/Admin/Settings.php:121
+msgid ""
+"Enter the campaign expired text. This will be visible to the donation "
+"products if the campaign end date is exceeded."
+msgstr ""
+
+#: includes/Admin/Settings.php:134
 msgid "Advanced Settings"
 msgstr ""
 
-#: includes/Admin/Settings.php:110
+#: includes/Admin/Settings.php:136
 msgid "The following options are the plugin advanced settings."
 msgstr ""
 
-#: includes/Admin/Settings.php:115 includes/Admin/Settings.php:116
+#: includes/Admin/Settings.php:141 includes/Admin/Settings.php:142
 msgid ""
 "Enter the minimum amount. This will be apply globally if didn't set the "
 "minimum amount while creating campaigns."
 msgstr ""
 
-#: includes/Admin/Settings.php:123 includes/Admin/Settings.php:124
+#: includes/Admin/Settings.php:149 includes/Admin/Settings.php:150
 msgid ""
 "Enter the maximum amount. This will be apply globally if didn't set the "
 "maximum amount while creating campaigns."
 msgstr ""
 
-#: includes/Admin/Settings.php:130
+#: includes/Admin/Settings.php:156
 msgid "Delete plugin data"
 msgstr ""
 
-#: includes/Admin/Settings.php:131
+#: includes/Admin/Settings.php:157
 msgid "Delete plugin data."
 msgstr ""
 
-#: includes/Admin/Settings.php:132
+#: includes/Admin/Settings.php:158
 msgid "Enabling this will delete all the data while uninstalling the plugin."
 msgstr ""
 
 #: includes/Admin/Utilities.php:28 includes/Admin/Utilities.php:29
 #: includes/Admin/views/campaigns/campaigns.php:13
 msgid "Campaigns"
-msgstr ""
-
-#: includes/Admin/Utilities.php:38 includes/Admin/Utilities.php:39
-msgid "Donors"
 msgstr ""
 
 #: includes/Admin/Utilities.php:47 includes/Admin/Utilities.php:48
@@ -481,11 +534,6 @@ msgstr ""
 
 #: includes/Donation/Donation.php:33
 msgid "Donation"
-msgstr ""
-
-#: includes/Donation/class-donation-product.php:48
-#: includes/Donation/class-donation-product.php:71
-msgid "Donate Now"
 msgstr ""
 
 #: includes/Donation/class-donation-product.php:48

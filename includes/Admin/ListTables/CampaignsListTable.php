@@ -13,24 +13,27 @@ defined( 'ABSPATH' ) || exit;
 class CampaignsListTable extends ListTable {
 
 	/**
-	 * Get campaigns started
+	 * Constructor.
 	 *
-	 * @param array $args Optional.
+	 * @param array $args An associative array of arguments.
 	 *
-	 * @see WP_List_Table::__construct()
-	 * @since  1.0.0
+	 * @see WP_List_Table::__construct() for more information on default arguments.
+	 * @since 1.0.0
 	 */
 	public function __construct( $args = array() ) {
-		$args         = (array) wp_parse_args(
-			$args,
-			array(
-				'singular' => 'campaign',
-				'plural'   => 'campaigns',
-				'ajax'     => 'true',
+		parent::__construct(
+			wp_parse_args(
+				$args,
+				array(
+					'singular' => 'campaign',
+					'plural'   => 'campaigns',
+					'screen'   => get_current_screen(),
+					'args'     => array(),
+				)
 			)
 		);
-		$this->screen = get_current_screen();
-		parent::__construct( $args );
+
+		$this->base_url = admin_url( 'admin.php?page=wc-donation-manager' );
 	}
 
 	/**
@@ -40,24 +43,21 @@ class CampaignsListTable extends ListTable {
 	 * @return void
 	 */
 	public function prepare_items() {
-		wp_verify_nonce( '_nonce' );
-		$columns               = $this->get_columns();
-		$sortable              = $this->get_sortable_columns();
-		$hidden                = $this->get_hidden_columns();
-		$this->_column_headers = array( $columns, $hidden, $sortable );
-		$per_page              = $this->get_items_per_page( 'wcdm_campaigns_per_page', 20 );
-		$order_by              = isset( $_GET['orderby'] ) ? sanitize_key( wp_unslash( $_GET['orderby'] ) ) : '';
-		$order                 = isset( $_GET['order'] ) ? sanitize_key( wp_unslash( $_GET['order'] ) ) : '';
-		$search                = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-		$current_page          = isset( $_GET['paged'] ) ? sanitize_key( wp_unslash( $_GET['paged'] ) ) : 1;
-		$args                  = array(
+		$this->process_actions();
+		$per_page = $this->get_items_per_page( 'wcdm_campaigns_per_page', 20 );
+		$paged    = $this->get_pagenum();
+		$search   = $this->get_request_search();
+		$order_by = $this->get_request_orderby( 'order_id' );
+		$order    = $this->get_request_order();
+
+		$args = array(
 			'post_type'      => 'wcdm_campaigns',
 			'post_status'    => 'any',
 			'order'          => $order,
 			'order_by'       => $order_by,
 			's'              => $search,
 			'posts_per_page' => $per_page,
-			'paged'          => $current_page,
+			'paged'          => $paged,
 		);
 
 		$query       = new \WP_Query( $args );
@@ -70,6 +70,27 @@ class CampaignsListTable extends ListTable {
 				'per_page'    => $per_page,
 			)
 		);
+	}
+
+	/**
+	 * handle bulk delete action.
+	 *
+	 * @param array $ids List of item IDs.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	protected function bulk_delete( $ids ) {
+		$performed = 0;
+		foreach ( $ids as $id ) {
+			if ( wp_delete_post( $id, true ) ) {
+				++$performed;
+			}
+		}
+		if ( ! empty( $performed ) ) {
+			// translators: %s: number of accounts.
+			WCDM()->flash->success( sprintf( __( '%s campaign(s) deleted successfully.', 'wc-donation-manager' ), number_format_i18n( $performed ) ) );
+		}
 	}
 
 	/**
@@ -131,52 +152,10 @@ class CampaignsListTable extends ListTable {
 	 *
 	 * @return array
 	 */
-	public function get_bulk_actions() {
+	protected function get_bulk_actions() {
 		return array(
 			'delete' => __( 'Delete', 'wc-donation-manager' ),
 		);
-	}
-
-	/**
-	 * Process bulk action.
-	 *
-	 * @param string $doaction Action name.
-	 *
-	 * @since 1.0.2
-	 */
-	public function process_bulk_action( $doaction ) {
-		if ( ! empty( $doaction ) && check_admin_referer( 'bulk-' . $this->_args['plural'] ) ) {
-			$id  = filter_input( INPUT_GET, 'id' );
-			$ids = filter_input( INPUT_GET, 'ids', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY );
-			if ( ! empty( $id ) ) {
-				$ids      = wp_parse_id_list( $id );
-				$doaction = ( - 1 !== $_REQUEST['action'] ) ? $_REQUEST['action'] : $_REQUEST['action2']; // phpcs:ignore
-			} elseif ( ! empty( $ids ) ) {
-				$ids = array_map( 'absint', $ids );
-			} elseif ( wp_get_referer() ) {
-				wp_safe_redirect( wp_get_referer() );
-				exit;
-			}
-
-			switch ( $doaction ) {
-				case 'delete':
-					$deleted = 0;
-					foreach ( $ids as $id ) {
-						$campaign = wcdm_get_campaign( $id );
-						if ( $campaign && $campaign->delete() ) {
-							++$deleted;
-						}
-					}
-					// translators: %d: number of campaigns deleted.
-					WCDM()->flash->success( sprintf( _n( '%d campaign deleted.', '%d campaigns deleted.', $deleted, 'wc-donation-manager' ), $deleted ) );
-					break;
-			}
-
-			wp_safe_redirect( remove_query_arg( array( 'action', 'action2', 'id', 'ids', 'paged' ) ) );
-			exit();
-		}
-
-		parent::process_bulk_actions( $doaction );
 	}
 
 	/**
@@ -197,8 +176,8 @@ class CampaignsListTable extends ListTable {
 	 * @return string Displays a checkbox.
 	 * @since  1.0.0
 	 */
-	public function column_cb( $item ) {
-		return sprintf( '<input type="checkbox" name="ids[]" value="%d"/>', esc_attr( $item->ID ) );
+	protected function column_cb( $item ) {
+		return sprintf( '<input type="checkbox" name="id[]" value="%d"/>', esc_attr( $item->ID ) );
 	}
 
 	/**
@@ -214,7 +193,7 @@ class CampaignsListTable extends ListTable {
 		$id_url    = add_query_arg( 'id', $item->ID, $admin_url );
 		$actions   = array(
 			'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( add_query_arg( 'edit', $item->ID, $admin_url ) ), __( 'Edit', 'wc-donation-manager' ) ),
-			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-campaigns' ), __( 'Delete', 'wc-donation-manager' ) ),
+			'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( add_query_arg( 'action', 'delete', $id_url ), 'bulk-' . $this->_args['plural'] ), __( 'Delete', 'wc-donation-manager' ) ),
 		);
 
 		return sprintf( '<a href="%s">%s</a> %s', esc_url( add_query_arg( 'edit', $item->ID, $admin_url ) ), esc_html( $item->post_title ), $this->row_actions( $actions ) );
@@ -244,7 +223,7 @@ class CampaignsListTable extends ListTable {
 	 * @return string Displays the campaign goal_amount.
 	 */
 	public function column_goal_amount( $item ) {
-		$goal_amount = get_woocommerce_currency_symbol() . get_post_meta( $item->ID, '_goal_amount', true );
+		$goal_amount = get_woocommerce_currency_symbol() . get_post_meta( $item->ID, 'wcdm_goal_amount', true );
 
 		return $goal_amount ?? '&mdash;';
 	}
