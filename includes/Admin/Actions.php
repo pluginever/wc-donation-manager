@@ -51,7 +51,7 @@ class Actions {
 			'post_status'  => $status,
 			'meta_input'   => array(
 				'wcdm_goal_amount' => $goal_amount,
-				'_end_date'    => $end_date,
+				'_end_date'        => $end_date,
 			),
 		);
 
@@ -97,7 +97,7 @@ class Actions {
 			'post_status'  => $status,
 			'meta_input'   => array(
 				'wcdm_goal_amount' => $goal_amount,
-				'_end_date'    => $end_date,
+				'_end_date'        => $end_date,
 			),
 		);
 
