@@ -207,7 +207,7 @@ class Menus {
 				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
 				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
 			</div>
-			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/donors.png' ); ?>" alt="<?php esc_attr_e( 'Import Serial Numbers', 'wc-donation-manager' ); ?>"/>
+			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/donors.png' ); ?>" alt="<?php esc_attr_e( 'Donors list table', 'wc-donation-manager' ); ?>"/>
 		</div>
 		<?php
 	}
@@ -225,7 +225,7 @@ class Menus {
 				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
 				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
 			</div>
-			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/emails.png' ); ?>" alt="<?php esc_attr_e( 'Import Serial Numbers', 'wc-donation-manager' ); ?>"/>
+			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/emails.png' ); ?>" alt="<?php esc_attr_e( 'Customer completed emails', 'wc-donation-manager' ); ?>"/>
 		</div>
 		<?php
 	}
@@ -243,7 +243,7 @@ class Menus {
 				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
 				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
 			</div>
-			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/customizable-options.png' ); ?>" alt="<?php esc_attr_e( 'Import Serial Numbers', 'wc-donation-manager' ); ?>"/>
+			<img src="<?php echo esc_url( WCDM()->get_dir_url() . 'assets/images/customizable-options.png' ); ?>" alt="<?php esc_attr_e( 'Add customizable settings', 'wc-donation-manager' ); ?>"/>
 		</div>
 		<?php
 	}
