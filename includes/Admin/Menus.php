@@ -59,7 +59,7 @@ class Menus {
 			'manage_options',
 			self::PARENT_SLUG,
 			null,
-			'dashicons-lock',
+			'dashicons-heart',
 			'55.9'
 		);
 		$admin_page_hooks['wc-donation-manager'] = 'wc-donation-manager';

@@ -20,7 +20,7 @@ class Orders {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		add_action( 'woocommerce_checkout_create_order', array( __CLASS__, 'before_checkout_create_order' ), 20 );
+		add_action( 'woocommerce_order_status_changed', array( __CLASS__, 'mark_donation_order' ), 20 );
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
 	}
 
@@ -34,8 +34,9 @@ class Orders {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function before_checkout_create_order( $order ) {
+	public static function mark_donation_order( $order ) {
 
+		$order            = wc_get_order( $order );
 		$is_type_donation = false;
 
 		foreach ( $order->get_items() as $item_id => $item ) {
@@ -47,8 +48,12 @@ class Orders {
 			}
 		}
 
-		if ( true === $is_type_donation ) {
-			$order->update_meta_data( '_has_product_type', 'donation' );
+		if ( $is_type_donation ) {
+			$order->update_meta_data( '_wcdm_order', $is_type_donation ? 'yes' : 'no' );
+			$order->save();
+		} else {
+			$order->delete_meta_data( '_wcdm_order' );
+			$order->save();
 		}
 	}
 
