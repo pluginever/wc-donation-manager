@@ -55,7 +55,7 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 							<?php esc_html_e( 'Goal Amount *', 'wc-donation-manager' ); ?>
 						</label>
 						<div class="field-group">
-							<input type="number" min="0" step="any" name="goal_amount" id="goal_amount" class="regular-text" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_goal_amount', true ) ); ?>" required/>
+							<input type="number" min="0" step="any" name="goal_amount" id="goal_amount" class="regular-text" value="<?php echo esc_attr( get_post_meta( $campaign->ID, 'wcdm_goal_amount', true ) ); ?>" required/>
 							<p class="description">
 								<?php esc_html_e( 'Edit or update the goal amount of the campaign.', 'wc-donation-manager' ); ?>
 							</p>
@@ -84,9 +84,9 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 				<div class="bk-card__body campaign-progress">
 					<div class="progress-label">
 						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ) ) ); ?></label>
-						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_goal_amount', true ) ) ) ); ?></label>
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, 'wcdm_goal_amount', true ) ) ) ); ?></label>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign->ID, '_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?></progress>
+					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign->ID, 'wcdm_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?></progress>
 				</div>
 			</div>
 			<div class="bk-card">

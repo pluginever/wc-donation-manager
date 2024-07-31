@@ -71,32 +71,32 @@ class Metaboxes {
 
 		woocommerce_wp_checkbox(
 			array(
-				'id'          => '_is_predefined_amounts',
+				'id'          => 'wcdm_is_predefined_amounts',
 				'label'       => __( 'Allow predefined amounts', 'wc-donation-manager' ),
 				'description' => __( 'When enabled donors will be able to donate by chosing an option from the predefined/suggested amounts.', 'wc-donation-manager' ),
-				'value'       => get_post_meta( get_the_ID(), '_is_predefined_amounts', true ),
+				'value'       => get_post_meta( get_the_ID(), 'wcdm_is_predefined_amounts', true ),
 				'desc_tip'    => true,
 			)
 		);
 
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_predefined_amounts_title',
+				'id'          => 'wcdm_predefined_amounts_title',
 				'label'       => __( 'Predefined amounts title', 'wc-donation-manager' ),
 				'description' => __( 'Enter the title text of predefined/suggested amounts for the campaign.', 'wc-donation-manager' ),
 				'desc_tip'    => false,
-				'value'       => get_post_meta( get_the_ID(), '_predefined_amounts_title', true ),
+				'value'       => get_post_meta( get_the_ID(), 'wcdm_predefined_amounts_title', true ),
 				'data_type'   => 'text',
 			)
 		);
 
 		woocommerce_wp_text_input(
 			array(
-				'id'            => '_predefined_amounts',
+				'id'            => 'wcdm_predefined_amounts',
 				'label'         => __( 'Predefined amounts', 'wc-donation-manager' ),
 				'description'   => __( 'Enter the list of predefined/suggested amounts for the campaign. Each amount should be separated by comma.', 'wc-donation-manager' ),
 				'desc_tip'      => false,
-				'value'         => implode( ',', (array) get_post_meta( get_the_ID(), '_predefined_amounts', true ) ?? array() ),
+				'value'         => implode( ',', (array) get_post_meta( get_the_ID(), 'wcdm_predefined_amounts', true ) ?? array() ),
 				'data_type'     => 'text',
 				'wrapper_class' => 'options_group',
 			)
@@ -104,19 +104,19 @@ class Metaboxes {
 
 		woocommerce_wp_checkbox(
 			array(
-				'id'            => '_is_custom_amount',
+				'id'            => 'wcdm_is_custom_amount',
 				'label'         => __( 'Allow custom amount', 'wc-donation-manager' ),
 				'description'   => __( 'When enabled donors will be able to donate the custom amount.', 'wc-donation-manager' ),
-				'value'         => empty( get_post_meta( get_the_ID(), '_is_custom_amount', true ) ) ? 'yes' : get_post_meta( get_the_ID(), '_is_custom_amount', true ),
+				'value'         => empty( get_post_meta( get_the_ID(), 'wcdm_is_custom_amount', true ) ) ? 'yes' : get_post_meta( get_the_ID(), 'wcdm_is_custom_amount', true ),
 				'wrapper_class' => 'options_group',
 				'desc_tip'      => true,
 			)
 		);
 
-		$amount_increment = get_post_meta( get_the_ID(), '_amount_increment_steps', true );
+		$amount_increment = get_post_meta( get_the_ID(), 'wcdm_amount_increment_steps', true );
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_amount_increment_steps',
+				'id'          => 'wcdm_amount_increment_steps',
 				'label'       => __( 'Amount increment steps', 'wc-donation-manager' ),
 				'description' => __( 'Enter the amount increment steps for the campaign amount field. This will applicable for increasing or decreasing amounts on the campaign page.', 'wc-donation-manager' ),
 				'desc_tip'    => false,
@@ -137,22 +137,22 @@ class Metaboxes {
 		echo '<div id="wcdm_tab_data" class="panel woocommerce_options_panel wcdm_tab_data_options"><div class="options_group show_if_donation">';
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_wcdm_min_amount',
+				'id'          => 'wcdm_min_amount',
 				'label'       => __( 'Minimum amount', 'wc-donation-manager' ),
 				'description' => __( 'Enter the minimum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_min_amount', true ) : get_option( 'wcdm_minimum_amount' ),
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_min_amount', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_min_amount', true ) : get_option( 'wcdm_minimum_amount' ),
 				'data_type'   => 'price',
 			)
 		);
 
 		woocommerce_wp_text_input(
 			array(
-				'id'          => '_wcdm_max_amount',
+				'id'          => 'wcdm_max_amount',
 				'label'       => __( 'Maximum amount', 'wc-donation-manager' ),
 				'description' => __( 'Enter the maximum amount for the campaign. Default amount comes from the plugin global settings.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_max_amount', true ) : get_option( 'wcdm_maximum_amount' ),
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_max_amount', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_max_amount', true ) : get_option( 'wcdm_maximum_amount' ),
 				'data_type'   => 'price',
 			)
 		);
@@ -171,12 +171,12 @@ class Metaboxes {
 
 		woocommerce_wp_select(
 			array(
-				'id'          => '_wcdm_campaign_id',
+				'id'          => 'wcdm_campaign_id',
 				'label'       => __( 'Select a campaign', 'wc-donation-manager' ),
 				'description' => __( 'Select a campaign to assign this donation product. After selected a campaign, the campaign cause & the goal amount will be inherited.', 'wc-donation-manager' ),
 				'desc_tip'    => true,
 				'options'     => $campaign_options,
-				'value'       => ! empty( get_post_meta( get_the_ID(), '_wcdm_campaign_id', true ) ) ? get_post_meta( get_the_ID(), '_wcdm_campaign_id', true ) : '0',
+				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_campaign_id', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_campaign_id', true ) : '0',
 			)
 		);
 
@@ -207,13 +207,13 @@ class Metaboxes {
 					<?php } ?>
 					jQuery('#woocommerce-product-data .type_box label[for=_downloadable].tips').addClass('show_if_donation').show();
 
-					jQuery('#_is_predefined_amounts').on( 'change', function() {
+					jQuery('#wcdm_is_predefined_amounts').on( 'change', function() {
 						if ( jQuery(this).is(":checked") ) {
-							jQuery( '._predefined_amounts_title_field').show();
-							jQuery( '._predefined_amounts_field').show();
+							jQuery( '.wcdm_predefined_amounts_title_field').show();
+							jQuery( '.wcdm_predefined_amounts_field').show();
 						} else {
-							jQuery( '._predefined_amounts_title_field').hide();
-							jQuery( '._predefined_amounts_field').hide();
+							jQuery( '.wcdm_predefined_amounts_title_field').hide();
+							jQuery( '.wcdm_predefined_amounts_field').hide();
 						}
 					}).trigger('change');
 				});

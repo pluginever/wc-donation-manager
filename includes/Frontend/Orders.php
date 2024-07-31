@@ -49,10 +49,10 @@ class Orders {
 		}
 
 		if ( $is_type_donation ) {
-			$order->update_meta_data( '_wcdm_order', $is_type_donation ? 'yes' : 'no' );
+			$order->update_meta_data( 'wcdm_order', $is_type_donation ? 'yes' : 'no' );
 			$order->save();
 		} else {
-			$order->delete_meta_data( '_wcdm_order' );
+			$order->delete_meta_data( 'wcdm_order' );
 			$order->save();
 		}
 	}
@@ -81,7 +81,7 @@ class Orders {
 
 				if ( ! in_array( $order_id, $orders_id, true ) ) {
 					$orders_id[]    = $order_id;
-					$campaign_id    = get_post_meta( $product->get_id(), '_wcdm_campaign_id', true );
+					$campaign_id    = get_post_meta( $product->get_id(), 'wcdm_campaign_id', true );
 					$raised_amount  = (float) get_post_meta( $campaign_id, '_raised_amount', true );
 					$raised_amount += (float) $item['subtotal'];
 					update_post_meta( $item['product_id'], 'wcdm_orders_id', $orders_id );

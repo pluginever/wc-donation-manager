@@ -84,7 +84,7 @@ function wcdm_get_campaign_products( $campaign_id ) {
 		'post_type'      => 'product',
 		'posts_per_page' => - 1,
 		'orderby'        => 'date',
-		'meta_key'       => '_wcdm_campaign_id', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+		'meta_key'       => 'wcdm_campaign_id', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
 		'meta_value'     => $campaign_id, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 		'order'          => 'ASC',
 	);

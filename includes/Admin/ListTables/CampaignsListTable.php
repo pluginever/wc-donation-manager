@@ -244,7 +244,7 @@ class CampaignsListTable extends ListTable {
 	 * @return string Displays the campaign goal_amount.
 	 */
 	public function column_goal_amount( $item ) {
-		$goal_amount = get_woocommerce_currency_symbol() . get_post_meta( $item->ID, '_goal_amount', true );
+		$goal_amount = get_woocommerce_currency_symbol() . get_post_meta( $item->ID, 'wcdm_goal_amount', true );
 
 		return $goal_amount ?? '&mdash;';
 	}
