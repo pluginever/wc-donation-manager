@@ -110,6 +110,7 @@ final class Plugin extends ByteKit\Plugin {
 					Admin\Settings::instance(),
 					Admin\Actions::class,
 					Admin\Metaboxes::class,
+					Admin\Notices::class,
 				)
 			);
 		}

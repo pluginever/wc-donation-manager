@@ -1,10 +1,10 @@
 {
   "name": "wc-donation-manager",
   "title": "WC Donation Manager",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.",
   "homepage": "https://pluginever.com/plugins/wc-donation-manager/",
-  "license": "GPL-3.0+",
+  "license": "GPL-2.0-or-later",
   "prettier": "@wordpress/prettier-config",
   "scripts": {
     "build": "wp-scripts build && grunt build",

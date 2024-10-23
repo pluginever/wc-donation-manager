@@ -8,10 +8,10 @@ module.exports = [
 		...defaultConfig,
 		entry: {
 			...defaultConfig.entry(),
-			'css/wcdm-admin': './src/css/admin-common.scss',
-			'js/wcdm-admin': './src/js/admin-common.js',
-			'css/wcdm-frontend': './src/css/frontend-common.scss',
-			'js/wcdm-frontend': './src/js/frontend-common.js',
+			'css/wcdm-admin': './.assets/css/admin-common.scss',
+			'js/wcdm-admin': './.assets/js/admin-common.js',
+			'css/wcdm-frontend': './.assets/css/frontend-common.scss',
+			'js/wcdm-frontend': './.assets/js/frontend-common.js',
 		},
 		output: {
 			...defaultConfig.output,
@@ -47,7 +47,7 @@ module.exports = [
 			new CopyWebpackPlugin({
 				patterns: [
 					{
-						from: path.resolve(__dirname, 'src/images'),
+						from: path.resolve(__dirname, '.assets/images'),
 						to: path.resolve(__dirname, 'assets/images'),
 					}
 				]

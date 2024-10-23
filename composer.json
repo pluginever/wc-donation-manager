@@ -3,7 +3,7 @@
   "description": "A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.",
   "homepage": "https://pluginever.com/plugins/wc-donation-manager/",
   "type": "wordpress-plugin",
-  "license": "GPL-3.0-or-later",
+  "license": "GPL-2.0-or-later",
   "require": {
     "php": ">=7.4"
   },
