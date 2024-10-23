@@ -22,9 +22,9 @@ defined( 'ABSPATH' ) || exit;
 			<?php
 			echo wp_kses_post(
 				sprintf(
-				// translators: %1$s: WC Key Manager Pro link, %2$s: Coupon code.
+				// translators: %1$s: WooCommerce Donation Manager WP ORG link, %2$s: Coupon code.
 					__( 'We hope you had a wonderful experience using %1$s. Please take a moment to show us your support by leaving a 5-star review on <a href="%2$s" target="_blank"><strong>WordPress.org</strong></a>. Thank you! 😊', 'wc-donation-manager' ),
-					'<a href="ttps://wordpress.org/plugins/wc-donation-manager/" target="_blank"><strong>WC Key Manager</strong></a>',
+					'<a href="ttps://wordpress.org/plugins/wc-donation-manager/" target="_blank"><strong>WooCommerce Donation Manager</strong></a>',
 					'https://wordpress.org/support/plugin/wc-donation-manager/reviews/?filter=5#new-post'
 				)
 			);

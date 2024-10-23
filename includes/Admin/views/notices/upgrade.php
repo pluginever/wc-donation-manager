@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php
 			echo wp_kses_post(
 				sprintf(
-					// translators: %1$s: WC Key Manager Pro link, %2$s: Coupon code.
+					// translators: %1$s: WooCommerce Donation Manager ORG link, %2$s: Coupon code.
 					__( 'Get access to %1$s with a <strong>20%% discount</strong> for the next <strong>72 hours</strong> only! Use coupon code %2$s at checkout. Hurry up, the offer ends soon.', 'wc-donation-manager' ),
 					'<a href="https://pluginever.com/?utm_source=plugin&utm_medium=notice&utm_campaign=flash-sale" target="_blank"><strong>All Plugins</strong></a>',
 					'<strong>FLASH20</strong>'
