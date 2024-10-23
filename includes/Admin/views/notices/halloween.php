@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 ?>
 <div class="notice-body">
 	<div class="notice-icon">
-		<img src="<?php echo esc_url( WCDM()->get_assets_url( 'images/halloween-icon.svg' ) ); ?>" alt="Auto Complete Orders for WooCommerce Halloween Offer">
+		<img src="<?php echo esc_url( WCDM()->get_assets_url( 'images/halloween-icon.svg' ) ); ?>" alt="WooCommerce Donation Manager Halloween Offer">
 	</div>
 	<div class="notice-content">
 		<h3>
@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 </div>
 <div class="notice-footer">
 	<div class="footer-btn">
-		<a href="<?php echo esc_url( WCDM()->plugin_uri . '?utm_source=plugin&utm_medium=notice&utm_campaign=halloween-2024&discount=bigtreat30' ); ?>" class="primary halloween-upgrade-btn">
+		<a href="<?php echo esc_url( WCDM()->plugin_uri . '?utm_source=plugin&utm_medium=notice&utm_campaign=halloween-2024&discount=bigtreat30' ); ?>" class="primary halloween-upgrade-btn" target="_blank">
 			<span class="dashicons dashicons-cart"></span>
 			<?php esc_html_e( 'Claim your discount!!', 'wc-donation-manager' ); ?>
 		</a>

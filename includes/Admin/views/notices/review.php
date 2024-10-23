@@ -12,11 +12,11 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="notice-body">
 	<div class="notice-icon">
-		<img src="<?php echo esc_attr( WCDM()->get_assets_url( 'images/plugin-icon.png' ) ); ?>" alt="Key Manager">
+		<img src="<?php echo esc_attr( WCDM()->get_assets_url( 'images/plugin-icon.png' ) ); ?>" alt="WooCommerce Donation Manager">
 	</div>
 	<div class="notice-content">
 		<h3>
-			<?php esc_html_e( 'Enjoying Auto Complete Orders for WooCommerce?', 'wc-donation-manager' ); ?>
+			<?php esc_html_e( 'Enjoying WooCommerce Donation Manager?', 'wc-donation-manager' ); ?>
 		</h3>
 		<p>
 			<?php
@@ -24,8 +24,8 @@ defined( 'ABSPATH' ) || exit;
 				sprintf(
 				// translators: %1$s: WC Key Manager Pro link, %2$s: Coupon code.
 					__( 'We hope you had a wonderful experience using %1$s. Please take a moment to show us your support by leaving a 5-star review on <a href="%2$s" target="_blank"><strong>WordPress.org</strong></a>. Thank you! 😊', 'wc-donation-manager' ),
-					'<a href="ttps://wordpress.org/plugins/autocomplete-orders-for-woocommerce/" target="_blank"><strong>WC Key Manager</strong></a>',
-					'https://wordpress.org/support/plugin/autocomplete-orders-for-woocommerce/reviews/?filter=5#new-post'
+					'<a href="ttps://wordpress.org/plugins/wc-donation-manager/" target="_blank"><strong>WC Key Manager</strong></a>',
+					'https://wordpress.org/support/plugin/wc-donation-manager/reviews/?filter=5#new-post'
 				)
 			);
 			?>
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </div>
 <div class="notice-footer">
-	<a class="primary" href="https://wordpress.org/support/plugin/autocomplete-orders-for-woocommerce/reviews/?filter=5#new-post" target="_blank">
+	<a class="primary" href="https://wordpress.org/support/plugin/wc-donation-manager/reviews/?filter=5#new-post" target="_blank">
 		<span class="dashicons dashicons-heart"></span>
 		<?php esc_html_e( 'Sure, I\'d love to help!', 'wc-donation-manager' ); ?>
 	</a>
