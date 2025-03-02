@@ -29,20 +29,6 @@ class Notices {
 		$installed_time = get_option( 'wcdm_installed' );
 		$current_time   = wp_date( 'U' );
 
-		// Halloween's promotion notice.
-		$halloween_time = date_i18n( strtotime( '2024-11-11 00:00:00' ) );
-		if ( $current_time < $halloween_time ) {
-			WCDM()->notices->add(
-				array(
-					'message'     => __DIR__ . '/views/notices/halloween.php',
-					'dismissible' => false,
-					'notice_id'   => 'wcdm_halloween_promotion',
-					'style'       => 'border-left-color: #8500ff;background-image: url("' . esc_url( WCDM()->get_assets_url( 'images/halloween-banner.svg' ) ) . '");',
-					'class'       => 'notice-halloween',
-				)
-			);
-		}
-
 		if ( ! defined( 'WCDM_PRO_VERSION' ) ) {
 			WCDM()->notices->add(
 				array(
