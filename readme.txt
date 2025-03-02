@@ -81,6 +81,10 @@ Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://plugineve
 = 1.0.3 (March 02, 2025) =
 * New: Update the plugin framework.
 * Enhance: Enhance autoload classes and files to improve performance.
+* Compatibility: Tested with the latest version of WordPress and WooCommerce.
+* Fix: Few known issues.
+
+= 1.0.2 (December 12, 2024) =
 * Fix: Few known issues.
 
 = 1.0.1 (July 31, 2024) =
