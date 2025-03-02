@@ -22,6 +22,7 @@ module.exports = function( grunt ) {
 						src: [
 							'*.php',
 							'**/*.php',
+							'vendor/namespaced/**/*.php',
 							'!node_modules/**',
 							'!tests/**',
 							'!vendor/**',

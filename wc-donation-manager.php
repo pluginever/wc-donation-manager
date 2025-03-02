@@ -12,9 +12,9 @@
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:          wc-donation-manager
  * Domain Path:          /languages
- * Tested up to:         6.6
+ * Tested up to:         6.7
  * WC requires at least: 3.0.0
- * WC tested up to:      9.3
+ * WC tested up to:      9.7
  * Requires Plugins:     woocommerce
  *
  * @package WooCommerceDonationManager
@@ -30,11 +30,12 @@
  * GNU General Public License for more details.
  */
 
-// don't call the file directly.
+// Don't call the file directly.
 defined( 'ABSPATH' ) || exit();
 
 // Require the autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor-prefixed/autoload.php';
 
 // Instantiate the plugin.
 WooCommerceDonationManager\Plugin::create(
