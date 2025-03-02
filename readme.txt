@@ -78,6 +78,11 @@ To update the plugin settings, navigate to the Donation Manager menu in the Word
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
+= 1.0.3 (March 02, 2025) =
+* New: Update the plugin framework.
+* Enhance: Enhance autoload classes and files to improve performance.
+* Fix: Few known issues.
+
 = 1.0.1 (July 31, 2024) =
 * New Feature: Add a new feature to create donation campaigns.
 * Enhance: Updating and creating campaigns
