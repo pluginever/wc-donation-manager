@@ -24,10 +24,11 @@ class Notices {
 	 * Admin notices.
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
 	public function admin_notices() {
-		$installed_time = get_option( 'wcdm_installed' );
-		$current_time   = wp_date( 'U' );
+		$installed_time = absint( get_option( 'wcdm_installed' ) );
+		$current_time   = absint( wp_date( 'U' ) );
 
 		if ( ! defined( 'WCDM_PRO_VERSION' ) ) {
 			WCDM()->notices->add(
