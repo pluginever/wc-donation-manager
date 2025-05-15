@@ -12,7 +12,7 @@
     "byteever/bytekit-settings": "^1.0"
   },
   "require-dev": {
-    "byteever/byteever-sniffs": "dev-master"
+    "byteever/byteever-sniffs": "^1.1"
   },
   "autoload": {
     "psr-4": {
