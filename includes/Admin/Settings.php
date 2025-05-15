@@ -45,7 +45,7 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 					array(
 						'title' => __( 'General Settings', 'wc-donation-manager' ),
 						'type'  => 'title',
-						'desc'  => __( 'The following options are the plugin general settings. Theses options affect how the plugin will work.', 'wc-donation-manager' ),
+						'desc'  => __( 'The following options are the plugin\'s general settings. These options affect how the plugin will work.', 'wc-donation-manager' ),
 						'id'    => 'general_options',
 					),
 					array(
