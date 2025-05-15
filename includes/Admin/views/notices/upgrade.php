@@ -2,8 +2,8 @@
 /**
  * Admin notice for upgrade.
  *
- * @package WooCommerceDonationManager
  * @since 1.0.0
+ * @package WooCommerceDonationManager
  * @return void
  */
 
@@ -21,9 +21,9 @@ defined( 'ABSPATH' ) || exit;
 			echo wp_kses_post(
 				sprintf(
 					// translators: %1$s: WooCommerce Donation Manager ORG link, %2$s: Coupon code.
-					__( 'Get access to %1$s with a <strong>20%% discount</strong> for the next <strong>72 hours</strong> only! Use coupon code %2$s at checkout. Hurry up, the offer ends soon.', 'wc-donation-manager' ),
-					'<a href="https://pluginever.com/?utm_source=plugin&utm_medium=notice&utm_campaign=flash-sale" target="_blank"><strong>All Plugins</strong></a>',
-					'<strong>FLASH20</strong>'
+					__( 'Enjoy a  <strong>10%% discount</strong> on %1$s! Use coupon code %2$s at checkout to grab the deal. Don’t miss out — this offer won’t last forever!', 'wc-donation-manager' ),
+					'<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=plugin&utm_medium=notice&utm_campaign=flash-sale" target="_blank"><strong>WC Donation Manager Pro</strong></a>',
+					'<strong>FLASH10</strong>'
 				)
 			);
 			?>
@@ -31,9 +31,9 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </div>
 <div class="notice-footer">
-	<a class="primary" href="https://pluginever.com/?utm_source=plugin&utm_medium=notice&utm_campaign=flash-sale" target="_blank">
+	<a class="primary" href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=plugin&utm_medium=notice&utm_campaign=flash-sale" target="_blank">
 		<span class="dashicons dashicons-cart"></span>
-		<?php esc_attr_e( 'Claim discount ow', 'wc-donation-manager' ); ?>
+		<?php esc_attr_e( 'Upgrade now', 'wc-donation-manager' ); ?>
 	</a>
 	<a href="#" data-snooze="<?php echo esc_attr( MONTH_IN_SECONDS ); ?>">
 		<span class="dashicons dashicons-clock"></span>

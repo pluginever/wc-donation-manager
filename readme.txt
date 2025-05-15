@@ -1,10 +1,8 @@
 ===WC Donation Manager - Effortlessly Collect Donations Through WooCommerce===
 Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable
-Requires at least: 5.0
-Tested up to: 6.7
-Requires PHP: 7.4
-Stable tag: 1.0.3
+Tested up to: 6.8
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +76,11 @@ To update the plugin settings, navigate to the Donation Manager menu in the Word
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
+= 1.0.4 (May 15, 2025) =
+* Fix: Fixed a few known issues and typos.
+* Update: Update the plugin notifications.
+* Compatibility: Tested with the latest version of WordPress and WooCommerce.
+
 = 1.0.3 (March 02, 2025) =
 * New: Update the plugin framework.
 * Enhance: Enhance autoload classes and files to improve performance.
