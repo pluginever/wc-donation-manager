@@ -127,6 +127,13 @@ If you encounter a bug or have a feature request for the WC Donation Manager plu
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
+= 1.0.5 (June 24, 2025) =
+* New: Update the plugin directory structure to improve organization and maintainability.
+* Enhance: Improve the donation product metabox for better usability.
+* Fix: Fixed a few known issues and typos.
+* Update: Update the plugin framework and autoload classes for better performance.
+* Compatibility: Tested with the latest version of WordPress and WooCommerce.
+
 = 1.0.4 (May 15, 2025) =
 * Fix: Fixed a few known issues and typos.
 * Update: Update the plugin notifications.
