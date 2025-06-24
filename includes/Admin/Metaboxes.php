@@ -183,9 +183,13 @@ class Metaboxes {
 		/**
 		 * Hook for adding more campaign data.
 		 *
+		 * This hook allows developers to add more fields or data related to the campaign on the product edit page.
+		 *
+		 * @param int $post_id The ID of the current product post.
+		 *
 		 * @since 1.0.1
 		 */
-		do_action( 'wc_donation_manager_after_product_campaign_data', $wcdm_campaign );
+		do_action( 'wc_donation_manager_after_product_campaign_data', get_the_ID() );
 
 		echo '</div></div>';
 	}
