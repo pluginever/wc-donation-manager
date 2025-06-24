@@ -5,14 +5,13 @@
 	<!-- Check all PHP files in directory tree by default. -->
 	<file>.</file>
 	<exclude-pattern>languages/</exclude-pattern>
-	<exclude-pattern>lib/</exclude-pattern>
 	<exclude-pattern>tests/</exclude-pattern>
 	<exclude-pattern>assets/</exclude-pattern>
 	<exclude-pattern>dist/</exclude-pattern>
 	<exclude-pattern>bin/</exclude-pattern>
 	<exclude-pattern>*/node_modules/*</exclude-pattern>
 	<exclude-pattern>*/vendor/*</exclude-pattern>
-	<exclude-pattern>*/vendor-prefixed/*</exclude-pattern>
+	<exclude-pattern>*/libraries/*</exclude-pattern>
 	<exclude-pattern>*\.(css|js|xml)</exclude-pattern>
 	<arg name="basepath" value="./"/><!-- Strip the file paths down to the relevant bit -->
 	<arg name="extensions" value="php"/>
