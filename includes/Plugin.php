@@ -61,8 +61,25 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 */
 	public function init_hooks() {
 		register_activation_hook( $this->get_file(), array( Installer::class, 'install' ) );
+		add_filter( 'plugin_action_links_' . $this->get_basename(), array( $this, 'plugin_action_links' ) );
 		add_action( 'before_woocommerce_init', array( $this, 'on_before_woocommerce_init' ) );
 		add_action( 'woocommerce_init', array( $this, 'on_init' ), 0 );
+	}
+
+	/**
+	 * Add plugin action links.
+	 *
+	 * @param array $links The plugin action links.
+	 *
+	 * @since 1.0.0
+	 * @return array
+	 */
+	public function plugin_action_links( $links ) {
+		if ( ! $this->is_plugin_active( 'wc-donation-manager-pro/wc-donation-manager-pro.php' ) ) {
+			$links['go_pro'] = '<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=plugin&utm_medium=plugin-action-link&utm_campaign=go-pro" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__( 'Go Pro', 'wc-donation-manager' ) . '</a>';
+		}
+
+		return $links;
 	}
 
 	/**
@@ -169,5 +186,29 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 		);
 
 		register_post_type( 'wcdm_campaigns', apply_filters( 'wcdm_campaigns_post_type_args', $args ) );
+	}
+
+	/**
+	 * Get assets path.
+	 *
+	 * @param string $file Optional. File name.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function get_assets_path( $file = '' ) {
+		return $this->get_dir_path( 'assets/' . $file );
+	}
+
+	/**
+	 * Get assets url.
+	 *
+	 * @param string $file Optional. File name.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
+	public function get_assets_url( $file = '' ) {
+		return $this->get_dir_url( 'assets/' . $file );
 	}
 }
