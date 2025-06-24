@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.4\n"
 "Report-Msgid-Bugs-To: "
 "https://pluginever.com/plugins/wc-donation-manager-pro/\n"
-"POT-Creation-Date: 2025-05-15 07:13:53+00:00\n"
+"POT-Creation-Date: 2025-06-24 06:33:54+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -401,7 +401,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:12 includes/Plugin.php:142
+#: includes/Admin/views/campaigns/add.php:12 includes/Plugin.php:159
 msgid "Add New Campaign"
 msgstr ""
 
@@ -460,7 +460,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:16 includes/Plugin.php:144
+#: includes/Admin/views/campaigns/edit.php:16 includes/Plugin.php:161
 msgid "Edit Campaign"
 msgstr ""
 
@@ -587,31 +587,35 @@ msgstr ""
 msgid "The campaign expired!"
 msgstr ""
 
-#: includes/Plugin.php:143
+#: includes/Plugin.php:79
+msgid "Go Pro"
+msgstr ""
+
+#: includes/Plugin.php:160
 msgid "New Campaign"
 msgstr ""
 
-#: includes/Plugin.php:145
+#: includes/Plugin.php:162
 msgid "View Campaign"
 msgstr ""
 
-#: includes/Plugin.php:146
+#: includes/Plugin.php:163
 msgid "All Campaign"
 msgstr ""
 
-#: includes/Plugin.php:147
+#: includes/Plugin.php:164
 msgid "Search Campaign"
 msgstr ""
 
-#: includes/Plugin.php:148
+#: includes/Plugin.php:165
 msgid "Parent Campaign:"
 msgstr ""
 
-#: includes/Plugin.php:149
+#: includes/Plugin.php:166
 msgid "No campaigns found."
 msgstr ""
 
-#: includes/Plugin.php:150
+#: includes/Plugin.php:167
 msgid "No campaigns found in Trash."
 msgstr ""
 
@@ -682,27 +686,27 @@ msgstr ""
 msgid "PluginEver"
 msgstr ""
 
-#: includes/Plugin.php:137
+#: includes/Plugin.php:154
 msgctxt "post type general name"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:138
+#: includes/Plugin.php:155
 msgctxt "post type singular name"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:139
+#: includes/Plugin.php:156
 msgctxt "admin menu"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:140
+#: includes/Plugin.php:157
 msgctxt "add new on admin bar"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:141
+#: includes/Plugin.php:158
 msgctxt "campaign"
 msgid "Add New"
 msgstr ""
