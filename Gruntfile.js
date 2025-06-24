@@ -79,13 +79,6 @@ module.exports = function( grunt ) {
 					},
 				},
 			},
-			wp_readme_to_markdown: {
-				your_target: {
-					files: {
-						'readme.md': 'readme.txt',
-					},
-				},
-			},
 		}
 	);
 
