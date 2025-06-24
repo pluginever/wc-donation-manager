@@ -2,10 +2,10 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WC Donation Manager 1.0.4\n"
+"Project-Id-Version: WC Donation Manager 1.0.5\n"
 "Report-Msgid-Bugs-To: "
-"https://pluginever.com/plugins/wc-donation-manager-pro/\n"
-"POT-Creation-Date: 2025-06-24 06:33:54+00:00\n"
+"https://pluginever.com/plugins/woocommerce-donation-manager-pro/\n"
+"POT-Creation-Date: 2025-06-24 08:50:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -397,7 +397,7 @@ msgid "Campaigns"
 msgstr ""
 
 #: includes/Admin/Utilities.php:47 includes/Admin/Utilities.php:48
-#: vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:255
+#: libraries/byteever/bytekit-plugin/src/Traits/HasPlugin.php:255
 msgid "Settings"
 msgstr ""
 
@@ -619,49 +619,49 @@ msgstr ""
 msgid "No campaigns found in Trash."
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-plugin/src/Admin/Notices.php:130
+#: libraries/byteever/bytekit-plugin/src/Admin/Notices.php:130
 msgid "Dismiss this notice"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:216
+#: libraries/byteever/bytekit-plugin/src/Traits/HasPlugin.php:216
 msgid "Documentation"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:223
+#: libraries/byteever/bytekit-plugin/src/Traits/HasPlugin.php:223
 msgid "Support"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:230
+#: libraries/byteever/bytekit-plugin/src/Traits/HasPlugin.php:230
 msgid "Review"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:90
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:90
 msgid "Settings saved."
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:254
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:349
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:254
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:349
 msgid "Recommended"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:255
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:350
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:255
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:350
 msgid "Install Now"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:318
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:318
 msgid "Need Help?"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:364
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:364
 msgid "Join our Community"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:368
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:368
 msgid "Request a Feature"
 msgstr ""
 
-#: vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:372
+#: libraries/byteever/bytekit-settings/src/Admin/Settings.php:372
 msgid "Report a Bug"
 msgstr ""
 
