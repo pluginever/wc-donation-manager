@@ -1,12 +1,12 @@
 {
   "name": "wc-donation-manager",
   "title": "WC Donation Manager",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.",
-  "homepage": "https://pluginever.com/plugins/wc-donation-manager-pro/",
-  "license": "GPL-2.0-or-later",
+  "homepage": "https://pluginever.com/plugins/woocommerce-donation-manager-pro/",
+  "license": "GPL-v2 or later",
   "scripts": {
-    "build": "wp-scripts build --webpack-src-dir=assets && grunt build",
+    "build": "wp-scripts build --webpack-src-dir=resources && grunt build",
     "check-engines": "wp-scripts check-engines",
     "check-licenses": "wp-scripts check-licenses",
     "format": "wp-scripts format",
@@ -16,13 +16,13 @@
     "lint:pkg-json": "wp-scripts lint-pkg-json",
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
-    "start": "wp-scripts start --webpack-src-dir=assets",
+    "start": "wp-scripts start --webpack-src-dir=resources",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },
   "devDependencies": {
+    "@wordpress/scripts": "^30.18.0",
     "@lodder/time-grunt": "^4.0.0",
-    "@wordpress/scripts": "^26.6.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "grunt": "^1.6.1",
@@ -36,5 +36,6 @@
     "> 0.1%",
     "ie 8",
     "ie 9"
-  ]
+  ],
+  "dependencies": {}
 }
