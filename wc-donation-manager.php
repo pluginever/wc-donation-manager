@@ -35,12 +35,14 @@ defined( 'ABSPATH' ) || exit();
 
 // Require the autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/vendor-prefixed/autoload.php';
+require_once __DIR__ . '/libraries/autoload.php';
 
 // Instantiate the plugin.
 WooCommerceDonationManager\Plugin::create(
 	array(
 		'file'         => __FILE__,
 		'settings_url' => admin_url( 'admin.php?page=wcdm-settings' ),
+		'support_url'  => 'https://pluginever.com/support/',
+		'docs_url'     => 'https://pluginever.com/docs/wc-donation-manager/',
 	)
 );
