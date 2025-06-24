@@ -8,14 +8,15 @@ module.exports = [
 		...defaultConfig,
 		entry: {
 			...defaultConfig.entry(),
-			'css/wcdm-admin': './assets/css/admin-common.scss',
-			'js/wcdm-admin': './assets/js/admin-common.js',
-			'css/wcdm-frontend': './assets/css/frontend-common.scss',
-			'js/wcdm-frontend': './assets/js/frontend-common.js',
+			'css/wcdm-admin': './resources/css/admin-common.scss',
+			'js/wcdm-admin': './resources/js/admin-common.js',
+			'css/wcdm-frontend': './resources/css/frontend-common.scss',
+			'js/wcdm-frontend': './resources/js/frontend-common.js',
 		},
 		output: {
 			...defaultConfig.output,
 			filename: '[name].js',
+			path: __dirname + '/assets/',
 		},
 		module: {
 			rules: [
@@ -42,12 +43,12 @@ module.exports = [
 		},
 		plugins: [
 			...defaultConfig.plugins,
-			// Copy images to the build folder.
+			// Copy images to the assets folder.
 			new CopyWebpackPlugin({
 				patterns: [
 					{
-						from: path.resolve(__dirname, 'assets/images'),
-						to: path.resolve(__dirname, 'build/images'),
+						from: path.resolve(__dirname, 'resources/images'),
+						to: path.resolve(__dirname, 'assets/images'),
 					}
 				]
 			}),
