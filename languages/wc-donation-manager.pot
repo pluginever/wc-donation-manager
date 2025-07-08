@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.5\n"
 "Report-Msgid-Bugs-To: "
 "https://pluginever.com/plugins/woocommerce-donation-manager-pro/\n"
-"POT-Creation-Date: 2025-06-24 08:50:17+00:00\n"
+"POT-Creation-Date: 2025-07-08 03:47:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -290,11 +290,11 @@ msgid "This will make the cart item price editable for the donation products onl
 msgstr ""
 
 #: includes/Admin/Settings.php:76
-msgid "Disabled coupon field"
+msgid "Disable coupon field"
 msgstr ""
 
 #: includes/Admin/Settings.php:77
-msgid "Disabled coupon field."
+msgid "Disable coupon field."
 msgstr ""
 
 #: includes/Admin/Settings.php:78
@@ -304,25 +304,25 @@ msgid ""
 msgstr ""
 
 #: includes/Admin/Settings.php:84
-msgid "Disabled order note"
+msgid "Disable order note"
 msgstr ""
 
 #: includes/Admin/Settings.php:85
-msgid "Disabled order note."
+msgid "Disable order note."
 msgstr ""
 
 #: includes/Admin/Settings.php:91
-msgid "Disabled tax"
+msgid "Disable tax"
 msgstr ""
 
 #: includes/Admin/Settings.php:92
-msgid "Disabled tax for donation."
+msgid "Disable tax for donation."
 msgstr ""
 
 #: includes/Admin/Settings.php:93
 msgid ""
-"Disabled the tax for donation product. This will hide tax status and tax "
-"class from product edit page as well if product type selected as donation."
+"This will hide the tax status and tax class fields from the product edit "
+"page when the product type is set to <i>Donation</i>."
 msgstr ""
 
 #: includes/Admin/Settings.php:103
