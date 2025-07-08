@@ -119,5 +119,30 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		public function is_virtual() {
 			return true;
 		}
+
+		/**
+		 * Get the add to cart button success message for donation product - used to update the mini cart live region.
+		 *
+		 * @since 1.0.6
+		 * @return string
+		 */
+		public function add_to_cart_success_message() {
+			$text = '';
+
+			if ( $this->is_purchasable() && $this->is_in_stock() ) {
+				/* translators: %s: Product title */
+				$text = __( 'Donation product &ldquo;%s&rdquo; has been added to your cart. Proceed with the donation.', 'woocommerce' );
+				$text = sprintf( $text, $this->get_name() );
+			}
+
+			/**
+			 * Filter donation product add to cart success message.
+			 *
+			 * @since 9.2.0
+			 * @param string $text The success message when a donation product is added to the cart.
+			 * @param WCDM_Donation_Product $this Reference to the current WCDM_Donation_Product instance.
+			 */
+			return apply_filters( 'wcdm_donation_product_add_to_cart_success_message', $text, $this );
+		}
 	}
 }

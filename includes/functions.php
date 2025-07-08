@@ -109,31 +109,3 @@ function wcdm_get_the_title( $post_id ) {
 
 	return sprintf( '(#%1$s) %2$s', $post_id, get_the_title( $post_id ) );
 }
-
-/**
- * Modify the "Product has been added to your cart" message for product-data: donation.
- *
- * @param string $message The message HTML.
- * @param array $products The products that were added to the cart.
- * @return string
- */
-function wcdm_add_to_cart_message_customize_for_donation_product(string $message, array $products ): string
-{
-	$product_id = key( $products );
-	$product = wc_get_product( $product_id );
-
-	if ( $product && $product->get_type() === 'donation' ) {
-		$product_name = $product->get_name();
-		$message = sprintf(
-			'<div><strong>%s</strong> - %s</div>',
-			$product_name,
-			esc_html__( 'Proceed with the donations', 'wc-donation-manager' )
-		);
-	}
-
-	return $message;
-}
-add_filter( 'wc_add_to_cart_message_html', 'wcdm_add_to_cart_message_customize_for_donation_product', 10, 2 );
-
-
-
