@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: WC Donation Manager 1.0.5\n"
 "Report-Msgid-Bugs-To: "
 "https://pluginever.com/plugins/woocommerce-donation-manager-pro/\n"
-"POT-Creation-Date: 2025-08-20 11:27:12+00:00\n"
+"POT-Creation-Date: 2025-08-20 12:33:39+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -496,12 +496,12 @@ msgstr ""
 msgid "Campaign overview"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:86 includes/Frontend/Product.php:91
+#: includes/Admin/views/campaigns/edit.php:86 includes/Frontend/Product.php:93
 #. translators: 1: WC currency symbol 2: Raised amount
 msgid "%1$s%2$.2f raised"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:87 includes/Frontend/Product.php:92
+#: includes/Admin/views/campaigns/edit.php:87 includes/Frontend/Product.php:94
 #. translators: 1: WC currency symbol 2: Raised amount
 msgid "%1$s%2$.2f goal"
 msgstr ""
@@ -583,14 +583,30 @@ msgstr ""
 msgid "Read more about &ldquo;%s&rdquo;"
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:134
-#. translators: %s: Product title
+#: includes/Donation/class-donation-product.php:130
 msgid ""
-"Donation product &ldquo;%s&rdquo; has been added to your cart. Proceed with "
-"the donation."
+"Your donation has been added to the cart. Proceed with the donation to help "
+"now."
 msgstr ""
 
-#: includes/Frontend/Product.php:144
+#: includes/Donation/class-donation-product.php:135
+#. translators: %1$s: Product title, %2$s: View cart URL
+msgid ""
+"Your donation to &ldquo;%1$s&rdquo; has been added to the cart. Proceed "
+"with the donation to help now. <a href=\"%2$s\" class=\"button "
+"wc-forward\">View Cart</a>"
+msgstr ""
+
+#: includes/Donation/class-donation-product.php:160
+#. translators: %s: Product title
+msgid "You’ve already added “%s” to your cart. Complete your donation to help now!"
+msgstr ""
+
+#: includes/Donation/class-donation-product.php:168
+msgid "View Cart"
+msgstr ""
+
+#: includes/Frontend/Product.php:146
 msgid "The campaign expired!"
 msgstr ""
 

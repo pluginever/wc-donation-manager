@@ -121,28 +121,61 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		}
 
 		/**
-		 * Get the add to cart button success message for donation product - used to update the mini cart live region.
+		 * Get the add to cart button success message for donation product.
 		 *
 		 * @since 1.0.6
 		 * @return string
 		 */
 		public function add_to_cart_success_message() {
-			$text = '';
+			$text = __( 'Your donation has been added to the cart. Proceed with the donation to help now.', 'wc-donation-manager' );
 
 			if ( $this->is_purchasable() && $this->is_in_stock() ) {
-				/* translators: %s: Product title */
-				$text = __( 'Donation product &ldquo;%s&rdquo; has been added to your cart. Proceed with the donation.', 'wc-donation-manager' );
-				$text = sprintf( $text, $this->get_name() );
+				$text = sprintf(
+				/* translators: %1$s: Product title, %2$s: View cart URL */
+					__( 'Your donation to &ldquo;%1$s&rdquo; has been added to the cart. Proceed with the donation to help now. <a href="%2$s" class="button wc-forward">View Cart</a>', 'wc-donation-manager' ),
+					$this->get_name(),
+					esc_url( wc_get_cart_url() )
+				);
 			}
 
 			/**
 			 * Filter donation product add to cart success message.
 			 *
-			 * @since 9.2.0
+			 * @since 1.0.6
 			 * @param string $text The success message when a donation product is added to the cart.
 			 * @param WCDM_Donation_Product $this Reference to the current WCDM_Donation_Product instance.
 			 */
 			return apply_filters( 'wcdm_donation_product_add_to_cart_success_message', $text, $this );
+		}
+
+		/**
+		 * Get the already-in-cart error message for donation products.
+		 *
+		 * @since 1.0.6
+		 * @return string
+		 */
+		public function already_in_cart_message() {
+			$text = sprintf(
+			/* translators: %s: Product title */
+				__( 'You’ve already added “%s” to your cart. Complete your donation to help now!', 'wc-donation-manager' ),
+				$this->get_name()
+			);
+
+			$view_cart_url = wc_get_cart_url();
+			$text         .= sprintf(
+				' <a href="%s" class="button wc-forward">%s</a>',
+				esc_url( $view_cart_url ),
+				__( 'View Cart', 'wc-donation-manager' )
+			);
+
+			/**
+			 * Filter donation product already in cart message.
+			 *
+			 * @since 1.0.6
+			 * @param string $text The message when a donation product is already in the cart.
+			 * @param WCDM_Donation_Product $this Reference to the current WCDM_Donation_Product instance.
+			 */
+			return apply_filters( 'wcdm_donation_product_already_in_cart_message', $text, $this );
 		}
 	}
 }
