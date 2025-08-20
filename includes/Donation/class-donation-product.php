@@ -131,7 +131,7 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 
 			if ( $this->is_purchasable() && $this->is_in_stock() ) {
 				/* translators: %s: Product title */
-				$text = __( 'Donation product &ldquo;%s&rdquo; has been added to your cart. Proceed with the donation.', 'woocommerce' );
+				$text = __( 'Donation product &ldquo;%s&rdquo; has been added to your cart. Proceed with the donation.', 'wc-donation-manager' );
 				$text = sprintf( $text, $this->get_name() );
 			}
 
