@@ -49,8 +49,8 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 						'id'    => 'general_options',
 					),
 					array(
-						'title'    => __( 'Skip cart', 'wc-donation-manager' ),
-						'desc'     => __( 'Skip cart.', 'wc-donation-manager' ),
+						'title'    => __( 'Redirect to Cart', 'wc-donation-manager' ),
+						'desc'     => __( 'Redirect to Cart.', 'wc-donation-manager' ),
 						'desc_tip' => __( 'This will redirect donors to the cart page after adding a donation product to the cart item.', 'wc-donation-manager' ),
 						'id'       => 'wcdm_skip_cart',
 						'default'  => 'yes',
