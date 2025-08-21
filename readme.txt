@@ -2,7 +2,7 @@
 Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable
 Tested up to: 6.8
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Easily manage donations and effortlessly collect donations with WooCommerce.
 
 [WC Donation Manager](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) is a powerful & user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause. With WC Donation Manager, you can create donation campaigns, set up donation products, and track donors' data with ease. The plugin also allows you to send custom email notifications to donors after a successful donation. WC Donation Manager is the perfect tool for any organization looking to collect donations through their WooCommerce store.
 
-[**🚀 Update to Pro**](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) | [**💻 Live Demo Site**](https://demo.pluginever.com/wc-donation-manager/) | [**📄 Plugin Documentation**](https://pluginever.com/docs/wc-donation-manager/)
+[**🚀 Upgrade to Pro**](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) | [**💻 Live Demo Site**](https://demo.pluginever.com/wc-donation-manager/) | [**📄 Plugin Documentation**](https://pluginever.com/docs/wc-donation-manager/)
 
 === ✨ WC Donation Manager Features: ===
 
@@ -127,6 +127,12 @@ If you encounter a bug or have a feature request for the WC Donation Manager plu
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
+= 1.0.6 (August 21, 2025) =
+* New: Added custom add to cart notice for the donation product.
+* Enhance: Improved the donation product metabox for better usability.
+* Fix: Fixed a few known issues and typos.
+* Compatibility: Tested with the latest version of WordPress and WooCommerce.
+
 = 1.0.5 (June 24, 2025) =
 * New: Update the plugin directory structure to improve organization and maintainability.
 * Enhance: Improve the donation product metabox for better usability.

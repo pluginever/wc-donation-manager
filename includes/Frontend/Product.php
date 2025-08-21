@@ -26,6 +26,8 @@ class Product {
 		add_action( 'woocommerce_donation_add_to_cart', array( __CLASS__, 'add_to_cart_template' ) );
 		add_filter( 'woocommerce_add_to_cart_redirect', array( __CLASS__, 'add_to_cart_redirect' ), 10, 2 );
 		add_filter( 'woocommerce_add_cart_item', array( __CLASS__, 'add_cart_item' ) );
+		add_filter( 'wc_add_to_cart_message', array( __CLASS__, 'add_to_cart_message' ), 10, 2 );
+		add_filter( 'woocommerce_add_to_cart_validation', array( __CLASS__, 'prevent_duplicate_add_to_cart' ), 10, 2 );
 	}
 
 	/**
@@ -196,5 +198,49 @@ class Product {
 		}
 
 		return $item;
+	}
+
+	/**
+	 * Add to cart message for donation products.
+	 *
+	 * @param string $message Message.
+	 * @param int    $product_id Product ID.
+	 *
+	 * @since 1.0.6
+	 * @return string
+	 */
+	public static function add_to_cart_message( $message, $product_id ) {
+		$product = wc_get_product( $product_id );
+
+		if ( $product instanceof \WCDM_Donation_Product ) {
+			return $product->add_to_cart_success_message();
+		}
+
+		return $message;
+	}
+
+	/**
+	 * Prevent adding donation product again.
+	 *
+	 * @param bool $passed Whether the product can be added to the cart.
+	 * @param int  $product_id Product ID.
+	 *
+	 * @since 1.0.6
+	 * @return bool
+	 */
+	public static function prevent_duplicate_add_to_cart( $passed, $product_id ) {
+		$product = wc_get_product( $product_id );
+
+		// Only donation products.
+		if ( $product instanceof \WCDM_Donation_Product ) {
+			foreach ( WC()->cart->get_cart() as $cart_item ) {
+				if ( $cart_item['product_id'] === $product_id ) {
+					wc_add_notice( $product->already_in_cart_message(), 'error' );
+					return false;
+				}
+			}
+		}
+
+		return $passed;
 	}
 }
