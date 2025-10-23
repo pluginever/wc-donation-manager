@@ -10,6 +10,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$plugin_url = defined( 'WCDM_PRO_VERSION' ) ? trailingslashit( WCDM()->author_uri ) . 'plugins/' : trailingslashit( WCDM()->plugin_uri );
+
 ?>
 <div class="notice-body">
 	<div class="notice-icon">
@@ -35,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 </div>
 <div class="notice-footer">
 	<div class="footer-btn">
-		<a href="<?php echo esc_url( trailingslashit( WCDM()->plugin_uri ) . '?utm_source=plugin&utm_medium=notice&utm_campaign=halloween-sale&discount=EVERSAVE30' ); ?>" class="primary halloween-upgrade-btn" target="_blank">
+		<a href="<?php echo esc_url( trailingslashit( $plugin_url ) . '?utm_source=plugin&utm_medium=notice&utm_campaign=halloween-sale&discount=EVERSAVE30' ); ?>" class="primary halloween-upgrade-btn" target="_blank">
 			<span class="dashicons dashicons-cart"></span>
 			<?php esc_html_e( 'Claim your discount!!', 'wc-donation-manager' ); ?>
 		</a>
