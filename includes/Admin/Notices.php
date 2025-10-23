@@ -2,7 +2,7 @@
 
 namespace WooCommerceDonationManager\Admin;
 
-defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Notices class.
@@ -30,6 +30,9 @@ class Notices {
 		$installed_time = absint( get_option( 'wcdm_installed' ) );
 		$current_time   = absint( wp_date( 'U' ) );
 
+		// phpcs:disable
+		// TODO: Uncomment the below code when halloween offer is over.
+		/*
 		if ( ! defined( 'WCDM_PRO_VERSION' ) ) {
 			WCDM()->notices->add(
 				array(
@@ -37,6 +40,22 @@ class Notices {
 					'notice_id'   => 'wcdm_upgrade',
 					'style'       => 'border-left-color: #0542fa;',
 					'dismissible' => false,
+				)
+			);
+		}
+		*/
+		// phpcs:enable
+
+		// Halloween offer notice.
+		$halloween_end_time = date_i18n( strtotime( '2025-11-08 00:00:00' ) );
+		if ( $current_time < $halloween_end_time ) {
+			WCDM()->notices->add(
+				array(
+					'message'     => __DIR__ . '/views/notices/halloween.php',
+					'dismissible' => false,
+					'notice_id'   => 'wcdm_halloween_promo_2025',
+					'style'       => 'border-left-color: #8500ff;',
+					'class'       => 'notice-halloween',
 				)
 			);
 		}

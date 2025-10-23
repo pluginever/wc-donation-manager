@@ -3,7 +3,7 @@
  * Admin notice for upgrade.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package WooCommerceDonationManager\Admin\Views\Notices
  * @return void
  */
 
@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php
 			echo wp_kses_post(
 				sprintf(
-					// translators: %1$s: WooCommerce Donation Manager ORG link, %2$s: Coupon code.
+					// translators: %1$s: WooCommerce Donation Manager Pro plugin link, %2$s: Coupon code.
 					__( 'Enjoy a  <strong>10%% discount</strong> on %1$s! Use coupon code %2$s at checkout to grab the deal. Don’t miss out — this offer won’t last forever!', 'wc-donation-manager' ),
 					'<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=plugin&utm_medium=notice&utm_campaign=flash-sale" target="_blank"><strong>WC Donation Manager Pro</strong></a>',
 					'<strong>FLASH10</strong>'

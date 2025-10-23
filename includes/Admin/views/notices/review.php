@@ -3,7 +3,7 @@
  * Admin notice for review.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package WooCommerceDonationManager\Admin\Views\Notices
  * @return void
  */
 

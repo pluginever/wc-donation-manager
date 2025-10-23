@@ -2,7 +2,7 @@
 Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable
 Tested up to: 6.8
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,10 @@ If you encounter a bug or have a feature request for the WC Donation Manager plu
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
+= 1.0.7 (October 23, 2025) =
+* Fix: Few known issues are fixed.
+* Enhance: Update the plugin notices.
+
 = 1.0.6 (August 21, 2025) =
 * New: Added custom add to cart notice for the donation product.
 * Enhance: Improved the donation product metabox for better usability.
