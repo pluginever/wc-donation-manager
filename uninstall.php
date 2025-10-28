@@ -1,8 +1,8 @@
 <?php
 /**
- * WC Donation Manager Uninstall
+ * Donation Manager Uninstall
  *
- * Uninstalling WC Donation Manager deletes user roles, pages, tables, and options.
+ * Uninstalling Donation Manager deletes user roles, pages, tables, and options.
  *
  * @package WooCommerceDonationManager
  */

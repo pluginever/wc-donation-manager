@@ -1,6 +1,6 @@
 
 /**
- * WC Donation Manager
+ * Donation Manager
  * https://www.pluginever.com
  *
  * Copyright (c) 2018 pluginever

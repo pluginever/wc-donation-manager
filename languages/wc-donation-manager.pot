@@ -2,7 +2,7 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WC Donation Manager 1.0.7\n"
+"Project-Id-Version: Donation Manager 1.0.7\n"
 "Report-Msgid-Bugs-To: "
 "https://pluginever.com/plugins/woocommerce-donation-manager-pro/\n"
 "POT-Creation-Date: 2025-10-23 10:35:11+00:00\n"
@@ -558,11 +558,11 @@ msgid "Valid until November 8, 2025"
 msgstr ""
 
 #: includes/Admin/views/notices/review.php:18
-msgid "Enjoying WC Donation Manager?"
+msgid "Enjoying Donation Manager?"
 msgstr ""
 
 #: includes/Admin/views/notices/review.php:24
-#. translators: %1$s: WC Donation Manager WP ORG link, %2$s: Coupon code.
+#. translators: %1$s: Donation Manager WP ORG link, %2$s: Coupon code.
 msgid ""
 "We hope you had a wonderful experience using %1$s. Please take a moment to "
 "show us your support by leaving a 5-star review on <a href=\"%2$s\" "
@@ -721,7 +721,7 @@ msgid "Report a Bug"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "WC Donation Manager"
+msgid "Donation Manager"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
