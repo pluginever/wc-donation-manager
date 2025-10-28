@@ -1,4 +1,4 @@
-===Donation Manager for WooCommerce - Effortlessly Collect Donations ===
+=== Donation Manager for WooCommerce - Effortlessly Collect & Manage Donations ===
 Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable
 Tested up to: 6.8
