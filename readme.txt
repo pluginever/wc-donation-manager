@@ -127,41 +127,43 @@ If you encounter a bug or have a feature request for the Donation Manager for Wo
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
-= 1.0.8 (December 28, 2025) =
-* Enhance: Update the plugin name and description to align with the WordPress repository guidelines.
+= 1.0.8 (28th December 2025) =
+* Fix: Updated plugin naming to comply with WordPress.org trademark guidelines.
+* Fix: Corrected internationalization text domain.
+* Enhance: Improved readme content clarity and removed promotional language per guidelines.
 
-= 1.0.7 (October 23, 2025) =
+= 1.0.7 (23rd October 2025) =
 * Fix: Few known issues are fixed.
 * Enhance: Update the plugin notices.
 
-= 1.0.6 (August 21, 2025) =
+= 1.0.6 (21st August 2025) =
 * New: Added custom add to cart notice for the donation product.
 * Enhance: Improved the donation product metabox for better usability.
 * Fix: Fixed a few known issues and typos.
 * Compatibility: Tested with the latest version of WordPress and WooCommerce.
 
-= 1.0.5 (June 24, 2025) =
+= 1.0.5 (24th June 2025) =
 * New: Update the plugin directory structure to improve organization and maintainability.
 * Enhance: Improve the donation product metabox for better usability.
 * Fix: Fixed a few known issues and typos.
 * Update: Update the plugin framework and autoload classes for better performance.
 * Compatibility: Tested with the latest version of WordPress and WooCommerce.
 
-= 1.0.4 (May 15, 2025) =
+= 1.0.4 (15th May 2025) =
 * Fix: Fixed a few known issues and typos.
 * Update: Update the plugin notifications.
 * Compatibility: Tested with the latest version of WordPress and WooCommerce.
 
-= 1.0.3 (March 02, 2025) =
+= 1.0.3 (2nd March 2025) =
 * New: Update the plugin framework.
 * Enhance: Enhance autoload classes and files to improve performance.
 * Compatibility: Tested with the latest version of WordPress and WooCommerce.
 * Fix: Few known issues.
 
-= 1.0.2 (December 12, 2024) =
+= 1.0.2 (12th December 2024) =
 * Fix: Few known issues.
 
-= 1.0.1 (July 31, 2024) =
+= 1.0.1 (31st July 2024) =
 * New Feature: Add a new feature to create donation campaigns.
 * Enhance: Updating and creating campaigns
 * Enhance: Campaigns list table
@@ -169,5 +171,5 @@ Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://plugineve
 * Notice: This is a major release, please update the plugin as per your needs.
 * Add banner, icon and screenshots.
 
-= 1.0.0 (Jun 12, 2024) =
+= 1.0.0 (12th June 2024) =
 * Initial Release

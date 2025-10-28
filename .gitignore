@@ -10,6 +10,7 @@ tmtags
 *.un~
 Session.vim
 *.swp
+.phar
 
 # Mac OSX specific files
 .DS_Store

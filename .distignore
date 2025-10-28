@@ -72,7 +72,6 @@ Thumbs.db
 # Binary and other directories
 /bin/
 
-# Asset related files
-*.scss
+# Build related files
 *.*.map
-/resources
+/resources/images

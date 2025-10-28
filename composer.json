@@ -21,19 +21,20 @@
   },
   "autoload-dev": {},
   "config": {
-    "optimize-autoloader": true,
+    "preferred-install": "dist",
     "sort-packages": true,
+    "optimize-autoloader": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
   "repositories": [
     {
-      "type": "github",
+      "type": "vcs",
       "url": "git@github.com:byteever/bytekit-plugin.git"
     },
     {
-      "type": "github",
+      "type": "vcs",
       "url": "git@github.com:byteever/bytekit-settings.git"
     }
   ],
@@ -43,18 +44,19 @@
     "phpcs": "@php ./vendor/bin/phpcs --standard=phpcs.xml -s -v",
     "phpcbf": "@php ./vendor/bin/phpcbf --standard=phpcs.xml -v",
     "strauss": [
-      "test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/download/0.24.1/strauss.phar",
-      "@php bin/strauss.phar",
-      "@composer dump-autoload"
+      "test -f ./bin/strauss.phar && rm ./bin/strauss.phar; curl -o bin/strauss.phar -L https://github.com/BrianHenryIE/strauss/releases/download/0.24.1/strauss.phar",
+      "find ./vendor -type f -name '*.php' -exec perl -i -pe \"s/'bytekit-textdomain'/'wc-donation-manager'/g\" {} +",
+      "@php bin/strauss.phar --deleteVendorPackages=true"
     ]
   },
   "extra": {
     "strauss": {
-      "target_directory": "libraries",
+      "target_directory": "vendor/vendor-prefixed",
+      "namespace_prefix": "WooCommerceDonationManager\\",
       "classmap_prefix": "WooCommerceDonationManager__",
-      "namespace_prefix": "WooCommerceDonationManager",
-      "delete_vendor_packages": true,
-      "delete_vendor_files": true,
+      "delete_vendor_packages": false,
+      "delete_vendor_files": false,
+      "include_author": false,
       "packages": [
         "byteever/bytekit-plugin",
         "byteever/bytekit-settings"
