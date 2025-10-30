@@ -1,8 +1,8 @@
 /**
- * WC Donation Manager
- * https://www.pluginever.com
+ * Donation Manager for WooCommerce - Frontend Common JS
+ * @link https://pluginever.com
  *
- * Copyright (c) 2018 pluginever
+ * Copyright (c) 2025 PluginEver
  * Licensed under the GPLv2+ license.
  */
 (function ($) {

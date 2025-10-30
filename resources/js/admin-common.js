@@ -1,12 +1,11 @@
-
 /**
- * WC Donation Manager
- * https://www.pluginever.com
+ * Donation Manager for WooCommerce - Admin Common JS
+ * @link https://pluginever.com
  *
- * Copyright (c) 2018 pluginever
+ * Copyright (c) 2025 PluginEver
  * Licensed under the GPLv2+ license.
  */
-
+s
 /*jslint browser: true */
 /*global jQuery:false */
 jQuery(document).ready(function ($) {

@@ -1,9 +1,9 @@
 {
   "name": "pluginever/wc-donation-manager",
-  "description": "A powerful and user-friendly WordPress plugin designed to seamlessly integrate donation functionality into the WooCommerce platform. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause.",
+  "description": "Easily manage and collect donations with WooCommerce. It provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause.",
   "homepage": "https://pluginever.com/plugins/woocommerce-donation-manager-pro/",
   "type": "wordpress-plugin",
-  "license": "GPL-2.0-or-later",
+  "license": "GPL-v2-or-later",
   "prefer-stable": true,
   "minimum-stability": "dev",
   "require": {
@@ -21,40 +21,43 @@
   },
   "autoload-dev": {},
   "config": {
-    "optimize-autoloader": true,
+    "preferred-install": "dist",
     "sort-packages": true,
+    "optimize-autoloader": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
   "repositories": [
     {
-      "type": "github",
+      "type": "vcs",
       "url": "git@github.com:byteever/bytekit-plugin.git"
     },
     {
-      "type": "github",
+      "type": "vcs",
       "url": "git@github.com:byteever/bytekit-settings.git"
     }
   ],
   "scripts": {
     "post-install-cmd":"@strauss",
     "post-update-cmd": "@strauss",
+    "makepot": "wp --allow-root i18n make-pot . --include=*.php,assets,includes,templates --slug=wc-donation-manager",
     "phpcs": "@php ./vendor/bin/phpcs --standard=phpcs.xml -s -v",
     "phpcbf": "@php ./vendor/bin/phpcbf --standard=phpcs.xml -v",
     "strauss": [
-      "test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L -C - https://github.com/BrianHenryIE/strauss/releases/download/0.24.1/strauss.phar",
+      "test -f ./bin/strauss.phar || curl -o bin/strauss.phar -L https://github.com/BrianHenryIE/strauss/releases/download/0.24.1/strauss.phar",
       "@php bin/strauss.phar",
-      "@composer dump-autoload"
+      "find ./vendor/vendor-prefixed -type f -name '*.php' -exec perl -i -pe \"s/'bytekit-textdomain'/'wc-donation-manager'/g\" {} +"
     ]
   },
   "extra": {
     "strauss": {
-      "target_directory": "libraries",
+      "target_directory": "vendor/vendor-prefixed",
+      "namespace_prefix": "WooCommerceDonationManager\\",
       "classmap_prefix": "WooCommerceDonationManager__",
-      "namespace_prefix": "WooCommerceDonationManager",
+      "include_modified_date": false,
+      "include_author": false,
       "delete_vendor_packages": true,
-      "delete_vendor_files": true,
       "packages": [
         "byteever/bytekit-plugin",
         "byteever/bytekit-settings"
