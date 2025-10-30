@@ -3,27 +3,42 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Donation Manager 1.0.8\n"
-"Report-Msgid-Bugs-To: "
-"https://pluginever.com/plugins/woocommerce-donation-manager-pro/\n"
-"POT-Creation-Date: 2025-10-28 10:16:58+00:00\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-donation-manager\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Country: United States\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
-"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
-"X-Poedit-Basepath: ../\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-Bookmarks: \n"
-"X-Textdomain-Support: yes\n"
-"X-Generator: grunt-wp-i18n 1.0.3\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-10-30T05:58:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wc-donation-manager\n"
+
+#. Plugin Name of the plugin
+#: wc-donation-manager.php
+#: includes/Admin/Metaboxes.php:43
+msgid "Donation Manager"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wc-donation-manager.php
+msgid "https://pluginever.com/plugins/woocommerce-donation-manager-pro/"
+msgstr ""
+
+#. Description of the plugin
+#: wc-donation-manager.php
+msgid "Easily manage and collect donations with WooCommerce. It provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause."
+msgstr ""
+
+#. Author of the plugin
+#: wc-donation-manager.php
+msgid "PluginEver"
+msgstr ""
+
+#. Author URI of the plugin
+#: wc-donation-manager.php
+msgid "https://pluginever.com/"
+msgstr ""
 
 #: includes/Admin/Actions.php:63
 msgid "Campaign created successfully."
@@ -41,23 +56,27 @@ msgstr ""
 msgid "Select products"
 msgstr ""
 
-#: includes/Admin/Admin.php:81
 #. translators: %s: Plugin name
+#: includes/Admin/Admin.php:81
+#, php-format
 msgid "Thank you for using %s!"
 msgstr ""
 
-#: includes/Admin/Admin.php:87
 #. translators: %s: Plugin name
+#: includes/Admin/Admin.php:87
+#, php-format
 msgid " Share your appreciation with a five-star review %s."
 msgstr ""
 
-#: includes/Admin/Admin.php:108
 #. translators: 1: Plugin version
+#: includes/Admin/Admin.php:108
+#, php-format
 msgid "Version %s"
 msgstr ""
 
-#: includes/Admin/ListTables/CampaignsListTable.php:92
 #. translators: %s: number of accounts.
+#: includes/Admin/ListTables/CampaignsListTable.php:92
+#, php-format
 msgid "%s campaign(s) deleted successfully."
 msgstr ""
 
@@ -100,7 +119,8 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: includes/Admin/Menus.php:58 includes/Admin/Menus.php:59
+#: includes/Admin/Menus.php:58
+#: includes/Admin/Menus.php:59
 msgid "Donations"
 msgstr ""
 
@@ -108,7 +128,8 @@ msgstr ""
 msgid "Per page"
 msgstr ""
 
-#: includes/Admin/Menus.php:203 includes/Admin/Utilities.php:38
+#: includes/Admin/Menus.php:203
+#: includes/Admin/Utilities.php:38
 #: includes/Admin/Utilities.php:39
 msgid "Donors"
 msgstr ""
@@ -117,12 +138,14 @@ msgstr ""
 msgid "The list of donors and their donation information(s)"
 msgstr ""
 
-#: includes/Admin/Menus.php:208 includes/Admin/Menus.php:226
+#: includes/Admin/Menus.php:208
+#: includes/Admin/Menus.php:226
 #: includes/Admin/Menus.php:244
 msgid "Available in Pro Version"
 msgstr ""
 
-#: includes/Admin/Menus.php:209 includes/Admin/Menus.php:227
+#: includes/Admin/Menus.php:209
+#: includes/Admin/Menus.php:227
 #: includes/Admin/Menus.php:245
 msgid "Upgrade to Pro Now"
 msgstr ""
@@ -139,10 +162,6 @@ msgstr ""
 msgid "Add customizable settings"
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-msgid "Donation Manager"
-msgstr ""
-
 #: includes/Admin/Metaboxes.php:63
 msgid "Default amount"
 msgstr ""
@@ -156,9 +175,7 @@ msgid "Allow predefined amounts"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:76
-msgid ""
-"When enabled donors will be able to donate by chosing an option from the "
-"predefined/suggested amounts."
+msgid "When enabled donors will be able to donate by chosing an option from the predefined/suggested amounts."
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:85
@@ -174,9 +191,7 @@ msgid "Predefined amounts"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:97
-msgid ""
-"Enter the list of predefined/suggested amounts for the campaign. Each "
-"amount should be separated by comma."
+msgid "Enter the list of predefined/suggested amounts for the campaign. Each amount should be separated by comma."
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:108
@@ -192,29 +207,25 @@ msgid "Amount increment steps"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:121
-msgid ""
-"Enter the amount increment steps for the campaign amount field. This will "
-"applicable for increasing or decreasing amounts on the campaign page."
+msgid "Enter the amount increment steps for the campaign amount field. This will applicable for increasing or decreasing amounts on the campaign page."
 msgstr ""
 
-#: includes/Admin/Metaboxes.php:141 includes/Admin/Settings.php:140
+#: includes/Admin/Metaboxes.php:141
+#: includes/Admin/Settings.php:140
 msgid "Minimum amount"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:142
-msgid ""
-"Enter the minimum amount for the campaign. Default amount comes from the "
-"plugin global settings."
+msgid "Enter the minimum amount for the campaign. Default amount comes from the plugin global settings."
 msgstr ""
 
-#: includes/Admin/Metaboxes.php:152 includes/Admin/Settings.php:148
+#: includes/Admin/Metaboxes.php:152
+#: includes/Admin/Settings.php:148
 msgid "Maximum amount"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:153
-msgid ""
-"Enter the maximum amount for the campaign. Default amount comes from the "
-"plugin global settings."
+msgid "Enter the maximum amount for the campaign. Default amount comes from the plugin global settings."
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:175
@@ -222,9 +233,7 @@ msgid "Select a campaign"
 msgstr ""
 
 #: includes/Admin/Metaboxes.php:176
-msgid ""
-"Select a campaign to assign this donation product. After selected a "
-"campaign, the campaign cause & the goal amount will be inherited."
+msgid "Select a campaign to assign this donation product. After selected a campaign, the campaign cause & the goal amount will be inherited."
 msgstr ""
 
 #: includes/Admin/Settings.php:25
@@ -244,9 +253,7 @@ msgid "General Settings"
 msgstr ""
 
 #: includes/Admin/Settings.php:48
-msgid ""
-"The following options are the plugin's general settings. These options "
-"affect how the plugin will work."
+msgid "The following options are the plugin's general settings. These options affect how the plugin will work."
 msgstr ""
 
 #: includes/Admin/Settings.php:52
@@ -258,9 +265,7 @@ msgid "Skip to Cart."
 msgstr ""
 
 #: includes/Admin/Settings.php:54
-msgid ""
-"This will redirect donors to the cart page after adding a donation product "
-"to the cart item."
+msgid "This will redirect donors to the cart page after adding a donation product to the cart item."
 msgstr ""
 
 #: includes/Admin/Settings.php:60
@@ -272,9 +277,7 @@ msgid "Enable fast checkout."
 msgstr ""
 
 #: includes/Admin/Settings.php:62
-msgid ""
-"This will redirect donors to the checkout page after adding a donation "
-"product to the cart item."
+msgid "This will redirect donors to the checkout page after adding a donation product to the cart item."
 msgstr ""
 
 #: includes/Admin/Settings.php:68
@@ -298,9 +301,7 @@ msgid "Disable coupon field."
 msgstr ""
 
 #: includes/Admin/Settings.php:78
-msgid ""
-"This will disabled coupon fields from cart and checkout page if cart has at "
-"least a donation product."
+msgid "This will disabled coupon fields from cart and checkout page if cart has at least a donation product."
 msgstr ""
 
 #: includes/Admin/Settings.php:84
@@ -320,9 +321,7 @@ msgid "Disable tax for donation."
 msgstr ""
 
 #: includes/Admin/Settings.php:93
-msgid ""
-"This will hide the tax status and tax class fields from the product edit "
-"page when the product type is set to <i>Donation</i>."
+msgid "This will hide the tax status and tax class fields from the product edit page when the product type is set to <i>Donation</i>."
 msgstr ""
 
 #: includes/Admin/Settings.php:103
@@ -337,10 +336,9 @@ msgstr ""
 msgid "Add to cart button text"
 msgstr ""
 
-#: includes/Admin/Settings.php:112 includes/Admin/Settings.php:113
-msgid ""
-"Enter the add to cart button text. This will be applicable only for "
-"campaigns or donation product types."
+#: includes/Admin/Settings.php:112
+#: includes/Admin/Settings.php:113
+msgid "Enter the add to cart button text. This will be applicable only for campaigns or donation product types."
 msgstr ""
 
 #: includes/Admin/Settings.php:114
@@ -353,10 +351,9 @@ msgstr ""
 msgid "Campaign expired text"
 msgstr ""
 
-#: includes/Admin/Settings.php:120 includes/Admin/Settings.php:121
-msgid ""
-"Enter the campaign expired text. This will be visible to the donation "
-"products if the campaign end date is exceeded."
+#: includes/Admin/Settings.php:120
+#: includes/Admin/Settings.php:121
+msgid "Enter the campaign expired text. This will be visible to the donation products if the campaign end date is exceeded."
 msgstr ""
 
 #: includes/Admin/Settings.php:134
@@ -367,16 +364,14 @@ msgstr ""
 msgid "The following options are the plugin advanced settings."
 msgstr ""
 
-#: includes/Admin/Settings.php:141 includes/Admin/Settings.php:142
-msgid ""
-"Enter the minimum amount. This will be apply globally if didn't set the "
-"minimum amount while creating campaigns."
+#: includes/Admin/Settings.php:141
+#: includes/Admin/Settings.php:142
+msgid "Enter the minimum amount. This will be apply globally if didn't set the minimum amount while creating campaigns."
 msgstr ""
 
-#: includes/Admin/Settings.php:149 includes/Admin/Settings.php:150
-msgid ""
-"Enter the maximum amount. This will be apply globally if didn't set the "
-"maximum amount while creating campaigns."
+#: includes/Admin/Settings.php:149
+#: includes/Admin/Settings.php:150
+msgid "Enter the maximum amount. This will be apply globally if didn't set the maximum amount while creating campaigns."
 msgstr ""
 
 #: includes/Admin/Settings.php:156
@@ -391,17 +386,19 @@ msgstr ""
 msgid "Enabling this will delete all the data while uninstalling the plugin."
 msgstr ""
 
-#: includes/Admin/Utilities.php:28 includes/Admin/Utilities.php:29
+#: includes/Admin/Utilities.php:28
+#: includes/Admin/Utilities.php:29
 #: includes/Admin/views/campaigns/campaigns.php:13
 msgid "Campaigns"
 msgstr ""
 
-#: includes/Admin/Utilities.php:47 includes/Admin/Utilities.php:48
-#: vendor/vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:238
+#: includes/Admin/Utilities.php:47
+#: includes/Admin/Utilities.php:48
 msgid "Settings"
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:12 includes/Plugin.php:159
+#: includes/Admin/views/campaigns/add.php:12
+#: includes/Plugin.php:159
 msgid "Add New Campaign"
 msgstr ""
 
@@ -460,7 +457,8 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:16 includes/Plugin.php:161
+#: includes/Admin/views/campaigns/edit.php:16
+#: includes/Plugin.php:161
 msgid "Edit Campaign"
 msgstr ""
 
@@ -496,13 +494,17 @@ msgstr ""
 msgid "Campaign overview"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:86 includes/Frontend/Product.php:93
 #. translators: 1: WC currency symbol 2: Raised amount
+#: includes/Admin/views/campaigns/edit.php:86
+#: includes/Frontend/Product.php:93
+#, php-format
 msgid "%1$s%2$.2f raised"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:87 includes/Frontend/Product.php:94
 #. translators: 1: WC currency symbol 2: Raised amount
+#: includes/Admin/views/campaigns/edit.php:87
+#: includes/Frontend/Product.php:94
+#, php-format
 msgid "%1$s%2$.2f goal"
 msgstr ""
 
@@ -530,11 +532,10 @@ msgstr ""
 msgid "Limited Time Offer! PluginEver Halloween Sale: 30% OFF!!"
 msgstr ""
 
-#: includes/Admin/views/notices/halloween.php:29
 #. translators: 1.Offer Percentage, 2. Coupon Code.
-msgid ""
-"Spectacular Halloween Deal! Get %1$s on all premium plugins with code %2$s. "
-"Don't miss out — this offer vanishes soon! 👻"
+#: includes/Admin/views/notices/halloween.php:29
+#, php-format
+msgid "Spectacular Halloween Deal! Get %1$s on all premium plugins with code %2$s. Don't miss out — this offer vanishes soon! 👻"
 msgstr ""
 
 #: includes/Admin/views/notices/halloween.php:42
@@ -561,12 +562,10 @@ msgstr ""
 msgid "Enjoying Donation Manager?"
 msgstr ""
 
-#: includes/Admin/views/notices/review.php:24
 #. translators: %1$s: Donation Manager WP ORG link, %2$s: Coupon code.
-msgid ""
-"We hope you had a wonderful experience using %1$s. Please take a moment to "
-"show us your support by leaving a 5-star review on <a href=\"%2$s\" "
-"target=\"_blank\"><strong>WordPress.org</strong></a>. Thank you! 😊"
+#: includes/Admin/views/notices/review.php:24
+#, php-format
+msgid "We hope you had a wonderful experience using %1$s. Please take a moment to show us your support by leaving a 5-star review on <a href=\"%2$s\" target=\"_blank\"><strong>WordPress.org</strong></a>. Thank you! 😊"
 msgstr ""
 
 #: includes/Admin/views/notices/review.php:36
@@ -586,56 +585,54 @@ msgstr ""
 msgid "Flash Sale Alert!"
 msgstr ""
 
+#. translators: %1$s: WooCommerce Donation Manager Pro plugin link, %2$s: Coupon code.
 #: includes/Admin/views/notices/upgrade.php:24
-#. translators: %1$s: WooCommerce Donation Manager Pro plugin link, %2$s:
-#. Coupon code.
-msgid ""
-"Enjoy a  <strong>10%% discount</strong> on %1$s! Use coupon code %2$s at "
-"checkout to grab the deal. Don’t miss out — this offer won’t last forever!"
+#, php-format
+msgid "Enjoy a  <strong>10%% discount</strong> on %1$s! Use coupon code %2$s at checkout to grab the deal. Don’t miss out — this offer won’t last forever!"
 msgstr ""
 
 #: includes/Admin/views/notices/upgrade.php:36
 msgid "Upgrade now"
 msgstr ""
 
-#: includes/Donation/Donation.php:33
-msgid "Donation"
-msgstr ""
-
 #: includes/Donation/class-donation-product.php:48
 msgid "About donation"
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:84
 #. translators: %s: Product title
+#: includes/Donation/class-donation-product.php:84
+#, php-format
 msgid "Add &ldquo;%s&rdquo; to your cart"
 msgstr ""
 
+#. translators: %s: Product title
 #: includes/Donation/class-donation-product.php:84
+#, php-format
 msgid "Read more about &ldquo;%s&rdquo;"
 msgstr ""
 
 #: includes/Donation/class-donation-product.php:130
-msgid ""
-"Your donation has been added to the cart. Proceed with the donation to help "
-"now."
+msgid "Your donation has been added to the cart. Proceed with the donation to help now."
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:135
 #. translators: %1$s: Product title, %2$s: View cart URL
-msgid ""
-"Your donation to &ldquo;%1$s&rdquo; has been added to the cart. Proceed "
-"with the donation to help now. <a href=\"%2$s\" class=\"button "
-"wc-forward\">View Cart</a>"
+#: includes/Donation/class-donation-product.php:135
+#, php-format
+msgid "Your donation to &ldquo;%1$s&rdquo; has been added to the cart. Proceed with the donation to help now. <a href=\"%2$s\" class=\"button wc-forward\">View Cart</a>"
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:160
 #. translators: %s: Product title
+#: includes/Donation/class-donation-product.php:160
+#, php-format
 msgid "You’ve already added “%s” to your cart. Complete your donation to help now!"
 msgstr ""
 
 #: includes/Donation/class-donation-product.php:168
 msgid "View Cart"
+msgstr ""
+
+#: includes/Donation/Donation.php:33
+msgid "Donation"
 msgstr ""
 
 #: includes/Frontend/Product.php:146
@@ -644,6 +641,31 @@ msgstr ""
 
 #: includes/Plugin.php:79
 msgid "Go Pro"
+msgstr ""
+
+#: includes/Plugin.php:154
+msgctxt "post type general name"
+msgid "Campaign"
+msgstr ""
+
+#: includes/Plugin.php:155
+msgctxt "post type singular name"
+msgid "Campaign"
+msgstr ""
+
+#: includes/Plugin.php:156
+msgctxt "admin menu"
+msgid "Campaign"
+msgstr ""
+
+#: includes/Plugin.php:157
+msgctxt "add new on admin bar"
+msgid "Campaign"
+msgstr ""
+
+#: includes/Plugin.php:158
+msgctxt "campaign"
+msgid "Add New"
 msgstr ""
 
 #: includes/Plugin.php:160
@@ -672,94 +694,4 @@ msgstr ""
 
 #: includes/Plugin.php:167
 msgid "No campaigns found in Trash."
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-plugin/src/Admin/Notices.php:113
-msgid "Dismiss this notice"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:211
-msgid "Documentation"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:214
-msgid "Support"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-plugin/src/Traits/HasPlugin.php:217
-msgid "Review"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:88
-msgid "Settings saved."
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:261
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:364
-msgid "Recommended"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:261
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:364
-msgid "Install Now"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:330
-msgid "Need Help?"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:374
-msgid "Join our Community"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:374
-msgid "Request a Feature"
-msgstr ""
-
-#: vendor/vendor-prefixed/byteever/bytekit-settings/src/Admin/Settings.php:374
-msgid "Report a Bug"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "https://pluginever.com/plugins/woocommerce-donation-manager-pro/"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid ""
-"Easily manage and collect donations with WooCommerce. It provides a "
-"seamless solution for receiving donations for charitable organizations, "
-"non-profits, or businesses supporting a cause."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "PluginEver"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "https://pluginever.com/"
-msgstr ""
-
-#: includes/Plugin.php:154
-msgctxt "post type general name"
-msgid "Campaign"
-msgstr ""
-
-#: includes/Plugin.php:155
-msgctxt "post type singular name"
-msgid "Campaign"
-msgstr ""
-
-#: includes/Plugin.php:156
-msgctxt "admin menu"
-msgid "Campaign"
-msgstr ""
-
-#: includes/Plugin.php:157
-msgctxt "add new on admin bar"
-msgid "Campaign"
-msgstr ""
-
-#: includes/Plugin.php:158
-msgctxt "campaign"
-msgid "Add New"
 msgstr ""

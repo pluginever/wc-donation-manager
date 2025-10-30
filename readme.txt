@@ -10,7 +10,7 @@ Easily manage donations and effortlessly collect donations with WooCommerce.
 
 == Description ==
 
-Easily manage and collect donations with WooCommerce. [Donation Manager](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause. This plugin is the ultimate solution for effortlessly managing and receiving donations for a charitable organization, a non-profit, or a business looking to support a cause. With Donation Manager, you can create donation campaigns, set up donation products, and track donors' data with ease. The plugin also allows you to send custom email notifications to donors after a successful donation. Donation Manager is the perfect tool for any organization looking to collect donations through their WooCommerce store.
+Easily manage and collect donations with WooCommerce. [Donation Manager](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause. This plugin provides an easy and effective way to manage and receive donations for charitable organizations, non-profits, or businesses supporting a cause. With Donation Manager, you can create donation campaigns, set up donation products, and track donor data effortlessly. The plugin also allows you to send custom email notifications to donors after a successful donation. Donation Manager is the perfect tool for any organization looking to collect donations through their WooCommerce store.
 
 [**🚀 Upgrade to Pro**](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) | [**💻 Live Demo Site**](https://demo.pluginever.com/wc-donation-manager/) | [**📄 Plugin Documentation**](https://pluginever.com/docs/wc-donation-manager/)
 
@@ -56,7 +56,7 @@ Easily manage and collect donations with WooCommerce. [Donation Manager](https:/
 == Installation ==
 
 = Minimum requirements =
-* WordPress 5.0 or greater
+* WordPress 5.2 or greater
 * WooCommerce 5.0 or greater
 * PHP 7.4 or greater is required (PHP 8.0 or greater is recommended)
 * MySQL 5.6 or greater, OR MariaDB version 10.1 or greater, is required
@@ -66,6 +66,8 @@ Easily manage and collect donations with WooCommerce. [Donation Manager](https:/
 Automatic installation is the easiest option as WordPress handles the file transfers itself, and you don't need to leave your web browser. To do an automatic installation of Donation Manager, log in to your WordPress dashboard, navigate to the Plugins menu and click "Add New".
 
 In the search field type "Donation Manager for WooCommerce" and click Search Plugins. Once you have found the plugin you can view details about it such as plugin version, rating, and description. Most importantly, of course, you can install it by simply clicking "Install Now".
+
+Please note that if you didn't find the plugin in the search results, you can try searching with the "PluginEver" keyword or you can install it manually using the steps below.
 
 = Manual installation =
 
@@ -81,7 +83,7 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 2. Add New Campaign
 3. Edit Campaign
 4. Donation Product - General option
-5. Donation Manager - Product metabox
+5. Donation Manager - Product meta-box
 6. Settings - General
 7. Settings - Advance
 8. Frontend - Product single page for the Donation product type
@@ -127,10 +129,11 @@ If you encounter a bug or have a feature request for the Donation Manager for Wo
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
 
 == Changelog ==
-= 1.0.8 (28th December 2025) =
+= 1.0.8 (30th October 2025) =
 * Fix: Updated plugin naming to comply with WordPress.org trademark guidelines.
-* Fix: Corrected internationalization text domain.
 * Enhance: Improved readme content clarity and removed promotional language per guidelines.
+* Update: Update the directory structure for library files.
+* Compatibility: Tested with the latest version of WordPress and WooCommerce.
 
 = 1.0.7 (23rd October 2025) =
 * Fix: Few known issues are fixed.
