@@ -6,13 +6,14 @@ Stable tag: 1.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Easily manage donations and effortlessly collect donations with WooCommerce.
+Easily manage donations and effortlessly collect donation with WooCommerce.
 
 == Description ==
 
-Easily manage and collect donations with WooCommerce. [Donation Manager](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause. This plugin provides an easy and effective way to manage and receive donations for charitable organizations, non-profits, or businesses supporting a cause. With Donation Manager, you can create donation campaigns, set up donation products, and track donor data effortlessly. The plugin also allows you to send custom email notifications to donors after a successful donation. Donation Manager is the perfect tool for any organization looking to collect donations through their WooCommerce store.
+= Effortlessly Collect & Manage Donations =
+Easily manage and collect donations with WooCommerce. [Donation Manager](https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=product-page-wordpress.org&utm_medium=product-page-wordpress.org&utm_campaign=product-page-wordpress.org) provides an easy and effective way to manage and receive donations for charitable organizations, non-profits, or businesses supporting a cause. With Donation Manager, you can create donation campaigns, set up donation products, and track donor data effortlessly. The plugin also allows you to send custom email notifications to donors after a successful donation. Donation Manager is the perfect tool for any organization looking to collect donations through their WooCommerce store.
 
-[**🚀 Upgrade to Pro**](https://pluginever.com/plugins/woocommerce-donation-manager-pro/) | [**💻 Live Demo Site**](https://demo.pluginever.com/wc-donation-manager/) | [**📄 Plugin Documentation**](https://pluginever.com/docs/wc-donation-manager/)
+[**🚀 Upgrade to Pro**](https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=product-page-wordpress.org&utm_medium=product-page-wordpress.org&utm_campaign=product-page-wordpress.org) | [**💻 Live Demo Site**](https://demo.pluginever.com/wc-donation-manager/) | [**📄 Plugin Documentation**](https://pluginever.com/docs/wc-donation-manager/?utm_source=product-page-wordpress.org&utm_medium=product-page-wordpress.org&utm_campaign=product-page-wordpress.org)
 
 === ✨ Donation Manager for WooCommerce Features: ===
 
@@ -50,8 +51,6 @@ Easily manage and collect donations with WooCommerce. [Donation Manager](https:/
 3. When a customer places an donation order and completes the payment, the plugin automatically handles the donation process.
    - The customer will receive a confirmation email with the donation details.
    - The donation amount will be recorded in the WordPress admin dashboard, allowing you to track the total donations received for each campaign or product.
-
-[**💻 Live Demo Site**](https://demo.pluginever.com/wc-donation-manager/) | [**📄 Plugin Documentation**](https://pluginever.com/docs/wc-donation-manager/)
 
 == Installation ==
 
@@ -126,7 +125,7 @@ If you need support for the Donation Manager plugin, you can visit the [PluginEv
 If you encounter a bug or have a feature request for the Donation Manager for WooCommerce plugin, you can submit a report on the [PluginEver Support Forum](https://pluginever.com/support/). Please provide detailed information about the issue or feature request, including steps to reproduce the bug or a description of the desired feature. Our development team will review your report and address it in future updates if applicable.
 
 == Upgrade to PRO ==
-Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/)
+Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=product-page-wordpress.org&utm_medium=product-page-wordpress.org&utm_campaign=product-page-wordpress.org)
 
 == Changelog ==
 = 1.0.8 (30th October 2025) =
