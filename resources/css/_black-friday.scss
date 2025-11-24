@@ -1,0 +1,60 @@
+.bk-notice{
+	&.notice-black-friday{
+		position: relative;
+		background-image: url('../images/black-friday-banner.png');
+		background-repeat: repeat;
+		border-color: #000;
+
+		.notice-content{
+			h3{
+				color: #ffffff;
+				font-size: 1.25rem;
+			}
+
+			p{
+				color: #dddddd;
+				padding-left: 0;
+			}
+		}
+
+		.notice-footer{
+			justify-content: space-between;
+			border-top-color: #3e3e3e;
+		}
+
+		.footer-btn{
+			display: flex;
+			gap: 1.25rem;
+		}
+
+		.black-friday-upgrade-btn{
+			color: #eeeeee;
+		}
+
+		.black-friday-footer-text{
+			color: #cccccc;
+		}
+
+		.btn-data-dismiss{
+			position: absolute;
+			top: 0.75rem;
+			right: 0.75rem;
+			background: none;
+			border: none;
+			cursor: pointer;
+			z-index: 9;
+		}
+
+		@media (max-width: 768px) {
+			.notice-footer{
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.footer-btn{
+				flex-wrap: wrap;
+				gap: .5rem;
+			}
+		}
+	}
+}
