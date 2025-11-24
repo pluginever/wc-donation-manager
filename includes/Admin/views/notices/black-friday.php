@@ -16,14 +16,14 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<div class="notice-content">
 		<h3>
-			<?php esc_html_e( 'Black Friday Mega Sale! Get Flat 40% OFF on Donation Manager Pro Plugin!', 'wc-donation-manager' ); ?>
+			<?php esc_html_e( 'Black Friday Mega Sale! Get Flat 40% OFF on Donation Manager Pro !!', 'wc-donation-manager' ); ?>
 		</h3>
 		<p>
 			<?php
 			echo wp_kses_post(
 				sprintf(
 				// translators: 1. Offer Percentage, 2. Coupon Code.
-					__( 'Unlock premium features at an unbeatable price this Black Friday! Enjoy %1$s on Donation Manager Pro with code %2$s. Hurry, this deal ends soon! 🖤', 'wc-donation-manager' ),
+					__( 'Unlock premium features at an unbeatable price this Black Friday! Enjoy %1$s on Donation Manager Pro with code %2$s. Hurry, this deal ends soon!', 'wc-donation-manager' ),
 					'<strong>' . esc_attr( '40% OFF' ) . '</strong>',
 					'<strong>' . esc_attr( 'BFCM25' ) . '</strong>'
 				)
@@ -33,20 +33,17 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 </div>
 <div class="notice-footer">
-	<div class="footer-btn" style="display: flex;">
-		<a href="<?php echo esc_url( trailingslashit( WCDM()->plugin_uri ) . '?utm_source=plugin&utm_medium=notice&utm_campaign=black-friday-sale&discount=BFCM25' ); ?>" class="primary black-friday-upgrade-btn" target="_blank">
-			<span class="dashicons dashicons-cart"></span>
-			<?php esc_html_e( 'Claim your discount!!', 'wc-donation-manager' ); ?>
-		</a>
-		<a href="#" data-snooze="<?php echo esc_attr( WEEK_IN_SECONDS ); ?>">
-			<span class="dashicons dashicons-clock"></span>
-			<?php esc_html_e( 'Remind me later', 'wc-donation-manager' ); ?>
-		</a>
-		<a href="#" data-dismiss>
-			<span class="dashicons dashicons-remove"></span>
-			<?php esc_html_e( 'Never show this again!', 'wc-donation-manager' ); ?>
-		</a>
-		<a href="#" class="btn-data-dismiss" data-dismiss><span class="dashicons dashicons-dismiss"></span></a>
-	</div>
-	<strong class="black-friday-footer-text"><?php esc_html_e( 'Valid until December 5, 2025', 'wc-donation-manager' ); ?></strong>
+	<a href="<?php echo esc_url( trailingslashit( WCDM()->plugin_uri ) . '?utm_source=plugin&utm_medium=notice&utm_campaign=black-friday-sale&discount=BFCM25' ); ?>" class="primary black-friday-upgrade-btn" target="_blank">
+		<span class="dashicons dashicons-cart"></span>
+		<?php esc_html_e( 'Claim your discount!!', 'wc-donation-manager' ); ?>
+	</a>
+	<a href="#" data-snooze="<?php echo esc_attr( WEEK_IN_SECONDS ); ?>">
+		<span class="dashicons dashicons-clock"></span>
+		<?php esc_html_e( 'Remind me later', 'wc-donation-manager' ); ?>
+	</a>
+	<a href="#" data-dismiss>
+		<span class="dashicons dashicons-remove"></span>
+		<?php esc_html_e( 'Never show this again!', 'wc-donation-manager' ); ?>
+	</a>
+	<a href="#" class="btn-data-dismiss" data-dismiss><span class="dashicons dashicons-dismiss"></span></a>
 </div>
