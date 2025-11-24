@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="notice-body">
 	<div class="notice-icon">
-		<img src="<?php echo esc_attr( WCDM()->get_assets_url( 'images/black-friday-icon.png' ) ); ?>" alt="Donation Manager Black Friday Promo" />
+		<img src="<?php echo esc_attr( WCDM()->get_assets_url( 'images/black-friday-icon.png' ) ); ?>" alt="Donation Manager Black Friday Mega Sale!" />
 	</div>
 	<div class="notice-content">
 		<h3>
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php
 			echo wp_kses_post(
 				sprintf(
-				// translators: 1. Offer Percentage, 2. Coupon Code.
+				/* translators: 1. Offer Percentage, 2. Coupon Code. */
 					__( 'Unlock premium features at an unbeatable price this Black Friday! Enjoy %1$s on Donation Manager Pro with code %2$s. Hurry, this deal ends soon!', 'wc-donation-manager' ),
 					'<strong>' . esc_attr( '40% OFF' ) . '</strong>',
 					'<strong>' . esc_attr( 'BFCM25' ) . '</strong>'
