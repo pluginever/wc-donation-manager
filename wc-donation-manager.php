@@ -3,7 +3,7 @@
  * Plugin Name:          Donation Manager
  * Plugin URI:           https://pluginever.com/plugins/woocommerce-donation-manager-pro/
  * Description:          Easily manage and collect donations with WooCommerce. It provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause.
- * Version:              1.0.8
+ * Version:              1.0.9
  * Requires at least:    5.2
  * Requires PHP:         7.4
  * Author:               PluginEver
