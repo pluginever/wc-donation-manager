@@ -31,7 +31,7 @@ class Notices {
 		$current_time   = absint( wp_date( 'U' ) );
 
 		// phpcs:disable
-		// TODO: Uncomment the below code when halloween offer is over.
+		// TODO: Uncomment the below code when Black Friday offer is over.
 		/*
 		if ( ! defined( 'WCDM_PRO_VERSION' ) ) {
 			WCDM()->notices->add(
