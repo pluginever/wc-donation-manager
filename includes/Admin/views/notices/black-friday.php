@@ -2,8 +2,8 @@
 /**
  * Admin notice for black friday promo.
  *
- * @since 1.0.0
- * @package WooCommerceDonationManager/Admin/Views/Notices
+ * @since 1.0.9
+ * @package WooCommerceDonationManager\Admin\Views\Notices
  * @return void
  */
 
