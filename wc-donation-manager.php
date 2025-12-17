@@ -5,6 +5,7 @@
  * Description:          Easily manage and collect donations with WooCommerce. It provides a seamless solution for receiving donations for charitable organizations, non-profits, or businesses supporting a cause.
  * Version:              1.0.9
  * Requires at least:    5.2
+ * Tested up to:         6.9
  * Requires PHP:         7.4
  * Author:               PluginEver
  * Author URI:           https://pluginever.com/
@@ -12,28 +13,34 @@
  * License URI:          https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:          wc-donation-manager
  * Domain Path:          /languages
- * Tested up to:         6.8
  * WC requires at least: 3.0.0
- * WC tested up to:      10.3
+ * WC tested up to:      10.4
  * Requires Plugins:     woocommerce
  *
- * @package WooCommerceDonationManager
+ * @link                 https://pluginever.com
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
+ * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+ * @author              Sultan Nasir Uddin <manikdrmc@gmail.com>
+ * @copyright           2025 ByteEver
+ * @license             GPL-2.0+
+ * @package             WooCommerceDonationManager
  */
 
-// Don't call the file directly.
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
-// Require the autoloader.
+// Autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Instantiate the plugin.
