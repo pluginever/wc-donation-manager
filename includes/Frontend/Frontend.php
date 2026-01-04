@@ -51,7 +51,7 @@ class Frontend {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'css/wcdm-frontend.css' );
-		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'js/wcdm-frontend.js', array( 'jquery' ) );
+		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'css/frontend.css' );
+		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'js/frontend.js', array( 'jquery' ) );
 	}
 }

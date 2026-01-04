@@ -34,8 +34,8 @@ class Admin {
 	 */
 	public function enqueue_scripts( $hook ) {
 		$screen_ids = Utilities::get_screen_ids();
-		WCDM()->scripts->enqueue_style( 'wcdm-admin', 'css/wcdm-admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
-		WCDM()->scripts->register_script( 'wcdm-admin', 'js/wcdm-admin.js' );
+		WCDM()->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
+		WCDM()->scripts->register_script( 'wcdm-admin', 'js/admin.js' );
 
 		if ( in_array( $hook, $screen_ids, true ) ) {
 			wp_enqueue_style( 'wcdm-admin' );
