@@ -30,7 +30,6 @@ class Notices {
 		$installed_time = absint( get_option( 'wcdm_installed' ) );
 		$current_time   = absint( wp_date( 'U' ) );
 
-		// phpcs:disable
 		if ( ! defined( 'WCDM_PRO_VERSION' ) ) {
 			WCDM()->notices->add(
 				array(
@@ -41,7 +40,6 @@ class Notices {
 				)
 			);
 		}
-		// phpcs:enable
 
 		// Show after 5 days.
 		if ( $installed_time && $current_time > ( $installed_time + ( 5 * DAY_IN_SECONDS ) ) ) {
