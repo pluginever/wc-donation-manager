@@ -2,7 +2,7 @@
 Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable
 Tested up to: 6.9
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,10 @@ If you encounter a bug or have a feature request for the Donation Manager for Wo
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=product-page-wordpress.org&utm_medium=product-page-wordpress.org&utm_campaign=product-page-wordpress.org)
 
 == Changelog ==
+= 1.1.1 (9th March 2026) =
+* Fix: Fixed a few known issues.
+* Compatibility: Ensured compatibility with WooCommerce version 10.5.
+
 = 1.1.0 (5th January 2026) =
 * Fix: Fixed a few known issues.
 * Enhance: Update the plugin notices.
