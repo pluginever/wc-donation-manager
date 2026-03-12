@@ -2,7 +2,7 @@
 
 namespace WooCommerceDonationManager\Admin;
 
-defined( 'ABSPATH' ) || exit(); // Exit if accessed directly.
+defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
  * Admin class.

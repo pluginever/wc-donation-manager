@@ -22,8 +22,6 @@ class Installer {
 
 	/**
 	 * Class constructor.
-	 *
-	 * @since 1.0.0
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'check_update' ), 5 );
@@ -105,7 +103,6 @@ class Installer {
 	 * @return void
 	 */
 	public function run_update_callback( $callback, $version ) {
-		require_once __DIR__ . '/functions/updates.php';
 		if ( is_callable( $callback ) ) {
 			$result = (bool) call_user_func( $callback );
 			if ( $result ) {
