@@ -180,7 +180,7 @@ class Menus {
 
 		if ( ! empty( $edit ) && empty( $campaign ) ) {
 			wp_safe_redirect( remove_query_arg( 'edit' ) );
-			exit();
+			exit;
 		}
 
 		if ( Utilities::is_add_screen() ) {
