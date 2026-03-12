@@ -1,9 +1,9 @@
 <?php
 /**
- * List of Campaigns
+ * List view of Campaigns
  *
  * @package WooCommerceDonationManager
- * @version 1.0.0
+ * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;

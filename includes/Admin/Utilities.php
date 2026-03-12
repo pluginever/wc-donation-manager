@@ -2,9 +2,6 @@
 
 namespace WooCommerceDonationManager\Admin;
 
-use WooCommerceDonationManager\Admin\Menus;
-use WooCommerceDonationManager\Admin\Settings;
-
 defined( 'ABSPATH' ) || exit();
 
 /**

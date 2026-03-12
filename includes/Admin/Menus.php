@@ -2,7 +2,7 @@
 
 namespace WooCommerceDonationManager\Admin;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Menus class.
