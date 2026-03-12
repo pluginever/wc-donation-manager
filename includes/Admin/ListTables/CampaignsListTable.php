@@ -47,7 +47,7 @@ class CampaignsListTable extends ListTable {
 		$per_page = $this->get_items_per_page( 'wcdm_campaigns_per_page', 20 );
 		$paged    = $this->get_pagenum();
 		$search   = $this->get_request_search();
-		$order_by = $this->get_request_orderby( 'order_id' );
+		$order_by = $this->get_request_orderby( 'date' );
 		$order    = $this->get_request_order();
 
 		$args = array(
@@ -173,8 +173,8 @@ class CampaignsListTable extends ListTable {
 	 *
 	 * @param \WP_Post $item The current campaign post object.
 	 *
-	 * @return string Displays a checkbox.
 	 * @since  1.0.0
+	 * @return string Displays a checkbox.
 	 */
 	protected function column_cb( $item ) {
 		return sprintf( '<input type="checkbox" name="id[]" value="%d"/>', esc_attr( $item->ID ) );

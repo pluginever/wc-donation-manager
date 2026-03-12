@@ -2,7 +2,7 @@
 
 namespace WooCommerceDonationManager\Admin\ListTables;
 
-defined( 'ABSPATH' ) || exit();
+defined( 'ABSPATH' ) || exit;
 
 // Load WP_List_Table if not loaded.
 if ( ! class_exists( '\WP_List_Table' ) ) {

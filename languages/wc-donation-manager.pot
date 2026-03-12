@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Donation Manager 1.1.0\n"
+"Project-Id-Version: Donation Manager 1.1.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wc-donation-manager\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-05T04:50:44+00:00\n"
+"POT-Creation-Date: 2026-03-12T09:51:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wc-donation-manager\n"
@@ -129,8 +129,8 @@ msgid "Per page"
 msgstr ""
 
 #: includes/Admin/Menus.php:203
-#: includes/Admin/Utilities.php:38
-#: includes/Admin/Utilities.php:39
+#: includes/Admin/Utilities.php:35
+#: includes/Admin/Utilities.php:36
 msgid "Donors"
 msgstr ""
 
@@ -386,14 +386,14 @@ msgstr ""
 msgid "Enabling this will delete all the data while uninstalling the plugin."
 msgstr ""
 
-#: includes/Admin/Utilities.php:28
-#: includes/Admin/Utilities.php:29
+#: includes/Admin/Utilities.php:25
+#: includes/Admin/Utilities.php:26
 #: includes/Admin/views/campaigns/campaigns.php:13
 msgid "Campaigns"
 msgstr ""
 
-#: includes/Admin/Utilities.php:47
-#: includes/Admin/Utilities.php:48
+#: includes/Admin/Utilities.php:44
+#: includes/Admin/Utilities.php:45
 msgid "Settings"
 msgstr ""
 
