@@ -2,6 +2,8 @@
 
 namespace WooCommerceDonationManager\Frontend;
 
+use WooCommerceDonationManager\Plugin;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -13,13 +15,21 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager\Frontend
  */
 class Frontend {
+	/**
+	 * Plugin instance.
+	 *
+	 * @var Plugin
+	 */
+	protected Plugin $plugin;
 
 	/**
 	 * Frontend constructor.
 	 *
+	 * @param \WooCommerceDonationManager\Plugin $plugin Plugin instance.
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function __construct( Plugin $plugin ) {
+		$this->plugin = $plugin;
 		add_action( 'woocommerce_before_cart', array( __CLASS__, 'remove_coupon' ) );
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'remove_coupon' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -33,7 +43,7 @@ class Frontend {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function remove_coupon() {
+	public static function remove_coupon(): void {
 		if ( ! WC()->cart->is_empty() && 'yes' === get_option( 'wcdm_disabled_coupon_field', 'yes' ) ) {
 			foreach ( WC()->cart->get_cart() as $cart_item ) {
 				if ( 'donation' === $cart_item['data']->get_type() ) {
@@ -50,8 +60,8 @@ class Frontend {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function enqueue_scripts() {
-		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'css/frontend.css' );
-		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'js/frontend.js', array( 'jquery' ) );
+	public function enqueue_scripts(): void {
+		$this->plugin->scripts->enqueue_style( 'wcdm-frontend', 'css/frontend.css' );
+		$this->plugin->scripts->enqueue_script( 'wcdm-frontend', 'js/frontend.js', array( 'jquery' ) );
 	}
 }

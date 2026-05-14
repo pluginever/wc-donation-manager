@@ -5,7 +5,6 @@
  * Copyright (c) 2025 PluginEver
  * Licensed under the GPLv2+ license.
  */
-s
 /*jslint browser: true */
 /*global jQuery:false */
 jQuery(document).ready(function ($) {

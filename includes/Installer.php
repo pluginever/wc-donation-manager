@@ -11,6 +11,13 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * @package WooCommerceDonationManager
  */
 class Installer {
+	/**
+	 * Plugin instance.
+	 *
+	 * @since 1.0.0
+	 * @var Plugin
+	 */
+	protected Plugin $plugin;
 
 	/**
 	 * Update callbacks.
@@ -23,7 +30,8 @@ class Installer {
 	/**
 	 * Class constructor.
 	 */
-	public function __construct() {
+	public function __construct( Plugin $plugin ) {
+		$this->plugin = $plugin;
 		add_action( 'init', array( $this, 'check_update' ), 5 );
 		add_action( 'wcdm_run_update_callback', array( $this, 'run_update_callback' ), 10, 2 );
 		add_action( 'wcdm_update_db_version', array( $this, 'update_db_version' ) );
@@ -38,18 +46,18 @@ class Installer {
 	 * @return void
 	 */
 	public function check_update() {
-		$db_version      = WCDM()->get_db_version();
-		$current_version = WCDM()->get_version();
+		$db_version      = $this->plugin->options->get_db_version();
+		$current_version = $this->plugin->version;
 		$requires_update = version_compare( $db_version, $current_version, '<' );
 		$can_install     = ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) && ! defined( 'IFRAME_REQUEST' );
 		if ( $can_install && $requires_update && ! WC()->queue()->get_next( 'wcdm_run_update_callback' ) ) {
-			static::install();
+			$this->install();
 			$update_versions = array_keys( $this->updates );
 			usort( $update_versions, 'version_compare' );
 			if ( ! is_null( $db_version ) && version_compare( $db_version, end( $update_versions ), '<' ) ) {
 				$this->update();
 			} else {
-				WCDM()->update_db_version( $current_version );
+				$this->plugin->options->update_db_version( $current_version );
 			}
 		}
 	}
@@ -61,7 +69,7 @@ class Installer {
 	 * @return void
 	 */
 	public function update() {
-		$db_version = WCDM()->get_db_version();
+		$db_version = $this->plugin->options->get_db_version();
 		$loop       = 0;
 		foreach ( $this->updates as $version => $callbacks ) {
 			$callbacks = (array) $callbacks;
@@ -81,13 +89,13 @@ class Installer {
 			++$loop;
 		}
 
-		if ( version_compare( WCDM()->get_db_version(), WCDM()->get_version(), '<' ) &&
+		if ( version_compare( $this->plugin->options->get_db_version(), $this->plugin->version, '<' ) &&
 			! WC()->queue()->get_next( 'wcdm_update_db_version' ) ) {
 			WC()->queue()->schedule_single(
 				time() + $loop,
 				'wcdm_update_db_version',
 				array(
-					'version' => WCDM()->get_version(),
+					'version' => $this->plugin->version,
 				)
 			);
 		}
@@ -126,7 +134,7 @@ class Installer {
 	 * @return void
 	 */
 	public function update_db_version( $version ) {
-		WCDM()->update_db_version( $version );
+		$this->plugin->options->update_db_version( $version );
 	}
 
 	/**
@@ -135,14 +143,14 @@ class Installer {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function install() {
+	public function install() {
 		if ( ! is_blog_installed() ) {
 			return;
 		}
 		self::save_default_settings();
 		flush_rewrite_rules( true );
 		add_option( 'wcdm_installed', time() );
-		WCDM()->add_db_version();
+		$this->plugin->options->update_db_version( $this->plugin->version );
 	}
 
 	/**

@@ -2,6 +2,8 @@
 
 namespace WooCommerceDonationManager;
 
+use WooCommerceDonationManager\Installer;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
@@ -10,17 +12,13 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * @since   1.0.0
  * @package WooCommerceDonationManager
  */
-final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
-
+final class Plugin extends \WooCommerceDonationManager\B8\Plugin\App {
 	/**
-	 * Plugin constructor.
+	 * Bootstraps the plugin.
 	 *
-	 * @param array $data The plugin data.
-	 *
-	 * @since 1.0.0
+	 * @return void
 	 */
-	protected function __construct( $data ) {
-		parent::__construct( $data );
+	protected function bootstrap(): void {
 		$this->define_constants();
 		$this->includes();
 		$this->init_hooks();
@@ -32,15 +30,15 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function define_constants() {
+	public function define_constants(): void {
 		$role = apply_filters( 'wc_donation_manager_role', 'manage_woocommerce' );
-		$this->define( 'WCDM_VERSION', $this->get_version() );
-		$this->define( 'WCDM_FILE', $this->get_file() );
-		$this->define( 'WCDM_PATH', $this->get_dir_path() );
-		$this->define( 'WCDM_URL', $this->get_dir_url() );
-		$this->define( 'WCDM_ASSETS_URL', $this->get_assets_url() );
-		$this->define( 'WCDM_ASSETS_PATH', $this->get_assets_path() );
-		$this->define( 'WCDM_MANAGER_ROLE', $role );
+		define( 'WCDM_VERSION', $this->version );
+		define( 'WCDM_FILE', $this->file );
+		define( 'WCDM_PATH', $this->plugin_path() );
+		define( 'WCDM_URL', $this->plugin_url() );
+		define( 'WCDM_ASSETS_URL', $this->assets_url() );
+		define( 'WCDM_ASSETS_PATH', $this->assets_path() );
+		define( 'WCDM_MANAGER_ROLE', $role );
 	}
 
 	/**
@@ -60,8 +58,8 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 * @return void
 	 */
 	public function init_hooks() {
-		register_activation_hook( $this->get_file(), array( Installer::class, 'install' ) );
-		add_filter( 'plugin_action_links_' . $this->get_basename(), array( $this, 'plugin_action_links' ) );
+		register_activation_hook( $this->file, $this->callback( array( Installer::class, 'install' ) ) );
+		add_filter( 'plugin_action_links_' . $this->basename(), array( $this, 'plugin_action_links' ) );
 		add_action( 'before_woocommerce_init', array( $this, 'on_before_woocommerce_init' ) );
 		add_action( 'woocommerce_init', array( $this, 'on_init' ), 0 );
 	}
@@ -75,7 +73,7 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 * @return array
 	 */
 	public function plugin_action_links( $links ) {
-		if ( ! $this->is_plugin_active( 'wc-donation-manager-pro/wc-donation-manager-pro.php' ) ) {
+		if ( ! $this->plugin_active( 'wc-donation-manager-pro/wc-donation-manager-pro.php' ) ) {
 			$links['go_pro'] = '<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=plugin&utm_medium=plugin-action-link&utm_campaign=go-pro" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__( 'Go Pro', 'wc-donation-manager' ) . '</a>';
 		}
 
@@ -88,10 +86,10 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function on_before_woocommerce_init() {
+	public function on_before_woocommerce_init(): void {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->get_file(), true );
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->get_file(), true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->file, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->file, true );
 		}
 	}
 
@@ -101,7 +99,7 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function on_init() {
+	public function on_init(): void {
 		// Register post types.
 		add_action( 'init', array( $this, 'register_cpt_campaigns' ) );
 
@@ -109,28 +107,39 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 		require_once __DIR__ . '/Donation/class-donation-product.php';
 
 		// Include common classes.
-		$this->set(
-			array(
-				Donation\Donation::class,
-				Frontend\Frontend::class,
-				Frontend\Product::class,
-				Frontend\Cart::class,
-				Frontend\Orders::class,
-			)
-		);
+		// $this->set(
+		// array(
+		// Donation\Donation::class,
+		// Frontend\Frontend::class,
+		// Frontend\Product::class,
+		// Frontend\Cart::class,
+		// Frontend\Orders::class,
+		// )
+		// );
+		$this->make( Donation\Donation::class );
+		$this->make( Frontend\Frontend::class );
+		$this->make( Frontend\Product::class );
+		$this->make( Frontend\Cart::class );
+		$this->make( Frontend\Orders::class );
 
 		// Include Admin classes.
 		if ( is_admin() ) {
-			$this->set(
-				array(
-					Admin\Admin::class,
-					Admin\Menus::class,
-					Admin\Settings::instance(),
-					Admin\Actions::class,
-					Admin\Metaboxes::class,
-					Admin\Notices::class,
-				)
-			);
+			// $this->set(
+			// array(
+			// Admin\Admin::class,
+			// Admin\Menus::class,
+			// Admin\Settings::instance(),
+			// Admin\Actions::class,
+			// Admin\Metaboxes::class,
+			// Admin\Notices::class,
+			// )
+			// );
+			$this->make( Admin\Admin::class );
+			$this->make( Admin\Menus::class );
+			Admin\Settings::instance();
+			$this->make( Admin\Actions::class );
+			$this->make( Admin\Metaboxes::class );
+			$this->make( Admin\Notices::class );
 		}
 
 		/**
@@ -149,7 +158,7 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function register_cpt_campaigns() {
+	public function register_cpt_campaigns(): void {
 		$labels = array(
 			'name'               => _x( 'Campaign', 'post type general name', 'wc-donation-manager' ),
 			'singular_name'      => _x( 'Campaign', 'post type singular name', 'wc-donation-manager' ),
@@ -168,7 +177,7 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 		);
 
 		$args = array(
-			'labels'              => apply_filters( 'wcdm_campaigns_post_type_labels', $labels ),
+			'labels'              => $this->apply_filters( 'wcdm_campaigns_post_type_labels', $labels ),
 			'public'              => false,
 			'publicly_queryable'  => false,
 			'exclude_from_search' => true,
@@ -185,6 +194,6 @@ final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
 			'supports'            => array(),
 		);
 
-		register_post_type( 'wcdm_campaigns', apply_filters( 'wcdm_campaigns_post_type_args', $args ) );
+		register_post_type( 'wcdm_campaigns', $this->apply_filters( 'campaigns_post_type_args', $args ) );
 	}
 }

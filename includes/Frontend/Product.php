@@ -38,10 +38,10 @@ class Product {
 	 * @param string      $link Link html.
 	 * @param \WC_Product $product Product object.
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public static function add_to_cart_link( $link, $product ) {
+	public static function add_to_cart_link( string $link, \WC_Product $product ): string {
 		return ( 'donation' === $product->get_type() ? str_replace( 'ajax_add_to_cart', '', $link ) : $link );
 	}
 
@@ -51,10 +51,10 @@ class Product {
 	 * @param string      $price product price html.
 	 * @param \WC_Product $product Product object.
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public static function get_price_html( $price, $product ) {
+	public static function get_price_html( string $price, \WC_Product $product ): string {
 		if ( 'donation' === $product->get_type() ) {
 			return ( is_admin() ? 'Variable' : '' );
 		}
@@ -70,7 +70,7 @@ class Product {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function before_add_to_cart_button() {
+	public static function before_add_to_cart_button(): void {
 		global $product;
 
 		if ( 'donation' === $product->get_type() ) {
@@ -140,7 +140,7 @@ class Product {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function add_to_cart_template() {
+	public static function add_to_cart_template(): void {
 		$campaign_id           = get_post_meta( get_the_ID(), 'wcdm_campaign_id', true );
 		$campaign_end_date     = intval( str_replace( '-', '', get_post_meta( $campaign_id, '_end_date', true ) ) );
 		$campaign_expired_text = get_option( 'wcdm_expired_text', __( 'The campaign expired!', 'wc-donation-manager' ) );
@@ -154,16 +154,16 @@ class Product {
 	}
 
 	/**
-	 * Redirecting weather cart or checkout page.
+	 * Redirecting whether cart or checkout page.
 	 *
 	 * This will only be applied for the donation products.
 	 *
 	 * @param string $url Add to cart button url.
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public static function add_to_cart_redirect( $url ) {
+	public static function add_to_cart_redirect( string $url ) {
 		wp_verify_nonce( '_wpnonce' );
 		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? sanitize_key( wp_unslash( $_POST['add-to-cart'] ) ) : '' );
 		if ( $product_id ) {
@@ -225,10 +225,10 @@ class Product {
 	 * @param bool $passed Whether the product can be added to the cart.
 	 * @param int  $product_id Product ID.
 	 *
-	 * @since 1.0.6
 	 * @return bool
+	 * @since 1.0.6
 	 */
-	public static function prevent_duplicate_add_to_cart( $passed, $product_id ) {
+	public static function prevent_duplicate_add_to_cart( bool $passed, int $product_id ): bool {
 		$product = wc_get_product( $product_id );
 
 		// Only donation products.

@@ -2,6 +2,8 @@
 
 namespace WooCommerceDonationManager\Admin;
 
+use WooCommerceDonationManager\Plugin;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
@@ -11,13 +13,20 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * @package WooCommerceDonationManager\Admin
  */
 class Admin {
+	/**
+	 * Plugin instance.
+	 *
+	 * @var Plugin
+	 */
+	protected Plugin $plugin;
 
 	/**
 	 * Admin constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function __construct( Plugin $plugin ) {
+		$this->plugin = $plugin;
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_filter( 'woocommerce_screen_ids', array( $this, 'add_screen_ids' ) );
 		add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), PHP_INT_MAX );
@@ -34,8 +43,8 @@ class Admin {
 	 */
 	public function enqueue_scripts( $hook ) {
 		$screen_ids = Utilities::get_screen_ids();
-		WCDM()->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
-		WCDM()->scripts->register_script( 'wcdm-admin', 'js/admin.js' );
+		$this->plugin->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'woocommerce_admin_styles' ) );
+		$this->plugin->scripts->register_script( 'wcdm-admin', 'js/admin.js' );
 
 		if ( in_array( $hook, $screen_ids, true ) ) {
 			wp_enqueue_style( 'wcdm-admin' );
@@ -61,7 +70,7 @@ class Admin {
 	 *
 	 * @return array
 	 */
-	public function add_screen_ids( $ids ) {
+	public function add_screen_ids( $ids ): array {
 		return array_merge( $ids, Utilities::get_screen_ids() );
 	}
 
@@ -70,10 +79,10 @@ class Admin {
 	 *
 	 * @param string $text Footer text.
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public function admin_footer_text( $text ) {
+	public function admin_footer_text( string $text ): string {
 
 		if ( in_array( get_current_screen()->id, Utilities::get_screen_ids(), true ) ) {
 			$text = sprintf(
@@ -81,11 +90,11 @@ class Admin {
 				__( 'Thank you for using %s!', 'wc-donation-manager' ),
 				'<strong>' . esc_html( WCDM()->get_name() ) . '</strong>',
 			);
-			if ( WCDM()->get_review_url() ) {
+			if ( $this->plugin->review_url ) {
 				$text .= sprintf(
 				/* translators: %s: Plugin name */
 					__( ' Share your appreciation with a five-star review %s.', 'wc-donation-manager' ),
-					'<a href="' . esc_url( WCDM()->get_review_url() ) . '" target="_blank">here</a>'
+					'<a href="' . esc_url( $this->plugin->review_url ) . '" target="_blank">here</a>'
 				);
 			}
 		}
@@ -98,14 +107,14 @@ class Admin {
 	 *
 	 * @param string $text Footer text.
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public function update_footer( $text ) {
+	public function update_footer( string $text ): string {
 
 		if ( in_array( get_current_screen()->id, Utilities::get_screen_ids(), true ) ) {
 			/* translators: 1: Plugin version */
-			$text = sprintf( esc_html__( 'Version %s', 'wc-donation-manager' ), WCDM()->get_version() );
+			$text = sprintf( esc_html__( 'Version %s', 'wc-donation-manager' ), $this->plugin->version );
 		}
 
 		return $text;

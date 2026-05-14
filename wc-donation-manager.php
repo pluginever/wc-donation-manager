@@ -45,10 +45,23 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 // Instantiate the plugin.
 WooCommerceDonationManager\Plugin::create(
+	__FILE__,
 	array(
 		'file'         => __FILE__,
+		'version'      => '1.1.2',
+		'hook_prefix'  => 'wcdm',
 		'settings_url' => admin_url( 'admin.php?page=wcdm-settings' ),
 		'support_url'  => 'https://pluginever.com/support/',
 		'docs_url'     => 'https://pluginever.com/docs/wc-donation-manager/',
+		'text_domain'  => 'wc-donation-manager',
 	)
 );
+
+/**
+ * Main plugin instance.
+ *
+ * @return WooCommerceDonationManager\Plugin
+ */
+function donation_manager(): \WooCommerceDonationManager\Plugin {
+	return \WooCommerceDonationManager\Plugin::instance();
+}

@@ -31,10 +31,10 @@ class Orders {
 	 *
 	 * @param \WC_Order $order Order object.
 	 *
-	 * @since 1.0.0
 	 * @return void
+	 * @since 1.0.0
 	 */
-	public static function mark_donation_order( $order ) {
+	public static function mark_donation_order( \WC_Order $order ): void {
 
 		$order            = wc_get_order( $order );
 		$is_type_donation = false;
@@ -65,10 +65,10 @@ class Orders {
 	 * @param int       $order_id Order ID.
 	 * @param \WC_Order $order Order object.
 	 *
-	 * @since 1.0.0
 	 * @return void
+	 * @since 1.0.0
 	 */
-	public static function order_status_completed( $order_id, $order ) {
+	public static function order_status_completed( int $order_id, \WC_Order $order ): void {
 		foreach ( $order->get_items() as $item_id => $item ) {
 			$product = $item->get_product();
 

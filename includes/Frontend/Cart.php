@@ -30,10 +30,10 @@ class Cart {
 	 *
 	 * @param array $session_data Session cart item data.
 	 *
-	 * @since 1.0.0
 	 * @return array
+	 * @since 1.0.0
 	 */
-	public static function get_cart_item_from_session( $session_data ) {
+	public static function get_cart_item_from_session( array $session_data ): array {
 		if ( $session_data['data']->get_type() === 'donation' && isset( $session_data['donation_amount'] ) ) {
 			$session_data['data']->set_price( $session_data['donation_amount'] );
 		}
@@ -48,10 +48,10 @@ class Cart {
 	 * @param array  $cart_item Cart item.
 	 * @param string $cart_item_key Cart item key.
 	 *
-	 * @since 1.0.0
 	 * @return string
+	 * @since 1.0.0
 	 */
-	public static function cart_item_price( $price, $cart_item, $cart_item_key ) {
+	public static function cart_item_price( string $price, array $cart_item, string $cart_item_key ): string {
 		if ( ! is_cart() ) {
 			return $price;
 		}
@@ -68,10 +68,10 @@ class Cart {
 	 *
 	 * @param bool $cart_updated weather true of false.
 	 *
-	 * @since 1.0.0
 	 * @return bool
+	 * @since 1.0.0
 	 */
-	public static function update_cart( $cart_updated ) {
+	public static function update_cart( bool $cart_updated ): bool {
 		wp_verify_nonce( '_wpnonce' );
 
 		if ( 'yes' !== get_option( 'wcdm_editable_cart_price', 'yes' ) ) {

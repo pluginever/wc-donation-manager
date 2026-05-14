@@ -2,6 +2,8 @@
 
 namespace WooCommerceDonationManager\Donation;
 
+use WooCommerceDonationManager\Plugin;
+
 defined( 'ABSPATH' ) || exit; // Exist if accessed directly.
 
 /**
@@ -26,10 +28,10 @@ class Donation {
 	 *
 	 * @param array $product_type array of product types.
 	 *
-	 * @version 1.0.0
 	 * @return array array of product types.
+	 * @version 1.0.0
 	 */
-	public static function add_product_type( $product_type ) {
+	public static function add_product_type( array $product_type ): array {
 		$product_type['donation'] = __( 'Donation', 'wc-donation-manager' );
 
 		return $product_type;
@@ -41,10 +43,10 @@ class Donation {
 	 * @param string $class_name Class name.
 	 * @param string $product_type Product type name.
 	 *
-	 * @version 1.0.0
 	 * @return string Class name.
+	 * @version 1.0.0
 	 */
-	public static function product_type_class( $class_name, $product_type ) {
+	public static function product_type_class( string $class_name, string $product_type ): string {
 
 		if ( 'donation' === $product_type ) {
 			$class_name = 'WCDM_Donation_Product';

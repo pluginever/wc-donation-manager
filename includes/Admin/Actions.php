@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
  * @package WooCommerceDonationManager
  */
 class Actions {
-
 	/**
 	 * Actions constructor.
 	 *
@@ -108,7 +107,6 @@ class Actions {
 		} else {
 			WCDM()->flash->success( __( 'Campaign updated successfully.', 'wc-donation-manager' ) );
 		}
-
 		wp_safe_redirect( $referer );
 		exit;
 	}

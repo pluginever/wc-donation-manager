@@ -2,6 +2,8 @@
 
 namespace WooCommerceDonationManager\Admin;
 
+use WooCommerceDonationManager\Plugin;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -10,13 +12,20 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.0.0
  */
 class Notices {
+	/**
+	 * Plugin instance.
+	 *
+	 * @var Plugin
+	 */
+	protected Plugin $plugin;
 
 	/**
 	 * Notices constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function __construct( Plugin $plugin ) {
+		$this->plugin = $plugin;
 		add_action( 'admin_init', array( $this, 'admin_notices' ) );
 	}
 
@@ -31,7 +40,7 @@ class Notices {
 		$current_time   = absint( wp_date( 'U' ) );
 
 		if ( ! defined( 'WCDM_PRO_VERSION' ) ) {
-			WCDM()->notices->add(
+			$this->plugin->notices->add(
 				array(
 					'message'     => __DIR__ . '/views/notices/upgrade.php',
 					'notice_id'   => 'wcdm_upgrade',
@@ -43,7 +52,7 @@ class Notices {
 
 		// Show after 5 days.
 		if ( $installed_time && $current_time > ( $installed_time + ( 5 * DAY_IN_SECONDS ) ) ) {
-			WCDM()->notices->add(
+			$this->plugin->notices->add(
 				array(
 					'message'     => __DIR__ . '/views/notices/review.php',
 					'dismissible' => false,
