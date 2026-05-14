@@ -26,7 +26,7 @@ class Menus {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const string PARENT_SLUG = 'wc-donation-manager';
+	const PARENT_SLUG = 'wc-donation-manager';
 
 	/**
 	 * List tables.
