@@ -36,9 +36,11 @@ class Menus {
 	private $list_table;
 
 	/**
-	 * Menus constructor.
+	 * Class constructor.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Plugin $plugin Plugin instance.
 	 */
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;

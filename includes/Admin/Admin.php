@@ -21,9 +21,11 @@ class Admin {
 	protected Plugin $plugin;
 
 	/**
-	 * Admin constructor.
+	 * Admin Class constructor.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param Plugin $plugin Plugin instance.
 	 */
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;

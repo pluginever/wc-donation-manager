@@ -23,10 +23,11 @@ class Frontend {
 	protected Plugin $plugin;
 
 	/**
-	 * Frontend constructor.
+	 * Frontend Class constructor.
 	 *
-	 * @param \WooCommerceDonationManager\Plugin $plugin Plugin instance.
 	 * @since 1.0.0
+	 *
+	 * @param Plugin $plugin Plugin instance.
 	 */
 	public function __construct( Plugin $plugin ) {
 		$this->plugin = $plugin;

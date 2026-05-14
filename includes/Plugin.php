@@ -106,16 +106,6 @@ final class Plugin extends \WooCommerceDonationManager\B8\Plugin\App {
 		// Including donation product type class.
 		require_once __DIR__ . '/Donation/class-donation-product.php';
 
-		// Include common classes.
-		// $this->set(
-		// array(
-		// Donation\Donation::class,
-		// Frontend\Frontend::class,
-		// Frontend\Product::class,
-		// Frontend\Cart::class,
-		// Frontend\Orders::class,
-		// )
-		// );
 		$this->make( Donation\Donation::class );
 		$this->make( Frontend\Frontend::class );
 		$this->make( Frontend\Product::class );
@@ -124,16 +114,6 @@ final class Plugin extends \WooCommerceDonationManager\B8\Plugin\App {
 
 		// Include Admin classes.
 		if ( is_admin() ) {
-			// $this->set(
-			// array(
-			// Admin\Admin::class,
-			// Admin\Menus::class,
-			// Admin\Settings::instance(),
-			// Admin\Actions::class,
-			// Admin\Metaboxes::class,
-			// Admin\Notices::class,
-			// )
-			// );
 			$this->make( Admin\Admin::class );
 			$this->make( Admin\Menus::class );
 			Admin\Settings::instance();
