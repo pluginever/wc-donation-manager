@@ -43,7 +43,19 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 							<?php esc_html_e( 'Cause', 'wc-donation-manager' ); ?>
 						</label>
 						<div class="field-group">
-							<textarea name="cause" id="cause" class="regular-text" rows="6" placeholder="<?php esc_html_e( 'Enter the cause of the campaign...', 'wc-donation-manager' ); ?>"><?php echo wp_kses_post( $campaign->post_content ); ?></textarea>
+							<?php
+							wp_editor(
+								wp_kses_post( $campaign->post_content ),
+								'wcdm_donation_cause_editor',
+								array(
+									'textarea_name' => 'cause',
+									'media_buttons' => true,
+									'textarea_rows' => 12,
+									'teeny'         => false,
+									'quicktags'     => true,
+								)
+							);
+							?>
 							<p class="description">
 								<?php esc_html_e( 'Edit or update the cause of the campaign.', 'wc-donation-manager' ); ?>
 							</p>

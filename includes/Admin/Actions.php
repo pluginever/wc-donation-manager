@@ -36,7 +36,7 @@ class Actions {
 		$referer = wp_get_referer();
 
 		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
-		$cause       = isset( $_POST['cause'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cause'] ) ) : '';
+		$cause       = isset( $_POST['cause'] ) ? wp_kses_post( wp_unslash( $_POST['cause'] ) ) : '';
 		$goal_amount = isset( $_POST['goal_amount'] ) ? floatval( wp_unslash( $_POST['goal_amount'] ) ) : floatval( '0' );
 		$end_date    = isset( $_POST['end_date'] ) ? sanitize_text_field( wp_unslash( $_POST['end_date'] ) ) : '';
 		$status      = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : 'pending';
@@ -46,7 +46,7 @@ class Actions {
 			'ID'           => $id,
 			'post_type'    => 'wcdm_campaigns',
 			'post_title'   => wp_strip_all_tags( $name ),
-			'post_content' => wp_kses_post( $cause ),
+			'post_content' => $cause,
 			'post_status'  => $status,
 			'meta_input'   => array(
 				'wcdm_goal_amount' => $goal_amount,
@@ -82,7 +82,7 @@ class Actions {
 		$referer = wp_get_referer();
 
 		$name        = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
-		$cause       = isset( $_POST['cause'] ) ? sanitize_textarea_field( wp_unslash( $_POST['cause'] ) ) : '';
+		$cause       = isset( $_POST['cause'] ) ? wp_kses_post( wp_unslash( $_POST['cause'] ) ) : '';
 		$goal_amount = isset( $_POST['goal_amount'] ) ? floatval( wp_unslash( $_POST['goal_amount'] ) ) : floatval( '0' );
 		$end_date    = isset( $_POST['end_date'] ) ? sanitize_text_field( wp_unslash( $_POST['end_date'] ) ) : '';
 		$status      = isset( $_POST['status'] ) ? sanitize_key( wp_unslash( $_POST['status'] ) ) : 'pending';

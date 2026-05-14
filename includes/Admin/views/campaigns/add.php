@@ -30,7 +30,19 @@ defined( 'ABSPATH' ) || exit;
 				<label for="cause"><?php esc_html_e( 'Cause', 'wc-donation-manager' ); ?></label>
 			</th>
 			<td>
-				<textarea name="cause" id="cause" class="regular-text" rows="6" placeholder="<?php esc_html_e( 'Enter the cause of the campaign...', 'wc-donation-manager' ); ?>"></textarea>
+				<?php
+				wp_editor(
+					'',
+					'wcdm_donation_cause_editor',
+					array(
+						'textarea_name' => 'cause',
+						'media_buttons' => true,
+						'textarea_rows' => 12,
+						'teeny'         => false,
+						'quicktags'     => true,
+					)
+				);
+				?>
 				<p class="description">
 					<?php esc_html_e( 'Enter the cause of the campaign.', 'wc-donation-manager' ); ?>
 				</p>
