@@ -45,7 +45,7 @@ class Admin {
 	 */
 	public function enqueue_scripts( $hook ) {
 		$screen_ids = Utilities::get_screen_ids();
-		$this->plugin->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'woocommerce_admin_styles' ) );
+		$this->plugin->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
 		$this->plugin->scripts->register_script( 'wcdm-admin', 'js/admin.js' );
 
 		if ( in_array( $hook, $screen_ids, true ) ) {
@@ -90,7 +90,7 @@ class Admin {
 			$text = sprintf(
 			/* translators: %s: Plugin name */
 				__( 'Thank you for using %s!', 'wc-donation-manager' ),
-				'<strong>' . esc_html( WCDM()->get_name() ) . '</strong>',
+				'<strong>' . esc_html__( 'Donation Manager', 'wc-donation-manager' ) . '</strong>',
 			);
 			if ( $this->plugin->review_url ) {
 				$text .= sprintf(

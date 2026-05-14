@@ -9,13 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-20T09:55:11+00:00\n"
+"POT-Creation-Date: 2026-05-14T10:57:48+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wc-donation-manager\n"
 
 #. Plugin Name of the plugin
 #: wc-donation-manager.php
+#: includes/Admin/Admin.php:93
 #: includes/Admin/Metaboxes.php:43
 msgid "Donation Manager"
 msgstr ""
@@ -40,36 +41,36 @@ msgstr ""
 msgid "https://pluginever.com/"
 msgstr ""
 
-#: includes/Admin/Actions.php:63
+#: includes/Admin/Actions.php:62
 msgid "Campaign created successfully."
 msgstr ""
 
-#: includes/Admin/Actions.php:109
+#: includes/Admin/Actions.php:108
 msgid "Campaign updated successfully."
 msgstr ""
 
-#: includes/Admin/Actions.php:136
+#: includes/Admin/Actions.php:134
 msgid "Suggested amounts"
 msgstr ""
 
-#: includes/Admin/Admin.php:48
+#: includes/Admin/Admin.php:59
 msgid "Select products"
 msgstr ""
 
 #. translators: %s: Plugin name
-#: includes/Admin/Admin.php:81
+#: includes/Admin/Admin.php:92
 #, php-format
 msgid "Thank you for using %s!"
 msgstr ""
 
 #. translators: %s: Plugin name
-#: includes/Admin/Admin.php:87
+#: includes/Admin/Admin.php:98
 #, php-format
 msgid " Share your appreciation with a five-star review %s."
 msgstr ""
 
 #. translators: 1: Plugin version
-#: includes/Admin/Admin.php:108
+#: includes/Admin/Admin.php:119
 #, php-format
 msgid "Version %s"
 msgstr ""
@@ -119,46 +120,46 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: includes/Admin/Menus.php:58
-#: includes/Admin/Menus.php:59
+#: includes/Admin/Menus.php:69
+#: includes/Admin/Menus.php:70
 msgid "Donations"
 msgstr ""
 
-#: includes/Admin/Menus.php:153
+#: includes/Admin/Menus.php:164
 msgid "Per page"
 msgstr ""
 
-#: includes/Admin/Menus.php:203
+#: includes/Admin/Menus.php:214
 #: includes/Admin/Utilities.php:35
 #: includes/Admin/Utilities.php:36
 msgid "Donors"
 msgstr ""
 
-#: includes/Admin/Menus.php:204
+#: includes/Admin/Menus.php:215
 msgid "The list of donors and their donation information(s)"
 msgstr ""
 
-#: includes/Admin/Menus.php:208
-#: includes/Admin/Menus.php:226
-#: includes/Admin/Menus.php:244
+#: includes/Admin/Menus.php:219
+#: includes/Admin/Menus.php:237
+#: includes/Admin/Menus.php:255
 msgid "Available in Pro Version"
 msgstr ""
 
-#: includes/Admin/Menus.php:209
-#: includes/Admin/Menus.php:227
-#: includes/Admin/Menus.php:245
+#: includes/Admin/Menus.php:220
+#: includes/Admin/Menus.php:238
+#: includes/Admin/Menus.php:256
 msgid "Upgrade to Pro Now"
 msgstr ""
 
-#: includes/Admin/Menus.php:211
+#: includes/Admin/Menus.php:222
 msgid "Donors list table"
 msgstr ""
 
-#: includes/Admin/Menus.php:229
+#: includes/Admin/Menus.php:240
 msgid "Customer completed emails"
 msgstr ""
 
-#: includes/Admin/Menus.php:247
+#: includes/Admin/Menus.php:258
 msgid "Add customizable settings"
 msgstr ""
 
@@ -398,7 +399,7 @@ msgid "Settings"
 msgstr ""
 
 #: includes/Admin/views/campaigns/add.php:12
-#: includes/Plugin.php:159
+#: includes/Plugin.php:148
 msgid "Add New Campaign"
 msgstr ""
 
@@ -458,7 +459,7 @@ msgid "Search"
 msgstr ""
 
 #: includes/Admin/views/campaigns/edit.php:16
-#: includes/Plugin.php:161
+#: includes/Plugin.php:150
 msgid "Edit Campaign"
 msgstr ""
 
@@ -543,7 +544,7 @@ msgid "Sure, I'd love to help!"
 msgstr ""
 
 #: includes/Admin/views/notices/review.php:40
-#: includes/Admin/views/notices/upgrade.php:40
+#: includes/Admin/views/notices/upgrade.php:39
 msgid "Maybe later"
 msgstr ""
 
@@ -551,17 +552,17 @@ msgstr ""
 msgid "I've already left a review"
 msgstr ""
 
-#: includes/Admin/views/notices/upgrade.php:18
+#: includes/Admin/views/notices/upgrade.php:17
 msgid "Flash Sale Alert!"
 msgstr ""
 
 #. translators: %1$s: WooCommerce Donation Manager Pro plugin link, %2$s: Coupon code.
-#: includes/Admin/views/notices/upgrade.php:24
+#: includes/Admin/views/notices/upgrade.php:23
 #, php-format
 msgid "Enjoy a  <strong>10%% discount</strong> on %1$s! Use coupon code %2$s at checkout to grab the deal. Don’t miss out — this offer won’t last forever!"
 msgstr ""
 
-#: includes/Admin/views/notices/upgrade.php:36
+#: includes/Admin/views/notices/upgrade.php:35
 msgid "Upgrade now"
 msgstr ""
 
@@ -601,7 +602,7 @@ msgstr ""
 msgid "View Cart"
 msgstr ""
 
-#: includes/Donation/Donation.php:33
+#: includes/Donation/Donation.php:35
 msgid "Donation"
 msgstr ""
 
@@ -609,59 +610,59 @@ msgstr ""
 msgid "The campaign expired!"
 msgstr ""
 
-#: includes/Plugin.php:79
+#: includes/Plugin.php:77
 msgid "Go Pro"
 msgstr ""
 
-#: includes/Plugin.php:154
+#: includes/Plugin.php:143
 msgctxt "post type general name"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:155
+#: includes/Plugin.php:144
 msgctxt "post type singular name"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:156
+#: includes/Plugin.php:145
 msgctxt "admin menu"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:157
+#: includes/Plugin.php:146
 msgctxt "add new on admin bar"
 msgid "Campaign"
 msgstr ""
 
-#: includes/Plugin.php:158
+#: includes/Plugin.php:147
 msgctxt "campaign"
 msgid "Add New"
 msgstr ""
 
-#: includes/Plugin.php:160
+#: includes/Plugin.php:149
 msgid "New Campaign"
 msgstr ""
 
-#: includes/Plugin.php:162
+#: includes/Plugin.php:151
 msgid "View Campaign"
 msgstr ""
 
-#: includes/Plugin.php:163
+#: includes/Plugin.php:152
 msgid "All Campaign"
 msgstr ""
 
-#: includes/Plugin.php:164
+#: includes/Plugin.php:153
 msgid "Search Campaign"
 msgstr ""
 
-#: includes/Plugin.php:165
+#: includes/Plugin.php:154
 msgid "Parent Campaign:"
 msgstr ""
 
-#: includes/Plugin.php:166
+#: includes/Plugin.php:155
 msgid "No campaigns found."
 msgstr ""
 
-#: includes/Plugin.php:167
+#: includes/Plugin.php:156
 msgid "No campaigns found in Trash."
 msgstr ""
