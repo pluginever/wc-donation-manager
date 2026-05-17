@@ -34,7 +34,7 @@ class Orders {
 	 * @return void
 	 * @since 1.0.0
 	 */
-	public static function mark_donation_order( \WC_Order $order ): void {
+	public static function mark_donation_order( $order ): void {
 
 		$order            = wc_get_order( $order );
 		$is_type_donation = false;

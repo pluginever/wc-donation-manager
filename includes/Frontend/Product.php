@@ -26,7 +26,7 @@ class Product {
 		add_action( 'woocommerce_donation_add_to_cart', array( __CLASS__, 'add_to_cart_template' ) );
 		add_filter( 'woocommerce_add_to_cart_redirect', array( __CLASS__, 'add_to_cart_redirect' ), 10, 2 );
 		add_filter( 'woocommerce_add_cart_item', array( __CLASS__, 'add_cart_item' ) );
-		add_filter( 'wc_add_to_cart_message', array( __CLASS__, 'add_to_cart_message' ), 10, 2 );
+		add_filter( 'wc_add_to_cart_message_html', array( __CLASS__, 'add_to_cart_message' ), 10, 2 );
 		add_filter( 'woocommerce_add_to_cart_validation', array( __CLASS__, 'prevent_duplicate_add_to_cart' ), 10, 2 );
 	}
 
