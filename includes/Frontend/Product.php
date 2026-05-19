@@ -88,13 +88,33 @@ class Product {
 				<?php endif; ?>
 
 				<?php if ( $campaign_id ) : ?>
-				<div class="campaign-progress">
-					<div class="progress-label">
-						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ) ); ?></label>
-						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, 'wcdm_goal_amount', true ) ) ) ); ?></label>
+					<div
+						class="wcdm-progress-bar"
+						data-raised="<?php echo esc_attr( (float) get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>"
+						data-goal="<?php echo esc_attr( (float) get_post_meta( $campaign_id, 'wcdm_goal_amount', true ) ); ?>"
+						data-currency="<?php echo esc_html( $currency_symbol ); ?>"
+					>
+						<div class="donation-header">
+							<div class="donation-title">Donation Progress</div>
+							<div class="donation-percent">0%</div>
+						</div>
+
+						<div class="progress-wrapper">
+							<div class="progress-bar"></div>
+						</div>
+
+						<div class="donation-info">
+							<div>
+								Raised:
+								<span class="amount raised-amount">$0</span>
+							</div>
+
+							<div>
+								Goal:
+								<span class="amount goal-amount">$0</span>
+							</div>
+						</div>
 					</div>
-					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign_id, 'wcdm_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?></progress>
-				</div>
 				<?php endif; ?>
 				<?php
 				if ( $is_predefined_amounts ) :
