@@ -171,12 +171,15 @@ class Metaboxes {
 
 		woocommerce_wp_select(
 			array(
-				'id'          => 'wcdm_campaign_id',
-				'label'       => __( 'Select a campaign', 'wc-donation-manager' ),
-				'description' => __( 'Select a campaign to assign this donation product. After selected a campaign, the campaign cause & the goal amount will be inherited.', 'wc-donation-manager' ),
-				'desc_tip'    => true,
-				'options'     => $campaign_options,
-				'value'       => ! empty( get_post_meta( get_the_ID(), 'wcdm_campaign_id', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_campaign_id', true ) : '0',
+				'id'                => 'wcdm_campaign_id',
+				'label'             => __( 'Select a campaign', 'wc-donation-manager' ),
+				'description'       => __( 'Select a campaign to assign this donation product. After selected a campaign, the campaign cause & the goal amount will be inherited.', 'wc-donation-manager' ),
+				'desc_tip'          => true,
+				'options'           => $campaign_options,
+				'value'             => ! empty( get_post_meta( get_the_ID(), 'wcdm_campaign_id', true ) ) ? get_post_meta( get_the_ID(), 'wcdm_campaign_id', true ) : '0',
+				'custom_attributes' => array(
+					'required' => 'required',
+				),
 			)
 		);
 

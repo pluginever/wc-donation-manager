@@ -43,12 +43,13 @@ class Admin {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function enqueue_scripts( $hook ) {
+	public function enqueue_scripts( $hook ): void {
 		$screen_ids = Utilities::get_screen_ids();
 		$this->plugin->scripts->enqueue_style( 'wcdm-admin', 'css/admin.css', array( 'bytekit-layout', 'bytekit-components', 'woocommerce_admin_styles' ) );
 		$this->plugin->scripts->register_script( 'wcdm-admin', 'js/admin.js' );
 
-		if ( in_array( $hook, $screen_ids, true ) ) {
+		if ( in_array( $hook, $screen_ids, true ) || 'post-new.php' === $hook ) {
+
 			wp_enqueue_style( 'wcdm-admin' );
 			wp_enqueue_script( 'wcdm-admin' );
 
@@ -56,7 +57,9 @@ class Admin {
 				'ajaxurl'  => admin_url( 'admin-ajax.php' ),
 				'security' => wp_create_nonce( 'wc_donation_manager' ),
 				'i18n'     => array(
-					'search_products' => esc_html__( 'Select products', 'wc-donation-manager' ),
+					'search_products'       => esc_html__( 'Select products', 'wc-donation-manager' ),
+					'select_campaign_error' => esc_html__( 'Please select a campaign for donation products.', 'wc-donation-manager' ),
+					'min_gt_max_error'      => esc_html__( 'Minimum amount cannot be greater than maximum amount.', 'wc-donation-manager' ),
 				),
 			);
 

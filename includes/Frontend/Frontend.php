@@ -65,6 +65,15 @@ class Frontend {
 	public function enqueue_scripts(): void {
 		$this->plugin->scripts->enqueue_style( 'wcdm-frontend', 'css/frontend.css' );
 		$this->plugin->scripts->enqueue_script( 'wcdm-frontend', 'js/frontend.js', array( 'jquery' ) );
+		$this->plugin->scripts->enqueue_script(
+			'wcdm-cart-block',
+			'js/cart_block.js',
+			array(
+				'wc-blocks-checkout',
+				'jquery',
+			),
+			true
+		);
 	}
 
 	/**
@@ -76,7 +85,7 @@ class Frontend {
 	 *
 	 * @return void
 	 */
-	public function maybe_add_donation_button_class() {
+	public function maybe_add_donation_button_class(): void {
 
 		if ( ! is_product() ) {
 			return;

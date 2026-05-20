@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="notice-body">
 	<div class="notice-icon">
-		<img src="<?php echo esc_attr( WCDM()->assets_url( 'images/plugin-icon.png' ) ); ?>" alt="WooCommerce Donation Manager">
+		<img src="<?php echo esc_attr( WCDM()->assets_url( WCDM()->build_dir . '/images/plugin-icon.png' ) ); ?>" alt="WooCommerce Donation Manager">
 	</div>
 	<div class="notice-content">
 		<h3><?php esc_html_e( 'Enjoying Donation Manager?', 'wc-donation-manager' ); ?></h3>
