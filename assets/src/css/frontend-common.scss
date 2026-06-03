@@ -10,6 +10,14 @@
 			width: 100%;
 		}
 	}
+	.campaign-cause{
+		ul{
+			margin-bottom: 0;
+		}
+		p{
+			margin-bottom: 0;
+		}
+	}
 	.suggested-amounts {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
@@ -68,4 +76,64 @@
 	#donation_amount {
 		align-self: center;
 	}
+}
+//Frontend donation progressbar
+.wcdm-progress-bar {
+	width: 100%;
+	margin-bottom: 10px;
+	.donation-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 14px;
+	}
+
+	.donation-title {
+		font-size: 16px;
+		font-weight: 700;
+		color: #1e293b;
+	}
+
+	.donation-percent {
+		font-size: 20px;
+		font-weight: 700;
+		background: #7e7eef;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.progress-wrapper {
+		width: 100%;
+		height: 14px;
+		background: #e2e8f0;
+		border-radius: 999px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.progress-bar {
+		width: 0;
+		height: 100%;
+		border-radius: 999px;
+		transition: width 1s ease;
+
+		background:#7e7eef;
+	}
+
+	.donation-info {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 14px;
+		font-size: 14px;
+		color: #64748b;
+	}
+
+	.amount {
+		font-weight: 700;
+		color: #0f172a;
+	}
+}
+//Donation product donation button
+.wcdm-donation-button{
+	background-color: #10B981 !important;
 }
