@@ -3,7 +3,7 @@
         'name' => 'pluginever/wc-donation-manager',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'a1a8560234f88fc8c338626134d5af3155b8fb00',
+        'reference' => '8be291675123f05da384d9d0fda3632fb36a5683',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'pluginever/wc-donation-manager' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a1a8560234f88fc8c338626134d5af3155b8fb00',
+            'reference' => '8be291675123f05da384d9d0fda3632fb36a5683',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
