@@ -26,7 +26,7 @@ class Product {
 		add_action( 'woocommerce_donation_add_to_cart', array( __CLASS__, 'add_to_cart_template' ) );
 		add_filter( 'woocommerce_add_to_cart_redirect', array( __CLASS__, 'add_to_cart_redirect' ), 10, 2 );
 		add_filter( 'woocommerce_add_cart_item', array( __CLASS__, 'add_cart_item' ) );
-		add_filter( 'wc_add_to_cart_message_html', array( __CLASS__, 'add_to_cart_message' ), 10, 2 );
+		add_filter( 'wc_add_to_cart_message', array( __CLASS__, 'add_to_cart_message' ), 10, 2 );
 		add_filter( 'woocommerce_add_to_cart_validation', array( __CLASS__, 'prevent_duplicate_add_to_cart' ), 10, 2 );
 	}
 
@@ -38,10 +38,10 @@ class Product {
 	 * @param string      $link Link html.
 	 * @param \WC_Product $product Product object.
 	 *
-	 * @return string
 	 * @since 1.0.0
+	 * @return string
 	 */
-	public static function add_to_cart_link( string $link, \WC_Product $product ): string {
+	public static function add_to_cart_link( $link, $product ) {
 		return ( 'donation' === $product->get_type() ? str_replace( 'ajax_add_to_cart', '', $link ) : $link );
 	}
 
@@ -51,10 +51,10 @@ class Product {
 	 * @param string      $price product price html.
 	 * @param \WC_Product $product Product object.
 	 *
-	 * @return string
 	 * @since 1.0.0
+	 * @return string
 	 */
-	public static function get_price_html( string $price, \WC_Product $product ): string {
+	public static function get_price_html( $price, $product ) {
 		if ( 'donation' === $product->get_type() ) {
 			return ( is_admin() ? 'Variable' : '' );
 		}
@@ -70,7 +70,7 @@ class Product {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function before_add_to_cart_button(): void {
+	public static function before_add_to_cart_button() {
 		global $product;
 
 		if ( 'donation' === $product->get_type() ) {
@@ -82,39 +82,19 @@ class Product {
 			?>
 			<div class="wc-donation-manager">
 				<?php if ( $campaign_cause ) : ?>
-					<div class="campaign-cause">
-						<?php echo wp_kses_post( $campaign_cause ); ?>
-					</div>
+				<div class="campaign-cause">
+					<?php echo wp_kses_post( $campaign_cause ); ?>
+				</div>
 				<?php endif; ?>
 
 				<?php if ( $campaign_id ) : ?>
-					<div
-						class="wcdm-progress-bar"
-						data-raised="<?php echo esc_attr( (float) get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>"
-						data-goal="<?php echo esc_attr( (float) get_post_meta( $campaign_id, 'wcdm_goal_amount', true ) ); ?>"
-						data-currency="<?php echo esc_html( $currency_symbol ); ?>"
-					>
-						<div class="donation-header">
-							<div class="donation-title">Donation Progress</div>
-							<div class="donation-percent">0%</div>
-						</div>
-
-						<div class="progress-wrapper">
-							<div class="progress-bar"></div>
-						</div>
-
-						<div class="donation-info">
-							<div>
-								Raised:
-								<span class="amount raised-amount">$0</span>
-							</div>
-
-							<div>
-								Goal:
-								<span class="amount goal-amount">$0</span>
-							</div>
-						</div>
+				<div class="campaign-progress">
+					<div class="progress-label">
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ) ) ); ?></label>
+						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign_id, 'wcdm_goal_amount', true ) ) ) ); ?></label>
 					</div>
+					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign_id, 'wcdm_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign_id, '_raised_amount', true ) ); ?></progress>
+				</div>
 				<?php endif; ?>
 				<?php
 				if ( $is_predefined_amounts ) :
@@ -126,7 +106,7 @@ class Product {
 					}
 					if ( $predefined_amounts ) {
 						?>
-						<div class="suggested-amounts">
+					<div class="suggested-amounts">
 						<label class="suggested-amount selected"><?php printf( '%s%.2f', esc_html( $currency_symbol ), floatval( $product->get_price() ) ); ?>
 							<input type="radio" name="suggested-amount[]" value="<?php echo esc_html( $product->get_price() ); ?>" checked="checked">
 						</label>
@@ -160,7 +140,7 @@ class Product {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function add_to_cart_template(): void {
+	public static function add_to_cart_template() {
 		$campaign_id           = get_post_meta( get_the_ID(), 'wcdm_campaign_id', true );
 		$campaign_end_date     = intval( str_replace( '-', '', get_post_meta( $campaign_id, '_end_date', true ) ) );
 		$campaign_expired_text = get_option( 'wcdm_expired_text', __( 'The campaign expired!', 'wc-donation-manager' ) );
@@ -174,16 +154,16 @@ class Product {
 	}
 
 	/**
-	 * Redirecting whether cart or checkout page.
+	 * Redirecting weather cart or checkout page.
 	 *
 	 * This will only be applied for the donation products.
 	 *
 	 * @param string $url Add to cart button url.
 	 *
-	 * @return string
 	 * @since 1.0.0
+	 * @return string
 	 */
-	public static function add_to_cart_redirect( string $url ) {
+	public static function add_to_cart_redirect( $url ) {
 		wp_verify_nonce( '_wpnonce' );
 		$product_id = (int) apply_filters( 'woocommerce_add_to_cart_product_id', ! empty( $_POST['add-to-cart'] ) ? sanitize_key( wp_unslash( $_POST['add-to-cart'] ) ) : '' );
 		if ( $product_id ) {
@@ -245,10 +225,10 @@ class Product {
 	 * @param bool $passed Whether the product can be added to the cart.
 	 * @param int  $product_id Product ID.
 	 *
-	 * @return bool
 	 * @since 1.0.6
+	 * @return bool
 	 */
-	public static function prevent_duplicate_add_to_cart( bool $passed, int $product_id ): bool {
+	public static function prevent_duplicate_add_to_cart( $passed, $product_id ) {
 		$product = wc_get_product( $product_id );
 
 		// Only donation products.
