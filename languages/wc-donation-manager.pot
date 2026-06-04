@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-20T11:30:49+00:00\n"
+"POT-Creation-Date: 2026-06-04T05:46:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wc-donation-manager\n"
@@ -103,19 +103,19 @@ msgid "End date"
 msgstr ""
 
 #: includes/Admin/ListTables/CampaignsListTable.php:119
-#: includes/Admin/views/campaigns/add.php:63
-#: includes/Admin/views/campaigns/edit.php:99
+#: includes/Admin/views/campaigns/add.php:77
+#: includes/Admin/views/campaigns/edit.php:113
 msgid "Status"
 msgstr ""
 
 #: includes/Admin/ListTables/CampaignsListTable.php:157
 #: includes/Admin/ListTables/CampaignsListTable.php:196
-#: includes/Admin/views/campaigns/edit.php:113
+#: includes/Admin/views/campaigns/edit.php:127
 msgid "Delete"
 msgstr ""
 
 #: includes/Admin/ListTables/CampaignsListTable.php:195
-#: includes/Admin/views/campaigns/edit.php:150
+#: includes/Admin/views/campaigns/edit.php:164
 msgid "Edit"
 msgstr ""
 
@@ -415,37 +415,32 @@ msgstr ""
 msgid "Enter the name of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:33
-#: includes/Admin/views/campaigns/edit.php:46
-msgid "Enter the cause of the campaign..."
-msgstr ""
-
-#: includes/Admin/views/campaigns/add.php:35
+#: includes/Admin/views/campaigns/add.php:49
 msgid "Enter the cause of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:41
+#: includes/Admin/views/campaigns/add.php:55
 msgid "Goal amount *"
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:46
+#: includes/Admin/views/campaigns/add.php:60
 msgid "Enter the goal amount of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:52
-#: includes/Admin/views/campaigns/edit.php:67
+#: includes/Admin/views/campaigns/add.php:66
+#: includes/Admin/views/campaigns/edit.php:81
 msgid "End date *"
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:57
+#: includes/Admin/views/campaigns/add.php:71
 msgid "Enter the end date of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:72
+#: includes/Admin/views/campaigns/add.php:86
 msgid "Select the campaign status."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:81
+#: includes/Admin/views/campaigns/add.php:95
 msgid "Add Campaign"
 msgstr ""
 
@@ -474,57 +469,55 @@ msgstr ""
 msgid "Edit or update the name of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:48
+#: includes/Admin/views/campaigns/edit.php:62
 msgid "Edit or update the cause of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:55
+#: includes/Admin/views/campaigns/edit.php:69
 msgid "Goal Amount *"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:60
+#: includes/Admin/views/campaigns/edit.php:74
 msgid "Edit or update the goal amount of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:72
+#: includes/Admin/views/campaigns/edit.php:86
 msgid "Edit or update the end date of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:82
+#: includes/Admin/views/campaigns/edit.php:96
 msgid "Campaign overview"
 msgstr ""
 
 #. translators: 1: WC currency symbol 2: Raised amount
-#: includes/Admin/views/campaigns/edit.php:86
-#: includes/Frontend/Product.php:93
+#: includes/Admin/views/campaigns/edit.php:100
 #, php-format
 msgid "%1$s%2$.2f raised"
 msgstr ""
 
 #. translators: 1: WC currency symbol 2: Raised amount
-#: includes/Admin/views/campaigns/edit.php:87
-#: includes/Frontend/Product.php:94
+#: includes/Admin/views/campaigns/edit.php:101
 #, php-format
 msgid "%1$s%2$.2f goal"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:94
+#: includes/Admin/views/campaigns/edit.php:108
 msgid "Actions"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:108
+#: includes/Admin/views/campaigns/edit.php:122
 msgid "Update the campaign status."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:114
+#: includes/Admin/views/campaigns/edit.php:128
 msgid "Save Changes"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:129
+#: includes/Admin/views/campaigns/edit.php:143
 msgid "Campaign Products"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:151
+#: includes/Admin/views/campaigns/edit.php:165
 msgid "View"
 msgstr ""
 
@@ -605,7 +598,7 @@ msgstr ""
 msgid "Donation"
 msgstr ""
 
-#: includes/Frontend/Product.php:146
+#: includes/Frontend/Product.php:166
 msgid "The campaign expired!"
 msgstr ""
 
