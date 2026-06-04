@@ -50,8 +50,9 @@ class Actions {
 			'post_content' => $cause,
 			'post_status'  => $status,
 			'meta_input'   => array(
-				'wcdm_goal_amount' => $goal_amount,
-				'_end_date'        => $end_date,
+				'wcdm_goal_amount'   => $goal_amount,
+				'_end_date'          => $end_date,
+				'wcdm_goal_behavior' => ( ! empty( $_POST['goal_behavior'] ) ? sanitize_key( wp_unslash( $_POST['goal_behavior'] ) ) : get_option( 'wcdm_goal_behavior', 'continue' ) ),
 			),
 		);
 
@@ -96,8 +97,9 @@ class Actions {
 			'post_content' => wp_kses_post( $cause ),
 			'post_status'  => $status,
 			'meta_input'   => array(
-				'wcdm_goal_amount' => $goal_amount,
-				'_end_date'        => $end_date,
+				'wcdm_goal_amount'   => $goal_amount,
+				'_end_date'          => $end_date,
+				'wcdm_goal_behavior' => ( ! empty( $_POST['goal_behavior'] ) ? sanitize_key( wp_unslash( $_POST['goal_behavior'] ) ) : get_option( 'wcdm_goal_behavior', 'continue' ) ),
 			),
 		);
 

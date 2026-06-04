@@ -161,6 +161,18 @@ class Settings extends \WooCommerceDonationManager\ByteKit\Admin\Settings {
 						'type'     => 'checkbox',
 					),
 					array(
+						'title'   => __( 'Donation behaviour after goal completion', 'wc-donation-manager' ),
+						'desc'    => __( 'Define what should happen when a campaign reaches its goal.', 'wc-donation-manager' ),
+						'id'      => 'wcdm_goal_behavior',
+						'type'    => 'select',
+						'default' => 'continue',
+						'options' => array(
+							'continue'   => __( 'Continue accepting donations', 'wc-donation-manager' ),
+							'close'      => __( 'Close campaign automatically', 'wc-donation-manager' ),
+							'soft_close' => __( 'Show as completed but still allow donations', 'wc-donation-manager' ),
+						),
+					),
+					array(
 						'type' => 'sectionend',
 						'id'   => 'advanced_options',
 					),

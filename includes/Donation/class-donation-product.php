@@ -39,6 +39,31 @@ if ( class_exists( 'WC_Product_Simple' ) ) {
 		}
 
 		/**
+		 * Override purchasable behavior to respect campaign goal behavior.
+		 *
+		 * @since 1.0.0
+		 * @return bool
+		 */
+		public function is_purchasable() {
+			$base = parent::is_purchasable();
+			if ( ! $base ) {
+				return false;
+			}
+
+			$campaign_id = get_post_meta( $this->get_id(), 'wcdm_campaign_id', true );
+			if ( $campaign_id ) {
+				$behavior = wcdm_get_goal_behavior( $campaign_id );
+				$raised   = (float) get_post_meta( $campaign_id, '_raised_amount', true );
+				$goal     = (float) get_post_meta( $campaign_id, 'wcdm_goal_amount', true );
+				if ( 'close' === $behavior && $goal > 0 && $raised >= $goal ) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/**
 		 * Get the add to cart button text.
 		 *
 		 * @since 1.0.0
