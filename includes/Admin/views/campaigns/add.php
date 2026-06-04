@@ -72,6 +72,23 @@ defined( 'ABSPATH' ) || exit;
 				</p>
 			</td>
 		</tr>
+
+		<tr valign="top">
+			<th scope="row">
+				<label for="goal_behavior"><?php esc_html_e( 'Donation behavior after goal', 'wc-donation-manager' ); ?></label>
+			</th>
+			<td>
+				<select id="goal_behavior" name="goal_behavior" class="regular-text">
+					<?php $default_behavior = get_option( 'wcdm_goal_behavior', 'continue' ); ?>
+					<option value="continue" <?php echo 'continue' === $default_behavior ? 'selected' : ''; ?>><?php esc_html_e( 'Continue accepting donations', 'wc-donation-manager' ); ?></option>
+					<option value="close" <?php echo 'close' === $default_behavior ? 'selected' : ''; ?>><?php esc_html_e( 'Close campaign automatically', 'wc-donation-manager' ); ?></option>
+					<option value="soft_close" <?php echo 'soft_close' === $default_behavior ? 'selected' : ''; ?>><?php esc_html_e( 'Show as completed but still allow donations', 'wc-donation-manager' ); ?></option>
+				</select>
+				<p class="description">
+					<?php esc_html_e( 'Select the behavior when this campaign reaches its goal.', 'wc-donation-manager' ); ?>
+				</p>
+			</td>
+		</tr>
 		<tr valign="top">
 			<th scope="row">
 				<label for="status"><?php esc_html_e( 'Status', 'wc-donation-manager' ); ?></label>

@@ -87,6 +87,21 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 							</p>
 						</div>
 					</div>
+
+					<div class="pev-form-field">
+						<label for="goal_behavior">
+							<?php esc_html_e( 'Donation behavior after goal', 'wc-donation-manager' ); ?>
+						</label>
+						<div class="field-group">
+							<?php $behavior = get_post_meta( $campaign->ID, 'wcdm_goal_behavior', true ); ?>
+							<select id="goal_behavior" name="goal_behavior" style="width: 300px">
+								<option value="continue" <?php echo 'continue' === $behavior ? 'selected' : ''; ?>><?php esc_html_e( 'Continue accepting donations', 'wc-donation-manager' ); ?></option>
+								<option value="close" <?php echo 'close' === $behavior ? 'selected' : ''; ?>><?php esc_html_e( 'Close campaign automatically', 'wc-donation-manager' ); ?></option>
+								<option value="soft_close" <?php echo 'soft_close' === $behavior ? 'selected' : ''; ?>><?php esc_html_e( 'Show as completed but still allow donations', 'wc-donation-manager' ); ?></option>
+							</select>
+							<p class="description"><?php esc_html_e( 'Select the behavior when this campaign reaches its goal.', 'wc-donation-manager' ); ?></p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

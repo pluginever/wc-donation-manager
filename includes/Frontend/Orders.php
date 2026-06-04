@@ -86,6 +86,11 @@ class Orders {
 					$raised_amount += (float) $item['subtotal'];
 					update_post_meta( $item['product_id'], 'wcdm_orders_id', $orders_id );
 					update_post_meta( $campaign_id, '_raised_amount', $raised_amount );
+					$behavior = wcdm_get_goal_behavior( $campaign_id );
+					$goal     = (float) get_post_meta( $campaign_id, 'wcdm_goal_amount', true );
+					if ( 'close' === $behavior && $goal > 0 && $raised_amount >= $goal ) {
+						update_post_meta( $campaign_id, 'wcdm_goal_completed', 'yes' );
+					}
 				}
 			}
 		}

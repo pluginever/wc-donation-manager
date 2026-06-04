@@ -95,6 +95,20 @@ function wcdm_get_campaign_products( $campaign_id ) {
 }
 
 /**
+ * Get goal behavior for a campaign.
+ *
+ * @param int $campaign_id Campaign ID.
+ * @return string
+ */
+function wcdm_get_goal_behavior( $campaign_id ) {
+	$behavior = get_post_meta( $campaign_id, 'wcdm_goal_behavior', true );
+	if ( ! $behavior ) {
+		$behavior = get_option( 'wcdm_goal_behavior', 'continue' );
+	}
+	return $behavior;
+}
+
+/**
  * Get the post title.
  *
  * @param int $post_id Post id.

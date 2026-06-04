@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-04T05:48:37+00:00\n"
+"POT-Creation-Date: 2026-06-04T09:22:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wc-donation-manager\n"
@@ -40,15 +40,15 @@ msgstr ""
 msgid "https://pluginever.com/"
 msgstr ""
 
-#: includes/Admin/Actions.php:63
+#: includes/Admin/Actions.php:64
 msgid "Campaign created successfully."
 msgstr ""
 
-#: includes/Admin/Actions.php:109
+#: includes/Admin/Actions.php:111
 msgid "Campaign updated successfully."
 msgstr ""
 
-#: includes/Admin/Actions.php:136
+#: includes/Admin/Actions.php:138
 msgid "Suggested amounts"
 msgstr ""
 
@@ -103,19 +103,19 @@ msgid "End date"
 msgstr ""
 
 #: includes/Admin/ListTables/CampaignsListTable.php:119
-#: includes/Admin/views/campaigns/add.php:77
-#: includes/Admin/views/campaigns/edit.php:113
+#: includes/Admin/views/campaigns/add.php:94
+#: includes/Admin/views/campaigns/edit.php:128
 msgid "Status"
 msgstr ""
 
 #: includes/Admin/ListTables/CampaignsListTable.php:157
 #: includes/Admin/ListTables/CampaignsListTable.php:196
-#: includes/Admin/views/campaigns/edit.php:127
+#: includes/Admin/views/campaigns/edit.php:142
 msgid "Delete"
 msgstr ""
 
 #: includes/Admin/ListTables/CampaignsListTable.php:195
-#: includes/Admin/views/campaigns/edit.php:164
+#: includes/Admin/views/campaigns/edit.php:179
 msgid "Edit"
 msgstr ""
 
@@ -342,8 +342,8 @@ msgid "Enter the add to cart button text. This will be applicable only for campa
 msgstr ""
 
 #: includes/Admin/Settings.php:114
-#: includes/Donation/class-donation-product.php:48
-#: includes/Donation/class-donation-product.php:71
+#: includes/Donation/class-donation-product.php:73
+#: includes/Donation/class-donation-product.php:96
 msgid "Donate Now"
 msgstr ""
 
@@ -384,6 +384,32 @@ msgstr ""
 
 #: includes/Admin/Settings.php:158
 msgid "Enabling this will delete all the data while uninstalling the plugin."
+msgstr ""
+
+#: includes/Admin/Settings.php:164
+msgid "Donation behaviour after goal completion"
+msgstr ""
+
+#: includes/Admin/Settings.php:165
+msgid "Define what should happen when a campaign reaches its goal."
+msgstr ""
+
+#: includes/Admin/Settings.php:170
+#: includes/Admin/views/campaigns/add.php:83
+#: includes/Admin/views/campaigns/edit.php:98
+msgid "Continue accepting donations"
+msgstr ""
+
+#: includes/Admin/Settings.php:171
+#: includes/Admin/views/campaigns/add.php:84
+#: includes/Admin/views/campaigns/edit.php:99
+msgid "Close campaign automatically"
+msgstr ""
+
+#: includes/Admin/Settings.php:172
+#: includes/Admin/views/campaigns/add.php:85
+#: includes/Admin/views/campaigns/edit.php:100
+msgid "Show as completed but still allow donations"
 msgstr ""
 
 #: includes/Admin/Utilities.php:25
@@ -436,11 +462,21 @@ msgstr ""
 msgid "Enter the end date of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:86
+#: includes/Admin/views/campaigns/add.php:78
+#: includes/Admin/views/campaigns/edit.php:93
+msgid "Donation behavior after goal"
+msgstr ""
+
+#: includes/Admin/views/campaigns/add.php:88
+#: includes/Admin/views/campaigns/edit.php:102
+msgid "Select the behavior when this campaign reaches its goal."
+msgstr ""
+
+#: includes/Admin/views/campaigns/add.php:103
 msgid "Select the campaign status."
 msgstr ""
 
-#: includes/Admin/views/campaigns/add.php:95
+#: includes/Admin/views/campaigns/add.php:112
 msgid "Add Campaign"
 msgstr ""
 
@@ -485,41 +521,39 @@ msgstr ""
 msgid "Edit or update the end date of the campaign."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:96
+#: includes/Admin/views/campaigns/edit.php:111
 msgid "Campaign overview"
 msgstr ""
 
 #. translators: 1: WC currency symbol 2: Raised amount
-#: includes/Admin/views/campaigns/edit.php:100
-#: includes/Frontend/Product.php:93
+#: includes/Admin/views/campaigns/edit.php:115
 #, php-format
 msgid "%1$s%2$.2f raised"
 msgstr ""
 
 #. translators: 1: WC currency symbol 2: Raised amount
-#: includes/Admin/views/campaigns/edit.php:101
-#: includes/Frontend/Product.php:94
+#: includes/Admin/views/campaigns/edit.php:116
 #, php-format
 msgid "%1$s%2$.2f goal"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:108
+#: includes/Admin/views/campaigns/edit.php:123
 msgid "Actions"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:122
+#: includes/Admin/views/campaigns/edit.php:137
 msgid "Update the campaign status."
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:128
+#: includes/Admin/views/campaigns/edit.php:143
 msgid "Save Changes"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:143
+#: includes/Admin/views/campaigns/edit.php:158
 msgid "Campaign Products"
 msgstr ""
 
-#: includes/Admin/views/campaigns/edit.php:165
+#: includes/Admin/views/campaigns/edit.php:180
 msgid "View"
 msgstr ""
 
@@ -560,39 +594,39 @@ msgstr ""
 msgid "Upgrade now"
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:48
+#: includes/Donation/class-donation-product.php:73
 msgid "About donation"
 msgstr ""
 
 #. translators: %s: Product title
-#: includes/Donation/class-donation-product.php:84
+#: includes/Donation/class-donation-product.php:109
 #, php-format
 msgid "Add &ldquo;%s&rdquo; to your cart"
 msgstr ""
 
 #. translators: %s: Product title
-#: includes/Donation/class-donation-product.php:84
+#: includes/Donation/class-donation-product.php:109
 #, php-format
 msgid "Read more about &ldquo;%s&rdquo;"
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:130
+#: includes/Donation/class-donation-product.php:155
 msgid "Your donation has been added to the cart. Proceed with the donation to help now."
 msgstr ""
 
 #. translators: %1$s: Product title, %2$s: View cart URL
-#: includes/Donation/class-donation-product.php:135
+#: includes/Donation/class-donation-product.php:160
 #, php-format
 msgid "Your donation to &ldquo;%1$s&rdquo; has been added to the cart. Proceed with the donation to help now. <a href=\"%2$s\" class=\"button wc-forward\">View Cart</a>"
 msgstr ""
 
 #. translators: %s: Product title
-#: includes/Donation/class-donation-product.php:160
+#: includes/Donation/class-donation-product.php:185
 #, php-format
 msgid "You’ve already added “%s” to your cart. Complete your donation to help now!"
 msgstr ""
 
-#: includes/Donation/class-donation-product.php:168
+#: includes/Donation/class-donation-product.php:193
 msgid "View Cart"
 msgstr ""
 
@@ -600,8 +634,16 @@ msgstr ""
 msgid "Donation"
 msgstr ""
 
-#: includes/Frontend/Product.php:146
+#: includes/Frontend/Product.php:166
 msgid "The campaign expired!"
+msgstr ""
+
+#: includes/Frontend/Product.php:178
+msgid "This campaign has reached its goal and is now closed."
+msgstr ""
+
+#: includes/Frontend/Product.php:182
+msgid "This campaign has reached its goal but is still accepting donations."
 msgstr ""
 
 #: includes/Plugin.php:79
