@@ -170,9 +170,8 @@ class Product {
 			return;
 		}
 
-		// Respect campaign goal behavior.
-		$raised = (float) get_post_meta( $campaign_id, '_raised_amount', true );
-		$goal   = (float) get_post_meta( $campaign_id, 'wcdm_goal_amount', true );
+		$raised   = (float) get_post_meta( $campaign_id, '_raised_amount', true );
+		$goal     = (float) get_post_meta( $campaign_id, 'wcdm_goal_amount', true );
 		$behavior = wcdm_get_goal_behavior( $campaign_id );
 		if ( $goal > 0 && $raised >= $goal ) {
 			if ( 'close' === $behavior ) {
@@ -181,7 +180,6 @@ class Product {
 			}
 			if ( 'soft_close' === $behavior ) {
 				printf( '%1$s%2$s%3$s', '<p class="completed">', esc_html__( 'This campaign has reached its goal but is still accepting donations.', 'wc-donation-manager' ), '</p>' );
-				// continue to allow donations
 			}
 		}
 
