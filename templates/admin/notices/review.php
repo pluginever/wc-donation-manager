@@ -3,7 +3,7 @@
  * Admin notice for review.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Admin\Views\Notices
+ * @package PluginEver\DonationManager\Admin\Views\Notices
  * @return void
  */
 
@@ -12,7 +12,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="notice-body">
 	<div class="notice-icon">
-		<img src="<?php echo esc_attr( WCDM()->get_assets_url( 'images/plugin-icon.png' ) ); ?>" alt="WooCommerce Donation Manager">
+		<img src="<?php echo esc_attr( WCDM()->assets_url( 'images/plugin-icon.png' ) ); ?>" alt="WooCommerce Donation Manager">
 	</div>
 	<div class="notice-content">
 		<h3><?php esc_html_e( 'Enjoying Donation Manager?', 'wc-donation-manager' ); ?></h3>

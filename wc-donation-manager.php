@@ -35,20 +35,47 @@
  * @author              Sultan Nasir Uddin <manikdrmc@gmail.com>
  * @copyright           2026 ByteEver
  * @license             GPL-2.0+
- * @package             WooCommerceDonationManager
+ * @package             PluginEver\DonationManager
  */
+
+use PluginEver\DonationManager\Installer;
+use PluginEver\DonationManager\Plugin;
 
 defined( 'ABSPATH' ) || exit;
 
-// Autoloader.
+// Composer autoloader (includes strauss-prefixed framework + plugin classes).
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/includes/functions.php';
+
+$data = array(
+	'version'       => '1.1.3',
+	'name'          => 'Donation Manager',
+	'option_prefix' => 'wcdm',
+	'hook_prefix'   => 'wc_donation_manager',
+	'settings_url'  => admin_url( 'admin.php?page=wcdm-settings' ),
+	'support_url'   => 'https://pluginever.com/support/',
+	'docs_url'      => 'https://pluginever.com/docs/wc-donation-manager/',
+	'upgrade_url'   => 'https://pluginever.com/plugins/woocommerce-donation-manager-pro/',
+	'pro_basename'  => 'wc-donation-manager-pro/wc-donation-manager-pro.php',
+	'review_url'    => 'https://wordpress.org/support/plugin/wc-donation-manager/reviews/#new-post',
+);
 
 // Instantiate the plugin.
-WooCommerceDonationManager\Plugin::create(
-	array(
-		'file'         => __FILE__,
-		'settings_url' => admin_url( 'admin.php?page=wcdm-settings' ),
-		'support_url'  => 'https://pluginever.com/support/',
-		'docs_url'     => 'https://pluginever.com/docs/wc-donation-manager/',
-	)
+Plugin::create( __FILE__, $data );
+
+// Register the plugin activation and deactivation hooks.
+WCDM()->on_activation( array( Installer::class, 'install' ) );
+WCDM()->on_deactivation( array( Installer::class, 'deactivate' ) );
+
+// Declare WooCommerce feature compatibility.
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+		}
+	}
 );
+
+WCDM()->bootstrap();

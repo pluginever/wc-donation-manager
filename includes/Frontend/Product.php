@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Frontend;
+namespace PluginEver\DonationManager\Frontend;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,16 +12,16 @@ defined( 'ABSPATH' ) || exit;
  * This class is responsible for all frontend functionality for products shop/archive page.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Frontend
+ * @package PluginEver\DonationManager\Frontend
  */
-class Product {
+class Product extends Component {
 
 	/**
 	 * Products constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_filter( 'woocommerce_loop_add_to_cart_link', array( __CLASS__, 'add_to_cart_link' ), 10, 2 );
 		add_filter( 'woocommerce_get_price_html', array( __CLASS__, 'get_price_html' ), 10, 2 );
 		add_action( 'woocommerce_before_add_to_cart_button', array( __CLASS__, 'before_add_to_cart_button' ) );
@@ -72,7 +74,8 @@ class Product {
 	 */
 	public static function before_add_to_cart_button(): void {
 		global $product;
-
+        var_dump( $product->get_type() );
+		exit;
 		if ( 'donation' === $product->get_type() ) {
 			$currency_symbol       = get_woocommerce_currency_symbol();
 			$is_predefined_amounts = get_post_meta( $product->get_id(), 'wcdm_is_predefined_amounts', true );

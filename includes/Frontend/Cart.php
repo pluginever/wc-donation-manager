@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Frontend;
+namespace PluginEver\DonationManager\Frontend;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,16 +12,16 @@ defined( 'ABSPATH' ) || exit;
  * Handles cart functionality.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Frontend
+ * @package PluginEver\DonationManager\Frontend
  */
-class Cart {
+class Cart extends Component {
 
 	/**
 	 * Cart Constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_filter( 'woocommerce_get_cart_item_from_session', array( __CLASS__, 'get_cart_item_from_session' ) );
 		add_filter( 'woocommerce_cart_item_price', array( __CLASS__, 'cart_item_price' ), 10, 3 );
 		add_filter( 'woocommerce_update_cart_action_cart_updated', array( __CLASS__, 'update_cart' ) );

@@ -5,7 +5,7 @@
  * @var \WP_POST $campaign The campaign post object.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -17,16 +17,16 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 <p><?php esc_html_e( 'Edit and update the campaign.', 'wc-donation-manager' ); ?></p>
 
 <form class="campaign" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-	<div class="bk-poststuff">
+	<div class="b8-poststuff">
 		<div class="column-1">
-			<div class="bk-card">
-				<div class="bk-card__header">
-					<h3 class="bk-card__title"><?php esc_html_e( 'Campaign Details', 'wc-donation-manager' ); ?></h3>
-					<p class="bk-card__subtitle">
+			<div class="b8-card">
+				<div class="b8-card__header">
+					<h3 class="b8-card__title"><?php esc_html_e( 'Campaign Details', 'wc-donation-manager' ); ?></h3>
+					<p class="b8-card__subtitle">
 						#<?php echo esc_html( $campaign->ID ); ?>
 					</p>
 				</div>
-				<div class="bk-card__body form-inline">
+				<div class="b8-card__body form-inline">
 					<div class="pev-form-field">
 						<label for="name">
 							<?php esc_html_e( 'Campaign Name *', 'wc-donation-manager' ); ?>
@@ -106,11 +106,11 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 			</div>
 		</div>
 		<div class="column-2">
-			<div class="bk-card">
-				<div class="bk-card__header">
-					<h3 class="bk-card__title"><?php esc_html_e( 'Campaign overview', 'wc-donation-manager' ); ?></h3>
+			<div class="b8-card">
+				<div class="b8-card__header">
+					<h3 class="b8-card__title"><?php esc_html_e( 'Campaign overview', 'wc-donation-manager' ); ?></h3>
 				</div>
-				<div class="bk-card__body campaign-progress">
+				<div class="b8-card__body campaign-progress">
 					<div class="progress-label">
 						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f raised', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ) ) ); ?></label>
 						<label for="campaign-progressbar"><?php echo wp_kses_post( sprintf( /* translators: 1: WC currency symbol 2: Raised amount */ __( '%1$s%2$.2f goal', 'wc-donation-manager' ), esc_html( $currency_symbol ), esc_html( get_post_meta( $campaign->ID, 'wcdm_goal_amount', true ) ) ) ); ?></label>
@@ -118,12 +118,12 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 					<progress id="campaign-progressbar" value="<?php echo esc_attr( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?>" max="<?php echo esc_attr( get_post_meta( $campaign->ID, 'wcdm_goal_amount', true ) ); ?>"><?php echo esc_html( get_post_meta( $campaign->ID, '_raised_amount', true ) ); ?></progress>
 				</div>
 			</div>
-			<div class="bk-card">
-				<div class="bk-card__header">
-					<h3 class="bk-card__title"><?php esc_html_e( 'Actions', 'wc-donation-manager' ); ?></h3>
+			<div class="b8-card">
+				<div class="b8-card__header">
+					<h3 class="b8-card__title"><?php esc_html_e( 'Actions', 'wc-donation-manager' ); ?></h3>
 				</div>
 
-				<div class="bk-card__body">
+				<div class="b8-card__body">
 					<label for="status">
 						<?php esc_html_e( 'Status', 'wc-donation-manager' ); ?>
 					</label>
@@ -138,7 +138,7 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 					</p>
 				</div>
 
-				<div class="bk-card__footer">
+				<div class="b8-card__footer">
 					<a class="del" href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'action', 'delete', admin_url( 'admin.php?page=wc-donation-manager&id=' . $campaign->ID ) ), 'bulk-campaigns' ) ); ?>"><?php esc_html_e( 'Delete', 'wc-donation-manager' ); ?></a>
 					<button class="button button-primary"><?php esc_html_e( 'Save Changes', 'wc-donation-manager' ); ?></button>
 				</div>
@@ -151,13 +151,13 @@ $campaign_products = wcdm_get_campaign_products( $campaign->ID );
 </form>
 <?php if ( $campaign_products ) : ?>
 	<div class="campaign-products">
-		<div class="bk-poststuff">
+		<div class="b8-poststuff">
 			<div class="column-1">
-				<div class="bk-card">
-					<div class="bk-card__header">
-						<h3 class="bk-card__title"><?php esc_html_e( 'Campaign Products', 'wc-donation-manager' ); ?></h3>
+				<div class="b8-card">
+					<div class="b8-card__header">
+						<h3 class="b8-card__title"><?php esc_html_e( 'Campaign Products', 'wc-donation-manager' ); ?></h3>
 					</div>
-					<div class="bk-card__body">
+					<div class="b8-card__body">
 						<table>
 							<?php
 							foreach ( $campaign_products as $campaign_product ) :

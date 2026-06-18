@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin;
+namespace PluginEver\DonationManager\Admin;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -8,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
  * Menus class.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Admin
+ * @package PluginEver\DonationManager\Admin
  */
-class Menus {
+class Menus extends Component {
 
 	/**
 	 * Main menu slug.
@@ -28,20 +30,21 @@ class Menus {
 	private $list_table;
 
 	/**
-	 * Menus constructor.
+	 * Register hooks.
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_filter( 'set-screen-option', array( $this, 'screen_option' ), 10, 3 );
 		add_action( 'current_screen', array( $this, 'setup_list_table' ) );
 		add_action( 'wc_donation_manager_campaigns_content', array( $this, 'render_campaigns_content' ) );
 
-		// Pro tabs.
-		if ( ! WCDM()->is_plugin_active( 'wc-donation-manager-pro' ) ) {
+		// Free-version placeholders; the Pro add-on takes these over.
+		if ( ! $this->app->is_pro_active() ) {
 			add_action( 'wc_donation_manager_donors_content', array( $this, 'render_donors_content' ) );
-			add_action( 'wc_donation_manager_settings_emails_content', array( $this, 'render_emails_settings' ) );
+			add_action( 'wc_donation_manager_settings_tab_emails', array( $this, 'render_emails_settings' ) );
 			add_action( 'woocommerce_admin_field_wcdm_add_to_cart_btn_text', array( $this, 'render_customizable_settings' ) );
 		}
 	}
@@ -93,9 +96,13 @@ class Menus {
 			);
 			if ( ! is_callable( $submenu['callback'] ) && ! empty( $submenu['page_id'] ) ) {
 				$submenu['callback'] = function () use ( $submenu ) {
-					$page_id = $submenu['page_id'];
-					$tabs    = $submenu['tabs'];
-					include_once __DIR__ . '/views/admin-page.php';
+					$this->app->template->view(
+						'admin.admin-page',
+						array(
+							'page_id' => $submenu['page_id'],
+							'tabs'    => $submenu['tabs'],
+						)
+					);
 				};
 			}
 			$load = add_submenu_page(
@@ -184,11 +191,11 @@ class Menus {
 		}
 
 		if ( Utilities::is_add_screen() ) {
-			include __DIR__ . '/views/campaigns/add.php';
+			$this->app->template->view( 'admin.campaigns.add' );
 		} elseif ( $edit ) {
-			include __DIR__ . '/views/campaigns/edit.php';
+			$this->app->template->view( 'admin.campaigns.edit', array( 'campaign' => $campaign ) );
 		} else {
-			include __DIR__ . '/views/campaigns/campaigns.php';
+			$this->app->template->view( 'admin.campaigns.campaigns', array( 'list_table' => $this->list_table ) );
 		}
 	}
 
@@ -208,7 +215,7 @@ class Menus {
 				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
 				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
 			</div>
-			<img src="<?php echo esc_url( WCDM()->get_assets_url() . 'images/donors.png' ); ?>" alt="<?php esc_attr_e( 'Donors list table', 'wc-donation-manager' ); ?>"/>
+			<img src="<?php echo esc_url( $this->app->assets_url( 'images/donors.png' ) ); ?>" alt="<?php esc_attr_e( 'Donors list table', 'wc-donation-manager' ); ?>"/>
 		</div>
 		<?php
 	}
@@ -226,7 +233,7 @@ class Menus {
 				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
 				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
 			</div>
-			<img src="<?php echo esc_url( WCDM()->get_assets_url() . 'images/emails.png' ); ?>" alt="<?php esc_attr_e( 'Customer completed emails', 'wc-donation-manager' ); ?>"/>
+			<img src="<?php echo esc_url( $this->app->assets_url( 'images/emails.png' ) ); ?>" alt="<?php esc_attr_e( 'Customer completed emails', 'wc-donation-manager' ); ?>"/>
 		</div>
 		<?php
 	}
@@ -244,7 +251,7 @@ class Menus {
 				<h3><?php esc_html_e( 'Available in Pro Version', 'wc-donation-manager' ); ?></h3>
 				<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=import-tab&utm_medium=link&utm_campaign=upgrade&utm_id=wc-donation-manager" target="_blank" class="button-primary"><?php esc_html_e( 'Upgrade to Pro Now', 'wc-donation-manager' ); ?></a>
 			</div>
-			<img src="<?php echo esc_url( WCDM()->get_assets_url() . 'images/customizable-options.png' ); ?>" alt="<?php esc_attr_e( 'Add customizable settings', 'wc-donation-manager' ); ?>"/>
+			<img src="<?php echo esc_url( $this->app->assets_url( 'images/customizable-options.png' ) ); ?>" alt="<?php esc_attr_e( 'Add customizable settings', 'wc-donation-manager' ); ?>"/>
 		</div>
 		<?php
 	}

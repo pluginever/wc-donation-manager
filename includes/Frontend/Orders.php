@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Frontend;
+namespace PluginEver\DonationManager\Frontend;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,16 +12,16 @@ defined( 'ABSPATH' ) || exit;
  * Handles order functionality weather admin or customer.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Frontend
+ * @package PluginEver\DonationManager\Frontend
  */
-class Orders {
+class Orders extends Component {
 
 	/**
 	 * Orders Constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_action( 'woocommerce_order_status_changed', array( __CLASS__, 'mark_donation_order' ), 20 );
 		add_action( 'woocommerce_order_status_completed', array( __CLASS__, 'order_status_completed' ), 20, 2 );
 	}

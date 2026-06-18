@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin\ListTables;
+namespace PluginEver\DonationManager\Admin\ListTables;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * CampaignsListTable class.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
 class CampaignsListTable extends ListTable {
 

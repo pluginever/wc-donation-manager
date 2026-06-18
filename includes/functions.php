@@ -2,11 +2,11 @@
 /**
  * Usefully functions.
  *
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  * @since 1.0.0
  */
 
-use WooCommerceDonationManager\Plugin;
+use PluginEver\DonationManager\Plugin;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * Get the plugin instance.
  *
  * @since 1.0.0
- * @return WooCommerceDonationManager\Plugin
+ * @return PluginEver\DonationManager\Plugin
  */
 function WCDM() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 	return Plugin::instance();

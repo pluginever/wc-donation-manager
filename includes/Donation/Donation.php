@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Donation;
+namespace PluginEver\DonationManager\Donation;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit; // Exist if accessed directly.
 
@@ -8,14 +10,14 @@ defined( 'ABSPATH' ) || exit; // Exist if accessed directly.
  * Class Donation.
  *
  * @since   1.0.0
- * @package WooCommerceDonationManager\Donation
+ * @package PluginEver\DonationManager\Donation
  */
-class Donation {
+class Donation extends Component {
 
 	/**
 	 * Constructor.
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_filter( 'product_type_selector', array( __CLASS__, 'add_product_type' ) );
 		add_filter( 'woocommerce_product_class', array( __CLASS__, 'product_type_class' ), 10, 2 );
 	}

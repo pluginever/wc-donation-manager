@@ -3,7 +3,7 @@
  * Admin views: Add Campaign
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
 
 defined( 'ABSPATH' ) || exit;

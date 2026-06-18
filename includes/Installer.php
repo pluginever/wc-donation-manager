@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager;
+namespace PluginEver\DonationManager;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
@@ -8,125 +8,74 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * Installer Class.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
-class Installer {
+class Installer extends B8\Component {
 
 	/**
-	 * Update callbacks.
+	 * Update hook name.
+	 *
+	 * @since 1.1.3
+	 * @var string
+	 */
+	const UPDATE_HOOK = 'wc_donation_manager_run_update';
+
+	/**
+	 * Upgrade routines keyed by the target version.
 	 *
 	 * @since 1.0.0
-	 * @var array
+	 * @var array<string, callable>
 	 */
-	protected $updates = array();
+	protected array $updates = array();
 
 	/**
-	 * Class constructor.
-	 */
-	public function __construct() {
-		add_action( 'init', array( $this, 'check_update' ), 5 );
-		add_action( 'wcdm_run_update_callback', array( $this, 'run_update_callback' ), 10, 2 );
-		add_action( 'wcdm_update_db_version', array( $this, 'update_db_version' ) );
-	}
-
-	/**
-	 * Check the plugin version and run the updater if necessary.
-	 *
-	 * This check is done on all requests and runs if the versions do not match.
+	 * Register hooks.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function check_update() {
-		$db_version      = WCDM()->get_db_version();
-		$current_version = WCDM()->get_version();
-		$requires_update = version_compare( $db_version, $current_version, '<' );
-		$can_install     = ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) && ! defined( 'IFRAME_REQUEST' );
-		if ( $can_install && $requires_update && ! WC()->queue()->get_next( 'wcdm_run_update_callback' ) ) {
-			static::install();
-			$update_versions = array_keys( $this->updates );
-			usort( $update_versions, 'version_compare' );
-			if ( ! is_null( $db_version ) && version_compare( $db_version, end( $update_versions ), '<' ) ) {
-				$this->update();
-			} else {
-				WCDM()->update_db_version( $current_version );
+	public function register(): void {
+		add_action( 'init', array( $this, 'maybe_update' ) );
+		add_action( self::UPDATE_HOOK, array( $this, 'run_update' ) );
+	}
+
+	/**
+	 * Run the installer when the stored version is behind the plugin version.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function maybe_update(): void {
+		$can_install = ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) && ! defined( 'IFRAME_REQUEST' );
+
+		if ( $can_install && version_compare( $this->app->version, $this->app->options->get_db_version(), '>' ) ) {
+			$this->install();
+
+			if ( ! empty( $this->updates ) ) {
+				$this->app->queue->add( self::UPDATE_HOOK );
 			}
 		}
 	}
 
 	/**
-	 * Update the plugin.
+	 * Run the pending upgrade routines.
 	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public function update() {
-		$db_version = WCDM()->get_db_version();
-		$loop       = 0;
-		foreach ( $this->updates as $version => $callbacks ) {
-			$callbacks = (array) $callbacks;
-			if ( version_compare( $db_version, $version, '<' ) ) {
-				foreach ( $callbacks as $callback ) {
-					WC()->queue()->schedule_single(
-						time() + $loop,
-						'wcdm_run_update_callback',
-						array(
-							'callback' => $callback,
-							'version'  => $version,
-						)
-					);
-					++$loop;
-				}
-			}
-			++$loop;
-		}
+	public function run_update(): void {
+		$installed = $this->app->options->get_db_version();
 
-		if ( version_compare( WCDM()->get_db_version(), WCDM()->get_version(), '<' ) &&
-			! WC()->queue()->get_next( 'wcdm_update_db_version' ) ) {
-			WC()->queue()->schedule_single(
-				time() + $loop,
-				'wcdm_update_db_version',
-				array(
-					'version' => WCDM()->get_version(),
-				)
-			);
-		}
-	}
+		uksort( $this->updates, 'version_compare' );
 
-	/**
-	 * Run the update callback.
-	 *
-	 * @param string $callback The callback to run.
-	 * @param string $version The version of the callback.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function run_update_callback( $callback, $version ) {
-		if ( is_callable( $callback ) ) {
-			$result = (bool) call_user_func( $callback );
-			if ( $result ) {
-				WC()->queue()->add(
-					'wcdm_run_update_callback',
-					array(
-						'callback' => $callback,
-						'version'  => $version,
-					)
-				);
+		foreach ( $this->updates as $version => $callback ) {
+			if ( version_compare( $installed, $version, '<' ) ) {
+				call_user_func( $callback );
+				$this->app->options->update_db_version( $version, true );
 			}
 		}
-	}
 
-	/**
-	 * Update the plugin version.
-	 *
-	 * @param string $version The version to update to.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function update_db_version( $version ) {
-		WCDM()->update_db_version( $version );
+		$this->app->options->update_db_version( $this->app->version, true );
 	}
 
 	/**
@@ -135,23 +84,44 @@ class Installer {
 	 * @since 1.0.0
 	 * @return void
 	 */
-	public static function install() {
+	public function install(): void {
 		if ( ! is_blog_installed() ) {
 			return;
 		}
-		self::save_default_settings();
-		flush_rewrite_rules( true );
+
+		$this->create_defaults();
+		$this->app->options->update_db_version( $this->app->version, true );
 		add_option( 'wcdm_installed', time() );
-		WCDM()->add_db_version();
+
+		flush_rewrite_rules();
 	}
 
 	/**
-	 * Save default settings.
+	 * Seed default option values from the registered settings fields.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.3
 	 * @return void
 	 */
-	public static function save_default_settings() {
-		Admin\Settings::instance()->save_defaults();
+	protected function create_defaults(): void {
+		foreach ( $this->app->settings->get_settings() as $group ) {
+			foreach ( $group['fields'] as $field ) {
+				if ( empty( $field['id'] ) || ! isset( $field['default'] ) || false !== get_option( $field['id'], false ) ) {
+					continue;
+				}
+				add_option( $field['id'], $field['default'] );
+			}
+		}
+	}
+
+	/**
+	 * Clean up the plugin's runtime state on deactivation.
+	 *
+	 * @since 1.1.3
+	 * @return void
+	 */
+	public function deactivate(): void {
+		$this->app->queue->clear();
+
+		flush_rewrite_rules();
 	}
 }

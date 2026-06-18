@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Frontend;
+namespace PluginEver\DonationManager\Frontend;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,16 +12,16 @@ defined( 'ABSPATH' ) || exit;
  * This class is responsible for all frontend functionality.
  *
  * @since   1.0.0
- * @package WooCommerceDonationManager\Frontend
+ * @package PluginEver\DonationManager\Frontend
  */
-class Frontend {
+class Frontend extends Component {
 
 	/**
 	 * Frontend constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_action( 'woocommerce_before_cart', array( __CLASS__, 'remove_coupon' ) );
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'remove_coupon' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -51,7 +53,7 @@ class Frontend {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'css/frontend.css' );
-		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'js/frontend.js', array( 'jquery' ) );
+		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'frontend-common.css' );
+		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'frontend-common.js', array( 'jquery' ) );
 	}
 }

@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin;
+namespace PluginEver\DonationManager\Admin;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,16 +13,16 @@ defined( 'ABSPATH' ) || exit;
  * should be added here.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
-class Actions {
+class Actions extends Component {
 
 	/**
 	 * Actions constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_action( 'admin_post_wcdm_add_campaign', array( __CLASS__, 'add_campaign' ) );
 		add_action( 'admin_post_wcdm_edit_campaign', array( __CLASS__, 'edit_campaign' ) );
 		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_donation_meta' ) );

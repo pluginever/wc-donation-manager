@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin;
+namespace PluginEver\DonationManager\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * Utilities class.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Admin
+ * @package PluginEver\DonationManager\Admin
  */
 class Utilities {
 
@@ -46,7 +46,7 @@ class Utilities {
 				'capability' => 'manage_options',
 				'menu_slug'  => 'wcdm-settings',
 				'page_id'    => 'settings',
-				'callback'   => array( Settings::class, 'output' ),
+				'callback'   => array( WCDM()->get( Settings::class ), 'render' ),
 			),
 		);
 

@@ -41,9 +41,6 @@
 				? Math.min((raised / goal) * 100, 100)
 				: 0;
 
-			console.log(percentage);
-
-
 			$progressCard
 				.find('.progress-bar')
 				.css('width', percentage + '%');
