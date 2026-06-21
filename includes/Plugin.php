@@ -52,9 +52,6 @@ final class Plugin extends B8\App {
 		define( 'WCDM_ASSETS_PATH', $this->assets_path() );
 		define( 'WCDM_MANAGER_ROLE', $role );
 
-		// Donation product type class (non-namespaced WC_Product subclass).
-		require_once __DIR__ . '/Donation/class-donation-product.php';
-
 		add_action( 'init', array( $this, 'register_cpt_campaigns' ) );
 		add_action( 'woocommerce_loaded', array( $this, 'woocommerce_loaded' ), 0 );
 		add_filter( 'plugin_action_links_' . $this->basename(), array( $this, 'plugin_action_links' ) );
@@ -67,6 +64,9 @@ final class Plugin extends B8\App {
 	 * @return void
 	 */
 	public function woocommerce_loaded(): void {
+		// Donation product type class (non-namespaced WC_Product subclass).
+		require_once __DIR__ . '/Donation/class-donation-product.php';
+
 		$this->boot( $this->components );
 
 		/**
@@ -102,7 +102,8 @@ final class Plugin extends B8\App {
 	 * @return bool
 	 */
 	public function is_pro_active(): bool {
-		return ! empty( $this->pro_basename ) && $this->plugin_active( (string) $this->pro_basename );
+		$pro_basename = $this->get( 'pro_basename', '' );
+		return ! empty( $pro_basename ) && $this->plugin_active( (string) $pro_basename );
 	}
 
 	/**

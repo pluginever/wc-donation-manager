@@ -74,8 +74,6 @@ class Product extends Component {
 	 */
 	public static function before_add_to_cart_button(): void {
 		global $product;
-        var_dump( $product->get_type() );
-		exit;
 		if ( 'donation' === $product->get_type() ) {
 			$currency_symbol       = get_woocommerce_currency_symbol();
 			$is_predefined_amounts = get_post_meta( $product->get_id(), 'wcdm_is_predefined_amounts', true );

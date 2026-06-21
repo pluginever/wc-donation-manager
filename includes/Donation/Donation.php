@@ -49,6 +49,10 @@ class Donation extends Component {
 	public static function product_type_class( $class_name, $product_type ) {
 
 		if ( 'donation' === $product_type ) {
+			if ( ! class_exists( 'WCDM_Donation_Product' ) && class_exists( 'WC_Product_Simple' ) ) {
+				require_once WCDM_PATH . 'includes/Donation/class-donation-product.php';
+			}
+
 			$class_name = 'WCDM_Donation_Product';
 		}
 
