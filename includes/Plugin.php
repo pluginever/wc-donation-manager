@@ -34,6 +34,7 @@ final class Plugin extends B8\App {
 		Frontend\Cart::class,
 		Frontend\Orders::class,
 		Admin\Admin::class,
+		Admin\Feedback::class,
 	);
 
 	/**
@@ -43,15 +44,6 @@ final class Plugin extends B8\App {
 	 * @return void
 	 */
 	public function bootstrap(): void {
-		$role = apply_filters( 'wc_donation_manager_role', 'manage_woocommerce' );
-		define( 'WCDM_VERSION', $this->version );
-		define( 'WCDM_FILE', $this->file );
-		define( 'WCDM_PATH', $this->plugin_path() );
-		define( 'WCDM_URL', $this->plugin_url() );
-		define( 'WCDM_ASSETS_URL', $this->assets_url() );
-		define( 'WCDM_ASSETS_PATH', $this->assets_path() );
-		define( 'WCDM_MANAGER_ROLE', $role );
-
 		add_action( 'init', array( $this, 'register_cpt_campaigns' ) );
 		add_action( 'woocommerce_loaded', array( $this, 'woocommerce_loaded' ), 0 );
 		add_filter( 'plugin_action_links_' . $this->basename(), array( $this, 'plugin_action_links' ) );
