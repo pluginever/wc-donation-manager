@@ -6,7 +6,6 @@
  * @since 1.0.0
  */
 
-
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 

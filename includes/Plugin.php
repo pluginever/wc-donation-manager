@@ -56,7 +56,6 @@ final class Plugin extends B8\App {
 	 * @return void
 	 */
 	public function woocommerce_loaded(): void {
-		// Donation product type class (non-namespaced WC_Product subclass).
 		require_once __DIR__ . '/Donation/class-donation-product.php';
 
 		$this->boot( $this->components );
