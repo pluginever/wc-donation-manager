@@ -6,19 +6,9 @@
  * @since 1.0.0
  */
 
-use PluginEver\DonationManager\Plugin;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-/**
- * Get the plugin instance.
- *
- * @since 1.0.0
- * @return PluginEver\DonationManager\Plugin
- */
-function wc_donation_manager() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-	return Plugin::instance();
-}
 
 /**
  * Get campaign.
