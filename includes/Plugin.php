@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * @property-read string $pro_basename Premium plugin basename.
  * @property-read string $review_url   Review URL.
  */
-final class Plugin extends B8\App {
+class Plugin extends B8\App {
 
 	/**
 	 * Components to boot.
