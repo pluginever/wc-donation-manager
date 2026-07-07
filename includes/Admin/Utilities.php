@@ -46,7 +46,7 @@ class Utilities {
 				'capability' => 'manage_options',
 				'menu_slug'  => 'wcdm-settings',
 				'page_id'    => 'settings',
-				'callback'   => array( WCDM()->get( Settings::class ), 'render' ),
+				'callback'   => array( wc_donation_manager()->get( Settings::class ), 'render' ),
 			),
 		);
 

@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  * Handles the deactivation survey.
  *
  * @since   1.0.0
- * @package PluginEver\StarterPlugin\Admin
+ * @package PluginEver\DonationManager\Admin
  */
 class Feedback extends Component {
 

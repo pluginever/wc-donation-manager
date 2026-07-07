@@ -53,7 +53,7 @@ class Frontend extends Component {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		WCDM()->scripts->enqueue_style( 'wcdm-frontend', 'frontend-common.css' );
-		WCDM()->scripts->enqueue_script( 'wcdm-frontend', 'frontend-common.js', array( 'jquery' ) );
+		wc_donation_manager()->scripts->enqueue_style( 'wcdm-frontend', 'frontend-common.css' );
+		wc_donation_manager()->scripts->enqueue_script( 'wcdm-frontend', 'frontend-common.js', array( 'jquery' ) );
 	}
 }

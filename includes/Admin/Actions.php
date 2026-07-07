@@ -62,9 +62,9 @@ class Actions extends Component {
 		$campaign = wp_insert_post( $args );
 
 		if ( is_wp_error( $campaign ) ) {
-			WCDM()->flash->error( $campaign->get_error_message() );
+			wc_donation_manager()->flash->error( $campaign->get_error_message() );
 		} else {
-			WCDM()->flash->success( __( 'Campaign created successfully.', 'wc-donation-manager' ) );
+			wc_donation_manager()->flash->success( __( 'Campaign created successfully.', 'wc-donation-manager' ) );
 
 			$referer = add_query_arg(
 				array( 'edit' => absint( $campaign ) ),
@@ -109,9 +109,9 @@ class Actions extends Component {
 		$campaign = wp_insert_post( $args );
 
 		if ( is_wp_error( $campaign ) ) {
-			WCDM()->flash->error( $campaign->get_error_message() );
+			wc_donation_manager()->flash->error( $campaign->get_error_message() );
 		} else {
-			WCDM()->flash->success( __( 'Campaign updated successfully.', 'wc-donation-manager' ) );
+			wc_donation_manager()->flash->success( __( 'Campaign updated successfully.', 'wc-donation-manager' ) );
 		}
 
 		wp_safe_redirect( $referer );

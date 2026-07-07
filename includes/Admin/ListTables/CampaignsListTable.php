@@ -89,7 +89,7 @@ class CampaignsListTable extends ListTable {
 		}
 		if ( ! empty( $performed ) ) {
 			// translators: %s: number of accounts.
-			WCDM()->flash->success( sprintf( __( '%s campaign(s) deleted successfully.', 'wc-donation-manager' ), number_format_i18n( $performed ) ) );
+			wc_donation_manager()->flash->success( sprintf( __( '%s campaign(s) deleted successfully.', 'wc-donation-manager' ), number_format_i18n( $performed ) ) );
 		}
 	}
 

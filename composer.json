@@ -32,13 +32,10 @@
 		"makepot": "wp --allow-root i18n make-pot . --include=*.php,assets,includes,templates --domain=wc-donation-manager",
 		"phpcs": "php ./vendor/bin/phpcs --standard=phpcs.xml -s -v",
 		"phpcbf": "php ./vendor/bin/phpcbf --standard=phpcs.xml -v",
-		"test:setup": "bash ./bin/setup-tests.sh wordpress_test root root localhost trunk && phpunit",
-		"test": "phpunit",
 		"strauss": [
 			"test -f /tmp/strauss.phar || curl -o /tmp/strauss.phar -L https://github.com/BrianHenryIE/strauss/releases/download/0.24.1/strauss.phar",
 			"@php /tmp/strauss.phar",
-			"@composer dump-autoload --no-scripts",
-			"find ./vendor/byteever -type f -name '*.php' -exec perl -i -pe \"s/'bytekit-textdomain'/'wc-donation-manager'/g\" {} +"
+			"@composer dump-autoload --no-scripts"
 		]
 	},
 	"extra": {

@@ -50,7 +50,7 @@ class Donation extends Component {
 
 		if ( 'donation' === $product_type ) {
 			if ( ! class_exists( 'WCDM_Donation_Product' ) && class_exists( 'WC_Product_Simple' ) ) {
-				require_once WCDM()->plugin_path( '/includes/Donation/class-donation-product.php' );
+				require_once wc_donation_manager()->plugin_path( '/includes/Donation/class-donation-product.php' );
 			}
 
 			$class_name = 'WCDM_Donation_Product';

@@ -3,7 +3,7 @@
  * Deactivation feedback modal.
  *
  * @since   1.0.0
- * @package PluginEver\StarterPlugin
+ * @package PluginEver\DonationManager
  *
  * @var string                $basename Plugin basename.
  * @var string                $nonce    Feedback nonce.
@@ -60,7 +60,7 @@ defined( 'ABSPATH' ) || exit;
 		$wrap.on( 'click', '[data-submit]', function ( e ) {
 			e.preventDefault();
 			$.post( window.ajaxurl, {
-				action: 'wc_starter_plugin_feedback',
+				action: 'wc_donation_manager_plugin_feedback',
 				nonce: '<?php echo esc_js( $nonce ); ?>',
 				reason: $wrap.find( 'input[name="wc-donation-manager-reason"]:checked' ).val() || '',
 				details: $wrap.find( 'textarea' ).val() || ''
