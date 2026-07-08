@@ -29,6 +29,7 @@ jobs:
         with:
           target-branch: trunk
           ignore-file: .distignore
+          include-paths: .wordpress-org
           script-before: |
             composer config -g github-oauth.github.com "${{ secrets.ACCESS_TOKEN }}"
             [ -f composer.json ] && composer install --no-dev --optimize-autoloader

@@ -2,7 +2,7 @@
 /**
  * List view of Campaigns
  *
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  * @since 1.0.0
  */
 
@@ -18,9 +18,9 @@ defined( 'ABSPATH' ) || exit;
 	<hr class="wp-header-end">
 
 	<form id="wcdm-campaigns-table" method="get" action="<?php echo esc_url( admin_url( 'admin.php' ) ); ?>">
-		<?php $this->list_table->views(); ?>
-		<?php $this->list_table->search_box( __( 'Search', 'wc-donation-manager' ), 'search' ); ?>
-		<?php $this->list_table->display(); ?>
+		<?php $list_table->views(); ?>
+		<?php $list_table->search_box( __( 'Search', 'wc-donation-manager' ), 'search' ); ?>
+		<?php $list_table->display(); ?>
 		<input type="hidden" name="page" value="wc-donation-manager"/>
 	</form>
 <?php

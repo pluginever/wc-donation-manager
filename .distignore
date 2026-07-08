@@ -14,16 +14,16 @@
 # Development Tooling
 # ───────────────────────────────
 bin/
+tests/
 composer.lock
 node_modules/
 package-lock.json
 package.json
-packages/
-tests/
 
 # ───────────────────────────────
 # Catch All ( Miscellaneous )
 # ───────────────────────────────
+*.dist
 *.log
 *.map
 *.md

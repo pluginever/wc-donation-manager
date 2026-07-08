@@ -4,7 +4,7 @@
  *
  * Uninstalling Donation Manager deletes user roles, pages, tables, and options.
  *
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
 
 defined( 'WP_UNINSTALL_PLUGIN' ) || exit;

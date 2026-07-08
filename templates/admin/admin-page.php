@@ -18,9 +18,9 @@ $tabs        = apply_filters( 'wc_donation_manager_' . $page_id . '_tabs', $tabs
 $current_tab = ! empty( $current_tab ) && array_key_exists( $current_tab, $tabs ) ? $current_tab : key( $tabs );
 
 ?>
-<div class="wrap bk-wrap woocommerce">
+<div class="wrap b8-wrap woocommerce">
 	<?php if ( ! empty( $tabs ) && count( $tabs ) > 1 ) : ?>
-		<nav class="nav-tab-wrapper bk-navbar">
+		<nav class="nav-tab-wrapper b8-navbar">
 			<?php
 			foreach ( $tabs as $name => $label ) {
 				printf(
