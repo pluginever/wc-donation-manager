@@ -1,0 +1,51 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/admin.php?page=wc-donation-manager",
+	"preferredVersions": {
+		"php": "8.3",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"steps": [
+		{
+			"step": "login",
+			"username": "admin",
+			"password": "password"
+		},
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "Donation Manager Preview",
+				"blogdescription": "A live WordPress Playground preview for Donation Manager."
+			}
+		},
+		{
+			"step": "installPlugin",
+			"ifAlreadyInstalled": "skip",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "woocommerce"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"ifAlreadyInstalled": "skip",
+			"pluginData": {
+				"resource": "wordpress.org/plugins",
+				"slug": "wc-donation-manager"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\ndelete_transient( '_wc_activation_redirect' );\nupdate_option( 'woocommerce_onboarding_profile', array( 'skipped' => true ) );\nupdate_option( 'woocommerce_task_list_hidden', 'yes' );\nupdate_option( 'woocommerce_allow_tracking', 'no' );\nupdate_option( 'woocommerce_store_address', '123 Preview Street' );\nupdate_option( 'woocommerce_store_city', 'Playground' );\nupdate_option( 'woocommerce_default_country', 'US:CA' );\nupdate_option( 'woocommerce_currency', 'USD' );\nupdate_option( 'woocommerce_product_type', 'both' );\nupdate_option( 'wcdm_skip_cart', 'yes' );\nupdate_option( 'wcdm_fast_checkout', 'no' );\nupdate_option( 'wcdm_editable_cart_price', 'yes' );\nupdate_option( 'wcdm_disabled_coupon_field', 'yes' );\nupdate_option( 'wcdm_disabled_order_note', 'yes' );\nupdate_option( 'wcdm_disabled_tax', 'yes' );\nupdate_option( 'wcdm_goal_behavior', 'continue' );\n\nif ( class_exists( 'WC_Install' ) ) {\n\tWC_Install::create_pages();\n}\n\n$campaign_id = wp_insert_post(\n\tarray(\n\t\t'post_type'    => 'wcdm_campaigns',\n\t\t'post_title'   => 'Community Relief Fund',\n\t\t'post_content' => '<p>Help fund emergency supplies, meals, and local support services for families who need immediate assistance.</p>',\n\t\t'post_status'  => 'publish',\n\t\t'meta_input'   => array(\n\t\t\t'wcdm_goal_amount'   => '5000',\n\t\t\t'_raised_amount'     => '1850',\n\t\t\t'_end_date'          => gmdate( 'Y-m-d', strtotime( '+90 days' ) ),\n\t\t\t'wcdm_goal_behavior' => 'continue',\n\t\t),\n\t)\n);\n\nif ( is_wp_error( $campaign_id ) || ! class_exists( 'WCDM_Donation_Product' ) ) {\n\treturn;\n}\n\n$product = new WCDM_Donation_Product();\n$product->set_name( 'Donate to the Community Relief Fund' );\n$product->set_description( '<p>Choose a suggested amount or enter a custom donation to support this campaign.</p>' );\n$product->set_status( 'publish' );\n$product->set_catalog_visibility( 'visible' );\n$product->set_regular_price( '25' );\n$product->set_price( '25' );\n$product->set_virtual( true );\n$product->set_sold_individually( true );\n$product->set_manage_stock( false );\n$product->set_stock_status( 'instock' );\n\n$product_id = $product->save();\n\nif ( $product_id ) {\n\twp_set_object_terms( $product_id, 'donation', 'product_type', false );\n\tupdate_post_meta( $product_id, 'wcdm_campaign_id', $campaign_id );\n\tupdate_post_meta( $product_id, 'wcdm_is_predefined_amounts', 'yes' );\n\tupdate_post_meta( $product_id, 'wcdm_predefined_amounts_title', 'Suggested amounts' );\n\tupdate_post_meta( $product_id, 'wcdm_predefined_amounts', array( '25', '50', '100' ) );\n\tupdate_post_meta( $product_id, 'wcdm_is_custom_amount', 'yes' );\n\tupdate_post_meta( $product_id, 'wcdm_amount_increment_steps', '1.00' );\n\tupdate_post_meta( $product_id, 'wcdm_min_amount', '5' );\n\tupdate_post_meta( $product_id, 'wcdm_max_amount', '1000' );\n\n\tif ( function_exists( 'wc_delete_product_transients' ) ) {\n\t\twc_delete_product_transients( $product_id );\n\t}\n}\n"
+		}
+	]
+}
