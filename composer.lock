@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce072bdb6e04794b31a65a145d04f648",
+    "content-hash": "f97076217a001a899a84f192badf2d2b",
     "packages": [
         {
             "name": "byteever/plugin",
-            "version": "dev-trunk",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:byteever/plugin.git",
@@ -718,9 +718,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "byteever/plugin": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
