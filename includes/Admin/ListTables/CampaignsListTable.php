@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin\ListTables;
+namespace PluginEver\DonationManager\Admin\ListTables;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * CampaignsListTable class.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
 class CampaignsListTable extends ListTable {
 
@@ -89,7 +89,7 @@ class CampaignsListTable extends ListTable {
 		}
 		if ( ! empty( $performed ) ) {
 			// translators: %s: number of accounts.
-			WCDM()->flash->success( sprintf( __( '%s campaign(s) deleted successfully.', 'wc-donation-manager' ), number_format_i18n( $performed ) ) );
+			wc_donation_manager()->flash->success( sprintf( __( '%s campaign(s) deleted successfully.', 'wc-donation-manager' ), number_format_i18n( $performed ) ) );
 		}
 	}
 

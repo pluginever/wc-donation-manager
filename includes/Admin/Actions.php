@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin;
+namespace PluginEver\DonationManager\Admin;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -11,18 +13,19 @@ defined( 'ABSPATH' ) || exit;
  * should be added here.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
-class Actions {
+class Actions extends Component {
 
 	/**
 	 * Actions constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_action( 'admin_post_wcdm_add_campaign', array( __CLASS__, 'add_campaign' ) );
 		add_action( 'admin_post_wcdm_edit_campaign', array( __CLASS__, 'edit_campaign' ) );
+		add_action( 'woocommerce_admin_process_product_object', array( __CLASS__, 'save_donation_product_object' ) );
 		add_action( 'woocommerce_process_product_meta_donation', array( __CLASS__, 'save_donation_meta' ) );
 	}
 
@@ -59,9 +62,9 @@ class Actions {
 		$campaign = wp_insert_post( $args );
 
 		if ( is_wp_error( $campaign ) ) {
-			WCDM()->flash->error( $campaign->get_error_message() );
+			wc_donation_manager()->flash->error( $campaign->get_error_message() );
 		} else {
-			WCDM()->flash->success( __( 'Campaign created successfully.', 'wc-donation-manager' ) );
+			wc_donation_manager()->flash->success( __( 'Campaign created successfully.', 'wc-donation-manager' ) );
 
 			$referer = add_query_arg(
 				array( 'edit' => absint( $campaign ) ),
@@ -106,9 +109,9 @@ class Actions {
 		$campaign = wp_insert_post( $args );
 
 		if ( is_wp_error( $campaign ) ) {
-			WCDM()->flash->error( $campaign->get_error_message() );
+			wc_donation_manager()->flash->error( $campaign->get_error_message() );
 		} else {
-			WCDM()->flash->success( __( 'Campaign updated successfully.', 'wc-donation-manager' ) );
+			wc_donation_manager()->flash->success( __( 'Campaign updated successfully.', 'wc-donation-manager' ) );
 		}
 
 		wp_safe_redirect( $referer );
@@ -125,22 +128,76 @@ class Actions {
 	 * @return void
 	 */
 	public static function save_donation_meta( $product_id ) {
-		wp_verify_nonce( '_wpnonce' );
-		$price              = isset( $_POST['wcdm_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_amount'] ) ) : '';
+		self::save_donation_product_data( $product_id );
+	}
+
+	/**
+	 * Save donation product data on the WooCommerce product object.
+	 *
+	 * @param \WC_Product $product Product object.
+	 *
+	 * @since 1.1.3
+	 * @return void
+	 */
+	public static function save_donation_product_object( $product ) {
+		if ( ! $product instanceof \WC_Product || ! $product->is_type( 'donation' ) ) {
+			return;
+		}
+
+		$price = self::get_posted_price();
+		$product->set_regular_price( $price );
+		$product->set_price( $price );
+		self::save_donation_product_data( $product->get_id(), $product );
+	}
+
+	/**
+	 * Save donation product fields.
+	 *
+	 * @param int              $product_id Donation product id.
+	 * @param \WC_Product|null $product    Product object.
+	 *
+	 * @since 1.1.3
+	 * @return void
+	 */
+	private static function save_donation_product_data( $product_id, $product = null ) {
+		$price              = self::get_posted_price();
 		$goal_amounts       = isset( $_POST['wcdm_goal_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_goal_amount'] ) ) : '';
 		$predefined_amounts = ! empty( $_POST['wcdm_predefined_amounts'] ) ? explode( ',', preg_replace( '/\s*/m', '', sanitize_text_field( wp_unslash( $_POST['wcdm_predefined_amounts'] ) ) ) ) : array();
 		$predefined_amounts = array_filter( array_unique( $predefined_amounts ) );
+		$meta_data          = array(
+			'wcdm_goal_amount'              => $goal_amounts,
+			'wcdm_is_predefined_amounts'    => isset( $_POST['wcdm_is_predefined_amounts'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_predefined_amounts'] ) ) : '',
+			'wcdm_predefined_amounts_title' => ( ! empty( $_POST['wcdm_predefined_amounts_title'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_predefined_amounts_title'] ) ) : __( 'Suggested amounts', 'wc-donation-manager' ) ),
+			'wcdm_predefined_amounts'       => $predefined_amounts,
+			'wcdm_is_custom_amount'         => isset( $_POST['wcdm_is_custom_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_custom_amount'] ) ) : 'no',
+			'wcdm_amount_increment_steps'   => ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( wp_unslash( $_POST['wcdm_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ),
+			'wcdm_min_amount'               => ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ),
+			'wcdm_max_amount'               => ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ),
+			'wcdm_campaign_id'              => ( ! empty( $_POST['wcdm_campaign_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_campaign_id'] ) ) : '' ),
+		);
+
+		if ( $product instanceof \WC_Product ) {
+			foreach ( $meta_data as $key => $value ) {
+				$product->update_meta_data( $key, $value );
+			}
+
+			return;
+		}
 
 		update_post_meta( $product_id, '_price', $price );
 		update_post_meta( $product_id, '_regular_price', $price );
-		update_post_meta( $product_id, 'wcdm_goal_amount', $goal_amounts );
-		update_post_meta( $product_id, 'wcdm_is_predefined_amounts', isset( $_POST['wcdm_is_predefined_amounts'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_predefined_amounts'] ) ) : '' );
-		update_post_meta( $product_id, 'wcdm_predefined_amounts_title', ( ! empty( $_POST['wcdm_predefined_amounts_title'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_predefined_amounts_title'] ) ) : __( 'Suggested amounts', 'wc-donation-manager' ) ) );
-		update_post_meta( $product_id, 'wcdm_predefined_amounts', $predefined_amounts );
-		update_post_meta( $product_id, 'wcdm_is_custom_amount', isset( $_POST['wcdm_is_custom_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_custom_amount'] ) ) : 'no' );
-		update_post_meta( $product_id, 'wcdm_amount_increment_steps', ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( wp_unslash( $_POST['wcdm_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ) );
-		update_post_meta( $product_id, 'wcdm_min_amount', ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ) );
-		update_post_meta( $product_id, 'wcdm_max_amount', ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ) );
-		update_post_meta( $product_id, 'wcdm_campaign_id', ( ! empty( $_POST['wcdm_campaign_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_campaign_id'] ) ) : '' ) );
+		foreach ( $meta_data as $key => $value ) {
+			update_post_meta( $product_id, $key, $value );
+		}
+	}
+
+	/**
+	 * Get posted donation price.
+	 *
+	 * @since 1.1.3
+	 * @return float|string
+	 */
+	private static function get_posted_price() {
+		return isset( $_POST['wcdm_amount'] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $_POST['wcdm_amount'] ) ) ) : '';
 	}
 }

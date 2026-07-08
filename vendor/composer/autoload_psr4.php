@@ -6,6 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'WooCommerceDonationManager\\ByteKit\\' => array($vendorDir . '/byteever/bytekit-settings/src', $vendorDir . '/byteever/bytekit-plugin/src'),
-    'WooCommerceDonationManager\\' => array($baseDir . '/includes'),
+    'PluginEver\\DonationManager\\B8\\' => array($vendorDir . '/byteever/plugin/src'),
+    'PluginEver\\DonationManager\\' => array($baseDir . '/includes'),
 );

@@ -1,6 +1,8 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin;
+namespace PluginEver\DonationManager\Admin;
+
+use PluginEver\DonationManager\B8\Component;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -8,15 +10,15 @@ defined( 'ABSPATH' ) || exit;
  * Class Metaboxes.
  *
  * @since   1.0.0
- * @package WooCommerceDonationManager\Admin
+ * @package PluginEver\DonationManager\Admin
  */
-class Metaboxes {
+class Metaboxes extends Component {
 	/**
 	 * Metaboxes constructor.
 	 *
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	public function register(): void {
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_data' ) );

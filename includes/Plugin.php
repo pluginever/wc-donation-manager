@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager;
+namespace PluginEver\DonationManager;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
@@ -8,139 +8,93 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  * Plugin Class.
  *
  * @since   1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
+ *
+ * @property-read string $name         Plugin display name.
+ * @property-read string $settings_url Settings page URL.
+ * @property-read string $docs_url     Documentation URL.
+ * @property-read string $support_url  Support page URL.
+ * @property-read string $upgrade_url  Premium upgrade URL.
+ * @property-read string $pro_basename Premium plugin basename.
+ * @property-read string $review_url   Review URL.
  */
-final class Plugin extends \WooCommerceDonationManager\ByteKit\Plugin {
+class Plugin extends B8\App {
 
 	/**
-	 * Plugin constructor.
+	 * Components to boot.
 	 *
-	 * @param array $data The plugin data.
-	 *
-	 * @since 1.0.0
+	 * @since 1.1.3
+	 * @var array<int|string, class-string>
 	 */
-	protected function __construct( $data ) {
-		parent::__construct( $data );
-		$this->define_constants();
-		$this->includes();
-		$this->init_hooks();
+	protected array $components = array(
+		Installer::class,
+		Donation\Donation::class,
+		Frontend\Frontend::class,
+		Frontend\Product::class,
+		Frontend\Cart::class,
+		Frontend\Orders::class,
+		Admin\Admin::class,
+		Admin\Feedback::class,
+	);
+
+	/**
+	 * Bootstraps the plugin.
+	 *
+	 * @since 1.1.3
+	 * @return void
+	 */
+	public function bootstrap(): void {
+		add_action( 'init', array( $this, 'register_cpt_campaigns' ) );
+		add_action( 'woocommerce_loaded', array( $this, 'woocommerce_loaded' ), 0 );
+		add_filter( 'plugin_action_links_' . $this->basename(), array( $this, 'plugin_action_links' ) );
 	}
 
 	/**
-	 * Define constants.
+	 * Boot the components once WooCommerce is loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.3
 	 * @return void
 	 */
-	public function define_constants() {
-		$role = apply_filters( 'wc_donation_manager_role', 'manage_woocommerce' );
-		$this->define( 'WCDM_VERSION', $this->get_version() );
-		$this->define( 'WCDM_FILE', $this->get_file() );
-		$this->define( 'WCDM_PATH', $this->get_dir_path() );
-		$this->define( 'WCDM_URL', $this->get_dir_url() );
-		$this->define( 'WCDM_ASSETS_URL', $this->get_assets_url() );
-		$this->define( 'WCDM_ASSETS_PATH', $this->get_assets_path() );
-		$this->define( 'WCDM_MANAGER_ROLE', $role );
-	}
+	public function woocommerce_loaded(): void {
+		require_once __DIR__ . '/Donation/class-donation-product.php';
 
-	/**
-	 * Include required files.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function includes() {
-		require_once __DIR__ . '/functions.php';
-	}
+		$this->boot( $this->components );
 
-	/**
-	 * Initialize the plugin hooks.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function init_hooks() {
-		register_activation_hook( $this->get_file(), array( Installer::class, 'install' ) );
-		add_filter( 'plugin_action_links_' . $this->get_basename(), array( $this, 'plugin_action_links' ) );
-		add_action( 'before_woocommerce_init', array( $this, 'on_before_woocommerce_init' ) );
-		add_action( 'woocommerce_init', array( $this, 'on_init' ), 0 );
+		/**
+		 * Fires when the plugin is initialized.
+		 *
+		 * @param Plugin $plugin The plugin instance.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'wc_donation_manager_init', $this );
 	}
 
 	/**
 	 * Add plugin action links.
 	 *
-	 * @param array $links The plugin action links.
+	 * @param array<string, string> $links The plugin action links.
 	 *
 	 * @since 1.0.0
-	 * @return array
+	 * @return array<string, string>
 	 */
 	public function plugin_action_links( $links ) {
-		if ( ! $this->is_plugin_active( 'wc-donation-manager-pro/wc-donation-manager-pro.php' ) ) {
-			$links['go_pro'] = '<a href="https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=plugin&utm_medium=plugin-action-link&utm_campaign=go-pro" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__( 'Go Pro', 'wc-donation-manager' ) . '</a>';
+		if ( ! $this->is_pro_active() ) {
+			$links['go_pro'] = '<a href="' . esc_url( (string) $this->get( 'upgrade_url' ) ) . '" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__( 'Go Pro', 'wc-donation-manager' ) . '</a>';
 		}
 
 		return $links;
 	}
 
 	/**
-	 * Run on before WooCommerce init.
+	 * Whether the Pro add-on is active.
 	 *
-	 * @since 1.0.0
-	 * @return void
+	 * @since 1.1.3
+	 * @return bool
 	 */
-	public function on_before_woocommerce_init() {
-		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->get_file(), true );
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', $this->get_file(), true );
-		}
-	}
-
-	/**
-	 * Run on init.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function on_init() {
-		// Register post types.
-		add_action( 'init', array( $this, 'register_cpt_campaigns' ) );
-
-		// Including donation product type class.
-		require_once __DIR__ . '/Donation/class-donation-product.php';
-
-		// Include common classes.
-		$this->set(
-			array(
-				Donation\Donation::class,
-				Frontend\Frontend::class,
-				Frontend\Product::class,
-				Frontend\Cart::class,
-				Frontend\Orders::class,
-			)
-		);
-
-		// Include Admin classes.
-		if ( is_admin() ) {
-			$this->set(
-				array(
-					Admin\Admin::class,
-					Admin\Menus::class,
-					Admin\Settings::instance(),
-					Admin\Actions::class,
-					Admin\Metaboxes::class,
-					Admin\Notices::class,
-				)
-			);
-		}
-
-		/**
-		 * Fires when the plugin is initialized.
-		 *
-		 * @param Plugin $this The plugin instance.
-		 *
-		 * @since 1.0.0
-		 */
-		do_action( 'wc_donation_manager_init', $this );
+	public function is_pro_active(): bool {
+		$pro_basename = $this->get( 'pro_basename', '' );
+		return ! empty( $pro_basename ) && $this->plugin_active( (string) $pro_basename );
 	}
 
 	/**

@@ -1,6 +1,6 @@
 <?php
 
-namespace WooCommerceDonationManager\Admin\ListTables;
+namespace PluginEver\DonationManager\Admin\ListTables;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,7 +13,7 @@ if ( ! class_exists( '\WP_List_Table' ) ) {
  * List table class.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager
+ * @package PluginEver\DonationManager
  */
 class ListTable extends \WP_List_Table {
 

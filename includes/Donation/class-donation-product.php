@@ -3,7 +3,7 @@
  * Class WCDM_Donation_Product.
  *
  * @since 1.0.0
- * @package WooCommerceDonationManager\Donation
+ * @package PluginEver\DonationManager\Donation
  */
 
 defined( 'ABSPATH' ) || exit;
