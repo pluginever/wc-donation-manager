@@ -34,6 +34,7 @@ class Settings extends SettingsUI {
 	 */
 	public function register(): void {
 		$this->app->on_filter( 'settings', array( $this, 'register_settings' ) );
+		$this->app->on_action( 'settings_nav_extras', array( $this, 'output_docs_tab' ) );
 	}
 
 	/**
@@ -191,6 +192,21 @@ class Settings extends SettingsUI {
 		);
 
 		return $settings;
+	}
+
+	/**
+	 * Output the documentation tab.
+	 *
+	 * @since 1.1.0
+	 * @param array<string, string> $tabs Settings tabs.
+	 * @return void
+	 */
+	public function output_docs_tab( $tabs ) {
+		printf(
+			'<a href="%s" class="nav-tab" target="_blank">%s</a>',
+			esc_url( $this->app->docs_url ),
+			esc_html__( 'Documentation', 'wc-donation-manager' )
+		);
 	}
 
 	/**

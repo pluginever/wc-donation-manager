@@ -29,10 +29,6 @@
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "support": {
-                "source": "https://github.com/byteever/plugin/tree/1.0.0",
-                "issues": "https://github.com/byteever/plugin/issues"
-            },
             "install-path": "../byteever/plugin"
         }
     ],
