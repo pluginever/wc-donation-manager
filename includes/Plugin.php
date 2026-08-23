@@ -79,11 +79,17 @@ class Plugin extends B8\App {
 	 * @return array<string, string>
 	 */
 	public function plugin_action_links( $links ) {
+		$settings = sprintf(
+			'<a href="%s">%s</a>',
+			esc_url( (string) $this->get( 'settings_url' ) ),
+			esc_html__( 'Settings', 'wc-donation-manager' )
+		);
+
 		if ( ! $this->is_pro_active() ) {
 			$links['go_pro'] = '<a href="' . esc_url( (string) $this->get( 'upgrade_url' ) ) . '" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__( 'Go Pro', 'wc-donation-manager' ) . '</a>';
 		}
 
-		return $links;
+		return array_merge( array( 'settings' => $settings ), $links );
 	}
 
 	/**

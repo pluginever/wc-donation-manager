@@ -1,8 +1,8 @@
 === Donation Manager for WooCommerce - Effortlessly Collect & Manage Donations ===
 Contributors: pluginever, manikmist09
 Tags: donation, donations, donate, help, charitable
-Tested up to: 7.0
-Stable tag: 1.2.0
+Tested up to: 7.1
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,12 @@ If you encounter a bug or have a feature request for the Donation Manager for Wo
 Upgrade to PRO to unlock additional features: [Upgrade to PRO](https://pluginever.com/plugins/woocommerce-donation-manager-pro/?utm_source=product-page-wordpress.org&utm_medium=product-page-wordpress.org&utm_campaign=product-page-wordpress.org)
 
 == Changelog ==
+= 1.2.1 (23rd August 2026) =
+* New: Added a "Settings" action link to the plugin entry on the Plugins screen.
+* New: Added a "Documentation" link to the settings screen navigation.
+* Update: Updated development dependencies and coding standards packages.
+* Compatibility: Compatibility check with the latest versions of WordPress and WooCommerce.
+
 = 1.2.0 (8th July 2026) =
 * New: Modernize the plugin with a new component-based architecture for improved maintainability and extensibility.
 * New: Add a deactivation feedback survey to help collect user feedback.
