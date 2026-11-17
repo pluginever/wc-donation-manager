@@ -84,6 +84,26 @@ class Plugin extends B8\App {
 	}
 
 	/**
+	 * Install the plugin on activation.
+	 *
+	 * @since 2.0.0
+	 * @return void
+	 */
+	public function activate(): void {
+		$this->make( Installer::class )->install();
+	}
+
+	/**
+	 * Clean the plugin's scheduled work on deactivation.
+	 *
+	 * @since 2.0.0
+	 * @return void
+	 */
+	public function deactivate(): void {
+		$this->make( Installer::class )->deactivate();
+	}
+
+	/**
 	 * Add plugin action links.
 	 *
 	 * @param array<string, string> $links The plugin action links.

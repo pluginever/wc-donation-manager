@@ -38,7 +38,6 @@
  * @package             PluginEver\DonationManager
  */
 
-use PluginEver\DonationManager\Installer;
 use PluginEver\DonationManager\Plugin;
 
 defined( 'ABSPATH' ) || exit;
@@ -72,10 +71,6 @@ Plugin::create( __FILE__, $data );
 function wc_donation_manager(): Plugin {
 	return Plugin::instance();
 }
-
-// Register the plugin activation and deactivation hooks.
-wc_donation_manager()->on_activation( array( Installer::class, 'install' ) );
-wc_donation_manager()->on_deactivation( array( Installer::class, 'deactivate' ) );
 
 // Declare WooCommerce feature compatibility.
 add_action(
