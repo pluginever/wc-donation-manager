@@ -82,12 +82,12 @@ export default function Donors() {
 
 		setIsLoading( true );
 
-		apiFetch< { donors?: Donor[] } >( {
+		apiFetch< Donor[] >( {
 			path: `/${ vars.rest.namespace }/donors`,
 		} )
 			.then( ( data ) => {
 				if ( mounted ) {
-					setDonors( data.donors ?? [] );
+					setDonors( Array.isArray( data ) ? data : [] );
 					setIsLoading( false );
 				}
 			} )

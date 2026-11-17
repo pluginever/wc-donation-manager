@@ -74,7 +74,7 @@ class Campaigns extends Component {
 		);
 
 		$args = array(
-			'labels'              => $this->apply_filters( 'campaigns_post_type_labels', $labels ),
+			'labels'              => $this->app->apply_filters( 'campaigns_post_type_labels', $labels ),
 			'public'              => false,
 			'publicly_queryable'  => false,
 			'exclude_from_search' => true,
@@ -91,7 +91,7 @@ class Campaigns extends Component {
 			'supports'            => array(),
 		);
 
-		register_post_type( self::POST_TYPE, $this->apply_filters( 'campaigns_post_type_args', $args ) );
+		register_post_type( self::POST_TYPE, $this->app->apply_filters( 'campaigns_post_type_args', $args ) );
 	}
 
 	/**
@@ -135,19 +135,23 @@ class Campaigns extends Component {
 			)
 		);
 
-		$query = new \WP_Query(
-			array(
-				'post_type'              => self::POST_TYPE,
-				'post_status'            => (array) $args['status'],
-				's'                      => (string) $args['search'],
-				'orderby'                => (string) $args['orderby'],
-				'order'                  => (string) $args['order'],
-				'posts_per_page'         => (int) $args['per_page'],
-				'paged'                  => (int) $args['paged'],
-				'update_post_term_cache' => false,
-				'no_found_rows'          => false,
-			)
+		$query_args = array(
+			'post_type'              => self::POST_TYPE,
+			'post_status'            => (array) $args['status'],
+			's'                      => (string) $args['search'],
+			'orderby'                => (string) $args['orderby'],
+			'order'                  => (string) $args['order'],
+			'posts_per_page'         => (int) $args['per_page'],
+			'paged'                  => (int) $args['paged'],
+			'update_post_term_cache' => false,
+			'no_found_rows'          => false,
 		);
+
+		if ( ! empty( $args['meta_key'] ) ) {
+			$query_args['meta_key'] = (string) $args['meta_key']; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- deliberate sort column chosen by the controller.
+		}
+
+		$query = new \WP_Query( $query_args );
 
 		return array(
 			'items' => $query->posts,

@@ -140,8 +140,13 @@ abstract class Controller extends WP_REST_Controller {
 	/**
 	 * Get the item properties.
 	 *
+	 * Override for controllers that serve records; a controller without an
+	 * item schema, like the settings one, inherits the empty default.
+	 *
 	 * @since 2.0.0
 	 * @return array<string, mixed> Properties keyed by name.
 	 */
-	abstract protected function get_properties(): array;
+	protected function get_properties(): array {
+		return array();
+	}
 }

@@ -35,14 +35,30 @@ class Campaigns extends Controller {
 	 * @return WP_REST_Response The campaigns.
 	 */
 	public function get_items( $request ) {
+		$orderby = (string) $request->get_param( 'orderby' );
+
+		// The list sends column keys; the query needs WP_Query's own names.
+		$orderby_map = array(
+			'name'        => 'title',
+			'goal_amount' => 'meta_value_num',
+			'end_date'    => 'meta_value',
+			'status'      => 'post_status',
+		);
+
 		$args = array(
 			'search'   => (string) $request->get_param( 'search' ),
 			'status'   => (array) $request->get_param( 'status' ),
-			'orderby'  => (string) $request->get_param( 'orderby' ),
+			'orderby'  => $orderby_map[ $orderby ] ?? 'date',
 			'order'    => (string) $request->get_param( 'order' ),
 			'per_page' => (int) $request->get_param( 'per_page' ),
 			'paged'    => (int) $request->get_param( 'page' ),
 		);
+
+		if ( 'meta_value_num' === $args['orderby'] ) {
+			$args['meta_key'] = self::META['goal_amount'];
+		} elseif ( 'meta_value' === $args['orderby'] ) {
+			$args['meta_key'] = self::META['end_date'];
+		}
 
 		$query  = wc_donation_manager()->campaigns->query( $args );
 		$items  = array();
@@ -393,13 +409,16 @@ class Campaigns extends Controller {
 				'description' => __( 'Sort collection by object attribute.', 'wc-donation-manager' ),
 				'type'        => 'string',
 				'default'     => 'date',
-				'enum'        => array( 'date', 'id', 'title', 'modified' ),
+				'enum'        => array( 'date', 'id', 'name', 'goal_amount', 'end_date', 'status', 'modified' ),
 			),
 			'order'    => array(
-				'description' => __( 'Order sort attribute ascending or descending.', 'wc-donation-manager' ),
-				'type'        => 'string',
-				'default'     => 'DESC',
-				'enum'        => array( 'ASC', 'DESC' ),
+				'description'       => __( 'Order sort attribute ascending or descending.', 'wc-donation-manager' ),
+				'type'              => 'string',
+				'default'           => 'DESC',
+				'enum'              => array( 'ASC', 'DESC' ),
+				'sanitize_callback' => static function ( $value ) {
+					return strtoupper( (string) $value );
+				},
 			),
 			'page'     => array(
 				'description' => __( 'Current page of the collection.', 'wc-donation-manager' ),
