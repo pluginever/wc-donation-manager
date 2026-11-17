@@ -1,15 +1,38 @@
 {
 	"name": "wc-donation-manager",
 	"private": true,
+	"description": "Donation Manager for WooCommerce.",
 	"scripts": {
+		"build": "byteever-scripts build && npm run css && npm run js",
+		"start": "byteever-scripts start",
 		"css": "sass assets/src:assets/build",
 		"js": "esbuild assets/src/*.js --bundle --outdir=assets/build",
-		"start": "npm run css -- --watch & npm run js -- --watch",
-		"build": "npm run css -- --style=compressed --no-source-map && npm run js -- --minify",
-		"update": "npx npm-check-updates -u && npm i"
+		"lint-js": "byteever-scripts lint-js",
+		"lint-style": "byteever-scripts lint-style"
+	},
+	"dependencies": {
+		"@byteever/data": "^0.1.4",
+		"@byteever/router": "^0.1.4",
+		"@byteever/ui": "^0.1.4",
+		"@wordpress/api-fetch": "^7.57.0",
+		"@wordpress/data": "^10.57.0",
+		"@wordpress/dom-ready": "^4.57.0",
+		"@wordpress/element": "^9.0.0",
+		"@wordpress/i18n": "^6.30.0"
 	},
 	"devDependencies": {
+		"@byteever/scripts": "^4.0.1",
+		"@types/react": "^18.3.31",
+		"@types/react-dom": "^18.3.7",
+		"@wordpress/scripts": "^36.1.0",
 		"esbuild": "^0.28.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
 		"sass": "^1.100.0"
+	},
+	"byteever": {
+		"entries": {
+			"admin": "./src/admin/index.tsx"
+		}
 	}
 }

@@ -21,4 +21,13 @@
 		</properties>
 	</rule>
 
+	<!-- WooCommerce registers these capabilities itself. -->
+	<rule ref="WordPress.WP.Capabilities">
+		<properties>
+			<property name="custom_capabilities" type="array">
+				<element value="manage_woocommerce"/>
+			</property>
+		</properties>
+	</rule>
+
 </ruleset>

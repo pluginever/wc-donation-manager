@@ -5,48 +5,61 @@ namespace PluginEver\DonationManager;
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
- * Plugin Class.
+ * Main plugin class.
  *
  * @since   1.0.0
  * @package PluginEver\DonationManager
  *
- * @property-read string $name         Plugin display name.
- * @property-read string $settings_url Settings page URL.
- * @property-read string $docs_url     Documentation URL.
- * @property-read string $support_url  Support page URL.
- * @property-read string $upgrade_url  Premium upgrade URL.
- * @property-read string $pro_basename Premium plugin basename.
- * @property-read string $review_url   Review URL.
+ * @property Settings        $settings    Plugin settings.
+ * @property Campaigns       $campaigns   Campaigns registry.
+ *
+ * @property-read string     $name         Plugin display name.
+ * @property-read string     $settings_url Settings page URL.
+ * @property-read string     $docs_url     Documentation URL.
+ * @property-read string     $support_url  Support page URL.
+ * @property-read string     $upgrade_url  Premium upgrade URL.
+ * @property-read string     $review_url   Review URL.
  */
 class Plugin extends B8\App {
 
 	/**
 	 * Components to boot.
 	 *
-	 * @since 1.1.3
-	 * @var array<int|string, class-string>
+	 * @since 2.0.0
+	 * @var array<int, class-string>
 	 */
 	protected array $components = array(
 		Installer::class,
+		Campaigns::class,
 		Donation\Donation::class,
 		Frontend\Frontend::class,
 		Frontend\Product::class,
 		Frontend\Cart::class,
 		Frontend\Orders::class,
+		RestAPI\Routes::class,
 		Admin\Admin::class,
 		Admin\Feedback::class,
 	);
 
 	/**
-	 * Bootstraps the plugin.
+	 * Register hooks.
 	 *
 	 * @since 1.1.3
 	 * @return void
 	 */
 	public function bootstrap(): void {
-		add_action( 'init', array( $this, 'register_cpt_campaigns' ) );
+		$upload_dir = wp_upload_dir( null, false );
+		define( 'WCDM_PLUGIN_FILE', $this->file );
+		define( 'WCDM_PLUGIN_VERSION', $this->version );
+		define( 'WCDM_UPLOADS_DIR', $upload_dir['basedir'] . '/wcdm/' );
+		define( 'WCDM_UPLOADS_URL', $upload_dir['baseurl'] . '/wcdm/' );
+
+		$this->bind( 'settings', Settings::class );
+		$this->alias( Campaigns::class, 'campaigns' );
+
 		add_action( 'woocommerce_loaded', array( $this, 'woocommerce_loaded' ), 0 );
 		add_filter( 'plugin_action_links_' . $this->basename(), array( $this, 'plugin_action_links' ) );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 	}
 
 	/**
@@ -67,7 +80,7 @@ class Plugin extends B8\App {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'wc_donation_manager_init', $this );
+		$this->do_action( 'loaded', $this );
 	}
 
 	/**
@@ -85,11 +98,35 @@ class Plugin extends B8\App {
 			esc_html__( 'Settings', 'wc-donation-manager' )
 		);
 
+		$links = array_merge( array( 'settings' => $settings ), $links );
+
 		if ( ! $this->is_pro_active() ) {
 			$links['go_pro'] = '<a href="' . esc_url( (string) $this->get( 'upgrade_url' ) ) . '" target="_blank" style="color: #39b54a; font-weight: bold;">' . esc_html__( 'Go Pro', 'wc-donation-manager' ) . '</a>';
 		}
 
-		return array_merge( array( 'settings' => $settings ), $links );
+		return $links;
+	}
+
+	/**
+	 * Add the plugin row meta links.
+	 *
+	 * @since 2.0.0
+	 * @param array<int, string> $links Plugin row meta links.
+	 * @param string             $file  Plugin file path relative to the plugins directory.
+	 * @return array<int, string>
+	 */
+	public function plugin_row_meta( array $links, string $file ): array {
+		if ( $file !== $this->basename() ) {
+			return $links;
+		}
+
+		$links[] = sprintf(
+			'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
+			esc_url( (string) $this->get( 'review_url' ) ),
+			esc_html__( 'Review', 'wc-donation-manager' )
+		);
+
+		return $links;
 	}
 
 	/**
@@ -99,52 +136,6 @@ class Plugin extends B8\App {
 	 * @return bool
 	 */
 	public function is_pro_active(): bool {
-		$pro_basename = $this->get( 'pro_basename', '' );
-		return ! empty( $pro_basename ) && $this->plugin_active( (string) $pro_basename );
-	}
-
-	/**
-	 * Register custom post type campaigns.
-	 *
-	 * @since 1.0.0
-	 * @return void
-	 */
-	public function register_cpt_campaigns() {
-		$labels = array(
-			'name'               => _x( 'Campaign', 'post type general name', 'wc-donation-manager' ),
-			'singular_name'      => _x( 'Campaign', 'post type singular name', 'wc-donation-manager' ),
-			'menu_name'          => _x( 'Campaign', 'admin menu', 'wc-donation-manager' ),
-			'name_admin_bar'     => _x( 'Campaign', 'add new on admin bar', 'wc-donation-manager' ),
-			'add_new'            => _x( 'Add New', 'campaign', 'wc-donation-manager' ),
-			'add_new_item'       => __( 'Add New Campaign', 'wc-donation-manager' ),
-			'new_item'           => __( 'New Campaign', 'wc-donation-manager' ),
-			'edit_item'          => __( 'Edit Campaign', 'wc-donation-manager' ),
-			'view_item'          => __( 'View Campaign', 'wc-donation-manager' ),
-			'all_items'          => __( 'All Campaign', 'wc-donation-manager' ),
-			'search_items'       => __( 'Search Campaign', 'wc-donation-manager' ),
-			'parent_item_colon'  => __( 'Parent Campaign:', 'wc-donation-manager' ),
-			'not_found'          => __( 'No campaigns found.', 'wc-donation-manager' ),
-			'not_found_in_trash' => __( 'No campaigns found in Trash.', 'wc-donation-manager' ),
-		);
-
-		$args = array(
-			'labels'              => apply_filters( 'wcdm_campaigns_post_type_labels', $labels ),
-			'public'              => false,
-			'publicly_queryable'  => false,
-			'exclude_from_search' => true,
-			'show_ui'             => false,
-			'show_in_menu'        => false,
-			'show_in_nav_menus'   => false,
-			'query_var'           => false,
-			'can_export'          => false,
-			'rewrite'             => false,
-			'capability_type'     => 'post',
-			'has_archive'         => false,
-			'hierarchical'        => false,
-			'menu_position'       => null,
-			'supports'            => array(),
-		);
-
-		register_post_type( 'wcdm_campaigns', apply_filters( 'wcdm_campaigns_post_type_args', $args ) );
+		return $this->addons->has( 'wc-donation-manager-pro' );
 	}
 }

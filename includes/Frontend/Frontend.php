@@ -49,11 +49,14 @@ class Frontend extends Component {
 	/**
 	 * Enqueue frontend scripts.
 	 *
+	 * The frontend bundle is a small jQuery asset built by esbuild, not part
+	 * of the React build, so it is served from `assets/build` directly.
+	 *
 	 * @since 1.0.0
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		wc_donation_manager()->scripts->enqueue_style( 'wcdm-frontend', 'frontend-common.css' );
-		wc_donation_manager()->scripts->enqueue_script( 'wcdm-frontend', 'frontend-common.js', array( 'jquery' ) );
+		$this->app->scripts->enqueue_style( 'wcdm-frontend', $this->app->plugin_path( 'assets/build/frontend-common.css' ) );
+		$this->app->scripts->enqueue_script( 'wcdm-frontend', $this->app->plugin_path( 'assets/build/frontend-common.js' ), array( 'jquery' ) );
 	}
 }

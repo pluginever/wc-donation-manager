@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f97076217a001a899a84f192badf2d2b",
+    "content-hash": "ce072bdb6e04794b31a65a145d04f648",
     "packages": [
         {
             "name": "byteever/plugin",
-            "version": "1.0.0",
+            "version": "dev-trunk",
             "source": {
                 "type": "git",
                 "url": "git@github.com:byteever/plugin.git",
-                "reference": "10a12c5d685f04a28132defc863e7493e0085308"
+                "reference": "d9876c99f5f4acf6cdd9428bc55c0187d12715cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/byteever/plugin/zipball/10a12c5d685f04a28132defc863e7493e0085308",
-                "reference": "10a12c5d685f04a28132defc863e7493e0085308",
+                "url": "https://api.github.com/repos/byteever/plugin/zipball/d9876c99f5f4acf6cdd9428bc55c0187d12715cb",
+                "reference": "d9876c99f5f4acf6cdd9428bc55c0187d12715cb",
                 "shasum": ""
             },
             "require": {
@@ -32,7 +32,11 @@
             "license": [
                 "GPL-2.0-or-later"
             ],
-            "time": "2026-06-08T11:53:43+00:00"
+            "support": {
+                "source": "https://github.com/byteever/plugin/tree/trunk",
+                "issues": "https://github.com/byteever/plugin/issues"
+            },
+            "time": "2026-11-16T17:28:46+00:00"
         }
     ],
     "packages-dev": [
@@ -714,7 +718,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "byteever/plugin": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

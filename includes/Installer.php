@@ -2,6 +2,8 @@
 
 namespace PluginEver\DonationManager;
 
+use PluginEver\DonationManager\B8\Component;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 /**
@@ -9,8 +11,10 @@ defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
  *
  * @since 1.0.0
  * @package PluginEver\DonationManager
+ *
+ * @extends Component<Plugin>
  */
-class Installer extends B8\Component {
+class Installer extends Component {
 
 	/**
 	 * Update hook name.
@@ -18,7 +22,15 @@ class Installer extends B8\Component {
 	 * @since 1.1.3
 	 * @var string
 	 */
-	const UPDATE_HOOK = 'wc_donation_manager_run_update';
+	const UPDATE_HOOK = 'wcdm_run_update';
+
+	/**
+	 * Option storing the install timestamp.
+	 *
+	 * @since 2.0.0
+	 * @var string
+	 */
+	const INSTALLED_OPTION = 'installed_on';
 
 	/**
 	 * Upgrade routines keyed by the target version.
@@ -89,9 +101,10 @@ class Installer extends B8\Component {
 			return;
 		}
 
+		$this->migrate_legacy_options();
 		$this->create_defaults();
 		$this->app->options->update_db_version( $this->app->version, true );
-		add_option( 'wcdm_installed', time() );
+		add_option( $this->app->options->key( self::INSTALLED_OPTION ), time() );
 
 		flush_rewrite_rules();
 	}
@@ -103,14 +116,45 @@ class Installer extends B8\Component {
 	 * @return void
 	 */
 	protected function create_defaults(): void {
-		foreach ( $this->app->settings->get_settings() as $group ) {
-			foreach ( $group['fields'] as $field ) {
-				if ( empty( $field['id'] ) || ! isset( $field['default'] ) || false !== get_option( $field['id'], false ) ) {
-					continue;
-				}
-				add_option( $field['id'], $field['default'] );
+		foreach ( $this->app->settings->get_fields() as $name => $field ) {
+			if ( ! isset( $field['default'] ) || false !== get_option( $this->app->options->key( $name ), false ) ) {
+				continue;
 			}
+
+			$this->app->options->update( $name, $field['default'] );
 		}
+	}
+
+	/**
+	 * Fold the options written before the `wcdm` prefix existed into it.
+	 *
+	 * Every pre-2.0 option the framework wrote carried a prefix derived from
+	 * the plugin slug (`wcdonationmanager_...`); the plugin now declares its
+	 * own `wcdm` prefix.
+	 *
+	 * @since 2.0.0
+	 * @return void
+	 */
+	protected function migrate_legacy_options(): void {
+		global $wpdb;
+
+		$legacy_prefix = 'wcdonationmanager_';
+		$pattern       = $wpdb->esc_like( $legacy_prefix ) . '%';
+
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- one-off rename of legacy-prefixed options; no core API.
+		$names = $wpdb->get_col( $wpdb->prepare( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s", $pattern ) );
+
+		if ( empty( $names ) ) {
+			return;
+		}
+
+		foreach ( $names as $name ) {
+			$value = get_option( $name );
+			delete_option( $name );
+			update_option( $this->app->options->key( substr( (string) $name, strlen( $legacy_prefix ) ) ), $value );
+		}
+
+		wp_cache_flush();
 	}
 
 	/**

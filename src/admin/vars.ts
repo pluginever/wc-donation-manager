@@ -1,0 +1,37 @@
+/**
+ * The data the PHP side localizes onto the admin bundle.
+ */
+export type WCDMAdminVars = {
+	/** Menu slug of the admin page the app mounts on. */
+	slug: string;
+	/** Plugin version. */
+	version: string;
+	/** REST API configuration. */
+	rest: {
+		url: string;
+		nonce: string;
+		namespace: string;
+	};
+	/** Admin URL. */
+	adminUrl: string;
+	/** Plugin assets URL. */
+	assetsUrl: string;
+	/** Whether the Pro add-on is active. */
+	isPro: boolean;
+	/** Pro landing page URL. */
+	upgradeUrl: string;
+	/** Documentation URL. */
+	docsUrl: string;
+	user: {
+		id: number;
+		name: string;
+		email: string;
+		capabilities: Record< string, boolean >;
+	};
+	locale: string;
+	/** Store currency code and symbol. */
+	currency: string;
+	currencySymbol: string;
+};
+
+export const vars: WCDMAdminVars = Object.freeze( window.wcdm_admin_vars );

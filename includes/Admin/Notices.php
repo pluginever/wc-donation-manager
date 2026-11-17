@@ -29,7 +29,7 @@ class Notices extends Component {
 	 * @return void
 	 */
 	public function admin_notices() {
-		$installed_time = absint( get_option( 'wcdm_installed' ) );
+		$installed_time = absint( $this->app->options->get( Installer::INSTALLED_OPTION ) );
 		$current_time   = absint( wp_date( 'U' ) );
 
 		if ( ! $this->app->is_pro_active() ) {
