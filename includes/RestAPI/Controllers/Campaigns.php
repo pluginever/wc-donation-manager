@@ -132,6 +132,12 @@ class Campaigns extends Controller {
 			'status' => $post->post_status,
 		);
 
+		// A partial update keeps the meta the request does not carry.
+		$campaigns               = wc_donation_manager()->campaigns;
+		$stored['goal_amount']   = (float) get_post_meta( $post->ID, $campaigns::META['goal_amount'], true );
+		$stored['end_date']      = (string) get_post_meta( $post->ID, $campaigns::META['end_date'], true );
+		$stored['goal_behavior'] = (string) get_post_meta( $post->ID, $campaigns::META['goal_behavior'], true );
+
 		$post = wc_donation_manager()->campaigns->save( array_merge( $stored, $data ) );
 
 		if ( is_wp_error( $post ) ) {

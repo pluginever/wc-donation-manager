@@ -42,8 +42,19 @@ export const COLUMNS: Record<
 		render: ( name: string ) => name,
 	},
 	cause: {
-		render: ( cause: string ) =>
-			cause && cause.length > 60 ? `${ cause.slice( 0, 60 ) }…` : cause,
+		render: ( cause: string ) => {
+			if ( ! cause ) {
+				return null;
+			}
+
+			// The cause is rich text (the campaign editor); the cell shows a
+			// plain-text excerpt.
+			const text =
+				new DOMParser().parseFromString( cause, 'text/html' )
+					.body.textContent ?? '';
+
+			return text.length > 60 ? `${ text.slice( 0, 60 ) }…` : text;
+		},
 	},
 	goal_amount: {
 		render: ( amount: number, campaign: Campaign ) => (
