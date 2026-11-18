@@ -15,17 +15,6 @@ import { __ } from '@wordpress/i18n';
  */
 import { vars } from './vars';
 
-/**
- * Sends the donors screen back to campaigns while Pro is not active.
- *
- * @return {() => Promise<void>} The route's beforeLoad.
- */
-const requirePro = () => async () => {
-	if ( ! vars.isPro ) {
-		throw redirect( { to: '/campaigns', replace: true } );
-	}
-};
-
 export const routes = [
 	{
 		id: 'home',
@@ -43,25 +32,10 @@ export const routes = [
 		lazy: () => import( './routes/campaigns' ),
 	},
 	{
-		id: 'campaigns.add',
-		title: __( 'Add campaign', 'wc-donation-manager' ),
-		path: '/campaigns/new',
-		position: 11,
-		lazy: () => import( './routes/campaigns/edit' ),
-	},
-	{
-		id: 'campaigns.edit',
-		title: __( 'Edit campaign', 'wc-donation-manager' ),
-		path: '/campaigns/$campaignId/edit',
-		position: 12,
-		lazy: () => import( './routes/campaigns/edit' ),
-	},
-	{
 		id: 'donors',
 		title: __( 'Donors', 'wc-donation-manager' ),
 		path: '/donors',
 		position: 20,
-		beforeLoad: requirePro(),
 		lazy: () => import( './routes/donors' ),
 	},
 	{

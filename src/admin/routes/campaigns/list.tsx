@@ -2,7 +2,6 @@
  * External dependencies
  */
 import { useEntity, useEntityOptions } from '@byteever/data';
-import { useNavigate } from '@byteever/router';
 import {
 	Button,
 	Card,
@@ -43,7 +42,6 @@ type ListProps = {
  * @return {Element} The list.
  */
 export default function List( { onAction }: ListProps ) {
-	const navigate = useNavigate();
 	const list = useListParams();
 	const { query, setQuery, resetQuery, hasFilter } = list;
 	const { options, isLoading: optionsIsLoading } = useEntityOptions(
@@ -167,16 +165,6 @@ export default function List( { onAction }: ListProps ) {
 							}
 						/>
 					</Flex.Item>
-					<Group>
-						<Button
-							variant="solid"
-							tone="primary"
-							icon={ plus }
-							onClick={ () => onAction( 'add' ) }
-						>
-							{ __( 'Add campaign', 'wc-donation-manager' ) }
-						</Button>
-					</Group>
 				</Flex>
 			</Card.Header>
 

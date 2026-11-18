@@ -2,6 +2,7 @@
 
 namespace PluginEver\DonationManager\RestAPI\Controllers;
 
+use PluginEver\DonationManager\Campaigns as CampaignRegistry;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -55,9 +56,9 @@ class Campaigns extends Controller {
 		);
 
 		if ( 'meta_value_num' === $args['orderby'] ) {
-			$args['meta_key'] = self::META['goal_amount'];
+			$args['meta_key'] = CampaignRegistry::META['goal_amount']; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- deliberate sort column requested by the list.
 		} elseif ( 'meta_value' === $args['orderby'] ) {
-			$args['meta_key'] = self::META['end_date'];
+			$args['meta_key'] = CampaignRegistry::META['end_date']; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- deliberate sort column requested by the list.
 		}
 
 		$query  = wc_donation_manager()->campaigns->query( $args );
@@ -328,12 +329,15 @@ class Campaigns extends Controller {
 					'width'    => 'full',
 				),
 				'cause'         => array(
-					'type'     => 'textarea',
+					'type'     => 'editor',
 					'label'    => __( 'Cause', 'wc-donation-manager' ),
 					'help'     => __( 'What the campaign raises money for.', 'wc-donation-manager' ),
 					'priority' => 20,
 					'width'    => 'full',
-					'props'    => array( 'rows' => 4 ),
+					'props'    => array(
+						'rows'         => 6,
+						'mediaButtons' => true,
+					),
 				),
 				'goal_amount'   => array(
 					'type'     => 'number',

@@ -69,7 +69,19 @@ class Settings extends Controller {
 		 * and `sanitize`, so handing it back as the map to save would clean every
 		 * value as plain text and let a `section` row write an option.
 		 */
-		$values = array_intersect_key( (array) $request->get_json_params(), $this->get_settings() );
+		$settings = $this->get_settings();
+		$values   = array_intersect_key( (array) $request->get_json_params(), $settings );
+
+		// Fields marked `gated` unlock with the Pro add-on; free users' writes to them are dropped.
+		if ( ! wc_donation_manager()->is_pro_active() ) {
+			$values = array_filter(
+				$values,
+				static function ( $value, $name ) use ( $settings ) {
+					return empty( $settings[ $name ]['gated'] );
+				},
+				ARRAY_FILTER_USE_BOTH
+			);
+		}
 
 		wc_donation_manager()->settings->save_values( $values );
 

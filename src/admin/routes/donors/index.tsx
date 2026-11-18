@@ -5,10 +5,12 @@ import apiFetch from '@wordpress/api-fetch';
 import { useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
+	Button,
 	Card,
 	DataTable,
 	Empty,
 	ErrorBoundary,
+	Paywall,
 	type DataTableColumn,
 } from '@byteever/ui';
 
@@ -77,7 +79,13 @@ export default function Donors() {
 	const [ isLoading, setIsLoading ] = useState( true );
 	const [ error, setError ] = useState( '' );
 
+	const isPro = vars.isPro;
+
 	useEffect( () => {
+		if ( ! isPro ) {
+			return;
+		}
+
 		let mounted = true;
 
 		setIsLoading( true );
@@ -93,9 +101,7 @@ export default function Donors() {
 			} )
 			.catch( ( err ) => {
 				if ( mounted ) {
-					setError(
-						( err as { message?: string } ).message ?? ''
-					);
+					setError( ( err as { message?: string } ).message ?? '' );
 					setIsLoading( false );
 				}
 			} );
@@ -103,7 +109,30 @@ export default function Donors() {
 		return () => {
 			mounted = false;
 		};
-	}, [] );
+	}, [ isPro ] );
+
+	if ( ! isPro ) {
+		return (
+			<Paywall
+				blocked
+				title={ __( 'Donors', 'wc-donation-manager' ) }
+				description={ __(
+					'See everyone who donated, their contact details and the orders behind the donations. Available in Donation Manager Pro.',
+					'wc-donation-manager'
+				) }
+				action={
+					<Button
+						variant="solid"
+						tone="promo"
+						href={ vars.upgradeUrl }
+						target="_blank"
+					>
+						{ __( 'Upgrade to Pro', 'wc-donation-manager' ) }
+					</Button>
+				}
+			/>
+		);
+	}
 
 	if ( error ) {
 		return (

@@ -5,6 +5,7 @@ import { useSettings } from '@byteever/data';
 import {
 	Button,
 	Page,
+	Paywall,
 	SettingsForm,
 	Stack,
 	useBeforeUnload,
@@ -14,6 +15,7 @@ import {
 /**
  * WordPress dependencies
  */
+import { useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -21,6 +23,11 @@ import { __ } from '@wordpress/i18n';
  */
 import { app } from '../../app';
 import { vars } from '../../vars';
+
+/**
+ * The group paywalled whole; free users see it dimmed behind the paywall.
+ */
+const GATED_GROUP = 'emails';
 
 type GroupFormProps = {
 	group: string;
@@ -41,8 +48,23 @@ export default function GroupForm( { group }: GroupFormProps ) {
 	);
 	const current = groups.find( ( item ) => item.id === group );
 
+	// Fields the Pro add-on unlocks render disabled for free users; a
+	// disabled field keeps its value and is excluded from the submit.
+	const gatedFields = useMemo( () => {
+		if ( vars.isPro || ! fields ) {
+			return fields;
+		}
+
+		return Object.fromEntries(
+			Object.entries( fields ).map( ( [ name, field ] ) => [
+				name,
+				field.gated ? { ...field, disabled: true } : field,
+			] )
+		);
+	}, [ fields ] );
+
 	const form = useSettingsForm( {
-		fields,
+		fields: gatedFields,
 		values,
 		onSubmit: async ( data ) => {
 			await app.toast.promise( save( data ), {
@@ -60,6 +82,13 @@ export default function GroupForm( { group }: GroupFormProps ) {
 
 	useBeforeUnload( form.formState.isDirty );
 
+	const paywalled = GATED_GROUP === group && ! vars.isPro;
+	const hasGated =
+		! vars.isPro &&
+		Object.values( fields ?? {} ).some( ( field ) => field.gated );
+
+	const formNode = <SettingsForm form={ form } loading={ isLoading } />;
+
 	return (
 		<Page
 			title={ current ? String( current.title ) : '' }
@@ -73,14 +102,60 @@ export default function GroupForm( { group }: GroupFormProps ) {
 					tone="primary"
 					onClick={ form.submit }
 					loading={ form.formState.isSubmitting }
-					disabled={ isLoading || ! form.formState.isDirty }
+					disabled={ isLoading || paywalled || ! form.formState.isDirty }
 				>
 					{ __( 'Save changes', 'wc-donation-manager' ) }
 				</Button>
 			}
 		>
 			<Stack vertical gap="xl" align="stretch">
-				<SettingsForm form={ form } loading={ isLoading } />
+				{ paywalled ? (
+					<Paywall
+						blocked
+						title={ __( 'Available in Pro', 'wc-donation-manager' ) }
+						description={ __(
+							'Unlock these settings, and every other Pro feature, by upgrading to Donation Manager Pro.',
+							'wc-donation-manager'
+						) }
+						action={
+							<Button
+								variant="solid"
+								tone="promo"
+								href={ vars.upgradeUrl }
+								target="_blank"
+							>
+								{ __( 'Upgrade to Pro', 'wc-donation-manager' ) }
+							</Button>
+						}
+					>
+						{ formNode }
+					</Paywall>
+				) : (
+					formNode
+				) }
+				{ hasGated && ! paywalled && (
+					<Paywall
+						blocked
+						title={ __(
+							'Customize labels & buttons',
+							'wc-donation-manager'
+						) }
+						description={ __(
+							'Brand the donation experience with your own labels. Available in Donation Manager Pro.',
+							'wc-donation-manager'
+						) }
+						action={
+							<Button
+								variant="solid"
+								tone="promo"
+								href={ vars.upgradeUrl }
+								target="_blank"
+							>
+								{ __( 'Upgrade to Pro', 'wc-donation-manager' ) }
+							</Button>
+						}
+					/>
+				) }
 			</Stack>
 		</Page>
 	);

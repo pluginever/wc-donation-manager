@@ -22,6 +22,8 @@ class Metaboxes extends Component {
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
 		add_filter( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_data' ) );
+		add_action( 'woocommerce_admin_process_product_object', array( $this, 'save_donation_product_object' ) );
+		add_action( 'woocommerce_process_product_meta_donation', array( $this, 'save_donation_meta' ) );
 		add_action( 'admin_footer', array( __CLASS__, 'admin_custom_js' ) );
 	}
 
@@ -194,6 +196,90 @@ class Metaboxes extends Component {
 		do_action( 'wc_donation_manager_after_product_campaign_data', get_the_ID() );
 
 		echo '</div></div>';
+	}
+
+	/**
+	 * Save donation product meta.
+	 *
+	 * Runs on the legacy per-type save hook; only reachable while
+	 * adding or editing a donation product.
+	 *
+	 * @param int $product_id Donation product id.
+	 *
+	 * @since 1.0.0
+	 * @return void
+	 */
+	public function save_donation_meta( $product_id ) {
+		$this->save_donation_product_data( $product_id );
+	}
+
+	/**
+	 * Save donation product data on the WooCommerce product object.
+	 *
+	 * @param \WC_Product $product Product object.
+	 *
+	 * @since 1.1.3
+	 * @return void
+	 */
+	public function save_donation_product_object( $product ) {
+		if ( ! $product instanceof \WC_Product || ! $product->is_type( 'donation' ) ) {
+			return;
+		}
+
+		$price = $this->get_posted_price();
+		$product->set_regular_price( $price );
+		$product->set_price( $price );
+		$this->save_donation_product_data( $product->get_id(), $product );
+	}
+
+	/**
+	 * Save donation product fields.
+	 *
+	 * @param int              $product_id Donation product id.
+	 * @param \WC_Product|null $product    Product object; set, the values land on the product's meta data.
+	 *
+	 * @since 1.1.3
+	 * @return void
+	 */
+	private function save_donation_product_data( $product_id, $product = null ) {
+		$price              = $this->get_posted_price();
+		$predefined_amounts = ! empty( $_POST['wcdm_predefined_amounts'] ) ? explode( ',', preg_replace( '/\s*/m', '', sanitize_text_field( wp_unslash( $_POST['wcdm_predefined_amounts'] ) ) ) ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+		$predefined_amounts = array_filter( array_unique( $predefined_amounts ) );
+		$meta_data          = array(
+			'wcdm_is_predefined_amounts'    => isset( $_POST['wcdm_is_predefined_amounts'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_predefined_amounts'] ) ) : '', // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+			'wcdm_predefined_amounts_title' => ( ! empty( $_POST['wcdm_predefined_amounts_title'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_predefined_amounts_title'] ) ) : __( 'Suggested amounts', 'wc-donation-manager' ) ), // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+			'wcdm_predefined_amounts'       => $predefined_amounts,
+			'wcdm_is_custom_amount'         => isset( $_POST['wcdm_is_custom_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_is_custom_amount'] ) ) : 'no', // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+			'wcdm_amount_increment_steps'   => ( ! empty( $_POST['wcdm_amount_increment_steps'] ) && is_numeric( $_POST['wcdm_amount_increment_steps'] ) ? number_format( (float) wp_unslash( $_POST['wcdm_amount_increment_steps'] ), 2, '.', '' ) : 0.01 ), // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- WooCommerce verifies the product save nonce before this hook fires.
+			'wcdm_min_amount'               => ( ! empty( $_POST['wcdm_min_amount'] ) && is_numeric( $_POST['wcdm_min_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_min_amount'] ) ) : get_option( 'wcdm_minimum_amount' ) ), // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+			'wcdm_max_amount'               => ( ! empty( $_POST['wcdm_max_amount'] ) && is_numeric( $_POST['wcdm_max_amount'] ) ? floatval( wp_unslash( $_POST['wcdm_max_amount'] ) ) : get_option( 'wcdm_maximum_amount' ) ), // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+			'wcdm_campaign_id'              => ( ! empty( $_POST['wcdm_campaign_id'] ) ? sanitize_text_field( wp_unslash( $_POST['wcdm_campaign_id'] ) ) : '' ), // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
+		);
+
+		if ( $product instanceof \WC_Product ) {
+			foreach ( $meta_data as $key => $value ) {
+				$product->update_meta_data( $key, $value );
+			}
+
+			return;
+		}
+
+		update_post_meta( $product_id, '_price', $price );
+		update_post_meta( $product_id, '_regular_price', $price );
+
+		foreach ( $meta_data as $key => $value ) {
+			update_post_meta( $product_id, $key, $value );
+		}
+	}
+
+	/**
+	 * Get the posted donation price.
+	 *
+	 * @since 1.1.3
+	 * @return float|string
+	 */
+	private function get_posted_price() {
+		return isset( $_POST['wcdm_amount'] ) ? wc_format_decimal( sanitize_text_field( wp_unslash( $_POST['wcdm_amount'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- WooCommerce verifies the product save nonce before this hook fires.
 	}
 
 	/**

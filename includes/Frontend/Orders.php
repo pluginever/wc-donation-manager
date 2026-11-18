@@ -44,7 +44,7 @@ class Orders extends Component {
 		foreach ( $order->get_items() as $item_id => $item ) {
 			$product = $item->get_product();
 
-			if ( $product->is_type( 'donation' ) ) {
+			if ( $product && $product->is_type( 'donation' ) ) {
 				$is_type_donation = true;
 				break;
 			}
@@ -71,10 +71,18 @@ class Orders extends Component {
 	 * @return void
 	 */
 	public static function order_status_completed( $order_id, $order ) {
+		// A fresh read: the transition hooks can fire before the caller
+		// persisted its in-memory items.
+		$order = wc_get_order( $order_id );
+
+		if ( ! $order instanceof \WC_Order ) {
+			return;
+		}
+
 		foreach ( $order->get_items() as $item_id => $item ) {
 			$product = $item->get_product();
 
-			if ( $product->is_type( 'donation' ) ) {
+			if ( $product && $product->is_type( 'donation' ) ) {
 				$orders_id = get_post_meta( $item['product_id'], 'wcdm_orders_id', true );
 
 				if ( ! is_array( $orders_id ) ) {

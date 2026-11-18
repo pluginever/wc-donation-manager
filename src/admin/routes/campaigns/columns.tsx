@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import { Link } from '@byteever/router';
 import { FormatDate, type DataTableColumn } from '@byteever/ui';
 
 /**
@@ -40,9 +39,7 @@ export const COLUMNS: Record<
 	Partial< DataTableColumn< Campaign > >
 > = {
 	name: {
-		render: ( name: string, campaign: Campaign ) => (
-			<Link to={ `/campaigns/${ campaign.id }/edit` }>{ name }</Link>
-		),
+		render: ( name: string ) => name,
 	},
 	cause: {
 		render: ( cause: string ) =>

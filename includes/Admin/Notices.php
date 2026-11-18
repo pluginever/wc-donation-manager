@@ -3,6 +3,7 @@
 namespace PluginEver\DonationManager\Admin;
 
 use PluginEver\DonationManager\B8\Component;
+use PluginEver\DonationManager\Installer;
 
 defined( 'ABSPATH' ) || exit;
 

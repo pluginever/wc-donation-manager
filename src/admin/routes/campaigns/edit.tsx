@@ -1,12 +1,9 @@
 /**
  * External dependencies
  */
-import { useEntity, useEntityOptions } from '@byteever/data';
-import { Link, useNavigate, useParams } from '@byteever/router';
+import { useEntity } from '@byteever/data';
 import {
-	Button,
-	Group,
-	Page,
+	Drawer,
 	useBeforeUnload,
 	useDataForm,
 	type DataFormSchema,
@@ -15,6 +12,7 @@ import {
 /**
  * WordPress dependencies
  */
+import { useMemo } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -23,28 +21,56 @@ import { __ } from '@wordpress/i18n';
 import { app } from '../../app';
 import { DataForm } from '../../components';
 
+type EditProps = {
+	id: number | null;
+	open: boolean;
+	onClose: () => void;
+	onSave?: ( record: Record< string, unknown > ) => void;
+};
+
 /**
- * Adds or edits one campaign as its own page.
+ * Adds or edits one campaign in a right-side drawer.
  *
  * @since 2.0.0
- * @return {Element} The campaign form page.
+ * @param {EditProps}    props         Component props.
+ * @param {number|null}  props.id      Campaign id, or null to add one.
+ * @param {boolean}      props.open    Whether the drawer is open.
+ * @param {() => void}   props.onClose Called once the drawer closes.
+ * @param {OnSave}       props.onSave  Called with the saved campaign.
+ * @return {Element} The drawer.
  */
-export default function Edit() {
-	const params = useParams( { strict: false } );
-	const id = params.campaignId ? Number( params.campaignId ) : null;
-	const navigate = useNavigate();
-
+export default function Edit( { id, open, onClose, onSave }: EditProps ) {
 	const { record, options, recordIsLoading, optionsIsLoading, save } =
 		useEntity( 'wcdm', 'campaigns', {
 			id: id ?? undefined,
 			withOptions: true,
 		} );
 
+	// A new record starts from the declaration's defaults; the form only
+	// binds what it is given, so the schema defaults are seeded here.
+	const defaults = useMemo( () => {
+		const declared = ( options.form_fields ?? {} ) as DataFormSchema;
+
+		return Object.fromEntries(
+			Object.entries( declared )
+				.filter(
+					( [ , field ] ) =>
+						'section' !== field.type &&
+						( field as { default?: unknown } ).default !==
+							undefined
+				)
+				.map( ( [ name, field ] ) => [
+					name,
+					( field as { default?: unknown } ).default,
+				] )
+		);
+	}, [ options.form_fields ] );
+
 	const form = useDataForm( {
 		fields: ( options.form_fields ?? {} ) as DataFormSchema,
-		values: id && record ? record : {},
+		values: id && record ? record : defaults,
 		onSubmit: async ( values ) => {
-			await app.toast.promise(
+			const saved = await app.toast.promise(
 				save( {
 					...values,
 					...( id ? { id } : {} ),
@@ -61,45 +87,33 @@ export default function Edit() {
 				}
 			);
 
-			navigate( { to: '/campaigns', replace: true } );
+			onSave?.( saved );
+			onClose();
 		},
 	} );
 
-	useBeforeUnload( form.formState.isDirty );
+	useBeforeUnload( open && form.formState.isDirty );
 
 	return (
-		<Page
+		<Drawer
+			open={ open }
+			onOpenChange={ ( next ) => ! next && onClose() }
+			onOpenChangeComplete={ ( next ) => ! next && form.reset() }
 			title={
 				id
 					? __( 'Edit campaign', 'wc-donation-manager' )
 					: __( 'Add campaign', 'wc-donation-manager' )
 			}
-			subtitle={
-				<Link to="/campaigns">
-					{ __( '← Back to campaigns', 'wc-donation-manager' ) }
-				</Link>
-			}
-			maxWidth="narrow"
-			actions={
-				<Group>
-					<Button onClick={ () => navigate( { to: '/campaigns' } ) }>
-						{ __( 'Cancel', 'wc-donation-manager' ) }
-					</Button>
-					<Button
-						variant="solid"
-						tone="primary"
-						onClick={ form.submit }
-						loading={ form.formState.isSubmitting }
-						disabled={
-							optionsIsLoading || recordIsLoading || ! form.formState.isDirty
-						}
-					>
-						{ __( 'Save', 'wc-donation-manager' ) }
-					</Button>
-				</Group>
-			}
+			size={ 560 }
+			loading={ optionsIsLoading || recordIsLoading }
+			okText={ __( 'Save', 'wc-donation-manager' ) }
+			okButtonProps={ {
+				onClick: form.submit,
+				loading: form.formState.isSubmitting,
+				disabled: ! form.formState.isDirty,
+			} }
 		>
-			<DataForm form={ form } loading={ optionsIsLoading } />
-		</Page>
+			<DataForm form={ form } />
+		</Drawer>
 	);
 }

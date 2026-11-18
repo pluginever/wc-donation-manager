@@ -1,44 +1,47 @@
 /**
  * External dependencies
  */
-import { Button, Group, Page } from '@byteever/ui';
+import { Button, Page } from '@byteever/ui';
 import { plus } from '@byteever/ui/icons';
-import { useNavigate } from '@byteever/router';
 
 /**
  * WordPress dependencies
  */
-import { useCallback } from '@wordpress/element';
+import { useCallback, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
  */
 import List from './list';
+import Edit from './edit';
 import type { OnAction } from './types';
 
 /**
- * The campaigns screen: the list; add and edit are their own routes.
+ * The campaigns screen: the list with the add and edit drawer.
  *
  * @since 2.0.0
  * @return {Element} The campaigns page.
  */
 export default function Campaigns() {
-	const navigate = useNavigate();
+	const [ dialog, setDialog ] = useState< 'edit' | null >( null );
+	const [ editingId, setEditingId ] = useState< number | null >( null );
 
 	const handleAction = useCallback< OnAction >(
 		async ( action, ids = [] ) => {
 			switch ( action ) {
 				case 'add':
-					navigate( { to: '/campaigns/new' } );
+					setEditingId( null );
+					setDialog( 'edit' );
 					break;
 
 				case 'edit':
-					navigate( { to: `/campaigns/${ ids[ 0 ] }/edit` } );
+					setEditingId( Number( ids[ 0 ] ) );
+					setDialog( 'edit' );
 					break;
 			}
 		},
-		[ navigate ]
+		[]
 	);
 
 	return (
@@ -46,20 +49,23 @@ export default function Campaigns() {
 			title={ __( 'Campaigns', 'wc-donation-manager' ) }
 			maxWidth="wide"
 			actions={
-				<Group>
-					<Button
-						variant="solid"
-						tone="primary"
-						icon={ plus }
-						onClick={ () => handleAction( 'add' ) }
-					>
-						{ __( 'Add campaign', 'wc-donation-manager' ) }
-					</Button>
-				</Group>
+				<Button
+					variant="solid"
+					tone="primary"
+					icon={ plus }
+					onClick={ () => handleAction( 'add' ) }
+				>
+					{ __( 'Add campaign', 'wc-donation-manager' ) }
+				</Button>
 			}
 		>
 			<List onAction={ handleAction } />
+
+			<Edit
+				id={ editingId }
+				open={ 'edit' === dialog }
+				onClose={ () => setDialog( null ) }
+			/>
 		</Page>
 	);
 }
-

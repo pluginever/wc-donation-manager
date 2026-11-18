@@ -2,13 +2,9 @@
  * External dependencies
  */
 import { useSettings } from '@byteever/data';
-import {
-	Outlet,
-	useLocation,
-	useNavigate,
-} from '@byteever/router';
+import { Outlet, useLocation, useNavigate } from '@byteever/router';
 import { Layout, Sidebar, Skeleton } from '@byteever/ui';
-import { coins, heart, settings } from '@byteever/ui/icons';
+import { heart, mail, pencil, settings } from '@byteever/ui/icons';
 
 /**
  * WordPress dependencies
@@ -18,10 +14,10 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { app } from '../../app';
 
 const ICONS: Record< string, readonly unknown[] > = {
 	general: heart,
+	emails: mail,
 	advanced: settings,
 };
 
@@ -46,7 +42,7 @@ export default function Settings() {
 			id: group.id,
 			to: `/settings/${ group.id }`,
 			active: pathname.startsWith( `/settings/${ group.id }` ),
-			icon: ICONS[ group.id ],
+			icon: ICONS[ group.id ] ?? pencil,
 			label: String( group.title ),
 		} ) );
 

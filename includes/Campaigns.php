@@ -172,7 +172,7 @@ class Campaigns extends Component {
 		$status  = isset( $data['status'] ) ? sanitize_key( (string) $data['status'] ) : '';
 
 		if ( '' === $status ) {
-			$status = $editing ? get_post_status( $id ) : 'pending';
+			$status = $editing ? get_post_status( $id ) : 'publish';
 		}
 
 		$post_id = wp_insert_post(
@@ -181,7 +181,7 @@ class Campaigns extends Component {
 				'post_type'    => self::POST_TYPE,
 				'post_title'   => sanitize_text_field( (string) ( $data['name'] ?? '' ) ),
 				'post_content' => wp_kses_post( (string) ( $data['cause'] ?? '' ) ),
-				'post_status'  => in_array( $status, get_post_statuses(), true ) ? $status : 'pending',
+				'post_status'  => in_array( $status, array_keys( get_post_statuses() ), true ) ? $status : 'publish',
 				'meta_input'   => array(
 					self::META['goal_amount']   => isset( $data['goal_amount'] ) ? (float) $data['goal_amount'] : 0,
 					self::META['end_date']      => isset( $data['end_date'] ) ? sanitize_text_field( (string) $data['end_date'] ) : '',
