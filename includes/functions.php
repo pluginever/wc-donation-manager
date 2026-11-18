@@ -98,6 +98,51 @@ function wcdm_get_goal_behavior( $campaign_id ) {
 }
 
 /**
+ * Get the step-ladder-aligned initial donation amount for an input.
+ *
+ * Native number inputs step along the ladder `min + n × step`: when the
+ * rendered value sits off the ladder (an empty price renders 0.00, or a
+ * price that is not a multiple of the step), the first click snaps to the
+ * nearest rung instead of adding a full step. Seeding the value onto the
+ * ladder makes every increment and decrement exactly `±step`, regardless
+ * of the minimum.
+ *
+ * @since 2.0.0
+ * @param mixed $price Product default price. Empty means the donor picks the amount.
+ * @param mixed $min   Minimum accepted amount.
+ * @param mixed $max   Maximum accepted amount; 0 or empty means unlimited.
+ * @param mixed $step  Amount increment step.
+ * @return float The initial value, on the ladder.
+ */
+function wcdm_get_initial_amount( $price, $min, $max, $step ) {
+	$min  = (float) $min;
+	$max  = (float) $max;
+	$step = (float) $step;
+
+	if ( $step <= 0 ) {
+		$step = 1;
+	}
+
+	$base = $min;
+	if ( '' !== $price && null !== $price ) {
+		$base = max( $min, (float) $price );
+	}
+
+	$rungs = 0;
+	if ( $base > $min ) {
+		$rungs = (int) ceil( ( $base - $min ) / $step );
+	}
+
+	$value = $min + ( $rungs * $step );
+
+	if ( $max > 0 && $value > $max ) {
+		$value = $max;
+	}
+
+	return $value;
+}
+
+/**
  * Get the post title.
  *
  * @param int $post_id Post id.

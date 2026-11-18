@@ -8,7 +8,8 @@
 		"css": "sass assets/src:assets/build",
 		"js": "esbuild assets/src/*.js --bundle --outdir=assets/build",
 		"lint-js": "byteever-scripts lint-js",
-		"lint-style": "byteever-scripts lint-style"
+		"lint-style": "byteever-scripts lint-style",
+		"test": "php tests/test-initial-amount.php"
 	},
 	"dependencies": {
 		"@byteever/data": "^0.1.4",

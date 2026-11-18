@@ -143,11 +143,19 @@ class Product extends Component {
 				<?php endif; ?>
 				<div class="campaign-amount <?php echo sanitize_html_class( 'yes' === $is_custom_amount ? '' : 'disabled' ); ?>">
 					<label for="donation_amount" class="input-text"><?php echo esc_html( $currency_symbol ); ?></label>
+					<?php
+					$wcdm_initial_amount = wcdm_get_initial_amount(
+						$product->get_price(),
+						get_post_meta( $product->get_id(), 'wcdm_min_amount', true ),
+						get_post_meta( $product->get_id(), 'wcdm_max_amount', true ),
+						get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true )
+					);
+					?>
 					<input type="<?php echo esc_attr( 'yes' === $is_custom_amount ? 'number' : 'hidden' ); ?>" name="donation_amount" id="donation_amount"
 							min="<?php echo esc_attr( get_post_meta( $product->get_id(), 'wcdm_min_amount', true ) ); ?>"
 							max="<?php echo esc_attr( get_post_meta( $product->get_id(), 'wcdm_max_amount', true ) ); ?>"
 							step="<?php echo esc_attr( get_post_meta( $product->get_id(), 'wcdm_amount_increment_steps', true ) ); ?>"
-							value="<?php echo esc_attr( number_format( floatval( $product->get_price() ), 2, '.', '' ) ); ?>"
+							value="<?php echo esc_attr( number_format( $wcdm_initial_amount, 2, '.', '' ) ); ?>"
 							class="input-text text"/>
 				</div>
 			</div>
