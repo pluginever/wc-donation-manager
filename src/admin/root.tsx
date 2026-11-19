@@ -16,7 +16,7 @@ import {
 	Text,
 	Tooltip,
 } from '@byteever/ui';
-import { circleQuestionMark, settings } from '@byteever/ui/icons';
+import { circleQuestionMark } from '@byteever/ui/icons';
 
 /**
  * WordPress dependencies
@@ -29,7 +29,7 @@ import { __ } from '@wordpress/i18n';
 import { Logo } from './components';
 import { vars } from './vars';
 
-const UTILITY_MENU = [ 'settings', 'docs' ];
+const UTILITY_MENU = [ 'docs' ];
 
 export default function Root() {
 	useAdminMenu( vars.slug );
@@ -37,7 +37,6 @@ export default function Root() {
 
 	const navigate = useNavigate();
 	const menu = useActiveMenu();
-	const section = menu.find( ( item ) => item.active );
 	const primary = menu.filter( ( item ) => ! UTILITY_MENU.includes( item.id ) );
 
 	return (
@@ -68,15 +67,6 @@ export default function Root() {
 								label={ __( 'Help', 'wc-donation-manager' ) }
 								href={ vars.docsUrl }
 								target="_blank"
-							/>
-						</Tooltip>
-						<Tooltip content={ __( 'Settings', 'wc-donation-manager' ) }>
-							<Button
-								variant="plain"
-								icon={ settings }
-								label={ __( 'Settings', 'wc-donation-manager' ) }
-								href="#/settings"
-								pressed={ 'settings' === section?.id }
 							/>
 						</Tooltip>
 						{ ! vars.isPro && (

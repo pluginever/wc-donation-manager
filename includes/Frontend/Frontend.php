@@ -31,6 +31,7 @@ class Frontend extends Component {
 		add_action( 'woocommerce_before_cart', array( __CLASS__, 'conditionally_disable_coupons' ) );
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'conditionally_disable_coupons' ) );
 		add_filter( 'woocommerce_checkout_fields', array( __CLASS__, 'remove_order_note_field' ), 20 );
+		add_filter( 'woocommerce_enable_order_notes_field', array( __CLASS__, 'maybe_disable_order_notes_field' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
@@ -58,9 +59,10 @@ class Frontend extends Component {
 	 * Remove the order notes field from the checkout while the cart holds
 	 * a donation product.
 	 *
-	 * Classic checkout only: the field is registered checkout data, so
-	 * dropping it removes the textarea and its validation everywhere the
-	 * classic templates render it.
+	 * Classic checkout: the field is registered under the `order` fieldset,
+	 * so dropping it there (and flipping the order-notes switch) removes
+	 * the textarea and its validation everywhere the classic templates
+	 * render it.
 	 *
 	 * @since 2.0.0
 	 * @param array<string, mixed> $fields Checkout fields.
@@ -71,9 +73,25 @@ class Frontend extends Component {
 			return $fields;
 		}
 
-		unset( $fields['billing']['order_comments'], $fields['shipping']['order_comments'] );
+		unset( $fields['order']['order_comments'], $fields['shipping']['order_comments'] );
 
 		return $fields;
+	}
+
+	/**
+	 * Flip the classic order-notes switch off while the cart holds a
+	 * donation product.
+	 *
+	 * @since 2.0.0
+	 * @param bool $enabled Whether the order notes field is enabled.
+	 * @return bool
+	 */
+	public static function maybe_disable_order_notes_field( bool $enabled ): bool {
+		if ( 'yes' !== get_option( 'wcdm_disabled_order_note', 'yes' ) || ! self::cart_has_donation() ) {
+			return $enabled;
+		}
+
+		return false;
 	}
 
 	/**
