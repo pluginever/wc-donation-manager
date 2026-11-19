@@ -66,6 +66,23 @@ class Admin extends Component {
 		$this->app->scripts->register_style( 'wcdm-admin', 'style-admin.css' );
 
 		wp_localize_script( 'wcdm-admin', 'wcdm_admin_vars', $this->get_admin_vars() );
+
+		// The Cause field's editor mounts on demand inside a drawer and is
+		// driven by the classic editor API. The default machinery can bail
+		// (enqueue gates, the rich-edit preference), so the handles and the
+		// settings bootstrap are loaded explicitly.
+		wp_register_script(
+			'wcdm-editor-bootstrap',
+			'',
+			array( 'editor', 'quicktags', 'wp-tinymce' ),
+			(string) $this->app->version,
+			false
+		);
+		wp_add_inline_script(
+			'wcdm-editor-bootstrap',
+			'window.wp = window.wp || {}; window.wp.editor = window.wp.editor || {}; window.wp.editor.getDefaultSettings = window.wp.editor.getDefaultSettings || function () { return { tinymce: { wpautop: true }, quicktags: { buttons: "strong,em,link,block,del,ins,img,ul,ol,li,code,more,close" } }; };',
+			'after'
+		);
 	}
 
 	/**
@@ -103,6 +120,11 @@ class Admin extends Component {
 
 		wp_enqueue_media();
 		wp_enqueue_editor();
+		// Guarantee the classic editor API for the drawer's Cause editor.
+		wp_enqueue_script( 'editor' );
+		wp_enqueue_script( 'quicktags' );
+		wp_enqueue_script( 'wp-tinymce' );
+		wp_enqueue_script( 'wcdm-editor-bootstrap' );
 		wp_enqueue_script( 'wcdm-admin' );
 		wp_enqueue_style( 'wcdm-admin' );
 		wp_add_inline_script(
