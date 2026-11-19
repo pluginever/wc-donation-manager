@@ -18,6 +18,8 @@ interface WCDMAdminVars {
 	assetsUrl: string;
 	/** Whether the Pro add-on is active. */
 	isPro: boolean;
+	/** Whether the Pro add-on's license is valid; false when Pro is inactive. */
+	licensed: boolean;
 	/** Pro landing page URL. */
 	upgradeUrl: string;
 	/** Documentation URL. */

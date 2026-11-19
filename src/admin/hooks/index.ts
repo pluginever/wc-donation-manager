@@ -2,13 +2,18 @@
  * External dependencies
  */
 import { useNavigate, useSearch } from '@byteever/router';
-import { useListQuery } from '@byteever/ui';
+import {
+	toObject,
+	useListQuery,
+	type FilterDefinition,
+	type FiltersValue,
+} from '@byteever/ui';
 
 /**
  * WordPress dependencies
  */
 import { useDispatch } from '@wordpress/data';
-import { useCallback } from '@wordpress/element';
+import { useCallback, useMemo, useState } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -32,6 +37,33 @@ export function useListParams( defaults?: Record< string, unknown > ) {
 		onChange: ( next ) =>
 			void navigate( { to: '.', search: () => next, replace: true } ),
 	} );
+}
+
+/**
+ * A list's filters: the REST options' fields, whether the panel shows, and
+ * the applied value.
+ *
+ * @since 2.0.0
+ * @param {unknown}    filters Filters from the REST options, keyed by field.
+ * @param {Object}     list    The screen's list query, as `useListParams` returns it.
+ * @return {Object} The fields, whether the panel is open, its toggle, the applied value and the function applying one.
+ */
+export function useFilters( filters: unknown, list: ReturnType< typeof useListParams > ) {
+	const { query, setQuery, filterCount } = list;
+	const [ show, setShow ] = useState( false );
+	const fields = useMemo(
+		() =>
+			( toObject( filters ) ?? {} ) as Record< string, FilterDefinition >,
+		[ filters ]
+	);
+
+	return {
+		fields,
+		isOpen: show || filterCount > 0,
+		toggle: () => setShow( ( previous ) => ! previous ),
+		value: query.filters as FiltersValue | undefined,
+		apply: ( value: FiltersValue ) => setQuery( { filters: value } ),
+	};
 }
 
 type Messages = {

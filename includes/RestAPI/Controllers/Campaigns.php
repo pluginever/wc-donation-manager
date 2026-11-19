@@ -374,7 +374,7 @@ class Campaigns extends Controller {
 					'help'     => __( 'What happens when the campaign reaches its goal.', 'wc-donation-manager' ),
 					'priority' => 60,
 					'width'    => '1/2',
-					'default'  => wc_donation_manager()->options->get( 'goal_behavior', 'continue' ),
+					'default'  => 'continue',
 					'options'  => $behaviors,
 				),
 			)
@@ -557,7 +557,7 @@ class Campaigns extends Controller {
 		$campaigns = wc_donation_manager()->campaigns;
 		$behavior  = (string) get_post_meta( $post->ID, $campaigns::META['goal_behavior'], true );
 		if ( '' === $behavior ) {
-			$behavior = (string) wc_donation_manager()->options->get( 'goal_behavior', 'continue' );
+			$behavior = 'continue';
 		}
 
 		$items = array(

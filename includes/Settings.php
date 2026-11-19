@@ -91,16 +91,6 @@ class Settings extends B8\Settings {
 				'sanitize' => 'yes_no',
 				'section'  => 'checkout',
 			),
-			'expired_text2'         => array(
-				'type'     => 'text',
-				'label'    => __( 'Campaign expired text Two', 'wc-donation-manager' ),
-				'help'     => __( 'Shown on donation products whose campaign end date has passed two.', 'wc-donation-manager' ),
-				'default'  => __( 'The campaign expired!', 'wc-donation-manager' ),
-				'sanitize' => 'text',
-				'section'  => 'checkout',
-				'width'    => 'full',
-				'gated'    => true,
-			),
 			'fast_checkout'         => array(
 				'type'     => 'switch',
 				'label'    => __( 'Fast checkout', 'wc-donation-manager' ),
@@ -342,35 +332,9 @@ class Settings extends B8\Settings {
 				'type'     => 'number',
 				'label'    => __( 'Maximum amount', 'wc-donation-manager' ),
 				'help'     => __( 'Highest donation amount accepted when a campaign sets no maximum of its own.', 'wc-donation-manager' ),
-				'default'  => 100,
+				'default'  => 1000,
 				'sanitize' => 'float',
 				'section'  => 'amounts',
-			),
-			'campaigns'      => array(
-				'type'  => 'section',
-				'title' => __( 'Campaigns', 'wc-donation-manager' ),
-			),
-			'goal_behavior'  => array(
-				'type'     => 'select',
-				'label'    => __( 'After goal completion', 'wc-donation-manager' ),
-				'help'     => __( 'What happens when a campaign reaches its goal.', 'wc-donation-manager' ),
-				'default'  => 'continue',
-				'options'  => array(
-					array(
-						'value' => 'continue',
-						'label' => __( 'Continue accepting donations', 'wc-donation-manager' ),
-					),
-					array(
-						'value' => 'close',
-						'label' => __( 'Close the campaign automatically', 'wc-donation-manager' ),
-					),
-					array(
-						'value' => 'soft_close',
-						'label' => __( 'Show as completed but still allow donations', 'wc-donation-manager' ),
-					),
-				),
-				'sanitize' => 'enum:continue,close,soft_close',
-				'section'  => 'campaigns',
 			),
 			'data'           => array(
 				'type'        => 'section',

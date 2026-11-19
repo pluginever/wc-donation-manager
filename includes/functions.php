@@ -86,15 +86,16 @@ function wcdm_get_campaign_products( $campaign_id ) {
 /**
  * Get goal behavior for a campaign.
  *
+ * Behaviour is a per-campaign value set in the campaign form; campaigns
+ * saved before a behaviour was chosen keep accepting donations.
+ *
  * @param int $campaign_id Campaign ID.
  * @return string
  */
 function wcdm_get_goal_behavior( $campaign_id ) {
 	$behavior = get_post_meta( $campaign_id, 'wcdm_goal_behavior', true );
-	if ( ! $behavior ) {
-		$behavior = get_option( 'wcdm_goal_behavior', 'continue' );
-	}
-	return $behavior;
+
+	return in_array( $behavior, array( 'continue', 'close', 'soft_close' ), true ) ? $behavior : 'continue';
 }
 
 /**

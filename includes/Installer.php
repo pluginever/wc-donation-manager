@@ -102,6 +102,7 @@ class Installer extends Component {
 		}
 
 		$this->migrate_legacy_options();
+		$this->backfill_campaign_behaviors();
 		$this->create_defaults();
 		$this->app->options->update_db_version( $this->app->version, true );
 		add_option( $this->app->options->key( self::INSTALLED_OPTION ), time() );
@@ -155,6 +156,34 @@ class Installer extends Component {
 		}
 
 		wp_cache_flush();
+	}
+
+	/**
+	 * Copy the pre-2.0 global goal behaviour onto every campaign that has
+	 * none, then retire the global option.
+	 *
+	 * Goal behaviour is per-campaign since 2.0.0; the old global setting
+	 * still describes the intent of campaigns saved before it moved.
+	 *
+	 * @since 2.0.0
+	 * @return void
+	 */
+	protected function backfill_campaign_behaviors(): void {
+		$legacy = (string) $this->app->options->get( 'goal_behavior', '' );
+
+		if ( '' === $legacy ) {
+			return;
+		}
+
+		foreach ( wcdm_get_campaigns( array( 'post_status' => 'any' ) ) as $campaign ) {
+			$behavior = get_post_meta( $campaign->ID, Campaigns::META['goal_behavior'], true );
+
+			if ( '' === $behavior || null === $behavior ) {
+				update_post_meta( $campaign->ID, Campaigns::META['goal_behavior'], $legacy );
+			}
+		}
+
+		$this->app->options->delete( 'goal_behavior' );
 	}
 
 	/**

@@ -20,7 +20,6 @@ class Metaboxes extends Component {
 	 */
 	public function register(): void {
 		add_filter( 'woocommerce_product_data_tabs', array( __CLASS__, 'product_data_tab' ), 10, 1 );
-		add_filter( 'woocommerce_product_options_general_product_data', array( __CLASS__, 'general_product_data' ) );
 		add_action( 'woocommerce_product_data_panels', array( __CLASS__, 'product_data' ) );
 		add_action( 'woocommerce_admin_process_product_object', array( $this, 'save_donation_product_object' ) );
 		add_action( 'woocommerce_process_product_meta_donation', array( $this, 'save_donation_meta' ) );
@@ -37,10 +36,9 @@ class Metaboxes extends Component {
 	 * @return array array of product data tabs.
 	 */
 	public static function product_data_tab( array $tabs = array() ): array {
+		// Donation products are managed entirely in the Donation Manager tab.
 		foreach ( $tabs as $tab_id => $tab_data ) {
-			if ( 'general' !== $tab_id && 'advanced' !== $tab_id ) {
-				$tabs[ $tab_id ]['class'][] = 'hide_if_donation';
-			}
+			$tabs[ $tab_id ]['class'][] = 'hide_if_donation';
 		}
 
 		$tabs['wc_donation_manager'] = array(
@@ -54,12 +52,18 @@ class Metaboxes extends Component {
 	}
 
 	/**
-	 * Add fields to the general product data.
+	 * Add fields to the product data panel.
+	 *
+	 * Everything a donation product needs lives in the Donation Manager
+	 * tab: the amount fields (moved out of General) and the limits and
+	 * campaign assignment.
 	 *
 	 * @version 1.0.0
 	 * @return void
 	 */
-	public static function general_product_data() {
+	public static function product_data() {
+		echo '<div id="wcdm_tab_data" class="panel woocommerce_options_panel wcdm_tab_data_options">';
+
 		echo '<div class="options_group show_if_donation">';
 		woocommerce_wp_text_input(
 			array(
@@ -129,16 +133,8 @@ class Metaboxes extends Component {
 			)
 		);
 		echo '</div>';
-	}
 
-	/**
-	 * Add fields to the product data panel.
-	 *
-	 * @version 1.0.0
-	 * @return void
-	 */
-	public static function product_data() {
-		echo '<div id="wcdm_tab_data" class="panel woocommerce_options_panel wcdm_tab_data_options"><div class="options_group show_if_donation">';
+		echo '<div class="options_group show_if_donation">';
 		woocommerce_wp_text_input(
 			array(
 				'id'          => 'wcdm_min_amount',
@@ -294,9 +290,6 @@ class Metaboxes extends Component {
 			?>
 			<script type='text/javascript'>
 				jQuery(document).ready(function () {
-					<?php if ( 'yes' !== get_option( 'wcdm_disabled_tax', 'yes' ) ) { ?>
-					jQuery('#general_product_data ._tax_status_field').parent().addClass('show_if_donation').show();
-					<?php } ?>
 					jQuery('#woocommerce-product-data .type_box label[for=_downloadable].tips').addClass('show_if_donation').show();
 
 					jQuery('#wcdm_is_predefined_amounts').on( 'change', function() {

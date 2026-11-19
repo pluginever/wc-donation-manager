@@ -185,7 +185,7 @@ class Campaigns extends Component {
 				'meta_input'   => array(
 					self::META['goal_amount']   => isset( $data['goal_amount'] ) ? (float) $data['goal_amount'] : 0,
 					self::META['end_date']      => isset( $data['end_date'] ) ? sanitize_text_field( (string) $data['end_date'] ) : '',
-					self::META['goal_behavior'] => isset( $data['goal_behavior'] ) ? sanitize_key( (string) $data['goal_behavior'] ) : $this->app->options->get( 'goal_behavior', 'continue' ),
+					self::META['goal_behavior'] => isset( $data['goal_behavior'] ) ? sanitize_key( (string) $data['goal_behavior'] ) : 'continue',
 				),
 			),
 			true

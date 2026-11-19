@@ -29,6 +29,26 @@
 			});
 		});
 
+		// Donation products redirect to cart or checkout on add-to-cart.
+		// Classic form posts redirect in PHP (`woocommerce_add_to_cart_redirect`);
+		// AJAX adds (theme add-to-cart, store notices) only fire this event.
+		$(document.body).on('added_to_cart', function (event, fragments, cartHash, $button) {
+			if (!window.wcdm_front_vars) {
+				return;
+			}
+
+			const $form = $button ? $button.closest('form.cart') : $();
+			if (!$form.length || !$form.find('#donation_amount').length) {
+				return; // Only donation products carry the amount field.
+			}
+
+			if ('yes' === String(window.wcdm_front_vars.fast_checkout)) {
+				window.location = window.wcdm_front_vars.checkout_url;
+			} else if ('yes' === String(window.wcdm_front_vars.skip_cart)) {
+				window.location = window.wcdm_front_vars.cart_url;
+			}
+		});
+
 		$('.wcdm-progress-bar').each(function () {
 
 			const $progressCard = $(this);

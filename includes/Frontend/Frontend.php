@@ -30,7 +30,50 @@ class Frontend extends Component {
 		add_action( 'wp_loaded', array( __CLASS__, 'conditionally_disable_coupons' ), 20 );
 		add_action( 'woocommerce_before_cart', array( __CLASS__, 'conditionally_disable_coupons' ) );
 		add_action( 'woocommerce_before_checkout_form', array( __CLASS__, 'conditionally_disable_coupons' ) );
+		add_filter( 'woocommerce_checkout_fields', array( __CLASS__, 'remove_order_note_field' ), 20 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+	}
+
+	/**
+	 * Whether the cart holds a donation product.
+	 *
+	 * @since 2.0.0
+	 * @return bool
+	 */
+	protected static function cart_has_donation(): bool {
+		if ( ! ( WC()->cart instanceof \WC_Cart ) || WC()->cart->is_empty() ) {
+			return false;
+		}
+
+		foreach ( WC()->cart->get_cart() as $cart_item ) {
+			if ( ! empty( $cart_item['data'] ) && $cart_item['data']->is_type( 'donation' ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Remove the order notes field from the checkout while the cart holds
+	 * a donation product.
+	 *
+	 * Classic checkout only: the field is registered checkout data, so
+	 * dropping it removes the textarea and its validation everywhere the
+	 * classic templates render it.
+	 *
+	 * @since 2.0.0
+	 * @param array<string, mixed> $fields Checkout fields.
+	 * @return array<string, mixed>
+	 */
+	public static function remove_order_note_field( array $fields ): array {
+		if ( 'yes' !== get_option( 'wcdm_disabled_order_note', 'yes' ) || ! self::cart_has_donation() ) {
+			return $fields;
+		}
+
+		unset( $fields['billing']['order_comments'], $fields['shipping']['order_comments'] );
+
+		return $fields;
 	}
 
 	/**
@@ -48,16 +91,11 @@ class Frontend extends Component {
 			return;
 		}
 
-		if ( ! ( WC()->cart instanceof \WC_Cart ) || WC()->cart->is_empty() || 'yes' !== get_option( 'wcdm_disabled_coupon_field', 'yes' ) ) {
+		if ( 'yes' !== get_option( 'wcdm_disabled_coupon_field', 'yes' ) || ! self::cart_has_donation() ) {
 			return;
 		}
 
-		foreach ( WC()->cart->get_cart() as $cart_item ) {
-			if ( ! empty( $cart_item['data'] ) && $cart_item['data']->is_type( 'donation' ) ) {
-				add_filter( 'woocommerce_coupons_enabled', '__return_false' );
-				break;
-			}
-		}
+		add_filter( 'woocommerce_coupons_enabled', '__return_false' );
 	}
 
 	/**
@@ -72,5 +110,28 @@ class Frontend extends Component {
 	public function enqueue_scripts() {
 		$this->app->scripts->enqueue_style( 'wcdm-frontend', $this->app->plugin_path( 'assets/build/frontend-common.css' ) );
 		$this->app->scripts->enqueue_script( 'wcdm-frontend', $this->app->plugin_path( 'assets/build/frontend-common.js' ), array( 'jquery' ) );
+
+		wp_localize_script(
+			'wcdm-frontend',
+			'wcdm_front_vars',
+			array(
+				'fast_checkout' => get_option( 'wcdm_fast_checkout', 'no' ),
+				'skip_cart'     => get_option( 'wcdm_skip_cart', 'yes' ),
+				'checkout_url'  => wc_get_checkout_url(),
+				'cart_url'      => wc_get_cart_url(),
+			)
+		);
+
+		// The Checkout block renders its order-notes step from block markup;
+		// hide it with CSS while the setting asks for it (classic checkout
+		// loses the field through the checkout-fields filter instead).
+		if ( 'yes' === get_option( 'wcdm_disabled_order_note', 'yes' ) && self::cart_has_donation() ) {
+			wp_register_style( 'wcdm-checkout-note', false, array(), (string) $this->app->version );
+			wp_enqueue_style( 'wcdm-checkout-note' );
+			wp_add_inline_style(
+				'wcdm-checkout-note',
+				'.wc-block-checkout__order-notes{display:none!important}'
+			);
+		}
 	}
 }
